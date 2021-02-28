@@ -1,4 +1,4 @@
-import MerisMidiIo from '../components/meris_midi_io' 
+import MerisMidiIo from '../components/meris_pedals/meris_midi_io' 
 import PedalBoardTamerDropDown from '../components/pedal_board_tamer_dropdown' 
 import React from 'react'
 
@@ -14,7 +14,6 @@ export default class PedalSelector extends React.Component {
     this.midiObject = this.midiObject.bind(this);
     this.inputValues = this.inputValues.bind(this);
     this.outputValues = this.outputValues.bind(this);
-    this.sendCommand = this.sendCommand.bind(this);
   }
 
   componentDidMount(){
@@ -63,16 +62,6 @@ export default class PedalSelector extends React.Component {
   outputValues(){
     return this.state.outputValues;
   }
-
-  sendCommand(){
-    let device = this.midiObject().outputs.filter((x) => x.name == this.state.devicePort)[0]
-    // if (device != undefined){
-    //   let intMidiChannel = parseInt(this.state.midiChannel);
-    //   let intProgramNumber = parseInt(this.state.programNumber);
-    //   device.setProgram(intProgramNumber, {channels: intMidiChannel});
-    //   console.log("Command sent", {intMidiChannel: intMidiChannel, channels: intMidiChannel})
-    // }
-  }
   
   render() {
 		
@@ -80,7 +69,6 @@ export default class PedalSelector extends React.Component {
       <div className="container">
         <PedalBoardTamerDropDown inputValues={ this.inputValues } outputValues={ this.outputValues }/>
         <MerisMidiIo midiObject={this.midiObject} inputValues={ this.inputValues } outputValues={ this.outputValues }/>
-        <button onClick={this.sendCommand}>Send</button>
         <style jsx>{`
           .hidden{
             display: none !important;

@@ -1,4 +1,26 @@
 module.exports = {
+	EXPRESSION: {
+		ccValue: 4,
+		type: 'knob',
+		label: 'Expression Pedal'
+	},
+	HALF_SPEED_ENABLE: {
+		ccValue: 9,
+		label: 'Half Speed Enable',
+		type: 'button',
+		toggleValues: [63, 64]
+	},
+	BYPASS: {
+		ccValue: 14,
+		label: 'Bypass',
+		type: 'button',
+		toggleValues: [0, 127]
+	},
+	TEMPO: {
+		ccValue: 15,
+		type: 'knob',
+		label: 'Tempo (to millisec intervals)'
+	},
 	KEY: {
 		ccValue: 16,
 		type: 'knob',
@@ -65,4 +87,57 @@ module.exports = {
 		type: 'button',
 		value: 127
 	},
+	DELAY_MODE:{
+		ccValue: 29,
+		label: 'Delay Mode',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'Series + Pitch Feedback',
+				value: 0
+			},
+			{
+				label: 'Series',
+				value: 63
+			},
+			{
+				label: 'Dual + Cross Feedback',
+				value: 95
+			},
+			{
+				label: 'Dual',
+				value: 127
+			},
+		]
+	},
+	PITCH_CONTROL_SMOOTHING: {
+		ccValue: 30,
+		label: 'Pitch Control Smoothing',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'Smoothing On',
+				value: 0
+			},
+			{
+				label: 'Smoothing Off',
+				value: 127
+			}
+		]
+	},
+	VOLUME_SWELL_ENABLE:{
+		ccValue: 31,
+		label: 'Volume Swell Enable',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'Swell On',
+				value: 0
+			},
+			{
+				label: 'Swell Off',
+				value: 127
+			}
+		]
+	}
 }

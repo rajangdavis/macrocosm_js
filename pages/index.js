@@ -156,6 +156,27 @@ export default function Home() {
           box-sizing: border-box;
         }
 
+        .controls{
+          display: flexbox;
+          flex-direction: row;
+          align-content: space-between;
+          align-items: flex-start;
+        }
+        .top-left{
+          align-self: flex-start;;
+          width: 33%;
+        }
+        .top-center{
+          width: 33%;
+        }
+        .top-right{
+          width: 33%;
+        }
+        .bottom-right{
+          align-self: flex-end;
+          bottom: 10px;
+        }
+
       `}</style>
     </div>
   )
