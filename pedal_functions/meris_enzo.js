@@ -4,19 +4,12 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	ENVELOPE_TYPE: {
-		ccValue: 9,
-		label: 'Half Speed Enable',
-		type: 'button',
-		toggleValues: [63, 64]
-	},
-	BYPASS: {
-		ccValue: 14,
-		label: 'Bypass',
-		type: 'button',
-		classname: 'bottom-right',
-		toggleValues: [0, 127]
-	},
+	// ENVELOPE_TYPE: {
+	// 	ccValue: 9,
+	// 	label: 'Half Speed Enable',
+	// 	type: 'button',
+	// 	toggleValues: [63, 64]
+	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
@@ -26,35 +19,69 @@ module.exports = {
 		ccValue: 16,
 		type: 'knob',
 		label: 'Pitch',
-		className: 'top-left'
+		className: 'left-top'
 	},
 	FILTER: {
 		ccValue: 17,
 		type: 'knob',
 		label: 'Filter',
-		className: 'top-center'
+		className: 'center-top'
 	},
 	MIX: {
 		ccValue: 18,
 		type: 'knob',
 		label: 'Mix',
-		className: 'top-right'
+		className: 'right-top'
 	},
-	// SUSTAIN: {
-	// 	ccValue: 19,
-	// 	type: 'knob',
-	// 	label: 'Sustain'
-	// },
-	// FILTER_ENVELOPE: {
-	// 	ccValue: 20,
-	// 	type: 'knob',
-	// 	label: 'Filter Envelope'
-	// },
-	// MODULATION: {
-	// 	ccValue: 21,
-	// 	type: 'knob',
-	// 	label: 'Modulation'
-	// },
+	SUSTAIN: {
+		ccValue: 19,
+		type: 'knob',
+		label: 'Sustain',
+		className: 'left-middle'
+	},
+	FILTER_ENVELOPE: {
+		ccValue: 20,
+		type: 'knob',
+		label: 'Filter Envelope',
+		className: 'center-middle'
+	},
+	MODULATION: {
+		ccValue: 21,
+		type: 'knob',
+		label: 'Modulation',
+		className: 'right-middle'
+	},
+	SYNTH_MODE:{
+		ccValue: 29,
+		label: 'Synth Mode',
+		type: 'groupable_button',
+		className: 'right-above-bypass',
+		values: [
+			{
+				label: 'Dry',
+				value: 0
+			},
+			{
+				label: 'Mono',
+				value: 63
+			},
+			{
+				label: 'Arp',
+				value: 95
+			},
+			{
+				label: 'Poly',
+				value: 127
+			},
+		]
+	},
+	BYPASS: {
+		ccValue: 14,
+		label: 'Bypass',
+		type: 'button',
+		className: 'right-bottom',
+		toggleValues: [0, 127]
+	},
 	// PORTAMENTO: {
 	// 	ccValue: 22,
 	// 	type: 'knob',
@@ -85,35 +112,13 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Delay Feedback'
 	// },
-	// TAP: {
-	// 	ccValue: 28,
-	// 	label: 'Tap',
-	// 	type: 'button',
-	// 	value: 127
-	// },
-	// SYNTH_MODE:{
-	// 	ccValue: 29,
-	// 	label: 'Synth Mode',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'Dry',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Mono',
-	// 			value: 63
-	// 		},
-	// 		{
-	// 			label: 'Arp',
-	// 			value: 95
-	// 		},
-	// 		{
-	// 			label: 'Poly',
-	// 			value: 127
-	// 		},
-	// 	]
-	// },
+	TAP: {
+		ccValue: 28,
+		label: 'Tap',
+		type: 'button',
+		value: 127,
+		className: 'left-bottom'
+	},
 	// SYNTH_WAVESHAPE: {
 	// 	ccValue: 30,
 	// 	label: 'Synth Waveshape',

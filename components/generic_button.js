@@ -25,11 +25,6 @@ export default class GenericButton extends React.Component {
   render(){
     return <div className={this.props.className}> 
       <button onClick={this.sendChangeMessage}>{this.props.mappedTo.label}</button>
-      <style jsx>{`
-        .hidden{
-          display: none !important;
-        }
-      `}</style>
     </div>
   }
 }

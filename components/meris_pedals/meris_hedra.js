@@ -1,98 +1,13 @@
-import React from 'react'
-import GenericKnob from '../generic_knob'
-import GenericButton from '../generic_button'
-import GroupableButtons from '../groupable_buttons'
-import MidiChannelSelect from '../midi_channel_select'
-import ProgramChangeInput from '../program_change_input'
-import * as f from '../../pedal_functions/meris_hedra'
+import MerisGenericLayout from './meris_generic_layout'
+import * as pedalFunctions from '../../pedal_functions/meris_hedra'
 
-export default class MerisHedra extends React.Component {
+export default class MerisHedra extends MerisGenericLayout {
   constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      active: true,
-      midiChannel: "1",
-      midiPreset: "1"
-    };
-
-    this.showControls = this.showControls.bind(this);
-    this.deviceOutput = this.deviceOutput.bind(this);
-    this.midiChannelChange = this.midiChannelChange.bind(this);
-    this.programNumberChange = this.programNumberChange.bind(this);
-  }
-
-  midiChannelChange(e){
-    this.setState({midiChannel: event.target.value})
-  }
-
-  showControls() {
-    this.setState({
-      active: !this.state.active
-    });
-  }
-
-  isActive(){
-    return (this.state.active && !this.outputPortNotSet()) ? "" : "hidden"
-  }
-  
-  outputPortNotSet(){
-    return this.props.outputPort == ""
-  }
-
-  deviceOutput(){
-    return this.props.midiObject().outputs.filter((x) => x.name == this.props.outputPort)[0];
-  }
-
-  programNumberChange(e){
-    this.setState({midiPreset: event.target.value})
-  }
-  
-  render(){
-    return <div className="meris-hedra">
-      <a onClick={this.showControls}>Meris Hedra</a>
-      <div className={this.isActive()} >
-        <div>
-          <MidiChannelSelect midiChannelChange={this.midiChannelChange} midiChannel={this.state.midiChannel}/>
-          <ProgramChangeInput label={"Preset"} programNumber={this.state.midiPreset} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} max={16}/>
-          <div className="controls">
-            {Object.keys(f).map((control, i) =>{
-              let localControl = f[control];
-              if(localControl.type == 'button'){
-                return <GenericButton key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
-              }else if(localControl.type == 'knob'){
-                return <GenericKnob key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
-              }else if(localControl.type == 'groupable_button'){
-                return <GroupableButtons key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
-              }
-
-            })}
-          </div>
-        </div>
-
-        
-      </div>
-      
-      <style jsx>{`
-        .controls{
-          display: flexbox;
-        }
-        .top-left{
-          
-        }
-        .meris-hedra{
-          border: 1px solid grey;
-          padding: 15px;
-        }
-        .hidden{
-          display: none !important;
-        }
-        button{
-          margin: 10px auto 5px;
-          display: block;
-          font-weight: bold;
-        }
-      `}</style>
-    </div>
+    let pedalData = {
+      name: 'Meris Hedra',
+      className: 'meris-hedra',
+      pedalFunctions: pedalFunctions
+    }
+    super(props, context, pedalData);
   }
 }

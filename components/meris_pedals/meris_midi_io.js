@@ -44,13 +44,14 @@ export default class MerisMidiIo extends React.Component {
     return this.state.outputPort == ""
   }
   
-// <MerisHedra midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
   render(){
+    // <MerisEnzo midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
     return <div className="meris-midi-io">
       <a onClick={this.showControls}>Meris MIDI IO</a>
       <div className={this.isActive()} >
         <MidiDevicePortSelector ports={this.props.inputValues} portChange={this.inputPortChange} label="input"/>
         <MidiDevicePortSelector ports={this.props.outputValues} portChange={this.outputPortChange} label="output"/>
+        <MerisHedra midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
         <MerisEnzo midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
       </div>
       

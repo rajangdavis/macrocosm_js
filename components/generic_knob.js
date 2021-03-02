@@ -16,9 +16,6 @@ export default class GenericKnob extends React.Component {
 
   render(){
     return <div className={this.props.className}> 
-    	<label>
-    		{this.props.mappedTo.label}
-    	</label>
       <Knob 
       size={100}  
       angleOffset={220} 
@@ -40,29 +37,9 @@ export default class GenericKnob extends React.Component {
         color="#fff"
       />
     </Knob>
-    <style jsx>{`
-    .styledKnob circle,
-    .styledKnob path {
-        fill: #fc5a96;
-        opacity: 0.4;
-        transition: 
-          opacity 100ms, 
-          color 100ms 
-          ease-in-out;
-    }
-
-    .styledKnob:hover circle,
-    .styledKnob:hover path,
-    .styledKnob:focus circle,
-    .styledKnob:focus path, {
-        fill: #180094;
-        opacity: 1;
-        transition: 
-          opacity 450ms, 
-          color 450ms 
-          ease-in-out;
-    }
-    `}</style>
+    <label className="knob-labels">
+        {this.props.mappedTo.label}
+    </label>
     </div>
   }
 }
