@@ -134,11 +134,29 @@ code {
 }
 
 .meris-enzo{
-  border: 1px solid gold; 
+  border: 1px solid #DEAE1B;
+  background: #DEAE1B;
 }
 
 .meris-hedra{
-  border: 1px solid grey;
+  border: 1px solid #CFCFCF;
+  background: #CFCFCF;
+}
+
+.meris-mercury7{
+  border: 1px solid #286BB3;
+  background: #286BB3; 
+}
+
+.meris-polymoon{
+  border: 1px solid #EBE8E5;
+  background: #EBE8E5; 
+}
+
+.meris-ottobit-jr{
+  border: 1px solid #212121;
+  background: #212121;
+  color: #FFFFFF;
 }
 
 .hidden{
