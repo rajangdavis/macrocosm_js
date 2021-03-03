@@ -6,11 +6,22 @@ export default class GenericButton extends React.Component {
     this.state = {
       toggled: 0
     }
+    if (props.changeAltState)
+      this.changeAltState = props.changeAltState.bind(this)
+    this.midiControlChange = this.midiControlChange.bind(this);
     this.sendChangeMessage = this.sendChangeMessage.bind(this);
   }
 
   sendChangeMessage(){
-  	let intMidiChannel = parseInt(this.props.midiChannel);
+    if (this.props.buttonType == "alt"){
+      this.changeAltState()
+    }else{
+      this.midiControlChange()
+    }
+  }
+
+  midiControlChange(){
+    let intMidiChannel = parseInt(this.props.midiChannel);
     let toggleValues = this.props.mappedTo.toggleValues;
     if(toggleValues != undefined){
       var msgVal = this.state.toggled ==  0  ? 127 : 0
@@ -18,7 +29,7 @@ export default class GenericButton extends React.Component {
     }else{
       var msgVal = this.props.mappedTo.value
     }
-  	this.props.deviceOutput().sendControlChange(this.props.mappedTo.ccValue, msgVal,{channels: intMidiChannel});
+    this.props.deviceOutput().sendControlChange(this.props.mappedTo.ccValue, msgVal,{channels: intMidiChannel});
     console.log("Meris Hedra sent a change message", this.props.mappedTo.ccValue, msgVal, {channels: intMidiChannel})
   }
   

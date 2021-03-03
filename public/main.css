@@ -20,118 +20,7 @@ body {
   align-items: center;
 }
 
-main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-footer {
-  width: 100%;
-  height: 100px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-footer img {
-  margin-left: 0.5rem;
-}
-
-footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
-}
-
-.title {
-  margin: 0;
-  line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
-  text-align: center;
-}
-
-.description {
-  line-height: 1.5;
-  font-size: 1.5rem;
-}
-
-code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-    DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-}
-
-.grid {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-
-  max-width: 800px;
-  margin-top: 3rem;
-}
-
-.card {
-  margin: 1rem;
-  flex-basis: 45%;
-  padding: 1.5rem;
-  text-align: left;
-  color: inherit;
-  text-decoration: none;
-  border: 1px solid #eaeaea;
-  border-radius: 10px;
-  transition: color 0.15s ease, border-color 0.15s ease;
-}
-
-.card:hover,
-.card:focus,
-.card:active {
-  color: #0070f3;
-  border-color: #0070f3;
-}
-
-.card h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1.5rem;
-}
-
-.card p {
-  margin: 0;
-  font-size: 1.25rem;
-  line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-}
+/* MERIS PEDALS */
 
 .meris-enzo{
   border: 1px solid #DEAE1B;
@@ -171,9 +60,10 @@ button{
 .interface{
   width: 700px;
   padding: 15px;
+  text-transform: uppercase;
 }
 
-.controls, .channel-input{
+.controls, .alt-controls, .channel-input{
   display: flex;
   flex-direction: row;
 }
@@ -191,44 +81,54 @@ button{
   flex: 3;
 }
 
-.left-controls, .center-controls, .right-controls{
+.left-controls, .center-controls, .right-controls,
+.alt-left-controls, .alt-center-controls, .alt-right-controls{
   display: flex;
   align-items: center;
   flex-direction: column;
   align-content: space-between;
 }
 
-.left-controls{
+.alt-left-above-tap.active > button{
+  background: #FBEF00;
+}
+
+.left-controls, .alt-left-controls{
   flex: 1;
   order: 1;
 }
 
-.center-controls{
+.center-controls, .alt-center-controls{
   flex: 1;
   order: 2;
 }
-.right-controls{
+.right-controls, .alt-right-controls{
   flex: 1;
   order: 3; 
 }
 
-.left-controls div, .center-controls div, .right-controls div{
+.left-controls div, .center-controls div, .right-controls div,
+.alt-left-controls div, .alt-center-controls div, .alt-right-controls div{
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
-.left-top, .center-top, .right-top{
+.left-top, .center-top, .right-top,
+.alt-left-top, .alt-center-top, .alt-right-top{
   order: 1;
 }
-.left-middle, .center-middle, .right-middle{
+.left-middle, .center-middle, .right-middle,
+.alt-left-middle, .alt-center-middle, .alt-right-middle{
   order: 2;
 }
 
-.right-above-bypass{
+.right-above-bypass, .left-above-tap,
+.alt-right-above-bypass, .alt-left-above-tap{
   order: 3;
 }
 
-.left-bottom, .right-bottom{
+.left-bottom, .right-bottom,
+.alt-left-bottom, .alt-right-bottom{
   order: 4;
 }

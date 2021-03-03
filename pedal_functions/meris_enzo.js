@@ -112,6 +112,11 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Delay Feedback'
 	// },
+	ALT: {
+		label: 'Alt',
+		type: 'button',
+		className: 'left-above-tap'
+	},
 	TAP: {
 		ccValue: 28,
 		label: 'Tap',

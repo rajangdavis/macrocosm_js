@@ -82,42 +82,98 @@ module.exports = {
 		toggleValues: [0, 127],
 		className: 'right-bottom'
 	},
-	// SCALE_TYPE: {
-	// 	ccValue: 22,
-	// 	type: 'knob',
-	// 	label: 'Scale Type'
-	// },
-	// PITCH_CORRECTION_AND_GLIDE: {
-	// 	ccValue: 23,
-	// 	type: 'knob',
-	// 	label: 'Pitch Correction and Glide'
-	// },
-	// FEEDBACK: {
-	// 	ccValue: 24,
-	// 	type: 'knob',
-	// 	label: 'Feedback'
-	// },
-	// TIME_DIVISION_1: {
-	// 	ccValue: 25,
-	// 	type: 'knob',
-	// 	label: 'Time Division 1'
-	// },
-	// TIME_DIVISION_2: {
-	// 	ccValue: 26,
-	// 	type: 'knob',
-	// 	label: 'Time Division 2'
-	// },
-	// TIME_DIVISION_3: {
-	// 	ccValue: 27,
-	// 	type: 'knob',
-	// 	label: 'Time Division 3'
-	// },
+	SCALE_TYPE: {
+		ccValue: 22,
+		type: 'knob',
+		label: 'Scale Type',
+		className: 'alt-left-top'
+	},
+	PITCH_CORRECTION_AND_GLIDE: {
+		ccValue: 23,
+		type: 'knob',
+		label: 'Pitch Correction and Glide',
+		className: 'alt-center-top'
+	},
+	FEEDBACK: {
+		ccValue: 24,
+		type: 'knob',
+		label: 'Feedback',
+		className: 'alt-right-top'
+	},
+	TIME_DIVISION_1: {
+		ccValue: 25,
+		type: 'knob',
+		label: 'Time Division 1',
+		className: 'alt-left-middle'
+	},
+	TIME_DIVISION_2: {
+		ccValue: 26,
+		type: 'knob',
+		label: 'Time Division 2',
+		className: 'alt-center-middle'
+	},
+	TIME_DIVISION_3: {
+		ccValue: 27,
+		type: 'knob',
+		label: 'Time Division 3',
+		className: 'alt-right-middle'
+	},
+	DELAY_MODE_:{
+		ccValue: 29,
+		label: 'Delay Mode',
+		type: 'groupable_button',
+		className: 'alt-right-above-bypass',
+		values: [
+			{
+				label: 'Series + Pitch Feedback',
+				value: 0
+			},
+			{
+				label: 'Series',
+				value: 63
+			},
+			{
+				label: 'Dual + Cross Feedback',
+				value: 95
+			},
+			{
+				label: 'Dual',
+				value: 127
+			},
+		]
+	},
+	BYPASS_: {
+		ccValue: 14,
+		label: 'Bypass',
+		type: 'button',
+		toggleValues: [0, 127],
+		className: 'alt-right-bottom'
+	},
+	ALT: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'left-above-tap'
+	},
 	TAP: {
 		ccValue: 28,
 		label: 'Tap',
 		type: 'button',
 		value: 127,
 		className: 'left-bottom'
+	},
+	ALT_: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'alt-left-above-tap active'
+	},
+	TAP_: {
+		ccValue: 28,
+		label: 'Tap',
+		type: 'button',
+		value: 127,
+		className: 'alt-left-bottom'
 	},
 	// PITCH_CONTROL_SMOOTHING: {
 	// 	ccValue: 30,

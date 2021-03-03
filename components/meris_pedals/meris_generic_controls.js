@@ -10,15 +10,17 @@ export default class MerisGenericControls extends React.Component {
 			pedalFunctions: props.pedalData.pedalFunctions,
       midiChannel: props.midiChannel,
 		};
+
+    this.changeAltState = props.changeAltState;
+		this.deviceOutput = props.deviceOutput;
     this.fetchComponentByType = this.fetchComponentByType.bind(this);
-		this.deviceOutput = props.deviceOutput
     this.componentsByLocation = this.componentsByLocation.bind(this);
 	}
 
 	componentsByLocation(location){
     return Object.keys(this.state.pedalFunctions).filter((control, i) =>{
       let localControl = this.state.pedalFunctions[control];
-      if(localControl.className && localControl.className.indexOf(location) > -1){
+      if(localControl.className && localControl.className.indexOf(location) == 0){
         return localControl;
       }
     });
@@ -26,11 +28,12 @@ export default class MerisGenericControls extends React.Component {
 
   fetchComponentByType(localControl, i){
     if(localControl.type == 'knob'){
-      return <GenericKnob className={localControl.className} key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
+      return <GenericKnob className={localControl.className} key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel}/>
     }else if(localControl.type == 'groupable_button'){
       return <GroupableButtons className={localControl.className} key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
     }else if(localControl.type == 'button'){
-      return <GenericButton className={localControl.className} key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
+      let buttonType = localControl.alt == true ? 'alt' : '';
+      return <GenericButton className={localControl.className} key={i} mappedTo={localControl} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel}  buttonType={buttonType} changeAltState={this.changeAltState}/>
     }
   }
 
