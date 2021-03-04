@@ -4,27 +4,21 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	// ENVELOPE_TYPE: {
-	// 	ccValue: 9,
-	// 	label: 'Half Speed Enable',
-	// 	type: 'button',
-	// 	toggleValues: [63, 64]
-	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
 	// 	label: 'Tempo (to millisec intervals)'
 	// },
-	PITCH: {
+	TIME: {
 		ccValue: 16,
 		type: 'knob',
-		label: 'Pitch',
+		label: 'Time',
 		className: 'left-top'
 	},
-	FILTER: {
+	FEEDBACK: {
 		ccValue: 17,
 		type: 'knob',
-		label: 'Filter',
+		label: 'Feedback',
 		className: 'center-top'
 	},
 	MIX: {
@@ -33,44 +27,44 @@ module.exports = {
 		label: 'Mix',
 		className: 'right-top'
 	},
-	SUSTAIN: {
+	MULTIPLY: {
 		ccValue: 19,
 		type: 'knob',
-		label: 'Sustain',
+		label: 'Multiply',
 		className: 'left-middle'
 	},
-	FILTER_ENVELOPE: {
+	DIMENSION: {
 		ccValue: 20,
 		type: 'knob',
-		label: 'Filter Envelope',
+		label: 'Dimension',
 		className: 'center-middle'
 	},
-	MODULATION: {
+	DYNAMICS: {
 		ccValue: 21,
 		type: 'knob',
-		label: 'Modulation',
+		label: 'Dynamics',
 		className: 'right-middle'
 	},
-	SYNTH_MODE:{
+	PHASER_MODE:{
 		ccValue: 29,
-		label: 'Synth Mode',
+		label: 'Phaser Mode',
 		type: 'groupable_button',
 		className: 'right-above-bypass',
 		values: [
 			{
-				label: 'Dry',
+				label: 'Off',
 				value: 0
 			},
 			{
-				label: 'Mono',
+				label: 'Slow',
 				value: 63
 			},
 			{
-				label: 'Arp',
+				label: 'Whole Note',
 				value: 95
 			},
 			{
-				label: 'Poly',
+				label: 'Quarter Note',
 				value: 127
 			},
 		]
@@ -82,36 +76,88 @@ module.exports = {
 		className: 'right-bottom',
 		toggleValues: [0, 127]
 	},
-	// PORTAMENTO: {
-	// 	ccValue: 22,
-	// 	type: 'knob',
-	// 	label: 'Portamento'
-	// },
-	// FILTER_TYPE: {
-	// 	ccValue: 23,
-	// 	type: 'knob',
-	// 	label: 'Filter Type'
-	// },
-	// DELAY_LEVEL: {
-	// 	ccValue: 24,
-	// 	type: 'knob',
-	// 	label: 'Delay Level'
-	// },
-	// RING_MODULATION: {
-	// 	ccValue: 25,
-	// 	type: 'knob',
-	// 	label: 'Ring Modulation'
-	// },
-	// FILTER_BANDWIDTH: {
-	// 	ccValue: 26,
-	// 	type: 'knob',
-	// 	label: 'Filter Bandwidth'
-	// },
-	// DELAY_FEEDBACK: {
-	// 	ccValue: 27,
-	// 	type: 'knob',
-	// 	label: 'Delay Feedback'
-	// },
+	EARLY_MODULATIONS: {
+		ccValue: 22,
+		type: 'knob',
+		label: 'Early Modulations',
+		className: 'alt-left-top'
+	},
+	FEEDBACK_FILTER: {
+		ccValue: 23,
+		type: 'knob',
+		label: 'Feedback Filter',
+		className: 'alt-center-top'
+	},
+	DELAY_LEVEL: {
+		ccValue: 24,
+		type: 'knob',
+		label: 'Delay Level',
+		className: 'alt-right-top'
+	},
+	LATE_MODULATION: {
+		ccValue: 25,
+		type: 'knob',
+		label: 'Late Modulation',
+		className: 'alt-left-middle'
+	},
+	DYNAMIC_FLANGER_MODE: {
+		ccValue: 26,
+		type: 'knob',
+		label: 'Dynamic Flanger Mode',
+		className: 'alt-center-middle'
+	},
+	DYNAMIC_FLANGER_SPEED: {
+		ccValue: 27,
+		type: 'knob',
+		label: 'Dynamic Flanger Speed',
+		className: 'alt-right-middle'
+	},
+	PHASER_MODE_:{
+		ccValue: 29,
+		label: 'Phaser Mode',
+		type: 'groupable_button',
+		className: 'alt-right-above-bypass',
+		values: [
+			{
+				label: 'Off',
+				value: 0
+			},
+			{
+				label: 'Slow',
+				value: 63
+			},
+			{
+				label: 'Whole Note',
+				value: 95
+			},
+			{
+				label: 'Quarter Note',
+				value: 127
+			},
+		]
+	},
+	FLANGER_FEEDBACK: {
+		ccValue: 30,
+		label: 'Flanger Feedback',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'On',
+				value: 0
+			},
+			{
+				label: 'Off',
+				value: 127
+			}
+		],
+		className: 'alt-right-bottom',
+	},
+	ALT: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'left-above-tap'
+	},
 	TAP: {
 		ccValue: 28,
 		label: 'Tap',
@@ -119,19 +165,17 @@ module.exports = {
 		value: 127,
 		className: 'left-bottom'
 	},
-	// SYNTH_WAVESHAPE: {
-	// 	ccValue: 30,
-	// 	label: 'Synth Waveshape',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'Sawtooth',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Square',
-	// 			value: 127
-	// 		}
-	// 	]
-	// }
+	ALT_: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'alt-left-above-tap active'
+	},
+	ENVELOPE_TYPE: {
+		ccValue: 9,
+		label: 'Envelope Type',
+		type: 'button',
+		toggleValues: [63, 64],
+		className: 'alt-left-bottom'
+	},
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import MerisPresets from './meris_presets'
 import MerisGenericControls from './meris_generic_controls'
 import MidiChannelSelect from '../midi_channel_select'
 import ProgramChangeInput from '../program_change_input'
@@ -53,7 +54,6 @@ export default class MerisGenericLayout extends React.Component {
     this.setState({
       altMode: !this.state.altMode
     })
-    console.log(this.state)
   }
 
   inAltMode(){
@@ -63,13 +63,14 @@ export default class MerisGenericLayout extends React.Component {
   render(){
     let className = this.state.pedalData.className
     let name = this.state.pedalData.name
+// <ProgramChangeInput className={"presets-container"} label={"Preset"} programNumber={this.state.midiPreset} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} max={16}/>
 
     return <div className={className}>
       <a onClick={this.showControls}>{name}</a>
       <div className={`interface ${this.isActive()}`} >
         <div className="channel-input">
           <MidiChannelSelect className={"midi-channel-input"} midiChannelChange={this.midiChannelChange} midiChannel={this.state.midiChannel}/>
-          <ProgramChangeInput className={"presets-container"} label={"Preset"} programNumber={this.state.midiPreset} deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} max={16}/>
+          <MerisPresets deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
         </div>
         <div className={`${this.inAltMode()}controls`}>
           <MerisGenericControls direction={`${this.inAltMode()}left`} pedalData={this.state.pedalData} midiChannel={this.state.midiChannel} deviceOutput={this.deviceOutput} changeAltState={this.changeAltState}/>

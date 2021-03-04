@@ -4,12 +4,6 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	// ENVELOPE_TYPE: {
-	// 	ccValue: 9,
-	// 	label: 'Half Speed Enable',
-	// 	type: 'button',
-	// 	toggleValues: [63, 64]
-	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
@@ -82,39 +76,86 @@ module.exports = {
 		className: 'right-bottom',
 		toggleValues: [0, 127]
 	},
-	// PORTAMENTO: {
-	// 	ccValue: 22,
-	// 	type: 'knob',
-	// 	label: 'Portamento'
-	// },
-	// FILTER_TYPE: {
-	// 	ccValue: 23,
-	// 	type: 'knob',
-	// 	label: 'Filter Type'
-	// },
-	// DELAY_LEVEL: {
-	// 	ccValue: 24,
-	// 	type: 'knob',
-	// 	label: 'Delay Level'
-	// },
-	// RING_MODULATION: {
-	// 	ccValue: 25,
-	// 	type: 'knob',
-	// 	label: 'Ring Modulation'
-	// },
-	// FILTER_BANDWIDTH: {
-	// 	ccValue: 26,
-	// 	type: 'knob',
-	// 	label: 'Filter Bandwidth'
-	// },
-	// DELAY_FEEDBACK: {
-	// 	ccValue: 27,
-	// 	type: 'knob',
-	// 	label: 'Delay Feedback'
-	// },
+	PORTAMENTO: {
+		ccValue: 22,
+		type: 'knob',
+		label: 'Portamento',
+		className: 'alt-left-top'
+	},
+	FILTER_TYPE: {
+		ccValue: 23,
+		type: 'knob',
+		label: 'Filter Type',
+		className: 'alt-center-top'
+	},
+	DELAY_LEVEL: {
+		ccValue: 24,
+		type: 'knob',
+		label: 'Delay Level',
+		className: 'alt-right-top'
+	},
+	RING_MODULATION: {
+		ccValue: 25,
+		type: 'knob',
+		label: 'Ring Modulation',
+		className: 'alt-left-middle'
+	},
+	FILTER_BANDWIDTH: {
+		ccValue: 26,
+		type: 'knob',
+		label: 'Filter Bandwidth',
+		className: 'alt-center-middle'
+	},
+	DELAY_FEEDBACK: {
+		ccValue: 27,
+		type: 'knob',
+		label: 'Delay Feedback',
+		className: 'alt-right-middle'
+	},
+	SYNTH_MODE_:{
+		ccValue: 29,
+		label: 'Synth Mode',
+		type: 'groupable_button',
+		className: 'alt-right-above-bypass',
+		values: [
+			{
+				label: 'Dry',
+				value: 0
+			},
+			{
+				label: 'Mono',
+				value: 63
+			},
+			{
+				label: 'Arp',
+				value: 95
+			},
+			{
+				label: 'Poly',
+				value: 127
+			},
+		]
+	},
+	SYNTH_WAVESHAPE: {
+		ccValue: 30,
+		label: 'Synth Waveshape',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'Sawtooth',
+				value: 0
+			},
+			{
+				label: 'Square',
+				value: 127
+			}
+		],
+		className: 'alt-right-bottom',
+	},
 	ALT: {
 		label: 'Alt',
 		type: 'button',
+		alt: true,
 		className: 'left-above-tap'
 	},
 	TAP: {
@@ -124,19 +165,17 @@ module.exports = {
 		value: 127,
 		className: 'left-bottom'
 	},
-	// SYNTH_WAVESHAPE: {
-	// 	ccValue: 30,
-	// 	label: 'Synth Waveshape',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'Sawtooth',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Square',
-	// 			value: 127
-	// 		}
-	// 	]
-	// }
+	ALT_: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'alt-left-above-tap active'
+	},
+	ENVELOPE_TYPE: {
+		ccValue: 9,
+		label: 'Envelope Type',
+		type: 'button',
+		toggleValues: [63, 64],
+		className: 'alt-left-bottom'
+	},
 }

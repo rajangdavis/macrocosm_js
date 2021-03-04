@@ -4,21 +4,15 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	// ENVELOPE_TYPE: {
-	// 	ccValue: 9,
-	// 	label: 'Half Speed Enable',
-	// 	type: 'button',
-	// 	toggleValues: [63, 64]
-	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
 	// 	label: 'Tempo (to millisec intervals)'
 	// },
-	PITCH: {
+	SAMPLE_RATE: {
 		ccValue: 16,
 		type: 'knob',
-		label: 'Pitch',
+		label: 'Rate',
 		className: 'left-top'
 	},
 	FILTER: {
@@ -27,50 +21,46 @@ module.exports = {
 		label: 'Filter',
 		className: 'center-top'
 	},
-	MIX: {
+	BITS: {
 		ccValue: 18,
 		type: 'knob',
-		label: 'Mix',
+		label: 'Bits',
 		className: 'right-top'
 	},
-	SUSTAIN: {
+	STUTTER: {
 		ccValue: 19,
 		type: 'knob',
-		label: 'Sustain',
+		label: 'Stutter',
 		className: 'left-middle'
 	},
-	FILTER_ENVELOPE: {
+	SEQUENCER: {
 		ccValue: 20,
 		type: 'knob',
-		label: 'Filter Envelope',
+		label: 'Sequencer',
 		className: 'center-middle'
 	},
-	MODULATION: {
+	SEQUENCER_MULT: {
 		ccValue: 21,
 		type: 'knob',
-		label: 'Modulation',
+		label: 'Multiplier',
 		className: 'right-middle'
 	},
-	SYNTH_MODE:{
+	SEQUENCER_TYPE:{
 		ccValue: 29,
-		label: 'Synth Mode',
+		label: 'Sequencer Type',
 		type: 'groupable_button',
 		className: 'right-above-bypass',
 		values: [
 			{
-				label: 'Dry',
+				label: 'Pitch',
 				value: 0
 			},
 			{
-				label: 'Mono',
+				label: 'Sample Rate',
 				value: 63
 			},
 			{
-				label: 'Arp',
-				value: 95
-			},
-			{
-				label: 'Poly',
+				label: 'Filter',
 				value: 127
 			},
 		]
@@ -79,39 +69,78 @@ module.exports = {
 		ccValue: 14,
 		label: 'Bypass',
 		type: 'button',
-		className: 'right-bottom',
+		toggleValues: [0, 127],
+		className: 'right-bottom'
+	},
+	STEP_1: {
+		ccValue: 22,
+		type: 'knob',
+		label: 'Step 1',
+		className: 'alt-left-top'
+	},
+	STEP_2: {
+		ccValue: 23,
+		type: 'knob',
+		label: 'Step 2',
+		className: 'alt-center-top'
+	},
+	STEP_3: {
+		ccValue: 24,
+		type: 'knob',
+		label: 'Step 3',
+		className: 'alt-right-top'
+	},
+	STEP_4: {
+		ccValue: 25,
+		type: 'knob',
+		label: 'Step 4',
+		className: 'alt-left-middle'
+	},
+	STEP_5: {
+		ccValue: 26,
+		type: 'knob',
+		label: 'Step 5',
+		className: 'alt-center-middle'
+	},
+	STEP_6: {
+		ccValue: 27,
+		type: 'knob',
+		label: 'Step 6',
+		className: 'alt-right-middle'
+	},
+	SEQUENCER_TYPE_:{
+		ccValue: 29,
+		label: 'Sequencer Type',
+		type: 'groupable_button',
+		className: 'alt-right-above-bypass',
+		values: [
+			{
+				label: 'Pitch',
+				value: 0
+			},
+			{
+				label: 'Sample Rate',
+				value: 63
+			},
+			{
+				label: 'Filter',
+				value: 127
+			},
+		]
+	},
+	BYPASS_: {
+		ccValue: 14,
+		label: 'Bypass',
+		type: 'button',
+		className: 'alt-right-bottom',
 		toggleValues: [0, 127]
 	},
-	// PORTAMENTO: {
-	// 	ccValue: 22,
-	// 	type: 'knob',
-	// 	label: 'Portamento'
-	// },
-	// FILTER_TYPE: {
-	// 	ccValue: 23,
-	// 	type: 'knob',
-	// 	label: 'Filter Type'
-	// },
-	// DELAY_LEVEL: {
-	// 	ccValue: 24,
-	// 	type: 'knob',
-	// 	label: 'Delay Level'
-	// },
-	// RING_MODULATION: {
-	// 	ccValue: 25,
-	// 	type: 'knob',
-	// 	label: 'Ring Modulation'
-	// },
-	// FILTER_BANDWIDTH: {
-	// 	ccValue: 26,
-	// 	type: 'knob',
-	// 	label: 'Filter Bandwidth'
-	// },
-	// DELAY_FEEDBACK: {
-	// 	ccValue: 27,
-	// 	type: 'knob',
-	// 	label: 'Delay Feedback'
-	// },
+	ALT: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'left-above-tap'
+	},
 	TAP: {
 		ccValue: 28,
 		label: 'Tap',
@@ -119,19 +148,32 @@ module.exports = {
 		value: 127,
 		className: 'left-bottom'
 	},
-	// SYNTH_WAVESHAPE: {
-	// 	ccValue: 30,
-	// 	label: 'Synth Waveshape',
+	ALT_: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'alt-left-above-tap active'
+	},
+	TAP_: {
+		ccValue: 28,
+		label: 'Tap',
+		type: 'button',
+		value: 127,
+		className: 'alt-left-bottom'
+	},
+	// STUTTER_HOLD:{
+	// 	ccValue: 31,
+	// 	label: 'Stutter Hold',
 	// 	type: 'groupable_button',
 	// 	values: [
 	// 		{
-	// 			label: 'Sawtooth',
+	// 			label: 'On',
 	// 			value: 0
 	// 		},
 	// 		{
-	// 			label: 'Square',
+	// 			label: 'Off',
 	// 			value: 127
 	// 		}
-	// 	]
+	// 	],
 	// }
 }

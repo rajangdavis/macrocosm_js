@@ -4,12 +4,6 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	// HALF_SPEED_ENABLE: {
-	// 	ccValue: 9,
-	// 	label: 'Half Speed Enable',
-	// 	type: 'button',
-	// 	toggleValues: [63, 64]
-	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
@@ -142,11 +136,20 @@ module.exports = {
 			},
 		]
 	},
-	BYPASS_: {
-		ccValue: 14,
-		label: 'Bypass',
-		type: 'button',
-		toggleValues: [0, 127],
+	PITCH_CONTROL_SMOOTHING: {
+		ccValue: 30,
+		label: 'Pitch Control Smoothing',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'Smoothing On',
+				value: 0
+			},
+			{
+				label: 'Smoothing Off',
+				value: 127
+			}
+		],
 		className: 'alt-right-bottom'
 	},
 	ALT: {
@@ -168,28 +171,13 @@ module.exports = {
 		alt: true,
 		className: 'alt-left-above-tap active'
 	},
-	TAP_: {
-		ccValue: 28,
-		label: 'Tap',
+	HALF_SPEED_ENABLE: {
+		ccValue: 9,
+		label: 'Half Speed Enable',
 		type: 'button',
-		value: 127,
+		toggleValues: [63, 64],
 		className: 'alt-left-bottom'
 	},
-	// PITCH_CONTROL_SMOOTHING: {
-	// 	ccValue: 30,
-	// 	label: 'Pitch Control Smoothing',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'Smoothing On',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Smoothing Off',
-	// 			value: 127
-	// 		}
-	// 	]
-	// },
 	// VOLUME_SWELL_ENABLE:{
 	// 	ccValue: 31,
 	// 	label: 'Volume Swell Enable',
@@ -203,6 +191,6 @@ module.exports = {
 	// 			label: 'Swell Off',
 	// 			value: 127
 	// 		}
-	// 	]
+	// 	],
 	// }
 }

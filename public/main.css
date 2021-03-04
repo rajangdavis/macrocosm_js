@@ -34,7 +34,8 @@ body {
 
 .meris-mercury7{
   border: 1px solid #286BB3;
-  background: #286BB3; 
+  background: #286BB3;
+  color: #FFFFFF;
 }
 
 .meris-polymoon{
@@ -131,4 +132,34 @@ button{
 .left-bottom, .right-bottom,
 .alt-left-bottom, .alt-right-bottom{
   order: 4;
+}
+
+.preset-groups-container{
+  position: relative;
+}
+
+.preset-groups-container span{
+  position: absolute;
+  right: 0
+}
+
+.preset-groups{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  background: grey;
+  border-radius: 7%;
+}
+
+.preset-groups div{
+  display: flex;
+  flex-direction: row;
+}
+
+.preset-groups div button{
+  padding: 10px;
+  margin: 0;
+  width: 36px;
 }

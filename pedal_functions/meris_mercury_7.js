@@ -4,27 +4,21 @@ module.exports = {
 	// 	type: 'knob',
 	// 	label: 'Expression Pedal'
 	// },
-	// ENVELOPE_TYPE: {
-	// 	ccValue: 9,
-	// 	label: 'Half Speed Enable',
-	// 	type: 'button',
-	// 	toggleValues: [63, 64]
-	// },
 	// TEMPO: {
 	// 	ccValue: 15,
 	// 	type: 'knob',
 	// 	label: 'Tempo (to millisec intervals)'
 	// },
-	PITCH: {
+	SPACE_DECAY: {
 		ccValue: 16,
 		type: 'knob',
-		label: 'Pitch',
+		label: 'Space Decay',
 		className: 'left-top'
 	},
-	FILTER: {
+	MODULATE: {
 		ccValue: 17,
 		type: 'knob',
-		label: 'Filter',
+		label: 'Modulate',
 		className: 'center-top'
 	},
 	MIX: {
@@ -33,44 +27,36 @@ module.exports = {
 		label: 'Mix',
 		className: 'right-top'
 	},
-	SUSTAIN: {
+	LO_FREQ: {
 		ccValue: 19,
 		type: 'knob',
-		label: 'Sustain',
+		label: 'Lo Frequency',
 		className: 'left-middle'
 	},
-	FILTER_ENVELOPE: {
+	PITCH_VECTOR: {
 		ccValue: 20,
 		type: 'knob',
-		label: 'Filter Envelope',
+		label: 'Pitch Vector',
 		className: 'center-middle'
 	},
-	MODULATION: {
+	HI_FREQ: {
 		ccValue: 21,
 		type: 'knob',
-		label: 'Modulation',
+		label: 'Hi Frequency',
 		className: 'right-middle'
 	},
-	SYNTH_MODE:{
+	ALGORITHM_SELECT:{
 		ccValue: 29,
-		label: 'Synth Mode',
+		label: 'Algorithm Select',
 		type: 'groupable_button',
 		className: 'right-above-bypass',
 		values: [
 			{
-				label: 'Dry',
+				label: 'Ultraplate',
 				value: 0
 			},
 			{
-				label: 'Mono',
-				value: 63
-			},
-			{
-				label: 'Arp',
-				value: 95
-			},
-			{
-				label: 'Poly',
+				label: 'Cathedra',
 				value: 127
 			},
 		]
@@ -82,56 +68,89 @@ module.exports = {
 		className: 'right-bottom',
 		toggleValues: [0, 127]
 	},
-	// PORTAMENTO: {
-	// 	ccValue: 22,
-	// 	type: 'knob',
-	// 	label: 'Portamento'
-	// },
-	// FILTER_TYPE: {
-	// 	ccValue: 23,
-	// 	type: 'knob',
-	// 	label: 'Filter Type'
-	// },
-	// DELAY_LEVEL: {
-	// 	ccValue: 24,
-	// 	type: 'knob',
-	// 	label: 'Delay Level'
-	// },
-	// RING_MODULATION: {
-	// 	ccValue: 25,
-	// 	type: 'knob',
-	// 	label: 'Ring Modulation'
-	// },
-	// FILTER_BANDWIDTH: {
-	// 	ccValue: 26,
-	// 	type: 'knob',
-	// 	label: 'Filter Bandwidth'
-	// },
-	// DELAY_FEEDBACK: {
-	// 	ccValue: 27,
-	// 	type: 'knob',
-	// 	label: 'Delay Feedback'
-	// },
-	TAP: {
+	PREDELAY: {
+		ccValue: 22,
+		type: 'knob',
+		label: 'Predelay',
+		className: 'alt-left-top'
+	},
+	MOD_SPEED: {
+		ccValue: 23,
+		type: 'knob',
+		label: 'Mod Speed',
+		className: 'alt-center-top'
+	},
+	PITCH_VECTOR_MIX: {
+		ccValue: 24,
+		type: 'knob',
+		label: 'Pitch Vector Mix',
+		className: 'alt-right-top'
+	},
+	DENSITY: {
+		ccValue: 25,
+		type: 'knob',
+		label: 'Density',
+		className: 'alt-left-middle'
+	},
+	ATTACK_TIME: {
+		ccValue: 26,
+		type: 'knob',
+		label: 'Attack Time',
+		className: 'alt-center-middle'
+	},
+	VIBRATO_DEPTH: {
+		ccValue: 27,
+		type: 'knob',
+		label: 'Vibrato Depth',
+		className: 'alt-right-middle'
+	},
+	ALGORITHM_SELECT_:{
+		ccValue: 29,
+		label: 'Algorithm Select',
+		type: 'groupable_button',
+		className: 'alt-right-above-bypass',
+		values: [
+			{
+				label: 'Ultraplate',
+				value: 0
+			},
+			{
+				label: 'Cathedra',
+				value: 127
+			},
+		]
+	},
+	BYPASS_: {
+		ccValue: 14,
+		label: 'Bypass',
+		type: 'button',
+		className: 'alt-right-bottom',
+		toggleValues: [0, 127]
+	},
+	ALT: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'left-above-tap'
+	},
+	SWELL: {
 		ccValue: 28,
-		label: 'Tap',
+		label: 'Swell',
 		type: 'button',
 		value: 127,
 		className: 'left-bottom'
 	},
-	// SYNTH_WAVESHAPE: {
-	// 	ccValue: 30,
-	// 	label: 'Synth Waveshape',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'Sawtooth',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Square',
-	// 			value: 127
-	// 		}
-	// 	]
-	// }
+	ALT_: {
+		label: 'Alt',
+		type: 'button',
+		alt: true,
+		className: 'alt-left-above-tap active'
+	},
+	SWELL_: {
+		ccValue: 28,
+		label: 'Swell',
+		type: 'button',
+		value: 127,
+		className: 'alt-left-bottom'
+	},
 }

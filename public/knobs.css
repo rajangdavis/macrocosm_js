@@ -1,21 +1,34 @@
+/* Meris Hedra */
+
+.meris-hedra
+.styledKnob circle,
+.meris-hedra
+.styledKnob path {
+  fill: #AEAFB1;
+  opacity: 0.4;
+  transition:
+    opacity 100ms,
+    color 100ms
+    ease-in-out;
+}
+
 .styledKnob circle,
 .styledKnob path {
-  fill: #fc5a96;
+  fill: #000000;
   opacity: 0.4;
-  transition: 
-    opacity 100ms, 
-    color 100ms 
+  transition:
+    opacity 100ms,
+    color 100ms
     ease-in-out;
 }
 
 .styledKnob:hover circle,
 .styledKnob:hover path,
 .styledKnob:focus circle,
-.styledKnob:focus path, {
-  fill: #180094;
-  opacity: 1;
-  transition: 
-    opacity 450ms, 
-    color 450ms 
+.styledKnob:focus path {
+  opacity: 1 !important;
+  transition:
+    opacity 450ms,
+    color 450ms
     ease-in-out;
 }
