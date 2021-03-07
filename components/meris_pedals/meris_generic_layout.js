@@ -43,7 +43,7 @@ export default class MerisGenericLayout extends React.Component {
   }
 
   deviceOutput(){
-    return this.props.midiObject().outputs.filter((x) => x.name == this.props.outputPort)[0];
+    return this.props.midiObject.MIDI.outputs.filter((x) => x.name == this.props.outputPort)[0];
   }
 
   programNumberChange(e){

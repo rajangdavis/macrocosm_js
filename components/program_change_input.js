@@ -27,20 +27,8 @@ export default class ProgramChangeInput extends React.Component {
   
   render(){
     return <div className={this.props.className}> 
-      <div>
-        <label>{this.state.label}</label>
-        <input disabled={this.props.disabled} type="number" value={this.programNumber()} min="1" max={this.state.max} onChange={this.programNumberChange}/>
-      </div>
-      <style jsx>{`
-        .hidden{
-          display: none !important;
-        }
-        label{
-          margin: 10px auto 5px;
-          display: block;
-          font-weight: bold;
-        }
-      `}</style>
+      <label>{this.state.label}</label>
+      <input disabled={this.props.disabled} type="number" value={this.programNumber()} min="1" max={this.state.max} onChange={this.programNumberChange}/>
     </div>
   }
 }

@@ -12,12 +12,31 @@ body {
 }
 
 .container {
-  min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.macro{
+  border: 5px solid red;
+}
+
+/* CUSACK SWITCHERS */
+
+.pedal-tamer{
+  border: 2px solid #b4cfb0;
+  padding: 20px;
+  margin-bottom:10px
+}
+
+/* MERIS MIDI IO */
+
+.meris-midi-io{
+  border: 1px solid black;
+  padding: 20px;
+  margin-bottom: 10px;
 }
 
 /* MERIS PEDALS */
