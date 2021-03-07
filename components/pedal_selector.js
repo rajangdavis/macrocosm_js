@@ -67,17 +67,8 @@ export default class PedalSelector extends React.Component {
 		
     return (
       <div className="container">
-        <PedalBoardTamerDropDown inputValues={ this.inputValues } outputValues={ this.outputValues }/>
+        <PedalBoardTamerDropDown midiObject={this.midiObject} inputValues={ this.inputValues } outputValues={ this.outputValues }/>
         <MerisMidiIo midiObject={this.midiObject} inputValues={ this.inputValues } outputValues={ this.outputValues }/>
-        <style jsx>{`
-          .hidden{
-            display: none !important;
-          }
-          .container{
-            border: 3px solid purple;
-            padding: 25px;
-          }
-        `}</style>
       </div>
     )
   }

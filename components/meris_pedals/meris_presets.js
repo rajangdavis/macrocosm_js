@@ -47,7 +47,7 @@ export default class MerisPresets extends React.Component {
 		return <div className="preset-groups-container">
 			<div className={`preset-groups ${this.isActive()}`}>
 			  {groupedPresets.map((group) =>{
-			  	return <div>{group.map((button => {
+			  	return <div key={group}>{group.map((button => {
 			    	return <button key={button} onClick={()=> this.programNumberChange(button)} >{button}</button>
 			  	}))}</div>
 			  })}

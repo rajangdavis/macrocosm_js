@@ -6,14 +6,15 @@ export default class ProgramChangeInput extends React.Component {
     this.state = {
       programNumber: "1",
       label: this.props.label || "Program Number",
-      max: this.props.max ? this.props.max.toString() : "127"
+      max: this.props.max ? this.props.max.toString() : "127",
+      midiChannel: "1"
     }
     this.programNumberChange = this.programNumberChange.bind(this);
     this.programNumber = this.programNumber.bind(this);
   }
 
   programNumberChange(e){
-    let intMidiChannel = parseInt(this.props.midiChannel);
+    let intMidiChannel = parseInt(this.state.midiChannel);
     let intProgramNumber = parseInt(this.state.programNumber);
     this.props.deviceOutput().setProgram(intProgramNumber, {channels: intMidiChannel});
     console.log("Command sent", {intProgramNumber: intProgramNumber, channels: intMidiChannel})

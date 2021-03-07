@@ -15,17 +15,13 @@ export default class PedalBoardTamerDropDown extends React.Component {
     };
 
     this.showControls = this.showControls.bind(this);
-    this.midiChannelChange = this.midiChannelChange.bind(this);
-    this.programNumberChange = this.programNumberChange.bind(this);
+    this.midiChannelChange = this.midiChannelChange.bind(this);  
     this.devicePortChange = this.devicePortChange.bind(this);
+    this.deviceOutput = this.deviceOutput.bind(this);
   }
 
   midiChannelChange(){
     this.setState({ midiChannel: event.target.value })
-  }
-
-  programNumberChange(){
-    this.setState({ programNumber: event.target.value })
   }
 
   devicePortChange(){
@@ -42,6 +38,10 @@ export default class PedalBoardTamerDropDown extends React.Component {
   devicePortNotSet(){
     return this.state.devicePort == ""
   }
+
+  deviceOutput(){
+    return this.props.midiObject().outputs.filter((x) => x.name == this.state.devicePort)[0];
+  }
   
   render(){
     return <div className="pedal-tamer">
@@ -50,7 +50,7 @@ export default class PedalBoardTamerDropDown extends React.Component {
         <MidiDevicePortSelector ports={this.props.outputValues} devicePort={this.state.devicePort} portChange={this.devicePortChange} label='output'/>
         <div>
           <MidiChannelSelect disabled={ this.devicePortNotSet() } midiChannelChange={this.midiChannelChange} midiChannel={this.state.midiChannel}/>
-          <ProgramChangeInput disabled={ this.devicePortNotSet() } programNumberChange={this.programNumberChange} programNumber={this.state.programNumber} />
+          <ProgramChangeInput disabled={ this.devicePortNotSet() } deviceOutput={this.deviceOutput} programNumber={this.state.programNumber} />
         </div>
       </div>
       

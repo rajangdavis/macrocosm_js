@@ -13,7 +13,6 @@ export default class MerisMidiIo extends React.Component {
     super(props, context);
     this.state = {
       active: true,
-      midiChannel: "1",
       programNumber: "1",
       inputPort: '',
       outputPort: '',

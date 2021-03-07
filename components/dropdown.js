@@ -18,7 +18,6 @@ export default class DropDown extends React.Component {
     this.sendCommand = this.sendCommand.bind(this);
     this.midiChannelChange = this.midiChannelChange.bind(this);
     this.devicePortChange = this.devicePortChange.bind(this);
-    // this.programNumberChange = this.programNumberChange.bind(this);
   }
 
   midiChannelChange(e){
@@ -26,12 +25,6 @@ export default class DropDown extends React.Component {
       this.sendCommand();
     })
   }
-
-  // programNumberChange(e){
-  //   this.setState({programNumber: event.target.value},()=>{
-  //     this.sendCommand();
-  //   })
-  // }
 
   devicePortChange(e){
     this.setState({devicePort: event.target.value}) 
