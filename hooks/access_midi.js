@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 export default function AccessMidi(){
-  const [midiObject, setMidiObject] = useState({});
+  const [midiObject, setMidiObject] = useState({MIDI:{}, inputValues: [], outputValues: []});
   useEffect(() => {
     var loadScript = function (src) {
       var tag = document.createElement('script');

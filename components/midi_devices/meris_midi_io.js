@@ -1,4 +1,4 @@
-import { useState} from 'react'
+import React from 'react'
 import MidiChannelSelect from '../midi_channel_select'
 import MerisHedra from '../meris_pedals/meris_hedra'
 import MerisEnzo from '../meris_pedals/meris_enzo'
@@ -8,48 +8,67 @@ import MerisOttobitJr from '../meris_pedals/meris_ottobit_jr'
 import ProgramChangeInput from '../program_change_input'
 import MidiDevicePortSelector from '../midi_device_port_selector'
 
-export default function MerisMidiIo(midiObject){
-  const [merisMidiIoActive, setMerisMidiIoActive] = useState(false);
-  const [programNumber, setProgramNumber] = useState("1");
-  const [inputPort, setInputPort] = useState("1");
-  const [outputPort, setOutputPort] = useState("1");
+export default class MerisMidiIo extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      active: true,
+      programNumber: "1",
+      inputPort: '',
+      outputPort: '',
+    };
 
-  const inputPortChange = (e) => {
-    // setInputPort(event.target.value)
+    this.showControls = this.showControls.bind(this);
+    this.inputPortChange = this.inputPortChange.bind(this);
+    this.outputPortChange = this.outputPortChange.bind(this);
   }
 
-  const outputPortChange = (e) => {
-    // setInputPort(event.target.value)
+  inputPortChange(e){
+    this.setState({inputPort: event.target.value}) 
   }
 
-  const showControls = () => {
-    // setInputPort(event.target.value)
+  outputPortChange(e){
+    this.setState({outputPort: event.target.value}) 
   }
 
-  const isActive = () => {
-    return active ? "" : "hidden"
+  showControls() {
+    this.setState({ active: !this.state.active });
+  }
+
+  isActive(){
+    return this.state.active ? "" : "hidden"
+  }
+  inputPortNotSet(){
+    return this.state.inputPort == ""
+  }
+
+  outputPortNotSet(){
+    return this.state.outputPort == ""
   }
   
-  const inputPortNotSet = () => {
-    return inputPort == ""
-  }
-
-  const outputPortNotSet = () => {
-    return outputPort == ""
-  }
-
-  // {MidiDevicePortSelector(this.outputPortChange,"input", this.props.outputValues)}
-  // {MidiDevicePortSelector(this.outputPortChange,"output", this.props.outputValues)}
-  // <MerisHedra midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-  // <MerisEnzo midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-  // <MerisPolymoon midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-  // <MerisMercury7 midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-  // <MerisOttobitJr midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-  
+  render(){
     return <div className="meris-midi-io">
       <a onClick={this.showControls}>Meris MIDI IO</a>
-      <div className={isActive()} >
-        
+      <div className={this.isActive()} >
+        {MidiDevicePortSelector(this.outputPortChange,"input", this.props.outputValues)}
+        {MidiDevicePortSelector(this.outputPortChange,"output", this.props.outputValues)}
+        <MerisHedra midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
+        <MerisEnzo midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
+        <MerisPolymoon midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
+        <MerisMercury7 midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
+        <MerisOttobitJr midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
       </div>
+      
+      <style jsx>{`
+        .meris-midi-io{
+          border: 1px solid black;
+          padding: 20px;
+          margin-bottom: 10px;
+        }
+        .hidden{
+          display: none !important;
+        }
+      `}</style>
     </div>
+  }
 }

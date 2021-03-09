@@ -1,46 +1,74 @@
+import React from 'react'
 import MidiChannelSelect from '../midi_channel_select'
 import ProgramChangeInput from '../program_change_input'
 import MidiDevicePortSelector from '../midi_device_port_selector'
-import { useState} from 'react'
 
-export default function PedalBoardTamerDropDown(midiObject){
-  const [active, setActive] = useState(false);
-  const [midiChannel, setMidiChannel] = useState("1");
-  const [programNumber, setProgramNumber] = useState("1");
-  const [devicePort, setDevicePort] = useState("");
+export default class PedalBoardTamerDropDown extends React.Component {
+  constructor(props, context) {
+    super(props, context);
 
-  const midiChannelChange = () => {
-    setMidiChannel(event.target.value)
+    this.state = {
+      active: true,
+      midiChannel: "1",
+      programNumber: "1",
+      devicePort: '',
+    };
+
+    this.showControls = this.showControls.bind(this);
+    this.midiChannelChange = this.midiChannelChange.bind(this);  
+    this.devicePortChange = this.devicePortChange.bind(this);
+    this.deviceOutput = this.deviceOutput.bind(this);
   }
 
-  const devicePortChange = () => {
-    setProgramNumber(event.target.value)
+  midiChannelChange(){
+    this.setState({ midiChannel: event.target.value })
   }
 
-  const showControls = () => {
-    setActive(!active)
+  devicePortChange(){
+    this.setState({ devicePort: event.target.value} ) 
   }
 
-  const isActive = () => {
-    return active ? "" : "hidden"
+  showControls(){
+    this.setState({ active: !this.state.active })
   }
 
-  const devicePortNotSet = () => {
-    return devicePort == ""
+  isActive(){
+    return this.state.active ? "" : "hidden"
+  }
+  devicePortNotSet(){
+    return this.state.devicePort == ""
   }
 
-  const deviceOutput = () => {
-    return midiObject.MIDI.outputs.filter((x) => x.name == devicePort)[0];
+  deviceOutput(){
+    return this.props.midiObject.outputs.filter((x) => x.name == this.state.devicePort)[0];
   }
   
-  return <div className="pedal-tamer">
-    <a onClick={showControls}>Pedal Tamer</a>
-    <div className={isActive()} >
-      {MidiDevicePortSelector(devicePortChange,'output',outputValues) }
-      <div>
-        <MidiChannelSelect disabled={ devicePortNotSet() } midiChannelChange={midiChannelChange} midiChannel={midiChannel}/>
-        <ProgramChangeInput disabled={ devicePortNotSet() } deviceOutput={deviceOutput} programNumber={programNumber} />
+  render(){
+    return <div className="pedal-tamer">
+      <a onClick={this.showControls}>Pedal Tamer</a>
+      <div className={this.isActive()} >
+        {MidiDevicePortSelector(this.outputPortChange,"output", this.props.outputValues)}
+        <div>
+          <MidiChannelSelect disabled={ this.devicePortNotSet() } midiChannelChange={this.midiChannelChange} midiChannel={this.state.midiChannel}/>
+          <ProgramChangeInput disabled={ this.devicePortNotSet() } deviceOutput={this.deviceOutput} programNumber={this.state.programNumber} />
+        </div>
       </div>
+      
+      <style jsx>{`
+        .pedal-tamer{
+          border: 2px solid #b4cfb0;
+          padding: 20px;
+          margin-bottom:10px
+        }
+        .hidden{
+          display: none !important;
+        }
+        button{
+          margin: 10px auto 5px;
+          display: block;
+          font-weight: bold;
+        }
+      `}</style>
     </div>
-  </div>
+  }
 }

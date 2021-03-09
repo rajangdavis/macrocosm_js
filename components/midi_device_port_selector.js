@@ -1,6 +1,7 @@
 import DropDown from '../components/dropdown' 
 
-export default function MidiDevicePortSelector(portChange,label,ports){
+export default function MidiDevicePortSelector(portChange, label, ports){
+  console.log(ports)
   return (
     <div>
       <select onChange={portChange}>

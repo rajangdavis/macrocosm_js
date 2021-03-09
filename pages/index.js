@@ -11,7 +11,7 @@ export default function Home() {
         <title>macrocosm</title>
       </Head>
 			{MacrosContainer(midiObject)}
-      {BoardsContainer()}
+      {BoardsContainer(midiObject)}
     </div>
   )
 }
