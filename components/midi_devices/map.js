@@ -1,5 +1,5 @@
 import MerisMidiIo from './meris_midi_io_hooks' 
-import PedalBoardTamerDropDown from './pedal_board_tamer_dropdown'
+import PedalBoardTamerDropDown from './pedal_board_tamer_dropdown_hooks'
 
 module.exports = {
 	midiDevices: [

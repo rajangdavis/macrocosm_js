@@ -1,43 +1,27 @@
-import React, {useState } from 'react'
-import MerisMidiIo from './midi_devices/meris_midi_io' 
-import PedalBoardTamerDropDown from './midi_devices/pedal_board_tamer_dropdown'
-import MerisMidiIoHooks from './midi_devices/meris_midi_io_hooks' 
-import PedalBoardTamerDropDownHooks from './midi_devices/pedal_board_tamer_dropdown_hooks'
-// Figure out why this is broken...
-// {PedalBoardTamerDropDown(midiObject, inputValues, outputValues )}
+import React, {useState, useReducer} from 'react'
+import {midiDevices} from '../components/midi_devices/map'
 
 export default function MacroButton(props){
-  console.log(props.buttonData)
-  console.log(props.dispatch)
-	// const [selectedMidiDevices, setSelectedMidiDevices] = useState([]);
- //  const [isToggled, setToggled] = useState(false);
- //  const toggleTrueFalse = () => setToggled(!isToggled);
- //  const addDeviceToMacro = (device) =>{
- //  	let midiDevice = device.component;
- //    let newComponents = selectedMidiDevices.concat([ midiDevice])
- //    setSelectedMidiDevices(newComponents);
- //  }
-
-  // {selectedMidiDevices.map((device) => { return device(midiObject) })}
-  //     <div>
-  //     <h1>Add MIDI Devices</h1>
-  //       <div onClick={ toggleTrueFalse }>
-  //         Add MIDI Device
-  //       </div>
-  //       <div className={isToggled ? '' : 'hidden'}>
-  //         {midiDevices.map((md, i) =>{
-  //           return <p key={i} onClick={ () => addDeviceToMacro(md) }> {md.label}</p>
-  //         })}
-  //       </div>
-  //     </div>
-      // <PedalBoardTamerDropDown />
-  let removeMacro = () => props.dispatch({ type: 'remove', id: props.buttonData.id })
+  let removeMacro = () => props.dispatch({ type: 'remove-macro', macro_id: props.buttonData.macro_id })
+  let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-options', macro_id: props.buttonData.macro_id, new_value: !props.buttonData.show_midi_devices })
+  let addMidiDevice = (component) => props.dispatch({ type: 'add-midi-to-macro', macro_id: props.buttonData.macro_id, component: component })
 
   return (
     <div className="macro">
       <div onClick={removeMacro}>Delete</div>
-      <PedalBoardTamerDropDown midiObject={props.midiObject} inputValues={ props.midiObject.inputValues } outputValues={ props.midiObject.outputValues }/>
-      <MerisMidiIo midiObject={props.midiObject} inputValues={ props.midiObject.inputValues } outputValues={ props.midiObject.outputValues }/>
+      <div className="midi-devices">
+        <div onClick={toggleMidiDeviceOptions}>Add MIDI Device</div>
+      </div>
+      <div>
+        {props.buttonData.midi_devices.map((midi_device, i) => {
+          return <div key={i}>{midi_device.component(props.midiObject)}</div>
+        } )}
+      </div>
+      <div className={props.buttonData.show_midi_devices ? '' : 'hidden'}>
+        {midiDevices.map((x,i)=> {
+          return <p key={i} onClick={()=> addMidiDevice(x.component)}>{x.label}</p>
+        })}
+      </div>
     </div>
   )
 

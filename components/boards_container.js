@@ -1,4 +1,4 @@
-import AddRemovePattern from '../hooks/add_remove_pattern'
+import ManageMacros from '../hooks/manage_macros'
 import MacroButton from '../components/macro_button'
 
 export default function BoardsContainer(midiObject){
@@ -11,7 +11,7 @@ export default function BoardsContainer(midiObject){
     }
   }
 
-  const [state, dispatch] = AddRemovePattern(returnNewBoard);
+  const [state, dispatch] = ManageMacros(returnNewBoard);
 
   return <div className='macros-container'>
     <h1>Boards</h1>

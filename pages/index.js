@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import MacrosContainer from '../components/macros_container'
-import BoardsContainer from '../components/boards_container'
+// import BoardsContainer from '../components/boards_container'
 import AccessMidi from '../hooks/access_midi'
 
 export default function Home() {
@@ -10,8 +10,9 @@ export default function Home() {
       <Head>
         <title>macrocosm</title>
       </Head>
-			{MacrosContainer(midiObject)}
-      {BoardsContainer(midiObject)}
+      <div>
+			 {MacrosContainer(midiObject)}
+      </div>
     </div>
   )
 }

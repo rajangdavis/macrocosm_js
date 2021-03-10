@@ -9,8 +9,8 @@ import { useState} from 'react'
 export default function MerisMidiIo(midiObject){
   // const [active, setActive] = useState(false);
   // const [programNumber, setProgramNumber] = useState("1");
-  const [inputPort, setInputPort] = useState("1");
-  const [outputPort, setOutputPort] = useState("1");
+  // const [inputPort, setInputPort] = useState("1");
+  // const [outputPort, setOutputPort] = useState("1");
 
   // const inputPortChange = (e) => {
   //   // setInputPort(event.target.value)
@@ -46,10 +46,10 @@ export default function MerisMidiIo(midiObject){
   // <MerisMercury7 midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
   // <MerisOttobitJr midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
   
-  return <div className="meris-midi-io">
-      <a onClick={showControls}>Meris MIDI IO</a>
-      <div className={isActive()} >
-        
-      </div>
-    </div>
+  return (<div className="meris-midi-io">
+        <a onClick={showControls}>Meris MIDI IO</a>
+        <div className={isActive()} >
+          
+        </div>
+      </div>)
 }
