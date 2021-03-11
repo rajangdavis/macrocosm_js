@@ -14,24 +14,26 @@ export default function ManageMacros(){
       return [...state];
     }
 
-    let newMacro = (state)=>{
+    let newMacro = (globalMacros)=>{
       return {
         macro_id: Date.now(),
-        name: `Macro #${state.length + 1}`,
+        name: `Macro #${globalMacros.length + 1}`,
         midi_devices: [],
         open: true,
-        order: state.length,
+        order: globalMacros.length,
         show_midi_devices: false
       }
     }
     
-    let newMidiDevice = (state, component)=>{
+    let newMidiDevice = (macro, component)=>{
       return {
         midi_device_id: Date.now(),
-        name: `MIDI Device #${state.length + 1}`,
+        macro_id: macro.macro_id,
+        name: `MIDI Device #${macro.midi_devices.length + 1}`,
         component: component,
         pedals: [],
         open: true,
+        show_pedals: false
       }
     }
 
@@ -52,7 +54,7 @@ export default function ManageMacros(){
     
     let addNewMidiDevice = (state, action)=>{
       let [index, macro] = macroIndex(state, action);
-      let new_midi_device_state = macro.midi_devices.concat([newMidiDevice(macro.midi_devices, action.component)])
+      let new_midi_device_state = macro.midi_devices.concat([newMidiDevice(macro, action.component)])
       console.log(new_midi_device_state)
       updateMacro(state, 'midi_devices', new_midi_device_state)
     }

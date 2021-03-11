@@ -1,4 +1,3 @@
-import React, {useState, useReducer} from 'react'
 import {midiDevices} from '../components/midi_devices/map'
 
 export default function MacroButton(props){
@@ -14,6 +13,8 @@ export default function MacroButton(props){
       </div>
       <div>
         {props.buttonData.midi_devices.map((midi_device, i) => {
+          props.midi_device_id = midi_device.midi_device_id
+          props.macro_id = midi_device.macro_id
           return <div key={i}>{midi_device.component(props)}</div>
         } )}
       </div>

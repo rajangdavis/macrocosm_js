@@ -1,4 +1,4 @@
-import MerisGenericLayout from './meris_generic_layout'
+import MerisGenericLayout from './meris_generic_layout_hooks'
 import * as pedalFunctions from '../../pedal_functions/meris_enzo'
 
 export default class MerisEnzo extends MerisGenericLayout {

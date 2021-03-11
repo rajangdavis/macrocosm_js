@@ -1,7 +1,9 @@
 import Head from 'next/head'
-import MacrosContainer from '../components/macros_container'
+// import MacrosContainer from '../components/macros_container'
+// {MacrosContainer(midiObject)}
 // import BoardsContainer from '../components/boards_container'
 import AccessMidi from '../hooks/access_midi'
+import MerisEnzo from '../components/meris_pedals/meris_enzo'
 
 export default function Home() {
 	const midiObject = AccessMidi();
@@ -11,7 +13,7 @@ export default function Home() {
         <title>macrocosm</title>
       </Head>
       <div>
-			 {MacrosContainer(midiObject)}
+        <MerisEnzo midiObject={midiObject} inputPort={1} outputPort={1} />
       </div>
     </div>
   )

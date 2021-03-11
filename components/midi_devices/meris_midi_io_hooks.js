@@ -7,15 +7,14 @@ import MidiDevicePortSelector from '../midi_device_port_selector'
 import { useState} from 'react'
 
 export default function MerisMidiIo(props){
-
-  let removeMacro = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.buttonData.macro_id })
-  let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-device', macro_id: props.buttonData.macro_id, new_value: !props.buttonData.show_midi_devices })
-  let addPedal = (component) => props.dispatch({ type: 'add-pedal-to-midi-device', macro_id: props.buttonData.macro_id, component: component })
+  let removeMidiDevice = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
+  let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-device', midi_device_id: props.midi_device_id })
+  let addPedal = (component) => props.dispatch({ type: 'add-pedal-to-midi-device', midi_device_id: props.midi_device_id, component: component })
 
   return (<div className="meris-midi-io">
-        <a onClick={showControls}>Meris MIDI IO</a>
+        <a onClick={toggleMidiDeviceOptions}>Meris MIDI IO</a>
         <p>Add Pedals</p>
-        <div className={isActive()} >
+        <div className={'sup'} >
 
         </div>
       </div>)
