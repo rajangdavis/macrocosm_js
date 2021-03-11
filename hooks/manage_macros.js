@@ -10,6 +10,7 @@ export default function ManageMacros(){
       macro[field] = value;
       console.log(`macro[${field}] is now: ${macro[field]}`)
       state.splice(index, 1 , macro);
+      console.log(state)
       return [...state];
     }
 
@@ -39,6 +40,15 @@ export default function ManageMacros(){
       let index = state.findIndex( x => x.macro_id == action.macro_id)
       return [index, macro];
     }
+
+    let updateMidiDevice = (state, field, value)=>{
+      let [index, midiDevice] = midiDeviceIndex(state, action)
+      console.log(`midiDevice[${field}] was: ${midiDevice[field]}`)
+      midiDevice[field] = value;
+      console.log(`midiDevice[${field}] is now: ${midiDevice[field]}`)
+      macro.splice(index, 1 , midiDevice);
+      return [...state];
+    }
     
     let addNewMidiDevice = (state, action)=>{
       let [index, macro] = macroIndex(state, action);
@@ -47,27 +57,27 @@ export default function ManageMacros(){
       updateMacro(state, 'midi_devices', new_midi_device_state)
     }
 
-    let updateMidiDevice = (state, field, value)=>{
-      let [index, macro] = macroIndex(state, action);
-      console.log(`macro[${field}] was: ${macro[field]}`)
-      macro[field] = value;
-      console.log(`macro[${field}] is now: ${macro[field]}`)
-      state.splice(index, 1 , macro);
-      return [...state];
+    let midiDeviceIndex = (state, action)=>{
+      let [_, macro] = macroIndex(state, action);
+      let midiDevice = macro.midi_devices.filter( x => x.midi_device_id == action.midi_device_id)[0]
+      let index = macro.midi_devices.findIndex( x => x.midi_device_id == action.midi_device_id)
+      return [index, midiDevice];
     }
+
 
     switch(action.type){
       case 'add-macro':
+        let newState = [ ...state, newMacro(state)]
         return [ ...state, newMacro(state)]
-      case 'toggle-midi-options':
-        return updateMacro(state, 'show_midi_devices', action.new_value)
       case 'toggle-midi-device':
-        return updateMacro(state, 'show_midi_devices', action.new_value)
+        return updateMidiDevice(state, 'open', action.new_value)
       case 'remove-macro':
         return [...state.filter( x => x.macro_id != action.macro_id)]
       case 'add-midi-to-macro':
         addNewMidiDevice(state, action)
         return updateMacro(state, 'show_midi_devices', false)
+      case 'toggle-midi-options':
+        return updateMacro(state, 'show_midi_devices', action.new_value)
       default:
         throw new Error();
     }

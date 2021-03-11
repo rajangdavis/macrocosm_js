@@ -14,7 +14,7 @@ export default function MacroButton(props){
       </div>
       <div>
         {props.buttonData.midi_devices.map((midi_device, i) => {
-          return <div key={i}>{midi_device.component(props.midiObject)}</div>
+          return <div key={i}>{midi_device.component(props)}</div>
         } )}
       </div>
       <div className={props.buttonData.show_midi_devices ? '' : 'hidden'}>
