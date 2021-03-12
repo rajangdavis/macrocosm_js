@@ -4,7 +4,6 @@ import MerisMercury7 from '../meris_pedals/meris_mercury_7'
 import MerisPolymoon from '../meris_pedals/meris_polymoon'
 import MerisOttobitJr from '../meris_pedals/meris_ottobit_jr'
 import MidiDevicePortSelector from '../midi_device_port_selector'
-import { useState} from 'react'
 
 export default function MerisMidiIo(props){
   let removeMidiDevice = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })

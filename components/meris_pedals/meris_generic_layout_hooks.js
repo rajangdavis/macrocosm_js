@@ -1,82 +1,69 @@
-import React from 'react'
 import MerisPresets from './meris_presets'
 import MerisGenericControls from './meris_generic_controls'
 import MidiChannelSelect from '../midi_channel_select'
 import ProgramChangeInput from '../program_change_input'
+import MidiDevicePortSelector from '../midi_device_port_selector'
+import { useState } from 'react';
 
-export default class MerisGenericLayout extends React.Component {
-  constructor(props, context, pedalData) {
-    super(props, context);
+export default function MerisGenericLayout(props, pedalData){
 
-    this.state = {
-      active: true,
-      altMode: false,
-      midiChannel: "1",
-      midiPreset: "1",
-      pedalData: pedalData,
-    };
+  const [active, setActive] = useState(true)
+  const [altMode, setAltMode] = useState(false)
+  const [midiChannel, setMidiChannel] = useState("1")
+  const [midiPreset, setMidiPreset] = useState("1")
+  const [inputPort, setInputPort] = useState("")
+  const [outputPort, setOutputPort] = useState("")
 
-    this.showControls = this.showControls.bind(this);
-    this.deviceOutput = this.deviceOutput.bind(this);
-    this.midiChannelChange = this.midiChannelChange.bind(this);
-    this.programNumberChange = this.programNumberChange.bind(this);
-    this.changeAltState = this.changeAltState.bind(this);
-    this.inAltMode = this.inAltMode.bind(this);
+  let midiChannelChange = (e)=>{
+    return setMidiChannel(event.target.value);
   }
 
-  midiChannelChange(e){
-    this.setState({midiChannel: event.target.value})
+  let showControls = ()=>{
+    console.log('showControls')
   }
 
-  showControls() {
-    this.setState({
-      active: !this.state.active
-    });
+  let inputPortChange = (e)=>{
+    return setInputPort(event.target.value);
   }
 
-  isActive(){
-    return (this.state.active && !this.outputPortNotSet()) ? "" : "hidden"
+  let outputPortChange = (e)=>{
+    return setOutputPort(event.target.value);
   }
   
-  outputPortNotSet(){
-    return this.props.outputPort == ""
+  let outputPortNotSet = ()=>{
+    return outputPort == ""
   }
 
-  deviceOutput(){
-    return this.props.midiObject.MIDI.outputs.filter((x) => x.name == this.props.outputPort)[0];
+  let deviceOutput = ()=>{
+    return props.midiObject.outputValues.filter(x => x.name == outputPort)[0]
   }
 
-  programNumberChange(e){
-    this.setState({midiPreset: event.target.value})
+  let programNumberChange = (e)=>{
+    return setMidiPreset(event.target.value)
   }
 
-  changeAltState(e){
-    this.setState({
-      altMode: !this.state.altMode
-    })
+  let changeAltState = (e)=>{
+    return setAltMode(!altMode)
   }
 
-  inAltMode(){
-    return this.state.altMode == true ? 'alt-' : ''
+  let inAltMode = ()=>{
+    return altMode == true ? 'alt-' : ''
   }
   
-  render(){
-    let className = this.state.pedalData.className
-    let name = this.state.pedalData.name
-
-    return <div className={className}>
-      <a onClick={this.showControls}>{name}</a>
-      <div className={`interface ${this.isActive()}`} >
+  return (<div className={pedalData.className}>
+      <a onClick={showControls}>{pedalData.name}</a>
+      <div className={`interface`} >
         <div className="channel-input">
-          <MidiChannelSelect className={"midi-channel-input"} midiChannelChange={this.midiChannelChange} midiChannel={this.state.midiChannel}/>
-          <MerisPresets deviceOutput={this.deviceOutput} midiChannel={this.state.midiChannel} />
+          {MidiDevicePortSelector(inputPortChange,"input", props.midiObject.inputValues)}
+          {MidiDevicePortSelector(outputPortChange,"output", props.midiObject.outputValues)}
+          <MidiChannelSelect className={"midi-channel-input"} midiChannelChange={midiChannelChange} midiChannel={midiChannel}/>
+          <MerisPresets deviceOutput={deviceOutput} midiChannel={midiChannel} />
         </div>
-        <div className={`${this.inAltMode()}controls`}>
-          <MerisGenericControls direction={`${this.inAltMode()}left`} pedalData={this.state.pedalData} midiChannel={this.state.midiChannel} deviceOutput={this.deviceOutput} changeAltState={this.changeAltState}/>
-          <MerisGenericControls direction={`${this.inAltMode()}center`} pedalData={this.state.pedalData} midiChannel={this.state.midiChannel} deviceOutput={this.deviceOutput}/>
-          <MerisGenericControls direction={`${this.inAltMode()}right`} pedalData={this.state.pedalData} midiChannel={this.state.midiChannel} deviceOutput={this.deviceOutput}/>
+        <div className={`${inAltMode()}controls`}>
+          <MerisGenericControls direction={`${inAltMode()}left`} pedalData={pedalData} midiChannel={midiChannel} deviceOutput={deviceOutput} changeAltState={changeAltState}/>
+          <MerisGenericControls direction={`${inAltMode()}center`} pedalData={pedalData} midiChannel={midiChannel} deviceOutput={deviceOutput}/>
+          <MerisGenericControls direction={`${inAltMode()}right`} pedalData={pedalData} midiChannel={midiChannel} deviceOutput={deviceOutput}/>
         </div>
       </div>      
-    </div>
-  }  
+    </div>)
 }
