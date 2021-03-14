@@ -3,7 +3,7 @@ import ProgramChangeInput from '../program_change_input'
 import MidiDevicePortSelector from '../midi_device_port_selector'
 import { useState} from 'react'
 
-export default function PedalBoardTamerDropDown(props){
+export default function PedalBoardTamer(props){
   let removeMidiDevice = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
   let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-device', midi_device_id: props.midi_device_id })
   // const [active, setActive] = useState(true);

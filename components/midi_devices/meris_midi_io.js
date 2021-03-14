@@ -1,74 +1,49 @@
-import React from 'react'
-import MidiChannelSelect from '../midi_channel_select'
-import MerisHedra from '../meris_pedals/meris_hedra'
-import MerisEnzo from '../meris_pedals/meris_enzo'
-import MerisMercury7 from '../meris_pedals/meris_mercury_7'
-import MerisPolymoon from '../meris_pedals/meris_polymoon'
-import MerisOttobitJr from '../meris_pedals/meris_ottobit_jr'
-import ProgramChangeInput from '../program_change_input'
+import ManageMidiDevices from '../../hooks/manage_midi_devices'
 import MidiDevicePortSelector from '../midi_device_port_selector'
+import pedals from '../pedals/map'
 
-export default class MerisMidiIo extends React.Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      active: true,
-      programNumber: "1",
-      inputPort: '',
-      outputPort: '',
-    };
+export default function MerisMidiIo(props){
+  const [midiDeviceState, midiDispatch] = ManageMidiDevices();
+  let outputPortChange = () => props.dispatch({ type: 'update-midi-device', macro_id: props.midi_device_id  })
+  let inputPortChange = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
+  let removeMidiDevice = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
+  let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-device', midi_device_id: props.midi_device_id })
+  let addPedal = (x) => midiDispatch({ type: 'add-pedal-to-midi-device', midi_device_id: midiDeviceState.midi_device_id, component: x.label, props: props })
 
-    this.showControls = this.showControls.bind(this);
-    this.inputPortChange = this.inputPortChange.bind(this);
-    this.outputPortChange = this.outputPortChange.bind(this);
-  }
+  // {MidiDevicePortSelector(outputPortChange,"input", this.props.outputValues)}
+  // {MidiDevicePortSelector(outputPortChange,"output", this.props.outputValues)}
 
-  inputPortChange(e){
-    this.setState({inputPort: event.target.value}) 
-  }
-
-  outputPortChange(e){
-    this.setState({outputPort: event.target.value}) 
-  }
-
-  showControls() {
-    this.setState({ active: !this.state.active });
-  }
-
-  isActive(){
-    return this.state.active ? "" : "hidden"
-  }
-  inputPortNotSet(){
-    return this.state.inputPort == ""
-  }
-
-  outputPortNotSet(){
-    return this.state.outputPort == ""
-  }
-  
-  render(){
-    return <div className="meris-midi-io">
-      <a onClick={this.showControls}>Meris MIDI IO</a>
-      <div className={this.isActive()} >
-        {MidiDevicePortSelector(this.outputPortChange,"input", this.props.outputValues)}
-        {MidiDevicePortSelector(this.outputPortChange,"output", this.props.outputValues)}
-        <MerisHedra midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-        <MerisEnzo midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-        <MerisPolymoon midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-        <MerisMercury7 midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-        <MerisOttobitJr midiObject={this.props.midiObject} inputPort={this.state.inputPort} outputPort={this.state.outputPort} />
-      </div>
-      
-      <style jsx>{`
-        .meris-midi-io{
-          border: 1px solid black;
-          padding: 20px;
-          margin-bottom: 10px;
-        }
-        .hidden{
-          display: none !important;
-        }
-      `}</style>
-    </div>
-  }
+  return (<div className="meris-midi-io">
+        <a onClick={toggleMidiDeviceOptions}>Meris MIDI IO</a>
+        <p>Add Pedals</p>
+        <div>
+          {pedals.map((x,i)=> {
+            return <p key={i} onClick={()=> addPedal(x)}>{x.label}</p>
+          })}
+        </div>
+        <div className='midi-ports-select' >
+          {midiDeviceState.pedals.map(device => device)}
+        </div>
+      </div>)
 }
+
+  // const [active, setActive] = useState(false);
+  // const [programNumber, setProgramNumber] = useState("1");
+  // const [inputPort, setInputPort] = useState("1");
+  // const [outputPort, setOutputPort] = useState("1");
+
+  // const inputPortChange = (e) => {
+  //   // setInputPort(event.target.value)
+  // }
+
+  // const outputPortChange = (e) => {
+  //   // setInputPort(event.target.value)
+  // }
+  
+  // const inputPortNotSet = () => {
+  //   return inputPort == ""
+  // }
+
+  // const outputPortNotSet = () => {
+  //   return outputPort == ""
+  // }  

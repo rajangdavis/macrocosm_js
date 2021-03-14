@@ -19,6 +19,9 @@ body {
   align-items: center;
 }
 
+.text-center{
+  text-align: center;
+}
 .macro{
   border: 5px solid red;
 }
@@ -40,6 +43,11 @@ body {
 }
 
 /* MERIS PEDALS */
+
+.pedal-label{
+  width: 100%;
+  display: block;
+}
 
 .meris-enzo{
   border: 1px solid #DEAE1B;

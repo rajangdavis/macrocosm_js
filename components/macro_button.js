@@ -1,4 +1,4 @@
-import {midiDevices} from '../components/midi_devices/map'
+import midiDevices from '../components/midi_devices/map'
 
 export default function MacroButton(props){
   let removeMacro = () => props.dispatch({ type: 'remove-macro', macro_id: props.buttonData.macro_id })

@@ -1,4 +1,5 @@
 import { useReducer } from 'react'
+import ManageMidiDevices from './manage_midi_devices'
 
 export default function ManageMacros(){
 
@@ -25,47 +26,11 @@ export default function ManageMacros(){
       }
     }
     
-    let newMidiDevice = (macro, component)=>{
-      return {
-        midi_device_id: Date.now(),
-        macro_id: macro.macro_id,
-        name: `MIDI Device #${macro.midi_devices.length + 1}`,
-        component: component,
-        pedals: [],
-        open: true,
-        show_pedals: false
-      }
-    }
-
     let macroIndex = (state, action)=>{
       let macro = state.filter( x => x.macro_id == action.macro_id)[0]
       let index = state.findIndex( x => x.macro_id == action.macro_id)
       return [index, macro];
     }
-
-    let updateMidiDevice = (state, field, value)=>{
-      let [index, midiDevice] = midiDeviceIndex(state, action)
-      console.log(`midiDevice[${field}] was: ${midiDevice[field]}`)
-      midiDevice[field] = value;
-      console.log(`midiDevice[${field}] is now: ${midiDevice[field]}`)
-      macro.splice(index, 1 , midiDevice);
-      return [...state];
-    }
-    
-    let addNewMidiDevice = (state, action)=>{
-      let [index, macro] = macroIndex(state, action);
-      let new_midi_device_state = macro.midi_devices.concat([newMidiDevice(macro, action.component)])
-      console.log(new_midi_device_state)
-      updateMacro(state, 'midi_devices', new_midi_device_state)
-    }
-
-    let midiDeviceIndex = (state, action)=>{
-      let [_, macro] = macroIndex(state, action);
-      let midiDevice = macro.midi_devices.filter( x => x.midi_device_id == action.midi_device_id)[0]
-      let index = macro.midi_devices.findIndex( x => x.midi_device_id == action.midi_device_id)
-      return [index, midiDevice];
-    }
-
 
     switch(action.type){
       case 'add-macro':
