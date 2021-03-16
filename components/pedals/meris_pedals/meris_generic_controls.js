@@ -6,7 +6,7 @@ export default function MerisGenericControls(props){
 
 	let pedalFunctions = props.pedalData.pedalFunctions
 	let midiChannel = props.midiChannel
-  let pedalName = props.pedalData.name
+  let pedalName = props.pedalData.label
 
 	let componentsByLocation = (location)=>{
     return Object.keys(pedalFunctions).filter((control, i) =>{

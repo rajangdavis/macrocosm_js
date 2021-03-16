@@ -1,8 +1,7 @@
 import { useReducer } from 'react';
 
 export default function MerisState(pedalData){
-
-	let merisStateReducer = (state, action) =>{
+  let merisStateReducer = (state, action) =>{
     switch(action.type){
       case 'update-pedal-state':
         state[action.key] = action.value;
@@ -13,14 +12,15 @@ export default function MerisState(pedalData){
   }
   
   let initialState = {
+    pedal_id: Date.now(),
     active: true,
     presetsActive: false,
     presetsVal: 0,
     altMode: false,
     midiChannel: "1",
     midiPreset: "1",
-    inputPort: "",
-    outputPort: ""
+    inputPort: pedalData.inputPort || "",
+    outputPort: pedalData.outputPort ||""
   }
 
   Object.keys(pedalData.pedalFunctions).map((key)=>{

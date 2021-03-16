@@ -39,9 +39,10 @@ export default function MerisComputedFunctions(props, pedalData){
 	  },
 
 	  programNumberSend:  (value)=>{
-	    intMidiChannel:  parseInt(midiChannel);
-	    intProgramNumber:  parseInt(value);
-	    deviceOutput().setProgram(intProgramNumber, {channels: intMidiChannel});
+	    let intMidiChannel =  parseInt(merisPedalState.midiChannel);
+	    let intProgramNumber =  parseInt(value);
+	    let deviceOutput = props.midiObject.outputValues.filter(x => x.name == pedalData.outputPort)[0]
+	    deviceOutput.setProgram(intProgramNumber, {channels: intMidiChannel});
 	    console.log("Command sent", {intProgramNumber: intProgramNumber, channels: intMidiChannel})
 	    merisPedalDispatch({type: 'update-pedal-state', key: 'presetsVal', value: !merisPedalState.presetsActive})
 	  },
@@ -51,15 +52,11 @@ export default function MerisComputedFunctions(props, pedalData){
 	  },
 
 	  showOrHidePedalLabel:  ()=>{
-	    return merisPedalState.active ?  `${pedalData.name}[-]`: `${pedalData.name}[+]`
+	    return merisPedalState.active ?  `${pedalData.label}[-]`: `${pedalData.label}[+]`
 	  },
 	  
 	  outputPortNotSet:  ()=>{
 	    return merisPedalState.outputPort == ""
-	  },
-
-	  deviceOutput:  ()=>{
-	    return props.midiObject.outputValues.filter(x => x.name == merisPedalState.outputPort)[0]
 	  },
 
 	  pedalActive:  ()=>{

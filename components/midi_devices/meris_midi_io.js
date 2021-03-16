@@ -1,28 +1,34 @@
 import ManageMidiDevices from '../../hooks/manage_midi_devices'
 import MidiDevicePortSelector from '../midi_device_port_selector'
-import pedals from '../pedals/map'
+import { useState } from 'react'
+import MerisComputedFunctions from '../pedals/meris_pedals/meris_computed_functions'
+import pedals_ from '../pedals/map'
 
 export default function MerisMidiIo(props){
-  const [midiDeviceState, midiDispatch] = ManageMidiDevices();
-  let outputPortChange = () => props.dispatch({ type: 'update-midi-device', macro_id: props.midi_device_id  })
-  let inputPortChange = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
-  let removeMidiDevice = () => props.dispatch({ type: 'remove-midi-device', macro_id: props.midi_device_id  })
-  let toggleMidiDeviceOptions = () => props.dispatch({ type: 'toggle-midi-device', midi_device_id: props.midi_device_id })
-  let addPedal = (x) => midiDispatch({ type: 'add-pedal-to-midi-device', midi_device_id: midiDeviceState.midi_device_id, component: x.label, props: props })
+  const [midiDeviceState, midiDispatch] = ManageMidiDevices(props);
+  let outputPortChange = (e) => midiDispatch({ type: 'update-midi-device', new_value: e.target.value, field: 'outputPort' })
+  let inputPortChange = (e) => midiDispatch({ type: 'update-midi-device',  new_value: e.target.value, field: 'inputPort' })
+  let toggleMidiDeviceOptions = () => midiDispatch({ type: 'toggle-pedal-options', new_value: !midiDeviceState.showPedals})
+  let addPedal = (x) => midiDispatch({ type: 'add-pedal-to-midi-device', component: x, props: props})
 
-  // {MidiDevicePortSelector(outputPortChange,"input", this.props.outputValues)}
-  // {MidiDevicePortSelector(outputPortChange,"output", this.props.outputValues)}
+  let canShowPedals = ()=>{
+    return midiDeviceState.showPedals == true ? 'midi-ports-select' : 'hidden';
+  }
 
   return (<div className="meris-midi-io">
-        <a onClick={toggleMidiDeviceOptions}>Meris MIDI IO</a>
-        <p>Add Pedals</p>
-        <div>
-          {pedals.map((x,i)=> {
-            return <p key={i} onClick={()=> addPedal(x)}>{x.label}</p>
+        <a>Meris MIDI IO</a>
+        {MidiDevicePortSelector(inputPortChange,"input", props.midiObject.inputValues)}
+        {MidiDevicePortSelector(outputPortChange,"output", props.midiObject.outputValues)}
+        <p onClick={toggleMidiDeviceOptions}>Add Pedals</p>
+        <div className={canShowPedals()}>
+          {pedals_.map((x,i)=> {
+            return <p key={i} onClick={()=> addPedal(x)}>{x.pedalData.label}</p>
           })}
         </div>
-        <div className='midi-ports-select' >
-          {midiDeviceState.pedals.map(device => device)}
+        <div>
+          {midiDeviceState.pedals.map((device, y)=>{
+            return <div key={y}>{device(midiDeviceState.inputPort, midiDeviceState.outputPort)}</div>
+          })}
         </div>
       </div>)
 }

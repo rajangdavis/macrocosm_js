@@ -21,7 +21,7 @@ export default function GenericButton(props){
     }else{
       var msgVal = props.mappedTo.value
     }
-    props.deviceOutput().sendControlChange(props.mappedTo.ccValue, msgVal,{channels: intMidiChannel});
+    props.deviceOutput.sendControlChange(props.mappedTo.ccValue, msgVal,{channels: intMidiChannel});
     console.log("Meris Hedra sent a change message", props.mappedTo.ccValue, msgVal, {channels: intMidiChannel})
   }
   

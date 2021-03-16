@@ -6,7 +6,7 @@ export default function GenericKnob(props){
   let sendChangeMessage = function(value){
   	let intMidiChannel = parseInt(props.midiChannel)
   	let intValue = parseInt(value)
-  	props.deviceOutput().sendControlChange(props.mappedTo.ccValue, intValue, {channels: intMidiChannel});
+  	props.deviceOutput.sendControlChange(props.mappedTo.ccValue, intValue, {channels: intMidiChannel});
     console.log(`${props.pedalName} made a change`, props.mappedTo.ccValue, intValue, {channels: intMidiChannel})
   }
 

@@ -1,5 +1,4 @@
 import { useReducer } from 'react'
-import ManageMidiDevices from './manage_midi_devices'
 
 export default function ManageMacros(){
 
