@@ -2,46 +2,7 @@ import { useReducer, useState } from 'react'
 import pedals_ from '../components/pedals/map'
 
 export default function ManageMidiDevices(props){
-
-	let [pedals, setPedals] = useState([]);
-	let initialState = {
-    midiDeviceId: Date.now(),
-    // macro_id: macro.macro_id,
-    // name: `MIDI Device #${macro.midi_devices.length + 1}`,
-    // component	: component,
-    inputPort: "",
-    outputPort: "",
-    pedals: pedals,
-    open: true,
-    showPedals: false
-  }
 	
-	let pedalHash = {}
-	var pedalsMap = pedals_.map(x =>{
-		let cf = x.computedFunctions(props, x.pedalData);
-		x.pedalData.computedFunctions = cf
-		pedalHash[x.pedalData.label] = (inputPort, outputPort) => {
-			x.pedalData.inputPort = inputPort
-			x.pedalData.outputPort = outputPort
-			return x.component(props, x.pedalData)
-		}
-		return;
-	})
-
-	let resetPedalHash = (newPedal)=>{
-		console.log(pedalHash)
-		delete pedalHash[newPedal.label]
-		console.log(pedalHash)
-  	pedalHash[newPedal.label] = (inputPort, outputPort) => {
-			pedalData.inputPort = inputPort
-			pedalData.outputPort = outputPort
-			newPedalVersion = pedals_.filter(x => x.label == newPedal.label)[0]
-  		let cf = newPedalVersion.computedFunctions(props, newPedalVersion.pedalData);
-  		pedalData.computedFunctions = cf;
-			return test(props, pedalData)
-		}
-		console.log(pedalHash)
-	}
 
 	let reducer = (state, action) =>{		
 
@@ -52,13 +13,6 @@ export default function ManageMidiDevices(props){
 		//   // console.log(`midiDevice[${field}] is now: ${midiDevice[field]}`)
 		//   // macro.splice(index, 1 , midiDevice);
 		//   // return [...state];
-		// }
-
-		// let addNewMidiDevice = (state, action)=>{
-		//   // let [index, macro] = macroIndex(state, action);
-		//   // let new_midi_device_state = macro.midi_devices.concat([newMidiDevice(macro, action.component)])
-		//   // console.log(new_midi_device_state)
-		//   // updateMacro(state, 'midi_devices', new_midi_device_state)
 		// }
 
 		// let midiDeviceIndex = (state, action)=>{
