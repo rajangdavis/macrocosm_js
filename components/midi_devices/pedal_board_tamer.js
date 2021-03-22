@@ -11,6 +11,43 @@ export default function PedalBoardTamer(props){
       macro_id: props.macro_id
     })
   }
+
+  let devicePortChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    props.dispatch({
+      type: 'update-midi-device',
+      new_value: e.target.value,
+      field: 'output_port',
+      midi_device_id: props.midi_device_id,
+      macro_id: props.macro_id
+    })
+  }
+
+  let programNumberChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    props.dispatch({
+      type: 'update-midi-device',
+      new_value: e.target.value,
+      field: 'program_number',
+      midi_device_id: props.midi_device_id,
+      macro_id: props.macro_id
+    })
+  }
+
+  let midiChannelChange = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    props.dispatch({
+      type: 'update-midi-device',
+      field: 'midi_channel',
+      new_value: e.target.value,
+      midi_device_id: props.midi_device_id,
+      macro_id: props.macro_id
+    })
+  }
+  
   let toggleMidiDeviceOptions = () => {
     props.dispatch({
       type: 'update-midi-device',
@@ -21,41 +58,23 @@ export default function PedalBoardTamer(props){
     })
   }
 
-  // let midiChannelChange = () => {
-  //   setMidiChannel(event.target.value)
-  // }
-
-  // let devicePortChange = () => {
-  //   setProgramNumber(event.target.value)
-  // }
-
-  // let showControls = () => {
-  //   setActive(!active)
-  // }
-
-  let isActive = () => {
-    'test'
+  let devicePortNotSet = () => {
+    return md.output_port == ""
   }
 
-  // let devicePortNotSet = () => {
-  //   return devicePort == ""
-  // }
-
-  // let deviceOutput = () => {
-  //   console.log(midiObject)
-  //   return props.midiObject.MIDI.outputs.filter((x) => x.name == devicePort)[0];
-  // }
-  // {MidiDevicePortSelector(devicePortChange,'output', midiObject.outputValues) }
-  //     <div>
-  //       <MidiChannelSelect disabled={ devicePortNotSet() } midiChannelChange={midiChannelChange} midiChannel={midiChannel}/>
-  //       <ProgramChangeInput disabled={ devicePortNotSet() } deviceOutput={deviceOutput} programNumber={programNumber} />
-  //     </div>
+  let deviceOutput = () => {
+    return props.midiObject.MIDI.outputs.filter((x) => x.name == md.output_port)[0];
+  }
 
   return <div className="pedal-tamer">
     <div onClick={removeMidiDevice}>Delete</div>
     <a onClick={toggleMidiDeviceOptions}>Pedal Tamer</a>
     <div>
-
+      <MidiDevicePortSelector onChange={devicePortChange} label='output' ports={props.midiObject.outputValues} value={md.output_port}/>
+      <div>
+        <MidiChannelSelect disabled={ devicePortNotSet() } midiChannelChange={midiChannelChange} midiChannel={md.midi_channel}/>
+        <ProgramChangeInput disabled={ devicePortNotSet() } onChange={programNumberChange} deviceOutput={deviceOutput} label='Program Number' programNumber={md.program_number} midiChannel={md.midi_channel}/>
+      </div>
     </div>
   </div>
 }

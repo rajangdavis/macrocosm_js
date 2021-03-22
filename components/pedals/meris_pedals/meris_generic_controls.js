@@ -4,9 +4,9 @@ import GroupableButtons from '../../groupable_buttons'
 
 export default function MerisGenericControls(props){
 
-	let pedalFunctions = props.pedalData.pedalFunctions
+	let pedalFunctions = props.pedalFunctions
 	let midiChannel = props.midiChannel
-  let pedalName = props.pedalData.label
+  let pedalName = props.pedalName
 
 	let componentsByLocation = (location)=>{
     return Object.keys(pedalFunctions).filter((control, i) =>{

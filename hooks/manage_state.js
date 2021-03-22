@@ -1,7 +1,7 @@
-// import { useReducer } from 'react'
+import cloneDeep from 'lodash/cloneDeep';
 import { useImmerReducer } from "use-immer";
 
-export default function ManageMacros(){
+export default function ManageState(){
 
   let reducer = (state, action) =>{
     console.log(action)
@@ -47,16 +47,17 @@ export default function ManageMacros(){
 
     // CREATE
     let createMidiDevice = (state, action)=>{
+      let midiDeviceId = Date.now()
       let newMidiDevice = (state, action)=>{
         return {
-          midi_device_id: Date.now(),
+          midi_device_id: midiDeviceId,
           macro_id: state.macro_id,
           name: `MIDI Device #${state.midi_devices.length + 1}`,
           component: action.component,
           input_port: "",
           output_port: "",
-          device_port: "",
-          midi_channel: "",
+          midi_channel: 1,
+          program_number: 1,
           pedals: [],
           open: true,
           show_pedals: false
@@ -69,7 +70,7 @@ export default function ManageMacros(){
     }
     
     // READ
-    let readMidiDeviceIndex = (state, action)=>{
+    let readMidiDevice = (state, action)=>{
       let [macroIndex, macro] = readMacro(state, action)
       let midiDevice = macro.midi_devices.filter(x => x.midi_device_id == action.midi_device_id)[0]
       let midiIndex = macro.midi_devices.findIndex(x => x.midi_device_id == action.midi_device_id)
@@ -78,14 +79,14 @@ export default function ManageMacros(){
 
     // UPDATE
     let updateMidiDevice = (state, action)=>{
-      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDeviceIndex(state, action)
+      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDevice(state, action)
       midiDevice[action.field] = action.new_value;
       macro.midi_devices.splice(midiIndex, 1, midiDevice)
     }
     
     // DESTROY
     let removeMidiDevice = (state, action)=>{
-      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDeviceIndex(state, action)
+      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDevice(state, action)
       macro.midi_devices = macro.midi_devices.filter(x => x.midi_device_id != action.midi_device_id)
       state.splice(macroIndex, 1 , macro);
     }
@@ -96,45 +97,36 @@ export default function ManageMacros(){
 
     // CREATE
     let createPedal = (state, action)=>{
-      let newPedal = (state, action)=>{
-        return {
-          pedal_id: Date.now(),
-          macro_id: state.macro_id,
-          name: `Pedal #${state.pedals.length + 1}`,
-          component  : action.component,
-          input_port: "",
-          output_port: "",
-          open: true,
-          show_pedals: false
-        }
-      }
-      let [index, macro] = readMacro(state, action);
-      action.field = 'midi_devices'
-      action.new_value = macro.midi_devices.concat([newMidiDevice(macro, action)])
-      return updateMacro(state, action)
+      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDevice(state, action)
+      action.field = 'pedals'
+      action.new_value = midiDevice.pedals.concat([action.pedal])
+      midiDevice[action.field] = action.new_value;
+      macro.midi_devices.splice(midiIndex, 1, midiDevice)
     }
     
     // READ
-    let pedalIndex = (state, action)=>{
-      let [_, macro] = readMacro(state, action)
-      let midiDevice = macro.midi_devices.filter(x => x.midi_device_id == action.midi_device_id)
-      let index = macro.midi_devices.findIndex(x => x.midi_device_id == action.midi_device_id)
-      return [index, midiDevice]
+    let readPedalIndex = (state, action)=>{
+      let [midiIndex, midiDevice, macroIndex, macro] = readMidiDevice(state, action)
+      let pedal = midiDevice.pedals.filter(x => x.pedal_id == action.pedal_id)[0]
+      let pedalIndex = midiDevice.pedals.findIndex(x => x.pedal_id == action.pedal_id)
+      return [pedalIndex, pedal, midiIndex, midiDevice, macroIndex, macro]
     }
 
     // UPDATE
     let updatePedal = (state, action)=>{
-      let [index, midiDevice] = readMidiDeviceIndex(state, action)
-      // macro.midi_devices
-      // macro[action.field] = action.new_value;
-      // state.splice(index, 1 , macro);
-      return [...state];
+      let [pedalIndex, pedal, midiIndex, midiDevice, macroIndex, macro] = readPedalIndex(state, action)
+      pedal[action.field] = action.new_value;
+      midiDevice.pedals.splice(pedalIndex, 1, pedal)
+      macro.midi_devices.splice(midiIndex, 1, midiDevice)
+      state.splice(macroIndex, 1 , macro);
     }
     
     // DESTROY
     let removePedal = (state, action)=>{
-      // return [...state.filter( x => x.macro_id != action.macro_id)]
-      return [...state]
+      let [pedalIndex, pedal, midiIndex, midiDevice, macroIndex, macro] = readPedalIndex(state, action)
+      midiDevice.pedals = midiDevice.pedals.filter(x => x.pedal_id != action.pedal_id)
+      macro.midi_devices.splice(midiIndex, 1, midiDevice)
+      state.splice(macroIndex, 1 , macro)
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -26,6 +26,10 @@ body {
   border: 5px solid red;
 }
 
+.pedal-container{
+  margin-bottom: 20px;
+}
+
 /* CUSACK SWITCHERS */
 
 .pedal-tamer{

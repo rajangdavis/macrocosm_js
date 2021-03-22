@@ -63,17 +63,6 @@ export default class DropDown extends React.Component {
           <button disabled={ this.devicePortNotSet() } onClick={this.sendCommand}>Send</button>
         </div>
       </div>
-      
-      <style jsx>{`
-        .hidden{
-          display: none !important;
-        }
-        button{
-          margin: 10px auto 5px;
-          display: block;
-          font-weight: bold;
-        }
-      `}</style>
     </li>
   }
 }

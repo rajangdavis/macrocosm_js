@@ -24,7 +24,6 @@ export default function MacroButton(props){
     });
     toggleMidiDeviceOptions()
   }
-
   return (
     <div className="macro">
       <div onClick={removeMacro}>Delete</div>
@@ -48,3 +47,4 @@ export default function MacroButton(props){
   )
 
 }
+// <div onClick={cloneMacro}>Clone</div>
