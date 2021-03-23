@@ -2,9 +2,10 @@ import MerisPresets from './meris_presets'
 import MerisGenericControls from './meris_generic_controls'
 import MidiChannelSelect from '../../midi_channel_select'
 import MidiDevicePortSelector from '../../midi_device_port_selector'
+import MerisComputedFunctions from './meris_computed_functions'
 
 export default function MerisGenericLayout(props){
-  let cf = props.pedalData.computedFunctions(({...props.pedalData, dispatch: props.dispatch}));
+  let cf = MerisComputedFunctions({...props.pedalData, dispatch: props.dispatch});
   let deviceOutput = props.midiObject.outputValues.filter(x => x.name == props.outputPort)[0]
   return (<div className={props.pedalData.className}>
             <a onClick={cf.removePedal} className='pedal-label'>Remove</a>

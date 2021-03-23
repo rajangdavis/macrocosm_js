@@ -52,6 +52,10 @@ export default function MerisMidiIo(props){
     toggleMidiDeviceOptions()
   }
 
+  let findComponent = (device) =>{
+    return pedals_.filter(x => x.label == device.label)[0].component;
+  }
+
   let canShowPedals = ()=>{
     return md.show_pedals == true ? 'midi-ports-select' : 'hidden';
   }
@@ -69,11 +73,11 @@ export default function MerisMidiIo(props){
             </div>
             <div>
               {md.pedals.map((pedal, y)=>{
-                console.log(pedal)
-                props.pedalData = pedal;
+                props.pedalData = pedal
                 props.inputPort = md.input_port
                 props.outputPort = md.output_port
-                return <div className="pedal-container" key={y}>{pedal.component(props)}</div>
+                let pedaltoRender = findComponent(pedal)
+                return <div className="pedal-container" key={y}>{pedaltoRender(props)}</div>
               })}
             </div>
           </div>)
