@@ -27,7 +27,7 @@ export default function MerisComputedFunctions(props){
 	    return ()=>{
 	      props.dispatch({
 	      	type: 'update-pedal', 
-	      	field: key, 
+					field: props[key].value,
 	      	new_value: event.target.value, 
 	      	midi_device_id:  props.midi_device_id, 
       	  macro_id: props.macro_id, 

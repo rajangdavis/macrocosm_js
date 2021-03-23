@@ -2,6 +2,7 @@ import React from 'react'
 import {Knob,  Arc, Pointer } from 'rc-knob'
 
 export default function GenericKnob(props){
+  console.log(props)
 
   let sendChangeMessage = function(value){
   	let intMidiChannel = parseInt(props.midiChannel)

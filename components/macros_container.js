@@ -1,11 +1,10 @@
-import ManageState from '../hooks/manage_state'
+
 import {useState} from 'react'
 import MacroButton from '../components/macro_button'
 
-export default function MacrosContainer(midiObject){
-  let [Macros, MacroDispatch] = ManageState();
+export default function MacrosContainer(hooks){
+  let [midiObject, Macros, MacroDispatch] = hooks;
   let [debugMode, setDebugMode] = useState(false);
-
   let debugModeClass = ()=> debugMode ?  '' : 'hidden'
 
   return <div className='macros-container'>
