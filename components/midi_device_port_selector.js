@@ -1,5 +1,3 @@
-import DropDown from '../components/dropdown' 
-
 export default function MidiDevicePortSelector(props){
 
   return (

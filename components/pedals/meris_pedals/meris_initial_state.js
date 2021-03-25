@@ -17,10 +17,7 @@ export default function MerisInitialState(props, pedalFunctions){
   Object.keys(pedalFunctions).map((key)=>{
     let notDupedKnob = key[key.length - 1] != "_"
     if (pedalFunctions[key].ccValue && notDupedKnob)
-      initialState[key] = {
-        ccValue: pedalFunctions[key].ccValue,
-        value: 0,
-      }
+      initialState[key] = 0
   });
   return initialState;
 }

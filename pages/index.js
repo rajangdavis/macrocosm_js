@@ -1,5 +1,4 @@
 import Head from 'next/head'
-// import BoardsContainer from '../components/boards_container'
 import MacrosContainer from '../components/macros_container'
 import AccessMidi from '../hooks/access_midi'
 import ManageState from '../hooks/manage_state'
@@ -9,10 +8,10 @@ import {useEffect} from 'react'
 export default function Home() {
 	const midiObject = AccessMidi();
   let [initialState, setState] = useLocalStorage('state', [])
+  let [Macros, MacroDispatch] = ManageState(initialState);
   useEffect(() => {
     setState(Macros)
   });
-  let [Macros, MacroDispatch] = ManageState(initialState);
   let hooks = [midiObject, Macros, MacroDispatch];
 
   return (

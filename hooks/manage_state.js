@@ -77,7 +77,7 @@ export default function ManageState(initialState){
           midi_channel: 1,
           program_number: 1,
           pedals: [],
-          open: true,
+          active: true,
           show_pedals: false
         }
       }

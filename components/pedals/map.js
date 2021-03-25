@@ -22,7 +22,7 @@ module.exports = [
 		component: MerisGenericLayout
 	},
 	{
-		label: 'Meris Meris Mercury7',
+		label: 'Meris Mercury7',
 		initialState: MerisMercury7,
 		component: MerisGenericLayout
 	},

@@ -4,6 +4,8 @@ export default function GroupableButtons(props){
   	let intMidiChannel = parseInt(props.midiChannel)
   	let intValue = parseInt(value)
   	props.deviceOutput.sendControlChange(props.mappedTo.ccValue, intValue, {channels: intMidiChannel});
+    console.log(`${props.pedalName} sent a change message`, props.mappedTo.ccValue, intValue, {channels: intMidiChannel})
+    props.controlChange(props.pedalFunction, intValue);
   }
   
   return (<div className={props.className}> 
