@@ -23,6 +23,7 @@ export default function ManageState(initialState){
       let clone = cloneDeep(macro);
       let newMacroId = Date.now();
       clone.macro_id = newMacroId;
+      clone.name = `${macro.name} Duplicate`;
       for (var i = clone.midi_devices.length - 1; i >= 0; i--) {
         let midiDevice = clone.midi_devices[i];
         midiDevice.macro_id = newMacroId;

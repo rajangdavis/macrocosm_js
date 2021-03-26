@@ -36,6 +36,13 @@ export default function PedalBoardTamer(props){
     })
   }
 
+  let sendProgramNumber = ()=>{
+    let intMidiChannel = parseInt(md.midi_channel);
+    let intProgramNumber = parseInt(md.program_number);
+    deviceOutput().setProgram(intProgramNumber, {channels: intMidiChannel});
+    console.log("Command sent", {intProgramNumber: intProgramNumber, channels: intMidiChannel})
+  }
+
   let midiChannelChange = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -74,6 +81,7 @@ export default function PedalBoardTamer(props){
       <div>
         <MidiChannelSelect disabled={ devicePortNotSet() } midiChannelChange={midiChannelChange} midiChannel={md.midi_channel}/>
         <ProgramChangeInput disabled={ devicePortNotSet() } onChange={programNumberChange} deviceOutput={deviceOutput} label='Program Number' programNumber={md.program_number} midiChannel={md.midi_channel}/>
+        <button disabled={ devicePortNotSet() } onClick={sendProgramNumber}>Send</button>
       </div>
     </div>
   </div>
