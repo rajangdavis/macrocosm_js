@@ -1,5 +1,6 @@
 import cloneDeep from 'lodash/cloneDeep';
 import { useImmerReducer } from "use-immer";
+import { v4 as uuidv4 } from 'uuid';
 export default function ManageState(initialState){
 
   let reducer = (state, action) =>{
@@ -8,7 +9,7 @@ export default function ManageState(initialState){
     // CREATE
     let createMacro = (state)=>{
       let initialState = {
-        macro_id: Date.now(),
+        macro_id: uuidv4(),
         name: `Macro #${state.length + 1}`,
         midi_devices: [],
         open: true,
@@ -21,19 +22,19 @@ export default function ManageState(initialState){
     let cloneMacro = (state, action)=>{
       let [index, macro] = readMacro(state, action)
       let clone = cloneDeep(macro);
-      let newMacroId = Date.now();
+      let newMacroId = uuidv4();
       clone.macro_id = newMacroId;
       clone.name = `${macro.name} Duplicate`;
       for (var i = clone.midi_devices.length - 1; i >= 0; i--) {
         let midiDevice = clone.midi_devices[i];
         midiDevice.macro_id = newMacroId;
-        let newMidiDeviceId = new Date();
+        let newMidiDeviceId = uuidv4();
         midiDevice.midi_device_id = newMidiDeviceId;
         for (var j = midiDevice.pedals.length - 1; j >= 0; j--) {
           let pedal = midiDevice.pedals[j]
           pedal.macro_id = newMacroId;
           pedal.midi_device_id = newMidiDeviceId;
-          pedal.pedal_id = new Date();
+          pedal.pedal_id = uuidv4();
         }
       }
       state.push(clone);
@@ -66,7 +67,7 @@ export default function ManageState(initialState){
 
     // CREATE
     let createMidiDevice = (state, action)=>{
-      let midiDeviceId = Date.now()
+      let midiDeviceId = uuidv4()
       let newMidiDevice = (state, action)=>{
         return {
           midi_device_id: midiDeviceId,

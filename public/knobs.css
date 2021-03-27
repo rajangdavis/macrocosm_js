@@ -32,3 +32,16 @@
     color 450ms
     ease-in-out;
 }
+
+.styled-knob{
+  position: relative;
+}
+
+.hidden-range{
+  position: absolute;
+  top: 42px;
+  opacity: 1;
+  height: 80px;
+  width: 80px;
+  background: red;
+}

@@ -5,7 +5,9 @@ import MerisComputedFunctions from './meris_computed_functions'
 
 export default function MerisGenericLayout(props){
   let deviceOutput = props.midiObject.outputValues.filter(x => x.name == props.outputPort)[0]
-  let cf = MerisComputedFunctions({...props.pedalData, dispatch: props.dispatch, midiObject: props.midiObject, deviceOutput: deviceOutput});
+  let deviceInput = props.midiObject.inputValues.filter(x => x.name == props.inputPort)[0]
+  let cf = MerisComputedFunctions({...props.pedalData, dispatch: props.dispatch, midiObject: props.midiObject, deviceOutput: deviceOutput, deviceInput: deviceInput});
+  cf.inputConnected();
   return (<div className={props.pedalData.className}>
             <a onClick={cf.removePedal} className='pedal-label'>Remove</a>
             <a onClick={() => cf.showControls()} className='pedal-label text-center'>{cf.showOrHidePedalLabel()}</a>
