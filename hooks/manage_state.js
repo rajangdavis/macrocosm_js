@@ -1,4 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
+import merge from 'lodash/merge';
 import { useImmerReducer } from "use-immer";
 import { v4 as uuidv4 } from 'uuid';
 export default function ManageState(initialState){
@@ -138,7 +139,11 @@ export default function ManageState(initialState){
     // UPDATE
     let updatePedal = (state, action)=>{
       let [pedalIndex, pedal, midiIndex, midiDevice, macroIndex, macro] = readPedalIndex(state, action)
-      pedal[action.field] = action.new_value;
+      if(action.new_value != undefined){
+        pedal[action.field] = action.new_value;
+      }else if(action.new_state != undefined){
+        let test = merge(pedal, action.new_state)
+      }
       midiDevice.pedals.splice(pedalIndex, 1, pedal)
       macro.midi_devices.splice(midiIndex, 1, midiDevice)
       state.splice(macroIndex, 1 , macro);

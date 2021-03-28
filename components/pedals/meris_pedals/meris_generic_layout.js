@@ -2,12 +2,14 @@ import MerisPresets from './meris_presets'
 import MerisGenericControls from './meris_generic_controls'
 import MidiChannelSelect from '../../midi_channel_select'
 import MerisComputedFunctions from './meris_computed_functions'
+import MerisInputListener from './meris_input_listener'
 
 export default function MerisGenericLayout(props){
+  console.log(props.pedalData)
   let deviceOutput = props.midiObject.outputValues.filter(x => x.name == props.outputPort)[0]
   let deviceInput = props.midiObject.inputValues.filter(x => x.name == props.inputPort)[0]
   let cf = MerisComputedFunctions({...props.pedalData, dispatch: props.dispatch, midiObject: props.midiObject, deviceOutput: deviceOutput, deviceInput: deviceInput});
-  cf.inputConnected();
+  MerisInputListener({...props.pedalData, deviceInput: deviceInput, dispatch: props.dispatch})
   return (<div className={props.pedalData.className}>
             <a onClick={cf.removePedal} className='pedal-label'>Remove</a>
             <a onClick={() => cf.showControls()} className='pedal-label text-center'>{cf.showOrHidePedalLabel()}</a>
@@ -18,8 +20,9 @@ export default function MerisGenericLayout(props){
                 midiChannelChange={cf.midiChannelChange}
                 midiChannel={cf.currentMidiChannel()}/>
                 <MerisPresets
+                  {...props.pedalData}
                   deviceOutput={deviceOutput}
-                  midiChannel={props.pedalData.midiChannel}
+                  dispatch={props.dispatch}
                   isActive={cf.arePresetsActive}
                   showOrHidePresets={cf.showOrHidePresets}
                   showOrHidePresetsLabel={cf.showOrHidePresetsLabel}
@@ -66,5 +69,6 @@ export default function MerisGenericLayout(props){
                   deviceOutput={deviceOutput}/>
               </div>
             </div>
+            <h1>{props.pedalData.can_listen.toString()}</h1>
           </div>)
 }

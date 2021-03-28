@@ -16,19 +16,19 @@ module.exports = [
 		initialState: MerisEnzo,
 		component: MerisGenericLayout
 	},
-	{
-		label: 'Meris Polymoon',
-		initialState: MerisPolymoon,
-		component: MerisGenericLayout
-	},
-	{
-		label: 'Meris Mercury7',
-		initialState: MerisMercury7,
-		component: MerisGenericLayout
-	},
-	{
-		label: 'Meris Ottobit Jr',
-		initialState: MerisOttobitJr,
-		component: MerisGenericLayout
-	},
+	// {
+	// 	label: 'Meris Polymoon',
+	// 	initialState: MerisPolymoon,
+	// 	component: MerisGenericLayout
+	// },
+	// {
+	// 	label: 'Meris Mercury7',
+	// 	initialState: MerisMercury7,
+	// 	component: MerisGenericLayout
+	// },
+	// {
+	// 	label: 'Meris Ottobit Jr',
+	// 	initialState: MerisOttobitJr,
+	// 	component: MerisGenericLayout
+	// },
 ]

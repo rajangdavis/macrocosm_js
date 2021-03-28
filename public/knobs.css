@@ -39,9 +39,9 @@
 
 .hidden-range{
   position: absolute;
-  top: 42px;
-  opacity: 1;
-  height: 80px;
+  top: 22px;
+  opacity: 0;
+  height: 100px;
   width: 80px;
   background: red;
 }

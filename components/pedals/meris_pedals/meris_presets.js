@@ -1,3 +1,5 @@
+import parseSysexToBinary from '../../../utilities/parse_sysex'
+
 export default function MerisPresets(props){
 
 	let presetVals = Array(17).fill().map((_, i) => i + 1)
@@ -12,16 +14,42 @@ export default function MerisPresets(props){
 		tempArr.push(x)
 	})
 
+	let scopeListener = (updateOnListen)=>{
+		console.log("CALLED")
+		props.dispatch({
+			type: 'update-pedal',
+			field: 'can_listen',
+			new_value: updateOnListen,
+			midi_device_id:	props.midi_device_id,
+			macro_id: props.macro_id,
+			pedal_id: props.pedal_id
+		})
+	}
+
+	let updateListener = (command, callback)=>{
+		let {data, manufacturer} = parseSysexToBinary(command);
+		props.deviceOutput.sendSysex(manufacturer, data);
+		setTimeout(callback, 500);
+	}
+
+	let sendSysex = (command) =>{
+		scopeListener(true);
+		updateListener(command, ()=> scopeListener(false))
+	}
+
 	return (<div className="preset-groups-container">
       <div className={`preset-groups ${props.isActive()}`}>
-        {groupedPresets.map((group) =>{
-          return <div key={group}>{group.map((button => {
-            return <button key={button} onClick={()=> props.programNumberSend(button)} >{button}</button>
-          }))}</div>
-        })}
+        {props.factoryPresets.map((fp, i) =>{
+    			return <button key={i} onClick={()=> sendSysex(fp.message)}>{fp.label}</button>
+    		})}
       </div>
       <span onClick={()=> props.showOrHidePresets()}>{props.showOrHidePresetsLabel()}</span>
     </div>)
 
 }
 
+// {groupedPresets.map((group) =>{
+//   return <div key={group}>{group.map((button => {
+//     return <button key={button} onClick={()=> props.programNumberSend(button)} >{button}</button>
+//   }))}</div>
+// })}

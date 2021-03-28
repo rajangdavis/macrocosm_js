@@ -11,7 +11,8 @@ export default function MerisInitialState(props, pedalFunctions){
     midi_channel: "1",
     midi_preset: "1",
     input_port: "",
-    output_port: ""
+    output_port: "",
+    can_listen: false
   }
 
   Object.keys(pedalFunctions).map((key)=>{

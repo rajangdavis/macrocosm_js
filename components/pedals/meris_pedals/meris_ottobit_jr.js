@@ -1,4 +1,4 @@
-import * as OttobitJrPedalFunctions from '../../../pedal_functions/meris_ottobit_jr'
+import * as OttobitJrPedalFunctions from './pedal_functions/meris_ottobit_jr'
 import MerisInitialState from './meris_initial_state'
 
 export default function MerisOttobitJr(props){

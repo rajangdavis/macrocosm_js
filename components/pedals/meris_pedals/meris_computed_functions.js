@@ -114,30 +114,6 @@ export default function MerisComputedFunctions(props){
 	    })
 	  },
 
-	  inputConnected: ()=>{
-
-	  	if(props.deviceInput != undefined){
-		  	props.deviceInput.addListener("midimessage", (message)=>{
-			  	let findFieldToChange = (ccValue)=>{
-			  		return Object.keys(props.pedalFunctions).filter(key =>{
-						   return props.pedalFunctions[key].ccValue == ccValue;
-						})[0]
-			  	}
-		  		let field = findFieldToChange(message.dataBytes[0])
-	  		  props.dispatch({
-						type: 'update-pedal',
-						field: field,
-						new_value: message.dataBytes[1],
-						midi_device_id:  props.midi_device_id,
-						macro_id: props.macro_id,
-						pedal_id: props.pedal_id
-					})
-		  	});
-	  	}else{
-	  		console.log("no midi input")
-	  	}
-	  },
-
 	  currentMidiChannel:  ()=>{
 	    return props.midi_channel
 	  },
