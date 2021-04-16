@@ -1,0 +1,36 @@
+0					Header - 240, 
+1 2 3			Manufacturer - 0, 32, 16, 
+4 5				Group ID - 0, 1, 
+6					Model Number - 3, 
+7					Command - 38,
+8					Preset Number - 3, 
+9					CC16-Heel - 58, 
+10					CC17-Heel - 90,
+11					CC18-Heel - 83,
+12					CC19-Heel - 81,
+13					CC20-Heel - 63,
+14					CC21-Heel - 0,
+15					CC22-Heel - 0,
+16					CC23-Heel - 0,
+17					CC24-Heel - 127,
+18					CC25-Heel - 0,
+19					CC26-Heel - 72,
+20					CC27-Heel - 0
+21					CC14 - 127
+22					CC9 - 0
+23					CC29- 95
+24					CC30 - 127
+25					CC15 - 8
+26					CC16-Toe - 0
+27					CC17-Toe - 123
+28					CC18-Toe - 127
+29					CC19-Toe - 127
+30					CC20-Toe - 63
+31					CC21-Toe - 0
+32					CC22-Toe - 0
+33					CC23-Toe - 0
+34					CC24-Toe - 36
+35					CC25-Toe - 0
+36					CC26-Toe - 72
+37					CC27-Toe - 0
+38					Footer - 247

@@ -12,7 +12,6 @@ body {
 }
 
 .container {
-  min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
   flex-direction: column;
@@ -20,7 +19,43 @@ body {
   align-items: center;
 }
 
+.text-center{
+  text-align: center;
+}
+.macro{
+  border: 5px solid red;
+}
+
+.pedal-container{
+  margin-bottom: 20px;
+}
+
+/* CUSACK SWITCHERS */
+
+.pedal-tamer{
+  border: 2px solid #b4cfb0;
+  padding: 20px;
+  margin-bottom:10px
+}
+
+/* MERIS MIDI IO */
+
+.meris-midi-io{
+  border: 1px solid black;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.expression-pedal{
+  border: 3px solid grey;
+}
+
 /* MERIS PEDALS */
+
+.pedal-label{
+  width: 100%;
+  display: block;
+}
 
 .meris-enzo{
   border: 1px solid #DEAE1B;

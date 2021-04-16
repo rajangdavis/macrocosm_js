@@ -1,0 +1,27 @@
+/*
+Font: 		YWFT Ultramagnetic
+Style: 		Light
+URL: 		https://www.youworkforthem.com/font/T0020/ywft-ultramagnetic
+Foundry: 	YouWorkForThem
+Foundry: 	https://www.youworkforthem.com/designer/1/youworkforthem
+Copyright:	Copyright (c) 1996 by YouWorkForThem. All rights reserved.
+Version: 	17
+Created:	August 20, 2016
+License: 	https://www.youworkforthem.com/font-license 
+License: 	The WebFont(s) listed in this document must follow the YouWorkForThem
+			WebFont license rules. All other parties are strictly restricted 
+			from using the WebFonts(s) listed without a purchased license. 
+			All details above must always remain unaltered and visible in your CSS.
+*/
+
+@font-face {
+	font-family: 'YWFTUltramagnetic-Light';
+	src: url('ywft-ultramagnetic-light.eot');
+	src: url('ywft-ultramagnetic-light.eot?#iefix') format('embedded-opentype'),
+             url('ywft-ultramagnetic-light.woff2') format('woff2'),
+	     url('ywft-ultramagnetic-light.woff') format('woff'),
+	     url('ywft-ultramagnetic-light.ttf') format('truetype'),
+	     url('ywft-ultramagnetic-light.svg#youworkforthem') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
