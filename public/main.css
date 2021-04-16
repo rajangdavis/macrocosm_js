@@ -46,6 +46,10 @@ body {
   margin-bottom: 10px;
 }
 
+.expression-pedal{
+  border: 3px solid grey;
+}
+
 /* MERIS PEDALS */
 
 .pedal-label{

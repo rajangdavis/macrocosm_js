@@ -10,6 +10,6 @@ export default function ProgramChangeInput(props){
   
   return (<div className={props.className}> 
         <label>{props.label}</label>
-        <input disabled={props.disabled} type="number" value={props.programNumber} min="1" max="127" onChange={programNumberChange}/>
+        <input disabled={props.disabled} type="number" value={props.programNumber} min="0" max="127" onChange={programNumberChange}/>
       </div>)
 }

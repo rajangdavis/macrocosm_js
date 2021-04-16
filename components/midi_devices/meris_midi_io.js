@@ -1,4 +1,6 @@
 import MidiDevicePortSelector from '../midi_device_port_selector'
+import TapTempo from '../tap_tempo'
+import ExpressionPedalListener from '../expression_pedal_listener'
 import pedals_ from '../pedals/map'
 
 export default function MerisMidiIo(props){
@@ -63,7 +65,8 @@ export default function MerisMidiIo(props){
   return (<div className="meris-midi-io">
             <div onClick={removeMidiDevice}>Delete</div>
             <a>Meris MIDI IO</a>
-            <MidiDevicePortSelector onChange={inputPortChange} label="input" ports={props.midiObject.inputValues} value={md.input_port} />
+            {ExpressionPedalListener({...props, md: md, inputPortChange: inputPortChange})}
+            {TapTempo({...props, md: md, inputPortChange: inputPortChange})}
             <MidiDevicePortSelector onChange={outputPortChange} label="output" ports={props.midiObject.outputValues} value={md.output_port}/>
             <p onClick={toggleMidiDeviceOptions}>Add Pedals</p>
             <div className={canShowPedals()}>

@@ -1,4 +1,5 @@
 import * as PolymoonPedalFunctions from './pedal_functions/meris_polymoon'
+import PolymoonFactoryPresets from './factory_presets/meris_polymoon'
 import MerisInitialState from './meris_initial_state'
 
 export default function MerisPolymoon(props){
@@ -6,5 +7,6 @@ export default function MerisPolymoon(props){
 	initialState.className = 'meris-polymoon';
 	initialState.label = 'Meris Polymoon';
 	initialState.pedalFunctions = PolymoonPedalFunctions;
+	initialState.factoryPresets = PolymoonFactoryPresets;
 	return initialState;
 }

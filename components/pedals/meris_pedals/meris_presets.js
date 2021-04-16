@@ -15,7 +15,6 @@ export default function MerisPresets(props){
 	})
 
 	let scopeListener = (updateOnListen)=>{
-		console.log("CALLED")
 		props.dispatch({
 			type: 'update-pedal',
 			field: 'can_listen',
@@ -47,9 +46,3 @@ export default function MerisPresets(props){
     </div>)
 
 }
-
-// {groupedPresets.map((group) =>{
-//   return <div key={group}>{group.map((button => {
-//     return <button key={button} onClick={()=> props.programNumberSend(button)} >{button}</button>
-//   }))}</div>
-// })}

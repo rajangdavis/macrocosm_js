@@ -161,19 +161,19 @@ module.exports = {
 		value: 127,
 		className: 'alt-left-bottom'
 	},
-	// STUTTER_HOLD:{
-	// 	ccValue: 31,
-	// 	label: 'Stutter Hold',
-	// 	type: 'groupable_button',
-	// 	values: [
-	// 		{
-	// 			label: 'On',
-	// 			value: 0
-	// 		},
-	// 		{
-	// 			label: 'Off',
-	// 			value: 127
-	// 		}
-	// 	],
-	// }
+	STUTTER_HOLD:{
+		ccValue: 31,
+		label: 'Stutter Hold',
+		type: 'groupable_button',
+		values: [
+			{
+				label: 'On',
+				value: 0
+			},
+			{
+				label: 'Off',
+				value: 127
+			}
+		],
+	}
 }
