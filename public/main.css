@@ -52,9 +52,41 @@ body {
 
 /* MERIS PEDALS */
 
+.meris-pedal{
+  font-family: 'YWFTUltramagnetic-Light', sans-serif;
+  font-weight: 100;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-row > .top-row{
+  margin: 54px 14px 16px;
+}
+
+.flex-row > .middle-row{
+  margin: 16px 0px 16px;
+}
+
+.flex-row > .bottom-row{
+  margin: 16px 14px 16px;
+}
+
 .pedal-label{
   width: 100%;
   display: block;
+}
+.meris-enzo-bigbox{
+  top: 50px;
+  width: 816px;
+  height: 653px;
+  background: no-repeat center url('meris_enzo.svg'), radial-gradient(31.91% 40.42% at 48.29% 50.06%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 82.29%), radial-gradient(55.69% 55.69% at 50% -15.5%, #000000 0%, rgba(234, 160, 0, 0.15) 60.94%), radial-gradient(164.13% 164.12% at 50.47% 127.18%, #000000 0%, rgba(234, 160, 0, 0) 45.95%), linear-gradient(90deg, #FFFFFF -0.47%, rgba(255, 255, 255, 0) 2.47%), linear-gradient(270deg, #FFFFFF -1.14%, rgba(255, 255, 255, 0) 2.85%), #EAA000;
 }
 
 .meris-enzo{

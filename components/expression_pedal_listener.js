@@ -4,10 +4,6 @@ export default function ExpressionPedalListener(props){
 	let deviceInput = props.midiObject.inputValues.filter(x => x.name == props.md.input_port)[0]
   let deviceOutput = props.midiObject.outputValues.filter(x => x.name == props.md.output_port)[0]
 	
-	let createListener = ()=>{
-		deviceInput.addListener("midimessage", messageReceived)
-	}
-
 	let messageReceived = (message)=>{
 		let rawData = message.rawData
 		if(rawData[0] == 180){
@@ -19,32 +15,32 @@ export default function ExpressionPedalListener(props){
 		}
 	}
 
-	let finalPass = ()=>{
+	let createListener = ()=>{
 		if(deviceInput.getListenerCount('midimessage') == 0){
-			createListener();
+			deviceInput.addListener("midimessage", messageReceived);
 			console.log("Connected device");
 		}else{
 			console.log("Already connected");
 		}
 	}
 
-	let secondPass = ()=>{
+	let checkForDeviceOutput = ()=>{
 		if(deviceOutput != undefined){
-			finalPass()
+			createListener()
 		}else{
 			console.log("No device output")
 		}
 	}
 
-	let firstPass = ()=>{
+	let checkForDeviceInput = ()=>{
 		if(deviceInput != undefined){
-			secondPass()
+			checkForDeviceOutput()
 		}else{
 			console.log("No device input")
 		}
 	}
 
-	firstPass()	
+	checkForDeviceInput()	
 
 	return(<div className="expression-pedal">
 	        <p>Expression Pedal</p>

@@ -1,18 +1,9 @@
 import Head from 'next/head'
-import MacrosContainer from '../components/macros_container'
-import AccessMidi from '../hooks/access_midi'
-import ManageState from '../hooks/manage_state'
-import useLocalStorage from '../hooks/use_local_storage'
-import {useEffect} from 'react'
+import {useState} from 'react'
+import MerisEnzoLayout from '../components/pedals/meris_pedals/layouts/meris_enzo'
 
 export default function Home() {
-	const midiObject = AccessMidi();
-  let [initialState, setState] = useLocalStorage('state', [])
-  let [Macros, MacroDispatch] = ManageState(initialState);
-  useEffect(() => {
-    setState(Macros)
-  });
-  let hooks = [midiObject, Macros, MacroDispatch];
+  const [sliderOpacity, setSliderOpacity] = useState(0);
 
   return (
     <div className="container">
@@ -20,7 +11,15 @@ export default function Home() {
         <title>macrocosm</title>
       </Head>
       <div>
-        {MacrosContainer(hooks)}
+        <div>
+          <label>Slider Opacity</label>
+          <input type="range" 
+                 min="0" 
+                 max="100"
+                 value={sliderOpacity}
+                 onChange={(e)=> setSliderOpacity(e.target.value)}/>
+        </div>
+        <MerisEnzoLayout sliderOpacity={sliderOpacity}/>
       </div>
     </div>
   )
