@@ -45,7 +45,7 @@ function Knob(props){
 			</div>
 			<input 
 	      type="range" 
-	      min="1" 
+	      min="0" 
 	      max="127"
 	      value={props.val}
 	      style={style.inputRange(props.sliderOpacity)}

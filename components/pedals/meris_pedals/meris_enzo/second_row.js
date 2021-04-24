@@ -2,11 +2,11 @@ import {LittleKnob} from '../knob'
 import {useState} from 'react'
 
 export default function SecondRow(props){
-	const [ringModulation, setRingModulation] = useState(1);
-	const [sustain, setSustain] = useState(1);
-	const [filterEnv, setFilterEnv] = useState(1);
-	const [modulation, setModulation] = useState(1);
-	const [delayFeedback, setDelayFeedback] = useState(1);
+	const [ringModulation, setRingModulation] = useState(0);
+	const [sustain, setSustain] = useState(0);
+	const [filterEnv, setFilterEnv] = useState(0);
+	const [modulation, setModulation] = useState(0);
+	const [delayFeedback, setDelayFeedback] = useState(0);
 	return(
 		<div className="flex-row">
 			<LittleKnob 

@@ -8,7 +8,7 @@ export default function EnvelopeType(props){
 		return envelopeType == val ? 'selected' : ''
 	}
 	return(
-		<div className="text-center">
+		<div className="text-center envelope-type">
 			<WidePadButton 
 				label="Triggered" 
 				className={isSelected(63)} 

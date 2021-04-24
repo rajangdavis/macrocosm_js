@@ -9,7 +9,7 @@ export default function SynthMode(props){
 	}
 	
 	return(
-		<div className="text-center">
+		<div className="text-center synth-mode">
 			<div className="flex-row">
 				<SmallPadButton 
 					onClick={()=> setSynthMode(127)}

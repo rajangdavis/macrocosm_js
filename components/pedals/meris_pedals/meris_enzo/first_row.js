@@ -2,11 +2,11 @@ import {LittleKnob, BigKnob} from '../knob'
 import {useState} from 'react'
 
 export default function FirstRow(props){
-	const [portamento, setPortamento] = useState(1);
-	const [pitch, setPitch] = useState(1);
-	const [filter, setFilter] = useState(1);
-	const [mix, setMix] = useState(1);
-	const [delayLevel, setDelayLevel] = useState(1);
+	const [portamento, setPortamento] = useState(0);
+	const [pitch, setPitch] = useState(0);
+	const [filter, setFilter] = useState(0);
+	const [mix, setMix] = useState(0);
+	const [delayLevel, setDelayLevel] = useState(0);
 	return(
 		<div className="flex-row">
 			<BigKnob 

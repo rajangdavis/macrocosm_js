@@ -1,14 +1,14 @@
 import {LittleKnob} from '../knob'
-import TapButton from '../tap_button'
-import Bypass from '../bypass'
-import SynthMode from './synth_mode'
 import WaveShape from './wave_shape'
-import EnvelopeType from './envelope_type'
 import FilterType from './filter_type'
+import TapButton from '../tap_button'
+import EnvelopeType from './envelope_type'
+import SynthMode from './synth_mode'
+import Bypass from '../bypass'
 import {useState} from 'react'
 
 export default function ThirdRow(props){
-	const [filterBandwidth, setFilterBandwidth] = useState(1);
+	const [filterBandwidth, setFilterBandwidth] = useState(0);
 	return(
 		<div className="flex-row">
 			<div className="left-side-controls">
@@ -16,7 +16,9 @@ export default function ThirdRow(props){
 					<WaveShape />
 					<FilterType />
 				</div>
-				<TapButton />
+				<div className="flex-row tap">
+					<TapButton />
+				</div>
 			</div>
 			<div className="flex-row middle-controls">
 				<LittleKnob

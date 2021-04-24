@@ -11,15 +11,6 @@ body {
   box-sizing: border-box;
 }
 
-.hidden-range{
-  position: absolute;
-  top: 22px;
-  opacity: 0;
-  height: 100px;
-  width: 80px;
-  background: red;
-}
-
 .container {
   padding: 0 0.5rem;
   display: flex;
@@ -89,8 +80,13 @@ body {
   inset 20px 20px 20px rgb(0 0 0 / 10%) !important;
 }
 
+.pad-button > label{
+  opacity: 65%;
+}
+
 .pad-button:active > label{
   font-size: 15px;
+  opacity: 85%;
 }
 
 .knob:hover,

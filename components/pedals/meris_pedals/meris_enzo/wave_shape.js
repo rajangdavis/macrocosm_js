@@ -17,7 +17,7 @@ export default function WaveShape(props){
 			<SmallPadButton 
 				className={isSelected(127)} 
 				onClick={()=> setWaveShape(127)}
-				label="SQR"/>
+				label="SQUARE"/>
 			<label>Waveshape</label>
 		</div>
 	)
