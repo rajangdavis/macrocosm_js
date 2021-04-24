@@ -1,0 +1,119 @@
+.meris-enzo-bigbox{
+  top: 50px;
+  width: 816px;
+  height: 653px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: radial-gradient(31.91% 40.42% at 48.29% 50.06%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 82.29%),
+              radial-gradient(55.69% 55.69% at 50% -15.5%, #000000 0%, rgba(234, 160, 0, 0.15) 60.94%),
+              radial-gradient(164.13% 164.12% at 50.47% 127.18%, #000000 0%, rgba(234, 160, 0, 0) 45.95%), 
+              linear-gradient(90deg, #FFFFFF -0.47%, rgba(255, 255, 255, 0) 2.47%), 
+              linear-gradient(270deg, #FFFFFF -1.14%, rgba(255, 255, 255, 0) 2.85%), 
+              #EAA000;
+}
+
+.meris-enzo-bigbox:after{
+	content: url(./meris_enzo/logo.svg);
+	position: absolute;
+	bottom: 30px;
+	left: calc(50% - (148px/2));
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-row > .top-row{
+  margin: 54px 14px 16px;
+}
+
+.flex-row > .middle-row{
+  margin: 16px -1px 16px;
+}
+
+.flex-row > .bottom-row{
+  margin: 16px 14px 16px;
+}
+
+.flex-row:last-of-type{
+  flex:1;
+}
+
+.text-center > label{
+  margin-top: 1px;
+}
+
+.left-side-controls,
+.right-side-controls{
+  flex: 2;
+}
+.middle-controls{
+  flex: 1;
+}
+
+.left-side-controls,
+.right-side-controls{
+  flex-direction: column;
+}
+
+.left-side-controls > .first-row{
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.right-side-controls > .first-row{
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.tap-button, .bypass{
+  flex: 2;
+}
+
+
+.mix:before,
+.portamento:before,
+.delay-level:before{
+	content: url(./meris_enzo/generic_big_knob.svg);
+	position: absolute;
+	top:-12px;
+	left: 1px;
+}
+
+.filter{
+	margin-top: 69px !important;
+}
+
+.filter:before,
+.ring-modulation:before,
+.sustain:before,
+.modulation:before,
+.delay-feedback:before,
+.filter-bandwidth:before{
+	content: url(./meris_enzo/generic_little_knob.svg);
+	position: absolute;
+	top: -10px;
+  left: 19px;
+}
+
+.filter-env{
+  margin-top: 3px !important;
+}
+
+.filter-env:before{
+	content: url(./meris_enzo/filter_env.svg);
+	position: absolute;
+	top: -15px;
+  left: 2px;
+}
+
+.pitch:before{
+	content: url(./meris_enzo/pitch.svg);
+	position: absolute;
+	top: -22px;
+  left: -8px;
+}

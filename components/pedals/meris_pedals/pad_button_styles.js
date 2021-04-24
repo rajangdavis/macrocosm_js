@@ -5,7 +5,10 @@ module.exports = {
 		height: '46px',
 		background: 'radial-gradient(50% 50% at 50% 50%, rgba(221, 221, 221, 0.86) 0%, rgba(149, 149, 149, 0.53) 100%), #C4C4C4',
 		boxShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
-		borderRadius: '5px'
+		borderRadius: '5px',
+		display: 'flex',
+		alignItems: 'center',
+    justifyContent: 'center'
 	},
 	bigPadButton: {
 		position: 'relative',
@@ -13,7 +16,8 @@ module.exports = {
 		height: '78px',
 		background: 'radial-gradient(50% 50% at 50% 50%, rgba(221, 221, 221, 0.86) 0%, rgba(149, 149, 149, 0.53) 100%), #C4C4C4',
 		boxShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
-		borderRadius: '5px'
+		borderRadius: '5px',
+		textAlign: 'center'
 	},
 	widePadButton: {
 		position: 'relative',
@@ -22,5 +26,8 @@ module.exports = {
 		background: 'radial-gradient(50% 50% at 50% 50%, rgba(221, 221, 221, 0.51) 0%, rgba(149, 149, 149, 0.53) 100%), #C4C4C4',
 		boxShadow: '0px 0px 4px 2px rgba(0, 0, 0, 0.25)',
 		borderRadius: '5px',
+		display: 'flex',
+		alignItems: 'center',
+    justifyContent: 'center'
 	},
 }

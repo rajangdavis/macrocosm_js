@@ -17,16 +17,19 @@ module.exports = {
 } 
 
 
-function PadButton(props){
-
-	const updateVal = (event)=>{
-	  props.setVal(intValue);
-	}
-
-	// const changeStyles
-	
+function PadButton(props){	
 	return(
-		<div className={props.className} style={props.style} onClick={()=> console.log("sup")}>
+		<div className="text-center">
+			<div className={`pad-button ${props.className}`} 
+					 style={props.style} 
+					 onClick={props.onClick}>
+				{ props.label && 
+					<label>{props.label}</label>
+				}
+			</div>
+			{ props.bigButtonlabel && 
+				<label>{props.bigButtonlabel}</label>
+			}
 		</div>
 	)
 
