@@ -5,16 +5,27 @@ import TapButton from '../tap_button'
 import EnvelopeType from './envelope_type'
 import SynthMode from './synth_mode'
 import Bypass from '../bypass'
-import {useState} from 'react'
 
 export default function ThirdRow(props){
-	const [filterBandwidth, setFilterBandwidth] = useState(0);
+	let {
+		filterBandwidth, 
+		waveShape, 
+		filterType, 
+		envelopeType,
+		synthMode,
+		bypass
+	} = props.enzoState;
+	
+	let setFilterBandwidth = (value) =>{ 
+		props.enzoDispatch({key: 'filterBandwidth', value: value})
+	}
+	
 	return(
 		<div className="flex-row">
 			<div className="left-side-controls">
 				<div className="flex-row first-row">
-					<WaveShape />
-					<FilterType />
+					<WaveShape waveShape={waveShape} enzoDispatch={props.enzoDispatch}/>
+					<FilterType filterType={filterType} enzoDispatch={props.enzoDispatch}/>
 				</div>
 				<div className="flex-row tap">
 					<TapButton />
@@ -30,10 +41,10 @@ export default function ThirdRow(props){
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">
-					<EnvelopeType />
-					<SynthMode />
+					<EnvelopeType envelopeType={envelopeType} enzoDispatch={props.enzoDispatch}/>
+					<SynthMode synthMode={synthMode} enzoDispatch={props.enzoDispatch}/>
 				</div>
-				<Bypass />
+				<Bypass bypass={bypass} enzoDispatch={props.enzoDispatch}/>
 			</div>
 		</div>
 	)

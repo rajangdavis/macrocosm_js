@@ -15,7 +15,7 @@ module.exports = [
 	{
 		label: 'Meris Enzo',
 		initialState: MerisEnzo,
-		component: MerisEnzoLayout
+		component: MerisGenericLayout
 	},
 	{
 		label: 'Meris Polymoon',

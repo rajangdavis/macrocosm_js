@@ -1,11 +1,13 @@
 import {SmallPadButton} from './pad_button'
-import {useState} from 'react'
 
 export default function Bypass(props){
-	const [bypass, setBypass] = useState(null);
 
-	const isSelected = (val)=>{
-		return bypass == val ? 'selected' : ''
+	const isSelected = (value)=>{
+		return props.bypass == value ? 'selected' : ''
+	}
+
+	const setBypass = (value)=>{
+		props.enzoDispatch({key: 'bypass', value: value})
 	}
 	return(
 		<div className="text-center bypass">

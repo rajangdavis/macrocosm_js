@@ -1,11 +1,13 @@
 import {SmallPadButton} from '../pad_button'
-import {useState} from 'react'
 
 export default function SynthMode(props){
-	const [synthMode, setSynthMode] = useState(null);
 
-	const isSelected = (val)=>{
-		return synthMode == val ? 'selected' : ''
+	const isSelected = (value)=>{
+		return props.synthMode == value ? 'selected' : ''
+	}
+
+	const setSynthMode = (value)=>{
+		props.enzoDispatch({key: 'synthMode', value: value})
 	}
 	
 	return(

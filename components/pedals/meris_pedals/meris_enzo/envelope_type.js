@@ -2,11 +2,15 @@ import {WidePadButton} from '../pad_button'
 import {useState} from 'react'
 
 export default function EnvelopeType(props){
-	const [envelopeType, setEnvelopeType] = useState(null);
 
 	const isSelected = (val)=>{
-		return envelopeType == val ? 'selected' : ''
+		return props.envelopeType == val ? 'selected' : ''
 	}
+
+	const setEnvelopeType = (value)=>{
+		props.enzoDispatch({key: 'envelopeType', value: value})
+	}
+
 	return(
 		<div className="text-center envelope-type">
 			<WidePadButton 

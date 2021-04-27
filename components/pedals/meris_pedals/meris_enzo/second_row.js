@@ -1,12 +1,24 @@
 import {LittleKnob} from '../knob'
-import {useState} from 'react'
 
 export default function SecondRow(props){
-	const [ringModulation, setRingModulation] = useState(0);
-	const [sustain, setSustain] = useState(0);
-	const [filterEnv, setFilterEnv] = useState(0);
-	const [modulation, setModulation] = useState(0);
-	const [delayFeedback, setDelayFeedback] = useState(0);
+	let {ringModulation, sustain, filterEnv, modulation, delayFeedback} = props.enzoState;
+
+	let setRingModulation = (value) =>{ 
+		props.enzoDispatch({key: 'ringModulation', value: value})
+	}
+	let setSustain = (value) =>{ 
+		props.enzoDispatch({key: 'sustain', value: value})
+	}
+	let setFilterEnv = (value) =>{ 
+		props.enzoDispatch({key: 'filterEnv', value: value})
+	}
+	let setModulation = (value) =>{ 
+		props.enzoDispatch({key: 'modulation', value: value})
+	}
+	let setDelayFeedback = (value) =>{ 
+		props.enzoDispatch({key: 'delayFeedback', value: value})
+	}
+	
 	return(
 		<div className="flex-row">
 			<LittleKnob 

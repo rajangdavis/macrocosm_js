@@ -1,13 +1,14 @@
 import {SmallPadButton} from '../pad_button'
-import {useState} from 'react'
 
 export default function WaveShape(props){
-	const [waveShape, setWaveShape] = useState(null);
 
 	const isSelected = (val)=>{
-		return waveShape == val ? 'selected' : ''
+		return props.waveShape == val ? 'selected' : ''
 	}
 
+	let setWaveShape = (value) =>{ 
+		props.enzoDispatch({key: 'waveShape', value: value})
+	}
 	return(
 		<div className="text-center wave-shape">
 			<SmallPadButton 

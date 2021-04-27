@@ -1,5 +1,4 @@
 import * as style from './knob_styles'
-import {useState} from 'react'
 
 module.exports = {
 	LittleKnob: (props) => {
@@ -25,7 +24,7 @@ module.exports = {
 
 function Knob(props){
 
-	const updateVal = (event)=>{
+	const updateVal = (event) => {
 	  props.setVal(parseInt(event.target.value));
 	}
 

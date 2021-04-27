@@ -1,11 +1,13 @@
 import {SmallPadButton} from '../pad_button'
-import {useState} from 'react'
 
 export default function FilterType(props){
-	const [filterType, setFilterType] = useState(null);
+	
+	const isSelected = (value)=>{
+		return props.filterType == value ? 'selected' : ''
+	}
 
-	const isSelected = (val)=>{
-		return filterType == val ? 'selected' : ''
+	const setFilterType = (value)=>{
+		props.enzoDispatch({key: 'filterType', value: value})
 	}
 	return (
 		<div className="text-center filter-type">
