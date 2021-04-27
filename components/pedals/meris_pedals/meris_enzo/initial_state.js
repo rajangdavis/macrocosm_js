@@ -1,18 +1,66 @@
 module.exports = {
-	portamento: 0,
-  pitch: 0,
-  filter: 0,
-  mix: 0,
-  delayLevel: 0,
-  ringModulation: 0,
-  sustain: 0,
-  filterEnv: 0,
-  modulation: 0,
-  delayFeedback: 0,
-  filterBandwidth: 0,
-  bypass: null,
-  synthMode: null,
-  envelopeType: null,
-  filterType: null,
-  waveShape: null
+  portamento: {
+    value:0,
+    ccValue: 22
+  },
+  pitch: {
+    value:0,
+    ccValue: 16
+  },
+  filter: {
+    value:0,
+    ccValue: 17
+  },
+  mix: {
+    value:0,
+    ccValue: 18
+  },
+  delayLevel: {
+    value:0,
+    ccValue: 24
+  },
+  ringModulation: {
+    value:0,
+    ccValue: 25
+  },
+  sustain: {
+    value:0,
+    ccValue: 19
+  },
+  filterEnv: {
+    value:0,
+    ccValue: 20
+  },
+  modulation: {
+    value:0,
+    ccValue: 21
+  },
+  delayFeedback: {
+    value:0,
+    ccValue: 27
+  },
+  filterBandwidth: {
+    value:0,
+    ccValue: 26
+  },
+  waveShape: {
+    value: null,
+    ccValue: 30
+  },
+  filterType: {
+    value: null,
+    ccValue: 23
+  },
+  envelopeType: {
+    value: null,
+    ccValue: 9
+  },
+  synthMode: {
+    value: null,
+    ccValue: 29
+  },
+  bypass: {
+    value: null,
+    ccValue: 14
+  },
 }

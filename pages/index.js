@@ -7,7 +7,7 @@ import {WebMidi} from 'webmidi'
 export default function Home() {
   const [sliderOpacity, setSliderOpacity] = useState(0);
   const [midiObject, setMidiObject] = useState({inputs: [], outputs: []});
-  const [midiChannel, setMidiChannel] = useState(null);
+  const [midiChannel, setMidiChannel] = useState(1);
   const [midiInput, setMidiInput] = useState(null);
   const [midiOutput, setMidiOutput] = useState(null);
   
@@ -32,9 +32,6 @@ export default function Home() {
                  onChange={(e)=> setSliderOpacity(e.target.value)}/>
         </div>
         <div>
-          <MidiChannelSelect value={midiChannel} />
-        </div>
-        <div>
           <label>Input</label>
           <select onChange={(e)=> setMidiInput(e.target.value)}>
             <option value="">Pick an input</option>
@@ -54,11 +51,20 @@ export default function Home() {
             }
           </select>
         </div>
+        <div>
+          <label>MIDI Channel</label>
+          <input type="number" 
+                 min="1" 
+                 max="16" 
+                 value={midiChannel.toString()} 
+                 onChange={(e)=> setMidiChannel(e.target.value)}/>
+        </div>
         <MerisEnzoLayout 
           sliderOpacity={sliderOpacity}
           midiObject={midiObject}
           midiInput={midiInput}
           midiOutput={midiOutput}
+          midiChannel={midiChannel}
         />
       </div>
     </div>

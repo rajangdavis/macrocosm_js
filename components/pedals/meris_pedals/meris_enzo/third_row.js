@@ -24,8 +24,8 @@ export default function ThirdRow(props){
 		<div className="flex-row">
 			<div className="left-side-controls">
 				<div className="flex-row first-row">
-					<WaveShape waveShape={waveShape} enzoDispatch={props.enzoDispatch}/>
-					<FilterType filterType={filterType} enzoDispatch={props.enzoDispatch}/>
+					<WaveShape waveShape={waveShape.value} enzoDispatch={props.enzoDispatch}/>
+					<FilterType filterType={filterType.value} enzoDispatch={props.enzoDispatch}/>
 				</div>
 				<div className="flex-row tap">
 					<TapButton />
@@ -36,15 +36,15 @@ export default function ThirdRow(props){
 					className="filter-bandwidth"
 					label="Filter Bandwidth" 
 					setVal={setFilterBandwidth} 
-					val={filterBandwidth} 
+					val={filterBandwidth.value} 
 					sliderOpacity={props.sliderOpacity}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">
-					<EnvelopeType envelopeType={envelopeType} enzoDispatch={props.enzoDispatch}/>
-					<SynthMode synthMode={synthMode} enzoDispatch={props.enzoDispatch}/>
+					<EnvelopeType envelopeType={envelopeType.value} enzoDispatch={props.enzoDispatch}/>
+					<SynthMode synthMode={synthMode.value} enzoDispatch={props.enzoDispatch}/>
 				</div>
-				<Bypass bypass={bypass} enzoDispatch={props.enzoDispatch}/>
+				<Bypass bypass={bypass.value} enzoDispatch={props.enzoDispatch}/>
 			</div>
 		</div>
 	)

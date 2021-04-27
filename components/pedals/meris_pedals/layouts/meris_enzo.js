@@ -8,7 +8,7 @@ import {useEffect} from 'react'
 
 export default function MerisEnzoLayout(props){
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
-  const [enzoState, enzoDispatch] = enzoStateReducer(initialState);
+  const [enzoState, enzoDispatch] = enzoStateReducer(initialState, props);
   useEffect(() => {
     setState(enzoState)
   });
