@@ -12,21 +12,20 @@ export default function MerisEnzoLayout(props){
   useEffect(() => {
     setState(enzoState)
   });
-
 	return(
 		<div className="meris-pedal meris-enzo-bigbox">
 			<FirstRow
 				enzoState={enzoState}
 				enzoDispatch={enzoDispatch}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}/>
 			<SecondRow 
 				enzoState={enzoState} 
 				enzoDispatch={enzoDispatch} 
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}/>
 			<ThirdRow 
 				enzoState={enzoState} 
 				enzoDispatch={enzoDispatch} 
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}/>
 		</div>
 	)
 }

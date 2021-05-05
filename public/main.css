@@ -11,6 +11,13 @@ body {
   box-sizing: border-box;
 }
 
+.main{
+  position: absolute;
+  top:50px;
+  left:50%;
+  right:50%;
+}
+
 .container {
   padding: 0 0.5rem;
   display: flex;
@@ -21,33 +28,6 @@ body {
 
 .text-center{
   text-align: center;
-}
-.macro{
-  border: 5px solid red;
-}
-
-.pedal-container{
-  margin-bottom: 20px;
-}
-
-/* CUSACK SWITCHERS */
-
-.pedal-tamer{
-  border: 2px solid #b4cfb0;
-  padding: 20px;
-  margin-bottom:10px
-}
-
-/* MERIS MIDI IO */
-
-.meris-midi-io{
-  border: 1px solid black;
-  padding: 20px;
-  margin-bottom: 10px;
-}
-
-.expression-pedal{
-  border: 3px solid grey;
 }
 
 /* MERIS PEDALS */
@@ -73,11 +53,13 @@ body {
               rgba(255 235 59 / 91%) 0%, 
               rgba(149, 149, 149, 0) 100%), 
               #ff7600 !important;
+  transition: background linear;
 }
 
 .pad-button:active{
   box-shadow: inset -4px -4px 8px rgb(196 196 196 / 50%), 
   inset 20px 20px 20px rgb(0 0 0 / 10%) !important;
+  transition: box-shadow linear;
 }
 
 .pad-button > label{
@@ -91,8 +73,49 @@ body {
 
 .knob:hover,
 .knob > input:hover,
-.pad-button:hover{
+.pad-button:hover,
+.controls > details:hover{
   cursor: pointer;
+}
+
+.hidden{
+  display: none !important;
+}
+
+
+.preset-groups-container{
+  position: relative;
+}
+
+.controls{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.preset-groups, .slider-controls, .midi-controls, .pedal-config{
+  z-index: 5;
+  flex: 3;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 16px;
+  background: grey;
+  border-radius: 7%;
+}
+
+.preset-groups div{
+  display: flex;
+  flex-direction: row;
+}
+
+.controls > details{
+  border:1px solid;
+}
+
+.controls > details > summary{
+  padding: 50px 35px;
 }
 
 /*
@@ -101,6 +124,30 @@ body {
 
 
 */
+
+.pedal-container{
+  margin-bottom: 20px;
+}
+
+/* CUSACK SWITCHERS */
+
+.pedal-tamer{
+  border: 2px solid #b4cfb0;
+  padding: 20px;
+  margin-bottom:10px
+}
+
+/* MERIS MIDI IO */
+
+.meris-midi-io{
+  border: 1px solid black;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+.expression-pedal{
+  border: 3px solid grey;
+}
 
 .meris-enzo{
   border: 1px solid #DEAE1B;
@@ -129,9 +176,6 @@ body {
   color: #FFFFFF;
 }
 
-.hidden{
-  display: none !important;
-}
 button{
   margin: 10px auto 5px;
   display: block;
@@ -212,34 +256,4 @@ button{
 .left-bottom, .right-bottom,
 .alt-left-bottom, .alt-right-bottom{
   order: 4;
-}
-
-.preset-groups-container{
-  position: relative;
-}
-
-.preset-groups-container span{
-  position: absolute;
-  right: 0
-}
-
-.preset-groups{
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 16px;
-  background: grey;
-  border-radius: 7%;
-}
-
-.preset-groups div{
-  display: flex;
-  flex-direction: row;
-}
-
-.preset-groups div button{
-  padding: 10px;
-  margin: 0;
-  width: 36px;
 }

@@ -13,7 +13,6 @@ module.exports = {
 
 	HandleMidiInput: (props = {})=>{
 		if(props.midiObject && props.midiChannel && props.midiInput){
-			let ccValue = state[action.key].ccValue;
 			let {midiObject, midiChannel, midiInput} = props;
 			let deviceInput = midiObject.outputs.filter(x =>{
 				return x.name == midiInput

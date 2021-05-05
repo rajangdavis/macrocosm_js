@@ -67,14 +67,15 @@ module.exports = {
 			transform: `rotate(${rotationAngle}deg)`
 		}
 	},
-	inputRange: (opacity)=>{
-		let decimalVal = opacity/100
+	inputRange: (sliderData)=>{
+		let decimalVal = sliderData.opacity/100
 		return{
 			opacity: decimalVal,
 			position: "relative",
 	    zIndex: 3,
 	    margin: "0 auto",
-	    height: "80px"
+	    height: `${80-sliderData.placement}px`,
+	    transform: `rotate(${parseInt(sliderData.rotation)}deg)`
 		}
 	},
 	textLabel: {

@@ -47,7 +47,7 @@ function Knob(props){
 	      min="0" 
 	      max="127"
 	      value={props.val}
-	      style={style.inputRange(props.sliderOpacity)}
+	      style={style.inputRange(props.sliderData)}
 	      onChange={updateVal}
 	      onClickCapture={updateVal}/>
 		</div>

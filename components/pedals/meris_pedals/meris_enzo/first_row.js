@@ -26,31 +26,36 @@ export default function FirstRow(props){
 				label="Portamento"
 				setVal={setPortamento}
 				val={portamento.value}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}
+				/>
 			<BigKnob
 				className="top-row pitch"
 				label="Pitch"
 				setVal={setPitch}
 				val={pitch.value}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}
+				/>
 			<LittleKnob
 				className="top-row filter"
 				label="Filter"
 				setVal={setFilter}
 				val={filter.value}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}
+				/>
 			<BigKnob
 				className="top-row mix"
 				label="Mix"
 				setVal={setMix}
 				val={mix.value}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}
+				/>
 			<BigKnob
 				className="top-row delay-level"
 				label="Delay Level"
 				setVal={setDelayLevel}
 				val={delayLevel.value}
-				sliderOpacity={props.sliderOpacity}/>
+				sliderData={props.sliderData}
+				/>
 		</div>
 	)
 }
