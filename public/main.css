@@ -101,8 +101,7 @@ body {
   align-items: center;
   flex-direction: column;
   padding: 16px;
-  background: grey;
-  border-radius: 7%;
+  background: #282828;
 }
 
 .preset-groups div{
@@ -110,13 +109,41 @@ body {
   flex-direction: row;
 }
 
+
 .controls > details{
-  border:1px solid;
+  color: white;
+  margin: 0 auto ;
+  background: #282828;
+  box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
 }
 
 .controls > details > summary{
   padding: 50px 35px;
+  font-weight: bold;
+  cursor: pointer;
 }
+
+details {
+  margin: 1.3rem 0;
+  border-bottom: 1px solid #aaa;
+  padding: 0.5rem;
+  height: auto;
+  transition: all 0.1s ease;
+}
+
+details[open] {
+  transition: all 1s ease;
+}
+/* THE MAGIC 🧙‍♀️ */
+details[open] > summary:before {
+  transform: rotate(90deg);
+}
+
+
+details summary::-webkit-details-marker {
+  display:none;
+}
+
 
 /*
 

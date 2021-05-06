@@ -18,7 +18,7 @@ export default function MerisPresets(props){
 	}
 
 	return (
-		<details className="preset-groups-container">
+		<details className={`preset-groups-container ${props.className}`}>
       <summary>
 	    	{`${props.selectedPedal} Presets`.toUpperCase()}
       </summary>

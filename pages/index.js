@@ -46,10 +46,12 @@ export default function Home() {
             midiObject={midiObject}
             setMidiData={setMidiData}/>
           <MerisConfig
+            className={midiData.output ? '' : 'hidden'}
             selectedPedal={'Meris Enzo'}
             setMidiData={setMidiData}
             />
           <MerisPresets
+            className={midiData.output ? '' : 'hidden'}
             factoryPresets={EnzoFactoryPresets}
             selectedPedal={'Meris Enzo'}
             />

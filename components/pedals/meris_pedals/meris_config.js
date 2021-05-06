@@ -1,7 +1,7 @@
 export default function MerisConfig(props){
 
 	return (
-		<details className="pedal-config-container">
+		<details className={`pedal-config-container ${props.className}`}>
       <summary>
 	    	PEDAL CONFIG
       </summary>
