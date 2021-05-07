@@ -21,7 +21,8 @@ export default function Home() {
   });
   const [midiData, setMidiData] = useState({
     input: null,
-    output: null
+    output: null,
+    channel: 1
   });
 
   useEffect(()=>{
@@ -49,6 +50,7 @@ export default function Home() {
             className={midiData.output ? '' : 'hidden'}
             selectedPedal={'Meris Enzo'}
             setMidiData={setMidiData}
+            midiData={midiData}
             />
           <MerisPresets
             className={midiData.output ? '' : 'hidden'}

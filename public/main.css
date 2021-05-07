@@ -118,7 +118,7 @@ body {
 }
 
 .controls > details > summary{
-  padding: 50px 35px;
+  padding: 50px 20px;
   font-weight: bold;
   cursor: pointer;
 }

@@ -1,4 +1,6 @@
 export default function MerisConfig(props){
+  const setMidiData = props.setMidiData;
+  const midiData = props.midiData;
 
 	return (
 		<details className={`pedal-config-container ${props.className}`}>
@@ -11,8 +13,8 @@ export default function MerisConfig(props){
           <input type="number" 
                  min="1" 
                  max="16" 
-                 // value={midiChannel.toString()} 
-                 onChange={(e)=> console.log(e.target.value)}/>
+                 value={midiData.channel}
+                 onChange={(e)=> setMidiData({...midiData, channel: e.target.value})}/>
         </div>
        </div>
     </details>
