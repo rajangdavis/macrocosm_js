@@ -26,6 +26,18 @@ body {
   align-items: center;
 }
 
+.main-display{
+  display: flex;
+}
+
+.pedal-selector{
+  display: flex;
+  flex-direction: column;
+}
+
+.pedal-selector a{
+  flex: 1;
+}
 .text-center{
   text-align: center;
 }

@@ -1,3 +1,5 @@
+import { HandleMidiInput } from "../hooks/midi_io"
+
 export default function MidiControls(props){
 	const setMidiData = props.setMidiData;
 	const midiObject = props.midiObject;
