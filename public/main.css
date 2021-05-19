@@ -9,6 +9,7 @@ body {
 
 * {
   box-sizing: border-box;
+  font-family: 'YWFTUltramagnetic-Light', sans-serif;
 }
 
 .main{
@@ -28,6 +29,7 @@ body {
 
 .main-display{
   display: flex;
+  flex-direction: column;
 }
 
 .pedal-selector{
@@ -40,6 +42,17 @@ body {
 }
 .text-center{
   text-align: center;
+}
+
+.presets-button{
+  font-weight: 100;
+  width: 468px;
+  height: 62px;
+  margin-top: 48px;
+  background: white;
+  color: black;
+  font-size: 25px;
+  border: 3px solid;
 }
 
 /* MERIS PEDALS */
@@ -60,27 +73,15 @@ body {
   margin:0 auto;
 }
 
-.pad-button.selected{
-  background: radial-gradient(50% 50% at 50% 50%, 
-              rgba(255 235 59 / 91%) 0%, 
-              rgba(149, 149, 149, 0) 100%), 
-              #ff7600 !important;
-  transition: background linear;
-}
-
-.pad-button:active{
-  box-shadow: inset -4px -4px 8px rgb(196 196 196 / 50%), 
-  inset 20px 20px 20px rgb(0 0 0 / 10%) !important;
-  transition: box-shadow linear;
-}
-
-.pad-button > label{
-  opacity: 65%;
-}
-
 .pad-button:active > label{
   font-size: 15px;
-  opacity: 85%;
+}
+
+.pad-button.selected, .tap-button:active{
+  background-color: black !important;
+  border: white;
+  color: white;
+  transition: background-color, border, color linear .05s;
 }
 
 .knob:hover,

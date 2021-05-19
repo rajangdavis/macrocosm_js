@@ -20,27 +20,6 @@ module.exports = {
 		top: '6.66%',
 		bottom: '74.29%',
 	},
-	hiddenLittleKnob:{
-		zIndex: 1,
-		position: "absolute",
-		left: "22.31%",
-		right: "33.06%",
-		top: "0%",
-		bottom: "37.54%",
-		borderRadius: "50%",
-		boxShadow: "0px 6px 4px rgba(0, 0, 0, 0.25)",
-	},
-	hiddenBigKnob:{
-		zIndex: 1,
-		position: "absolute",
-		left: "11.48%",
-		right: "14.95%",
-		top: "0.09%",
-		bottom: "25.69%",
-		borderRadius: "50%",
-		background: "radial-gradient(38.39% 37.72% at 50% 50%, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0) 100%), #000000",
-		boxShadow: "0px 6px 4px rgba(0, 0, 0, 0.25)",
-	},
 	bigKnob: (rotationAngle)=>{
 		return {
 			zIndex: 2,
@@ -50,7 +29,7 @@ module.exports = {
 			top: "0.09%",
 			bottom: "25.69%",
 			borderRadius: "50%",
-			background: "radial-gradient(38.39% 37.72% at 50% 50%, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0) 100%), #000000",
+			background: "black",
 			transform: `rotate(${rotationAngle}deg)`
 		}
 	},
@@ -63,7 +42,7 @@ module.exports = {
 			top: "0%",
 			bottom: "37.54%",
 			borderRadius: "50%",
-			background: "radial-gradient(38.39% 37.72% at 50% 50%, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0) 100%), #000000",
+			background: "black",
 			transform: `rotate(${rotationAngle}deg)`
 		}
 	},

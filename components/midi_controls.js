@@ -1,7 +1,9 @@
 import { HandleMidiInput } from "../hooks/midi_io"
+import MerisConfig from '../components/pedals/meris_pedals/meris_config'
 
 export default function MidiControls(props){
-	const setMidiData = props.setMidiData;
+  const setMidiData = props.setMidiData;
+	const selectedPedal = props.selectedPedal;
 	const midiObject = props.midiObject;
 	const midiData = props.midiData;
 
@@ -16,7 +18,7 @@ export default function MidiControls(props){
       </summary>
   		<div className="midi-controls">
         <div>
-          <label>Input</label>
+          <label>Expression Input</label>
           <select onChange={(e)=> setMidiInputAndSetListener(e)}>
             <option value="">Pick an input</option>
             {midiObject != undefined && midiObject.inputs.map((input, i)=>{
@@ -35,6 +37,12 @@ export default function MidiControls(props){
             }
           </select>
         </div>
+        <MerisConfig
+          className={midiData.output ? '' : ''}
+          selectedPedal={selectedPedal}
+          setMidiData={setMidiData}
+          midiData={midiData}
+          />
       </div>
     </details>
 	)

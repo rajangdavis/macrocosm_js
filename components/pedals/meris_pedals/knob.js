@@ -37,8 +37,6 @@ function Knob(props){
 			<div style={props.knobFunction(angleCalc(props.val))}>
 				<div style={style.knobDial}></div>
 			</div>
-			<div style={props.hiddenKnob}>
-			</div>
 			<div style={style.textLabel}>
 				<span>{props.label}</span>
 			</div>

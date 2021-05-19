@@ -1,16 +1,14 @@
 .meris-enzo-bigbox{
-  width: 850px;
-  height: 653px;
+  width: 916px;
+  height: 715px;
+  padding: 20px;
   user-select: none;
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: radial-gradient(31.91% 40.42% at 48.29% 50.06%, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 82.29%),
-              radial-gradient(55.69% 55.69% at 50% -15.5%, #000000 0%, rgba(234, 160, 0, 0.15) 60.94%),
-              radial-gradient(164.13% 164.12% at 50.47% 127.18%, #000000 0%, rgba(234, 160, 0, 0) 45.95%), 
-              linear-gradient(90deg, #FFFFFF -0.47%, rgba(255, 255, 255, 0) 2.47%), 
-              linear-gradient(270deg, #FFFFFF -1.14%, rgba(255, 255, 255, 0) 2.85%), 
-              #ea8200;
+  background: white;
+  border: 3px solid;
+  border-radius: 15px;
 }
 
 .meris-enzo-bigbox:after{
@@ -90,7 +88,7 @@
 }
 
 .middle-controls{
-  flex: 1;
+  flex: 1.45;
 }
 
 .left-side-controls,

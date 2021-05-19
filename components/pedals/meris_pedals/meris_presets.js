@@ -18,16 +18,13 @@ export default function MerisPresets(props){
 	}
 
 	return (
-		<details className={`preset-groups-container ${props.className}`}>
-      <summary>
-	    	{`${props.selectedPedal} Presets`.toUpperCase()}
-      </summary>
-      <div className="preset-groups">
+		<div className={`preset-groups-container ${props.className}`}>
+      <div className="">
       	{props.factoryPresets.map((fp, i) =>{
   				return <div key={i} onClick={()=> sendSysex(fp.message)}>{fp.label}</div>
   			})}
       </div>
-    </details>
+    </div>
   )
 
 }
