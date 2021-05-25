@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_pedals/meris_enzo/layout'
 import MerisPresetsMap from '../components/pedals/meris_pedals/factory_presets/meris_presets_map'
-import SliderControls from '../components/slider_controls'
-import MidiControls from '../components/midi_controls'
 import MerisPresets from '../components/pedals/meris_pedals/meris_presets'
 
 // Create a mega hook
@@ -44,7 +42,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="main container">
+    <div className="container">
       <Head>
         <title>macrocosm</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -58,7 +56,7 @@ export default function Home() {
             enzoDispatch={enzoDispatch}
             midiData={midiData}
           />
-          <button class="presets-button">PRESETS</button>
+          <button className="presets-button">PRESETS</button>
         </div>
       </div>
     </div>
