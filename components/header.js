@@ -8,11 +8,14 @@ export default function HeaderNav(props){
   return (<div className="header-nav">
   	<nav>
   		<NavButton headerOpen={headerOpen} setHeaderOpen={setHeaderOpen}/>
-      <NavMenu midiObject={props.midiObject}
-               setMidiObject={props.setMidiObject}
-               sliderData={props.sliderData}
-               setSliderData={props.setSliderData}
-               headerOpen={headerOpen}/>
+      {
+        headerOpen &&
+        <NavMenu midiObject={props.midiObject}
+                 setMidiObject={props.setMidiObject}
+                 sliderData={props.sliderData}
+                 setSliderData={props.setSliderData}
+                 headerOpen={headerOpen}/>
+      }
   	</nav>
    </div>)
 }
