@@ -1,18 +1,15 @@
 import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_pedals/meris_enzo/layout'
-import MerisPresetsMap from '../components/pedals/meris_pedals/factory_presets/meris_presets_map'
-import MerisPresets from '../components/pedals/meris_pedals/meris_presets'
-
-// Create a mega hook
+import MerisEnzoPresets from '../components/pedals/meris_pedals/factory_presets/meris_enzo'
+import PresetsModal from '../components/presets_modal'
 import {useState} from 'react'
-import enzoInitialState from '../components/pedals/meris_pedals/meris_enzo/initial_state'
-import enzoStateReducer from '../hooks/enzo_state'
-import useLocalStorage from '../hooks/use_local_storage'
-
 
 export default function Home(props) {
 
   const [selectedPedal, setSelectedPedal] = useState('enzo')
+  const [presetsOpen, setPresetsOpen] = useState(false)
+
+  let presetsButtonClass = presetsOpen ? "presets-button open" : "presets-button"
 
   return (
     <div className="container">
@@ -26,8 +23,12 @@ export default function Home(props) {
             sliderData={props.sliderData}
             midiObject={props.midiObject}
           />
-          <button className="presets-button">PRESETS</button>
+          <button className={presetsButtonClass} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS</button>
         </div>
+        {
+          presetsOpen && 
+          <PresetsModal setPresetsOpen={setPresetsOpen} presets={MerisEnzoPresets}/>
+        }
       </div>
     </div>
   )

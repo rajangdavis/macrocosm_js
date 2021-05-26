@@ -2,6 +2,7 @@ import dynamic from "next/dynamic";
 import '../public/ywft-ultramagnetic-light.css'
 import '../public/main.css'
 import '../public/nav.css'
+import '../public/presets_modal.css'
 import '../public/custom_select.css'
 import '../public/custom_slider.css'
 import '../public/midi_channel_input.css'

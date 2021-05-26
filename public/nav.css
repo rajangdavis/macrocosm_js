@@ -37,15 +37,15 @@ nav{
 }
 
 .nav-button > .line:not(:first-of-type){
-  margin-top:2vh;
+  margin-top:15px;
 }
 
 .nav-button.open > .line.first{
-  transform: rotate(-45deg) translateY(5px) translateX(-10px);
+  transform: rotate(-45deg) translateY(3px) translateX(-10px);
 }
 
 .nav-button.open > .line.second{
-  transform: rotate(45deg) translateY(-5px) translateX(-10px);
+  transform: rotate(45deg) translateY(-3px) translateX(-8px);
 }
 
 .nav-menu.closed{
