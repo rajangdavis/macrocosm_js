@@ -1,6 +1,6 @@
 import MerisPresets from './meris_presets'
 import MerisGenericControls from './meris_generic_controls'
-import MidiChannelSelect from '../../midi_channel_select'
+import MidiChannelSelect from '../../midi_channel_input'
 import MerisComputedFunctions from './meris_computed_functions'
 
 export default function MerisGenericLayout(props){

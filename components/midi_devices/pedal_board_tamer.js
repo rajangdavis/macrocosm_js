@@ -1,4 +1,4 @@
-import MidiChannelSelect from '../midi_channel_select'
+import MidiChannelSelect from '../midi_channel_input'
 import ProgramChangeInput from '../program_change_input'
 import MidiDevicePortSelector from '../midi_device_port_selector'
 
