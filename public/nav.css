@@ -1,0 +1,105 @@
+.header-nav{
+  height: 10vh;
+  width: 100vw;
+  background:black;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+nav{
+  color:white;
+  width: 90vw;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+}
+
+
+.nav-button{
+  display: flex;
+  flex-direction: column;
+}
+.nav-button:hover{
+  cursor: pointer;
+}
+
+.nav-button > .line{
+  width: 58px;
+  border-bottom: 3px solid #FFFFFF;
+  transition:.1s linear;
+}
+
+.nav-button > .line:not(:first-of-type){
+  margin-top:2vh;
+}
+
+.nav-button.open > .line.first{
+  transform: rotate(-45deg) translateY(5px) translateX(-10px);
+}
+
+.nav-button.open > .line.second{
+  transform: rotate(45deg) translateY(-5px) translateX(-10px);
+}
+
+.nav-menu.closed{
+  opacity: 0;
+}
+
+.nav-menu.open{
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  height: 90vh;
+  top: 10vh;
+  background: black;
+  opacity: 1;
+  transition:.1s linear;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-menu > .options-block{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nav-menu > .options-block:first-of-type{
+  margin-bottom: 130px;
+}
+
+.nav-menu > .options-block > label{
+  font-size: 25px;
+}
+
+.nav-menu > .options-block > hr{
+  width: 80vw;
+}
+
+.midi-options, .control-options{
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center; 
+  width: 80vw;
+  align-items: center;
+}
+
+.midi-options > div, .control-options > div{
+  margin: 0px 150px;
+}
+
+.nav-menu > .options-block > div{
+  margin-top: 50px
+}
+
+.custom-slider-container:not(:first-of-type){
+  margin-top: 50px;
+}
