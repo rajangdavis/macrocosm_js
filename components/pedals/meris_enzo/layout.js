@@ -3,9 +3,9 @@ import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import {useState, useEffect, useContext} from 'react'
 import enzoInitialState from './initial_state'
-import enzoStateReducer from '../../../../hooks/enzo_state'
-import {MidiConfigContext} from '../../../../hooks/midi_config'
-import useLocalStorage from '../../../../hooks/use_local_storage'
+import enzoStateReducer from '../../../hooks/enzo_state'
+import {MidiConfigContext} from '../../../hooks/midi_config'
+import useLocalStorage from '../../../hooks/use_local_storage'
 
 export default function MerisEnzoLayout(props){
 
@@ -15,8 +15,9 @@ export default function MerisEnzoLayout(props){
 	const [enzoState, enzoDispatch] = enzoStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 
 	useEffect(()=>{
+		console.log(enzoState)
 	  setState(enzoState)
-  }, [props.midiObject]);
+  }, [enzoState]);
 
 	return(
 		<div className="meris-pedal meris-enzo-bigbox">

@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import MerisEnzoLayout from '../components/pedals/meris_pedals/meris_enzo/layout'
-import MerisEnzoPresets from '../components/pedals/meris_pedals/factory_presets/meris_enzo'
+import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
+import MerisEnzoPresets from '../components/pedals/factory_presets/meris_enzo'
 import PresetsModal from '../components/presets_modal'
 import {useState, useContext} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'

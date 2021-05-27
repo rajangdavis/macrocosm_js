@@ -4,8 +4,8 @@ import { HandleMidiOutput } from "./midi_io"
 export default function EnzoState(initialState, props = {}){
 
   let reducer = (state, action) =>{
-    state[action.key].value = action.value
     HandleMidiOutput(state, action, props);
+    state[action.key].value = action.value
   }
 
 	return useImmerReducer(reducer, initialState)
