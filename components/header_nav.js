@@ -4,7 +4,6 @@ import {useState} from 'react'
 
 export default function HeaderNav(props){
 	const [headerOpen, setHeaderOpen] = useState(false);
-  
   return (<div className="header-nav">
   	<nav>
   		<NavButton headerOpen={headerOpen} setHeaderOpen={setHeaderOpen}/>

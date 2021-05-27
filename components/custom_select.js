@@ -2,9 +2,8 @@ import {useState, useEffect} from 'react'
 
 export default function CustomSelect(props){
 	const [selectOpen, setSelectOpen] = useState(false);
-	let defaultOption = props.defaultOption || ''
 	let closeIf = props.closeIf == undefined ? true : props.closeIf
-	const [selectedOption, setSelectedOption] = useState(defaultOption);
+	const [selectedOption, setSelectedOption] = useState(props.defaultOption);
 	let containerClass = selectedOption == '' ?  "custom-select" : "custom-select selected"
 	let arrowClass = selectOpen ? "select-selected open" : "select-selected"
 	let optionsClass = selectOpen ? "select-options open" : "select-options"
@@ -13,8 +12,8 @@ export default function CustomSelect(props){
 	}
 	let setOption = (option)=>{
 		setSelectedOption(option)
-		if(props.callback){
-			props.callback(option);
+		if(props.onChange){
+			props.onChange(option);
 		}
 	}
 

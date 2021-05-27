@@ -12,8 +12,8 @@ export default function PresetsModal(props){
       <div className="presets-modal-content">
         <label>PRESETS</label>
         <div>
-        	{props.presets.map(preset =>{
-        		return <div className="preset-row">{preset.label}</div>
+          {props.presets.map((preset, i) =>{
+            return <div key={i} className="preset-row">{preset.label}</div>
         	})}
         </div>
       </div>

@@ -7,15 +7,22 @@ import '../public/custom_select.css'
 import '../public/custom_slider.css'
 import '../public/midi_channel_input.css'
 import '../public/meris_enzo.css'
-import HeaderNav from '../components/header'
+import HeaderNav from '../components/header_nav'
+import {MidiConfigProvider, MidiConfigContext} from '../hooks/midi_config'
 import {WebMidi} from 'webmidi'
 import {useState, useEffect} from 'react'
 
-// This default export is required in a new `pages/_app.js` file.
 function MyApp({ Component, pageProps }) {
 	const [midiObject, setMidiObject] = useState({
     outputs: []
   });
+
+	useEffect(()=>{
+	  WebMidi.enable({sysex: true})
+	    .then((access)=>{
+	      setMidiObject(access);
+	    })
+	}, []);
 
 	const [sliderData, setSliderData] = useState({
     opacity: 0,
@@ -24,13 +31,15 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (<div className="main">
-			<HeaderNav
-				midiObject={midiObject}
-				setMidiObject={setMidiObject}
-				sliderData={sliderData}
-				setSliderData={setSliderData}
-				/>
-			<Component {...pageProps} midiObject={midiObject} sliderData={sliderData}/>
+			<MidiConfigProvider>
+				<HeaderNav
+					midiObject={midiObject}
+					setMidiObject={setMidiObject}
+					sliderData={sliderData}
+					setSliderData={setSliderData}
+					/>
+				<Component {...pageProps} midiObject={midiObject} sliderData={sliderData}/>
+			</MidiConfigProvider>
 	</div>)
 }
 

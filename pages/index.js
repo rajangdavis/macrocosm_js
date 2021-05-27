@@ -2,13 +2,14 @@ import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_pedals/meris_enzo/layout'
 import MerisEnzoPresets from '../components/pedals/meris_pedals/factory_presets/meris_enzo'
 import PresetsModal from '../components/presets_modal'
-import {useState} from 'react'
+import {useState, useContext} from 'react'
+import {MidiConfigContext} from '../hooks/midi_config'
 
 export default function Home(props) {
 
   const [selectedPedal, setSelectedPedal] = useState('enzo')
   const [presetsOpen, setPresetsOpen] = useState(false)
-
+  const {midiConfig, updateConfig} = useContext(MidiConfigContext)
   let presetsButtonClass = presetsOpen ? "presets-button open" : "presets-button"
 
   return (
@@ -19,16 +20,16 @@ export default function Home(props) {
       </Head>
       <div>
         <div className="main-display">
+          <button className={presetsButtonClass} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS</button>
           <MerisEnzoLayout
             sliderData={props.sliderData}
             midiObject={props.midiObject}
           />
-          <button className={presetsButtonClass} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS</button>
+          {
+            presetsOpen &&
+            <PresetsModal setPresetsOpen={setPresetsOpen} presets={MerisEnzoPresets}/>
+          }
         </div>
-        {
-          presetsOpen && 
-          <PresetsModal setPresetsOpen={setPresetsOpen} presets={MerisEnzoPresets}/>
-        }
       </div>
     </div>
   )

@@ -2,16 +2,19 @@ import SliderControls from './slider_controls'
 import CustomSelect from './custom_select'
 import MenuKnob from './menu_knob'
 import MidiChannelInput from './midi_channel_input'
-import {WebMidi} from 'webmidi'
-import {useEffect, useState} from 'react'
+import {MidiConfigContext} from '../hooks/midi_config'
+import {useState, useContext} from 'react'
 
 export default function NavMenu(props){
-	useEffect(()=>{
-    WebMidi.enable({sysex: true})
-      .then((access)=>{
-        props.setMidiObject(access);
-      })
-  }, []);
+  const {midiConfig, updateConfig} = useContext(MidiConfigContext)
+
+  const updateMidiChannel = (e)=>{
+		updateConfig('enzoChannel', parseInt(e.target.value))
+  }
+
+  const updateMidiOutput = (option)=>{
+		updateConfig('output', option)
+  }
 
 	const outputOptions = props.midiObject != undefined ? props.midiObject.outputs.map(x=> x.name) : []
 	let className = props.headerOpen ? "nav-menu open" : "nav-menu closed"
@@ -21,8 +24,14 @@ export default function NavMenu(props){
 			<label>MIDI OPTIONS</label>
 			<hr/>
 			<div className="midi-options">
-				<CustomSelect closeIf={props.headerOpen} inputLabel={"MIDI OUTPUT"} options={outputOptions}/>
-				<MidiChannelInput />
+				<CustomSelect
+					onChange={updateMidiOutput}
+					defaultOption={midiConfig.output}
+					closeIf={props.headerOpen}
+					inputLabel={"MIDI OUTPUT"}
+					options={outputOptions}
+				/>
+				<MidiChannelInput value={midiConfig.enzoChannel} onChange={updateMidiChannel}/>
 			</div>
 		</div>
 		<div className="options-block">
