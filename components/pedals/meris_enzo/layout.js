@@ -15,7 +15,6 @@ export default function MerisEnzoLayout(props){
 	const [enzoState, enzoDispatch] = enzoStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 
 	useEffect(()=>{
-		console.log(enzoState)
 	  setState(enzoState)
   }, [enzoState]);
 
@@ -36,6 +35,7 @@ export default function MerisEnzoLayout(props){
 			<ThirdRow
 				sliderData={props.sliderData}
         midiObject={props.midiObject}
+        midiData={midiData}
         enzoState={enzoState}
         enzoDispatch={enzoDispatch}
        />

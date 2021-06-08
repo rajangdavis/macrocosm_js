@@ -28,7 +28,7 @@ export default function ThirdRow(props){
 					<FilterType filterType={filterType.value} enzoDispatch={props.enzoDispatch}/>
 				</div>
 				<div className="flex-row tap">
-					<TapButton />
+					<TapButton midiData={props.midiData} midiObject={props.midiObject}/>
 				</div>
 			</div>
 			<div className="flex-row middle-controls">

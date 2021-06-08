@@ -17,7 +17,6 @@ const MidiConfigProvider = ({children, initialConfig= defaultConfig })=>{
 	const updateConfig = (key, value) => {
 		let copiedConfig = {...defaultConfig}
 		copiedConfig[key] = value
-		console.log(copiedConfig)
 		setMidiConfig(copiedConfig)
 	}
 	

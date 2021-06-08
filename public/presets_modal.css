@@ -43,6 +43,12 @@
 	margin-bottom: 15px;
 }
 
+.preset-row.selected{
+  background: white;
+  color: black;
+  border-bottom: 3px solid black;
+}
+
 .preset-row:hover{
 	cursor: pointer;
 	background: white;
