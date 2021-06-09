@@ -1,7 +1,23 @@
 import NavButton from './nav_button'
-import {useState} from 'react'
+import {useContext} from 'react'
+import {MidiConfigContext} from '../hooks/midi_config'
+import parseSysexToBinary from '../utilities/parse_sysex'
 
 export default function PresetsModal(props){
+  const {midiConfig} = useContext(MidiConfigContext)
+  const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
+
+  const setPreset = (preset)=>{
+    let {midiObject, setSelectedPreset} = props;
+    if(midiObject && midiData.output && midiData.channel){
+      let {manufacturer, data} =parseSysexToBinary(preset.message)
+      let deviceOutput = midiObject.outputs.filter(x =>{
+        return x.name == midiData.output
+      })[0]
+      deviceOutput.sendSysex(manufacturer, data)
+      setSelectedPreset(preset.label)
+    }
+  }
 
   const selectedClassName = (preset)=>{
     if(preset.label == props.selectedPreset){
@@ -21,13 +37,20 @@ export default function PresetsModal(props){
       </div>
       <div className="presets-modal-content">
         <label>GLOBAL SETTINGS</label>
-        <div>
-
+        <hr/>
+        <div className="global-settings">
+          <a>INPUT MODE</a>
+          <a>LINE/SYNTH LEVEL</a>
+          <a>BYPASS MODE</a>
+          <a>KILL DRY</a>
+          <a>TRAILS</a>
+          <a>GLOBAL TEMPO</a>
         </div>
         <label>PRESETS</label>
+        <hr/>
         <div>
           {props.presets.map((preset, i) =>{
-            return <div key={i} onClick={()=> props.setSelectedPreset(preset.label)} className={selectedClassName(preset)}>{preset.label}</div>
+            return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
         	})}
         </div>
       </div>

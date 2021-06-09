@@ -82,3 +82,10 @@
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
 }
+
+.global-settings{
+  margin-bottom: 75px;
+  display: flex;
+  flex-direction: column;
+  font-size: 25px;
+}

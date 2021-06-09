@@ -2,7 +2,7 @@ import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisEnzoPresets from '../components/pedals/factory_presets/meris_enzo'
 import PresetsModal from '../components/presets_modal'
-import {useState, useContext} from 'react'
+import {useState} from 'react'
 
 export default function Home(props) {
 
@@ -27,6 +27,7 @@ export default function Home(props) {
           {
             presetsOpen &&
             <PresetsModal
+              midiObject={props.midiObject}
               setPresetsOpen={setPresetsOpen}
               presets={MerisEnzoPresets}
               selectedPreset={selectedPreset}
