@@ -1,6 +1,7 @@
 import NavButton from './nav_button'
 import {useContext} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'
+import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../utilities/parse_sysex'
 
 export default function PresetsModal(props){
@@ -10,12 +11,13 @@ export default function PresetsModal(props){
   const setPreset = (preset)=>{
     let {midiObject, setSelectedPreset} = props;
     if(midiObject && midiData.output && midiData.channel){
-      let {manufacturer, data} =parseSysexToBinary(preset.message)
+      let {manufacturer, data} = parseSysexToBinary(preset.message)
       let deviceOutput = midiObject.outputs.filter(x =>{
         return x.name == midiData.output
       })[0]
       deviceOutput.sendSysex(manufacturer, data)
       setSelectedPreset(preset.label)
+      sysexKnobsUpdate({data: data, enzoDispatch: props.enzoDispatch})
     }
   }
 

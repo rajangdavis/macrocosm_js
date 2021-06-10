@@ -1,5 +1,7 @@
 module.exports = {
 	HandleMidiOutput: (state, action, props = {})=>{
+		if(action.skipMidi && action.skipMidi == true)
+			return
 		let {midiObject, midiData} = props;
 		if(midiObject && midiData.output && midiData.channel){
 			let ccValue = state[action.key].ccValue;

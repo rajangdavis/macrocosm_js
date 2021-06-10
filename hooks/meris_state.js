@@ -1,7 +1,7 @@
 import { useImmerReducer } from "use-immer";
 import { HandleMidiOutput } from "./midi_io"
 
-export default function EnzoState(initialState, props = {}){
+export default function MerisState(initialState, props = {}){
 
   let reducer = (state, action) =>{
     HandleMidiOutput(state, action, props);
