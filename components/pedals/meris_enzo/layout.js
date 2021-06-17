@@ -9,7 +9,6 @@ import useLocalStorage from '../../../hooks/use_local_storage'
 import MerisEnzoPresets from '../factory_presets/meris_enzo'
 import PresetsModal from '../../presets_modal'
 
-
 export default function MerisEnzoLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)

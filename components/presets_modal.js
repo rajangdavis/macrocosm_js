@@ -1,4 +1,5 @@
 import NavButton from './nav_button'
+import GlobalSettingsTable from './global_settings_table'
 import {useContext} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'
 import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
@@ -41,16 +42,11 @@ export default function PresetsModal(props){
         <label>GLOBAL SETTINGS</label>
         <hr/>
         <div className="global-settings">
-          <a>INPUT MODE</a>
-          <a>LINE/SYNTH LEVEL</a>
-          <a>BYPASS MODE</a>
-          <a>KILL DRY</a>
-          <a>TRAILS</a>
-          <a>GLOBAL TEMPO</a>
+          <GlobalSettingsTable />
         </div>
         <label>PRESETS</label>
         <hr/>
-        <div>
+        <div className="presets-container">
           {props.presets.map((preset, i) =>{
             return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
         	})}

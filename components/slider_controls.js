@@ -21,7 +21,7 @@ export default function SliderControls(props){
 			<CustomSlider
 				label="Slider Placement"
 				min="0"
-				max="70"
+				max="80"
 				value={sliderData.placement}
 				onChange={(e)=> setSliderData({...sliderData, placement: e.target.value})}
 			/>

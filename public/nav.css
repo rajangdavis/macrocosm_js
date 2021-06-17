@@ -103,3 +103,9 @@ nav{
 .custom-slider-container:not(:first-of-type){
   margin-top: 50px;
 }
+.menu-knob-container .menu-knob > div:first-of-type{
+  border: 1px solid white;
+}
+.menu-knob-container .menu-knob input{
+  top: -22px;
+}

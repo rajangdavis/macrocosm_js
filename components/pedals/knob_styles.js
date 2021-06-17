@@ -52,8 +52,8 @@ module.exports = {
 			opacity: decimalVal,
 			position: "relative",
 	    zIndex: 3,
-	    margin: "0 auto",
-	    height: `${80-sliderData.placement}px`,
+	    margin: `-${sliderData.placement}px auto 0 auto`,
+	    height: `80px`,
 	    transform: `rotate(${parseInt(sliderData.rotation)}deg)`
 		}
 	},
