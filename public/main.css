@@ -21,25 +21,136 @@ body {
 
 .container {
   display: flex;
-  margin-top: 15vh;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
-.main-display{
+.view-port{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 90%;
 }
 
 .pedal-selector{
   display: flex;
   flex-direction: column;
+  width: 15%;
+}
+.main-display{
+  margin-top: 15vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
 }
 
-.pedal-selector a{
-  flex: 1;
+.expression-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
 }
+.expression{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 350px;
+  margin-top: 450px;
+}
+
+.expression > input[type=range] {
+  transform: rotate(-90deg);
+  width: 500px;
+  margin: 20.8px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+.expression > input[type=range]:focus {
+  outline: none;
+}
+.expression > input[type=range]::-webkit-slider-runnable-track {
+  background: #000000;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 2000px;
+  height: 26px;
+  cursor: pointer;
+}
+.expression > input[type=range]::-webkit-slider-thumb {
+  margin-top: -21px;
+  width: 26px;
+  height: 66px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.expression > input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #0d0d0d;
+}
+.expression > input[type=range]::-moz-range-track {
+  background: #000000;
+  border: 0.2px solid #010101;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+.expression > input[type=range]::-moz-range-thumb {
+  width: 16px;
+  height: 50px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  cursor: pointer;
+}
+.expression > input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 21.8px 0;
+  color: transparent;
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+}
+.expression > input[type=range]::-ms-fill-lower {
+  background: #000000;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+.expression > input[type=range]::-ms-fill-upper {
+  background: #000000;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+}
+.expression > input[type=range]::-ms-thumb {
+  width: 16px;
+  height: 50px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+.expression > input[type=range]:focus::-ms-fill-lower {
+  background: #000000;
+}
+.expression > input[type=range]:focus::-ms-fill-upper {
+  background: #0d0d0d;
+}
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align:auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  .expression > input[type=range] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+
 .text-center{
   text-align: center;
 }
@@ -117,207 +228,4 @@ input[type=number] {
 
 .hidden{
   display: none !important;
-}
-
-
-.preset-groups-container{
-  position: relative;
-}
-
-.controls{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-.preset-groups, .midi-controls, .pedal-config{
-  z-index: 5;
-  flex: 3;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding: 16px;
-  background: #282828;
-}
-
-.preset-groups div{
-  display: flex;
-  flex-direction: row;
-}
-
-
-.controls > details{
-  color: white;
-  margin: 0 auto ;
-  background: #282828;
-  box-shadow: 0 .1rem 1rem -.5rem rgba(0,0,0,.4);
-}
-
-.controls > details > summary{
-  padding: 50px 20px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-details {
-  margin: 1.3rem 0;
-  border-bottom: 1px solid #aaa;
-  padding: 0.5rem;
-  height: auto;
-  transition: all 0.1s ease;
-}
-
-details[open] {
-  transition: all 1s ease;
-}
-/* THE MAGIC 🧙‍♀️ */
-details[open] > summary:before {
-  transform: rotate(90deg);
-}
-
-
-details summary::-webkit-details-marker {
-  display:none;
-}
-
-
-/*
-
- remove below when ready
-
-
-*/
-
-.pedal-container{
-  margin-bottom: 20px;
-}
-
-/* CUSACK SWITCHERS */
-
-.pedal-tamer{
-  border: 2px solid #b4cfb0;
-  padding: 20px;
-  margin-bottom:10px
-}
-
-/* MERIS MIDI IO */
-
-.meris-midi-io{
-  border: 1px solid black;
-  padding: 20px;
-  margin-bottom: 10px;
-}
-
-.expression-pedal{
-  border: 3px solid grey;
-}
-
-.meris-enzo{
-  border: 1px solid #DEAE1B;
-  background: #DEAE1B;
-}
-
-.meris-hedra{
-  border: 1px solid #CFCFCF;
-  background: #CFCFCF;
-}
-
-.meris-mercury7{
-  border: 1px solid #286BB3;
-  background: #286BB3;
-  color: #FFFFFF;
-}
-
-.meris-polymoon{
-  border: 1px solid #EBE8E5;
-  background: #EBE8E5; 
-}
-
-.meris-ottobit-jr{
-  border: 1px solid #212121;
-  background: #212121;
-  color: #FFFFFF;
-}
-
-button{
-  margin: 10px auto 5px;
-  display: block;
-  font-weight: bold;
-}
-
-.interface{
-  width: 700px;
-  padding: 15px;
-  text-transform: uppercase;
-}
-
-.controls, .alt-controls, .channel-input{
-  display: flex;
-  flex-direction: row;
-}
-
-.channel-input{
-  flex: 12;
-  margin-bottom: 50px
-}
-
-.channel-input > .midi-channel-input{
-  flex: 1;
-}
-
-.channel-input > .presets-container{
-  flex: 3;
-}
-
-.left-controls, .center-controls, .right-controls,
-.alt-left-controls, .alt-center-controls, .alt-right-controls{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  align-content: space-between;
-}
-
-.alt-left-above-tap.active > button{
-  background: #FBEF00;
-}
-
-.left-controls, .alt-left-controls{
-  flex: 1;
-  order: 1;
-}
-
-.center-controls, .alt-center-controls{
-  flex: 1;
-  order: 2;
-}
-.right-controls, .alt-right-controls{
-  flex: 1;
-  order: 3; 
-}
-
-.left-controls div, .center-controls div, .right-controls div,
-.alt-left-controls div, .alt-center-controls div, .alt-right-controls div{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.left-top, .center-top, .right-top,
-.alt-left-top, .alt-center-top, .alt-right-top{
-  order: 1;
-}
-.left-middle, .center-middle, .right-middle,
-.alt-left-middle, .alt-center-middle, .alt-right-middle{
-  order: 2;
-}
-
-.right-above-bypass, .left-above-tap,
-.alt-right-above-bypass, .alt-left-above-tap{
-  order: 3;
-}
-
-.left-bottom, .right-bottom,
-.alt-left-bottom, .alt-right-bottom{
-  order: 4;
 }
