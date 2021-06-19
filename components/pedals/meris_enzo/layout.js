@@ -17,7 +17,15 @@ export default function MerisEnzoLayout(props){
 	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
   const [selectedPreset, setSelectedPreset] = useState(null);
-  let presetsButtonClass = presetsOpen ? "presets-button open" : "presets-button"
+  let noOutput = midiConfig.output == ""
+
+  let presetsButtonClass = ()=>{
+		if(noOutput){
+			return "presets-button crosshatch"
+		}else{
+			return presetsOpen ? "presets-button open" : "presets-button"
+		}
+	}
 
 	useEffect(()=>{
 	  setState(enzoState)
@@ -25,7 +33,7 @@ export default function MerisEnzoLayout(props){
 
 	return(
 		<div className="main-display">
-			<button className={presetsButtonClass} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
+			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
 			<div className="meris-pedal meris-enzo-bigbox">
 				<FirstRow
 					sliderData={props.sliderData}

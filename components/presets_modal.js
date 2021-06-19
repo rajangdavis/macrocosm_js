@@ -1,4 +1,4 @@
-import NavButton from './nav_button'
+import CloseButton from './close_button'
 import GlobalSettingsTable from './global_settings_table'
 import {useContext} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'
@@ -33,7 +33,7 @@ export default function PresetsModal(props){
   return (
 		<div className="presets-modal zoom-in">
       <div className="presets-modal-background">
-			<NavButton 
+			<CloseButton
 				headerOpen={true} 
 				setHeaderOpen={props.setPresetsOpen}
 				/>

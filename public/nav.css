@@ -24,6 +24,7 @@ nav{
 
 .nav-button{
   display: flex;
+  position: relative;
   flex-direction: column;
 }
 .nav-button:hover{
@@ -108,4 +109,15 @@ nav{
 }
 .menu-knob-container .menu-knob input{
   top: -22px;
+}
+
+.red-dot{
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  position: absolute;
+  right: -10px;
+  top: -15px;
 }

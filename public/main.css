@@ -172,7 +172,7 @@ how to remove the virtical space around the range input in IE*/
   color: white;
 }
 
-.presets-button:hover{
+.presets-button:not(:disabled)hover{
   background: black;
   color: white;
   cursor: pointer;
@@ -228,4 +228,9 @@ input[type=number] {
 
 .hidden{
   display: none !important;
+}
+
+.crosshatch {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc4JyBoZWlnaHQ9JzgnPgogIDxyZWN0IHdpZHRoPSc4JyBoZWlnaHQ9JzgnIGZpbGw9JyNmZmYnLz4KICA8cGF0aCBkPSdNMCAwTDggOFpNOCAwTDAgOFonIHN0cm9rZS13aWR0aD0nMC41JyBzdHJva2U9JyNhYWEnLz4KPC9zdmc+Cg==");
+  background-repeat: repeat;
 }
