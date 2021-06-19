@@ -1,11 +1,13 @@
 import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
-import {useState} from 'react'
+import {MidiConfigContext} from '../hooks/midi_config'
+import Expression from '../components/expression'
+import {useState, useContext} from 'react'
 
 export default function Home(props) {
-
-  // const [selectedPedal, setSelectedPedal] = useState('enzo')
-  const [expressionVal, setExpressionVal] = useState(0);
+  const [selectedPedal, setSelectedPedal] = useState('enzo')
+  const {midiConfig} = useContext(MidiConfigContext)
+  const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output}
 
   return (
     <div className="container">
@@ -21,18 +23,9 @@ export default function Home(props) {
           sliderData={props.sliderData}
           midiObject={props.midiObject}
         />
-        <div className="expression-container">
-          <div className="expression">
-            <input type="range"
-                   value={expressionVal}
-                   min="0"
-                   max="127"
-                   onChange={(e)=>{ return setExpressionVal(e.target.value)}}/>
-            <label>
-              EXPRESSION
-            </label>
-          </div>
-        </div>
+        <Expression
+          midiData={midiData}
+          midiObject={props.midiObject} />
       </div>
     </div>
   )

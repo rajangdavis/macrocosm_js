@@ -54,6 +54,7 @@ body {
   width: 15%;
 }
 .expression{
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -62,6 +63,9 @@ body {
   margin-top: 450px;
 }
 
+.expression > label{
+  font-size: 25px;
+}
 .expression > input[type=range] {
   transform: rotate(-90deg);
   width: 500px;

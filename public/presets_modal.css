@@ -102,3 +102,11 @@
   color: grey;
   text-align: center;
 }
+.settings-container td:not(.title):hover{
+  cursor: pointer;
+}
+
+.settings-container td.selected{
+  color: white;
+  transition: .2s;
+}
