@@ -13,7 +13,23 @@ export default function TapButton(props){
 		}
 	}
 
+	let tempoDotStyle = ()=> {
+		let initStyle ={
+			WebkitAnimation: `blink-animation ${props.tempo*10}ms steps(1, end) infinite`,
+			animationDelay: "3ms"
+		}
+		let {midiObject, midiData} = props;
+		if(midiObject && midiData.output && midiData.channel){
+			return initStyle
+		}else{
+			return {}
+		}
+	}
+
 	return(
-		<BigPadButton onClick={tap} className="tap-button" bigButtonlabel="Tap"/>
+		<div className="tap-button-container">
+			<BigPadButton onClick={tap} className="tap-button" bigButtonlabel="Tap"/>
+			{/*<span className="tempo-dot" style={tempoDotStyle()}></span>*/}
+		</div>
 	)
 }

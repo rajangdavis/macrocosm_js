@@ -12,7 +12,7 @@ export default function NavButton(props){
   return (
 		<div className={className} onClick={openOrClose}>
 			<div className="line first"></div>
-			{(!props.headerOpen && noOutput) && <span class="red-dot"></span>}
+			{(!props.headerOpen && noOutput) && <span className="red-dot"></span>}
 			{!props.headerOpen && <div className="line"></div>}
 			<div className="line second"></div>
 		</div>

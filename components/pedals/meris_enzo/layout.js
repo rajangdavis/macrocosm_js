@@ -58,7 +58,9 @@ export default function MerisEnzoLayout(props){
 			{
         presetsOpen &&
         <PresetsModal
-					enzoDispatch={enzoDispatch}
+					selectedPedal={props.selectedPedal}
+					dispatch={enzoDispatch}
+					sysexByte={midiConfig.enzoSysex}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
           presets={MerisEnzoPresets}

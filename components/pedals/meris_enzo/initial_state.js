@@ -63,4 +63,8 @@ module.exports = {
     value: null,
     ccValue: 14
   },
+  tempo:{
+    value:0,
+    ccValue: 15
+  }
 }

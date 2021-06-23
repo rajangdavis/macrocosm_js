@@ -13,7 +13,8 @@ export default function ThirdRow(props){
 		filterType, 
 		envelopeType,
 		synthMode,
-		bypass
+		bypass,
+		tempo
 	} = props.enzoState;
 	
 	let setFilterBandwidth = (value) =>{ 
@@ -28,7 +29,7 @@ export default function ThirdRow(props){
 					<FilterType filterType={filterType.value} enzoDispatch={props.enzoDispatch}/>
 				</div>
 				<div className="flex-row tap">
-					<TapButton midiData={props.midiData} midiObject={props.midiObject}/>
+					<TapButton tempo={tempo.value} midiData={props.midiData} midiObject={props.midiObject}/>
 				</div>
 			</div>
 			<div className="flex-row middle-controls">

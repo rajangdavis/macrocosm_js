@@ -3,10 +3,15 @@ import {createContext, useState} from 'react'
 const defaultConfig = {
 	output: '',
 	enzoChannel: 1,
+	enzoSysex: 3,
 	hedraChannel: 2,
+	hedraSysex: 4,
 	polymoonChannel: 3,
+	polymoonSysex: 2,
 	mercury7Channel: 4,
-	ottobitJrChannel: 5
+	mercury7Sysex: 1,
+	ottobitJrChannel: 5,
+	ottobitJrSysex: 0,
 }
 
 const MidiConfigContext = createContext(defaultConfig);

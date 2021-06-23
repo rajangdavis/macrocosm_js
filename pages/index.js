@@ -20,6 +20,7 @@ export default function Home(props) {
 
         </div>
         <MerisEnzoLayout
+          selectedPedal={selectedPedal}
           sliderData={props.sliderData}
           midiObject={props.midiObject}
         />

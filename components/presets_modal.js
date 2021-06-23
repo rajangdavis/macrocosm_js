@@ -7,7 +7,8 @@ import parseSysexToBinary from '../utilities/parse_sysex'
 
 export default function PresetsModal(props){
   const {midiConfig} = useContext(MidiConfigContext)
-  const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
+  const pedal = props.selectedPedal;
+  const midiData = {channel: midiConfig[`${pedal}Channel`], output: midiConfig.output, sysexByte: midiConfig[`${pedal}Sysex`]}
 
   const setPreset = (preset)=>{
     let {midiObject, setSelectedPreset} = props;
@@ -18,7 +19,7 @@ export default function PresetsModal(props){
       })[0]
       deviceOutput.sendSysex(manufacturer, data)
       setSelectedPreset(preset.label)
-      sysexKnobsUpdate({data: data, enzoDispatch: props.enzoDispatch})
+      sysexKnobsUpdate({data: data, dispatch: props.dispatch})
     }
   }
 
@@ -42,7 +43,7 @@ export default function PresetsModal(props){
         <label>GLOBAL SETTINGS</label>
         <hr/>
         <div className="global-settings">
-          <GlobalSettingsTable />
+          <GlobalSettingsTable sysexByte={props.sysexByte} midiObject={props.midiObject}/>
         </div>
         <label>PRESETS</label>
         <hr/>
