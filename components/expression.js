@@ -1,15 +1,23 @@
 import {useState} from 'react'
+import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
+import parseSysexToBinary from '../utilities/parse_sysex'
 export default function Expression(props){
+	const {
+		expressionVal, 
+		setExpressionVal, 
+		midiObject, 
+		midiData
+	} = props;
 
-	const [expressionVal, setExpressionVal] = useState(0);
-	const tap = ()=>{
-		let {midiObject, midiData} = props;
+	const express = (e)=>{
 		if(midiObject && midiData.output && midiData.channel){
-			let deviceOutput = props.midiObject.outputs.filter(x =>{
-				return x.name == props.midiData.output
+			let deviceOutput = midiObject.outputs.filter(x =>{
+				return x.name == midiData.output
 			})[0]
-			console.log(4, 127, {channels: parseInt(props.midiData.channel)})
-			deviceOutput.sendControlChange(4, 127, {channels: parseInt(props.midiData.channel)})
+			let parsedVal = parseInt(e.target.value);
+			console.log(4, parsedVal, {channels: parseInt(midiData.channel)})
+			deviceOutput.sendControlChange(4, parsedVal, {channels: parseInt(midiData.channel)})
+			setExpressionVal(parsedVal)
 		}
 	}
 
@@ -20,7 +28,7 @@ export default function Expression(props){
                value={expressionVal}
                min="0"
                max="127"
-               onChange={(e)=>{ return setExpressionVal(e.target.value)}}/>
+               onChange={(e)=>{ return express(e) }}/>
         <label>
           EXPRESSION
         </label>

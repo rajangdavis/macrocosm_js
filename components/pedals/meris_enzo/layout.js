@@ -8,6 +8,8 @@ import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
 import MerisEnzoPresets from '../factory_presets/meris_enzo'
 import PresetsModal from '../../presets_modal'
+import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
+import parseSysexToBinary from '../../../utilities/parse_sysex'
 
 export default function MerisEnzoLayout(props){
 
@@ -16,8 +18,12 @@ export default function MerisEnzoLayout(props){
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
 	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
-  const [selectedPreset, setSelectedPreset] = useState(null);
+	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
+  let {
+		expressionVal,
+		setExpressionVal
+  } = props;
 
   let presetsButtonClass = ()=>{
 		if(noOutput){
@@ -29,7 +35,38 @@ export default function MerisEnzoLayout(props){
 
 	useEffect(()=>{
 	  setState(enzoState)
-  }, [enzoState]);
+  }, [enzoState, setState]);
+
+	useEffect(()=>{
+    if(selectedPreset.label != null){
+      applyExpression()
+    }
+  }, [expressionVal, applyExpression]);
+
+  useEffect(()=>{
+    if(selectedPreset.label != null){
+      setExpressionVal(0)
+    }
+  }, [selectedPreset, setExpressionVal]);
+
+  const applyExpression = ()=>{
+    if(props.midiObject && midiData.output && midiData.channel){
+      let {manufacturer, data} = parseSysexToBinary(selectedPreset.message)
+      let deviceOutput = props.midiObject.outputs.filter(x =>{
+        return x.name == midiData.output
+      })[0]
+      let presetValWithExpression = data.map((_, i)=>{
+        if(i < 5){
+          return 0;
+        }else{
+          let x = data[i];
+          let y = data[i + 17];
+          return Math.floor(props.expressionVal*((y - x)/127)) + x
+        }
+      })
+      sysexKnobsUpdate({data: presetValWithExpression, dispatch: enzoDispatch, expression: true})
+    }
+  }
 
 	return(
 		<div className="main-display">
@@ -60,7 +97,8 @@ export default function MerisEnzoLayout(props){
         <PresetsModal
 					selectedPedal={props.selectedPedal}
 					dispatch={enzoDispatch}
-					sysexByte={midiConfig.enzoSysex}
+					expressionVal={props.expressionVal}
+					sysexByte={3}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
           presets={MerisEnzoPresets}

@@ -6,6 +6,7 @@ import {useState, useContext} from 'react'
 
 export default function Home(props) {
   const [selectedPedal, setSelectedPedal] = useState('enzo')
+  const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output}
 
@@ -17,14 +18,22 @@ export default function Home(props) {
       </Head>
       <div className="view-port">
         <div className="pedal-selector">
-
+          {/*<a>Enzo</a>
+          <a>Hedra</a>
+          <a>Polymoon</a>
+          <a>Mercury 7</a>
+          <a>Ottobit Jr.</a>*/}
         </div>
         <MerisEnzoLayout
+          expressionVal={expressionVal}
+          setExpressionVal={setExpressionVal}
           selectedPedal={selectedPedal}
           sliderData={props.sliderData}
           midiObject={props.midiObject}
         />
         <Expression
+          expressionVal={expressionVal}
+          setExpressionVal={setExpressionVal}
           midiData={midiData}
           midiObject={props.midiObject} />
       </div>

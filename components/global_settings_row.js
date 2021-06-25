@@ -3,7 +3,6 @@ import parseSysexToBinary from '../utilities/parse_sysex'
 import {useContext} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'
 
-
 export default function GlobalSettingsRow(props){
   const {midiConfig} = useContext(MidiConfigContext)
   let isSelected = (thisVal)=>{

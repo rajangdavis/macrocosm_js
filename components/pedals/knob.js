@@ -6,7 +6,8 @@ module.exports = {
 			...props, 
 			knobContainer: style.littleKnobContainer,
 			knobFunction: style.littleKnob,
-			hiddenKnob: style.hiddenLittleKnob
+			hiddenKnob: style.hiddenLittleKnob,
+			magicNumber: 149
 		}
 		return Knob(newProps)
 	},
@@ -15,7 +16,8 @@ module.exports = {
 			...props, 
 			knobContainer: style.bigKnobContainer,
 			knobFunction: style.bigKnob,
-			hiddenKnob: style.hiddenBigKnob
+			hiddenKnob: style.hiddenBigKnob,
+			magicNumber: 136.7
 		}
 		return Knob(newProps)
 	},
@@ -29,7 +31,7 @@ function Knob(props){
 	}
 
 	const angleCalc = (intValue)=>{
-		return ((298/127)*intValue)-149;
+		return ((298/127)*intValue)-props.magicNumber;
 	}
 	
 	return(
