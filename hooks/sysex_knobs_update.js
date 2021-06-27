@@ -1,6 +1,5 @@
 export default function SysexKnobsUpdate(props){
 	const {data, dispatch, expression} = props
-	console.log(expression)
 	const updatedValues = data.slice(5, 22)
 	dispatch({skipMidi: true, key: 'pitch', value: updatedValues[0]})
 	dispatch({skipMidi: true, key: 'filter', value: updatedValues[1]})

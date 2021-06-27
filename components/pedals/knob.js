@@ -3,7 +3,8 @@ import * as style from './knob_styles'
 module.exports = {
 	LittleKnob: (props) => {
 		let newProps = {
-			...props, 
+			...props,
+			dialStyle: style.littleKnobDial,
 			knobContainer: style.littleKnobContainer,
 			knobFunction: style.littleKnob,
 			hiddenKnob: style.hiddenLittleKnob,
@@ -13,11 +14,12 @@ module.exports = {
 	},
 	BigKnob: (props) => {
 		let newProps = {
-			...props, 
+			...props,
+			dialStyle: style.bigKnobDial,
 			knobContainer: style.bigKnobContainer,
 			knobFunction: style.bigKnob,
 			hiddenKnob: style.hiddenBigKnob,
-			magicNumber: 136.7
+			magicNumber: 146
 		}
 		return Knob(newProps)
 	},
@@ -37,7 +39,7 @@ function Knob(props){
 	return(
 		<div className={`knob ${props.className}`} style={props.knobContainer}>
 			<div style={props.knobFunction(angleCalc(props.val))}>
-				<div style={style.knobDial}></div>
+				<div style={props.dialStyle}></div>
 			</div>
 			<div style={style.textLabel}>
 				<span>{props.label}</span>

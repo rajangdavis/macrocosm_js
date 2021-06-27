@@ -9,7 +9,7 @@ module.exports = {
 		width: '118px',
 		height: '118px',
 	},
-	knobDial: {
+	littleKnobDial: {
 		position: 'absolute',
 		zIndex: 2,
 		borderLeft: '5px solid transparent',
@@ -19,6 +19,17 @@ module.exports = {
 		right: '45.82%',
 		top: '6.66%',
 		bottom: '74.29%',
+	},
+	bigKnobDial: {
+		position: 'absolute',
+		zIndex: 2,
+		borderLeft: '5px solid transparent',
+		borderRight: '5px solid transparent',
+		borderBottom: '14px solid white',
+		left: '42.35%',
+		right: '47.82%',
+		top: '0%',
+		bottom: '79.29%',
 	},
 	bigKnob: (rotationAngle)=>{
 		return {
