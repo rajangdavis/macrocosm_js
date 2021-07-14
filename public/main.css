@@ -5,6 +5,7 @@
 @import url("custom_slider.css");
 @import url("midi_channel_input.css");
 @import url("meris_enzo.css");
+@import url("meris_hedra.css");
 
 html,
 body {
@@ -44,7 +45,15 @@ body {
 .pedal-selector{
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 15%;
+}
+.pedal-selector a{
+  margin: 10px;
+}
+.pedal-selector a:hover{
+  cursor: pointer;
 }
 .main-display{
   margin-top: 15vh;
@@ -267,4 +276,58 @@ input[type=number] {
   position: absolute;
   right: -40px;
   bottom: 60px;
+}
+
+/* LARGE SCREENS */
+
+@media(max-width: 1400px){
+  .view-port{
+    width: 100%;
+  }
+}
+
+/* LARGE SCREENS */
+
+@media(max-width:  1215px){
+  .view-port{
+    transform: rotate(90deg);
+    width: 150vh;
+  }
+  /*.expression-container{
+    display: none;
+  }*/
+}
+
+/* DESKTOP TEMPLATE */
+@media(min-width: 992px){
+
+}
+
+/* TABLET ONLY TEMPLATE */
+@media (min-width: 768px) and (max-width: 991px){
+
+}
+
+
+/* TABLET AND MOBILE TEMPLATE */
+@media(max-width: 991px){
+  .view-port{
+    transform: rotate(90deg) scale(.75);
+    width: 175vh;
+  }
+  .expression-container{
+    width: 25%;
+  }
+}
+
+
+/* MOBILE TEMPLATE */
+@media(max-width: 767px){
+  .view-port{
+    transform: rotate(90deg) scale(.6);
+    width: 200vh;
+  }
+  .expression-container{
+    width: 40%;
+  }
 }

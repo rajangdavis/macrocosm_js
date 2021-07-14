@@ -7,7 +7,7 @@ export default function SynthMode(props){
 	}
 
 	const setSynthMode = (value)=>{
-		props.enzoDispatch({key: 29, value: value})
+		props.enzoDispatch({key: 'synthMode', value: value})
 	}
 	
 	return(

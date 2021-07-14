@@ -12,7 +12,7 @@ export default function EnvelopeType(props){
 	}
 
 	const setEnvelopeType = (value)=>{
-		props.enzoDispatch({key: 9, value: value})
+		props.enzoDispatch({key: 'envelopeType', value: value})
 	}
 
 	return(

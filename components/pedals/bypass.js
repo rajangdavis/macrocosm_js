@@ -7,7 +7,7 @@ export default function Bypass(props){
 	}
 
 	const setBypass = (value)=>{
-		props.enzoDispatch({key: 'bypass', value: value})
+		props.dispatch({key: 14, value: value})
 	}
 	return(
 		<div className="text-center bypass">

@@ -4,7 +4,7 @@ module.exports = {
 			return
 		let {midiObject, midiData} = props;
 		if(midiObject && midiData.output && midiData.channel){
-			let ccValue = state[action.key].ccValue;
+			let ccValue = action.key;
 			let deviceOutput = midiObject.outputs.filter(x =>{
 				return x.name == midiData.output
 			})[0]

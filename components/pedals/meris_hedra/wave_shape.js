@@ -7,7 +7,7 @@ export default function WaveShape(props){
 	}
 
 	let setWaveShape = (value) =>{ 
-		props.enzoDispatch({key: 30, value: value})
+		props.enzoDispatch({key: 'waveShape', value: value})
 	}
 	return(
 		<div className="text-center wave-shape">

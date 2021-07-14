@@ -1,10 +1,10 @@
 @media (min-width: 1400px){
-  .meris-enzo-bigbox{
+  .meris-hedra-bigbox{
     width: 916px;
   }
 }
 
-.meris-enzo-bigbox{
+.meris-hedra-bigbox{
   margin-bottom: 48px;
   height: 715px;
   padding: 20px;
@@ -16,11 +16,12 @@
   border: 3px solid;
 }
 
-.meris-enzo-bigbox:after{
-	content: url(./meris_enzo/logo.svg);
+.meris-hedra-bigbox:after{
+	content: url(./meris_hedra/logo.svg);
 	position: absolute;
 	bottom: 30px;
-	left: calc(50% - (148px/2));
+  transform: scale(.95);
+	left: calc(50% - (247px/2) + 30px);
 }
 
 .flex-row{
@@ -52,7 +53,7 @@
 .mix:before,
 .portamento:before,
 .delay-level:before{
-	content: url(./meris_enzo/generic_big_knob.svg);
+	content: url(./meris_hedra/generic_big_knob.svg);
 	position: absolute;
 	top:-12px;
 	left: 1px;
@@ -68,7 +69,7 @@
 .modulation:before,
 .delay-feedback:before,
 .filter-bandwidth:before{
-	content: url(./meris_enzo/generic_little_knob.svg);
+	content: url(./meris_hedra/generic_little_knob.svg);
 	position: absolute;
 	top: -10px;
   left: 19px;
@@ -78,18 +79,18 @@
   margin-top: 3px !important;
 }
 
-.filter-env:before{
-	content: url(./meris_enzo/filter_env.svg);
+/*.filter-env:before{
+	content: url(./meris_hedra/filter_env.svg);
 	position: absolute;
 	top: -15px;
   left: 2px;
 }
-
-.pitch:before{
-	content: url(./meris_enzo/pitch.svg);
+*/
+.key:before{
+	content: url(./meris_hedra/key.svg);
 	position: absolute;
 	top: -22px;
-  left: -8px;
+  left: -3px;
 }
 
 .middle-controls{
@@ -122,7 +123,7 @@
 .wave-shape{
   flex: 1;
 }
-.filter-type, .envelope-type, .synth-mode{
+.scale-type, .envelope-type, .synth-mode{
   flex: 2;
 }
 
@@ -130,19 +131,15 @@
   margin-right: 20px;
 }
 
-.filter-type{
-  margin-left: -15px;
-}
-
 .wave-shape > div {
   margin-bottom: 15px;
 }
 
-.filter-type > div, .envelope-type > div, .synth-mode  > div > div {
+.scale-type > div, .envelope-type > div, .synth-mode  > div > div {
   margin-bottom: 15px;
 }
 
-.filter-type > div > div, .synth-mode  > div > div{
+.scale-type > div > div, .synth-mode  > div > div{
   margin-left: 15px;
 } 
 

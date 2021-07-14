@@ -5,7 +5,7 @@ export default function MerisState(initialState, props = {}){
 
   let reducer = (state, action) =>{
     HandleMidiOutput(state, action, props);
-    state[action.key].value = action.value
+    state[action.key] = action.value
   }
 
 	return useImmerReducer(reducer, initialState)
