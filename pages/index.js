@@ -3,19 +3,24 @@ import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import {MidiConfigContext} from '../hooks/midi_config'
 import Expression from '../components/expression'
-import {useState, useContext} from 'react'
+import {useState, useContext, useEffect} from 'react'
 
 export default function Home(props) {
-  const [selectedPedal, setSelectedPedal] = useState('enzo')
+  const [selectedPedal, setSelectedPedal] = useState('hedra')
   const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output}
+
+  useEffect(()=>{
+    setExpressionVal(0);
+  }, [selectedPedal]);
 
   return (
     <div className="container">
       <Head>
         <title>macrocosm</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
       </Head>
       <div className="view-port">
         <div className="pedal-selector">

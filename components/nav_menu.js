@@ -14,6 +14,7 @@ export default function NavMenu(props){
 
   const updateMidiOutput = (option)=>{
 		updateConfig('output', option)
+		props.setIsConnected(true)
   }
 
 	const outputOptions = props.midiObject != undefined ? props.midiObject.outputs.map(x=> x.name) : []

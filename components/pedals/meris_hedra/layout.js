@@ -64,7 +64,7 @@ export default function MerisHedraLayout(props){
           return Math.floor(props.expressionVal*((y - x)/128)) + x
         }
       })
-      sysexKnobsUpdate({data: presetValWithExpression, dispatch: hedraDispatch, expression: true})
+      sysexKnobsUpdate({data: presetValWithExpression.slice(5,22), dispatch: hedraDispatch, expression: true})
     }
   }
 
@@ -73,25 +73,25 @@ export default function MerisHedraLayout(props){
 			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
 			<div className="meris-pedal meris-hedra-bigbox">
 				<FirstRow
+					midiData={midiData}
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        hedraState={hedraState}
 	        hedraDispatch={hedraDispatch}
 	       />
-	      <SecondRow
+	      {/*<SecondRow
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        hedraState={hedraState}
 	        hedraDispatch={hedraDispatch}
 	       />
-				{/*
-				{<ThirdRow
+				<ThirdRow
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        midiData={midiData}
 	        hedraState={hedraState}
 	        hedraDispatch={hedraDispatch}
-	       />}*/}
+	       />*/}
 			</div>
 			{
         presetsOpen &&

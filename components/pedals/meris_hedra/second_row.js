@@ -1,12 +1,10 @@
 import {LittleKnob} from '../knob'
-import PitchControlSmoothing from './pitch_control_smoothing'
 
 export default function SecondRow(props){
 	let {
-		30:pitchControlSmoothing,
-		25:pitch1,
-		26:pitch2,
-		27:pitch3,
+		19:pitch1,
+		20:pitch2,
+		21:pitch3,
 		23:pitchCorrectionAndGlide
 	} = props.hedraState;
 	
@@ -26,9 +24,6 @@ export default function SecondRow(props){
 	
 	return(
 		<div className="flex-row">
-			<PitchControlSmoothing 
-				pitchControlSmoothing={pitchControlSmoothing} 
-				dispatch={props.hedraDispatch}/>
 			<LittleKnob 
 				className="middle-row pitch1"
 				label="Pitch 1"
@@ -49,7 +44,7 @@ export default function SecondRow(props){
 				sliderData={props.sliderData}/>
 			<LittleKnob
 				className="middle-row delay-feedback"
-				label="Pitch Correction + Glide"
+				label="Pitch Correction and Glide"
 				setVal={setPitchCorrectionAndGlide}
 				val={pitchCorrectionAndGlide}
 				sliderData={props.sliderData}/>

@@ -1,10 +1,5 @@
-@media (min-width: 1400px){
-  .meris-enzo-bigbox{
-    width: 916px;
-  }
-}
-
 .meris-enzo-bigbox{
+  width: 916px;
   margin-bottom: 48px;
   height: 715px;
   padding: 20px;

@@ -1,49 +1,58 @@
 import {LittleKnob} from '../knob'
-import WaveShape from './wave_shape'
-import TapButton from '../tap_button'
-import EnvelopeType from './envelope_type'
-import SynthMode from './synth_mode'
+import DelayMode from './delay_mode'
 import Bypass from '../bypass'
 
 export default function ThirdRow(props){
 	let {
-		filterBandwidth, 
-		waveShape, 
-		filterType, 
-		envelopeType,
-		synthMode,
-		bypass,
-		tempo
-	} = props.enzoState;
+		14:bypass,
+		25:timeDivision1,
+		26:timeDivision2,
+		27:timeDivision3,
+		29:delayMode,
+	} = props.hedraState;
 	
-	let setFilterBandwidth = (value) =>{ 
-		props.enzoDispatch({key: 'filterBandwidth', value: value})
+	let setTimeDivision1 = (value) =>{ 
+		props.hedraDispatch({key: 'timeDivision1', value: value})
+	}
+
+	let setTimeDivision2 = (value) =>{ 
+		props.hedraDispatch({key: 'timeDivision2', value: value})
+	}
+
+	let setTimeDivision3 = (value) =>{ 
+		props.hedraDispatch({key: 'timeDivision3', value: value})
 	}
 	
 	return(
 		<div className="flex-row">
-			<div className="left-side-controls">
-				<div className="flex-row first-row">
-					<WaveShape waveShape={waveShape.value} enzoDispatch={props.enzoDispatch}/>
-				</div>
-				<div className="flex-row tap">
-					<TapButton tempo={tempo.value} midiData={props.midiData} midiObject={props.midiObject}/>
-				</div>
-			</div>
 			<div className="flex-row middle-controls">
 				<LittleKnob
-					className="filter-bandwidth"
-					label="Filter Bandwidth" 
-					setVal={setFilterBandwidth} 
-					val={filterBandwidth.value} 
+					className=""
+					label="Time Division 1" 
+					setVal={setTimeDivision1} 
+					val={timeDivision1} 
 					sliderData={props.sliderData}/>
+					<LittleKnob
+						className=""
+						label="Time Division 2" 
+						setVal={setTimeDivision2} 
+						val={timeDivision2} 
+						sliderData={props.sliderData}/>
+					<LittleKnob
+						className=""
+						label="Time Division 3" 
+						setVal={setTimeDivision3} 
+						val={timeDivision3} 
+						sliderData={props.sliderData}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">
-					<EnvelopeType envelopeType={envelopeType.value} enzoDispatch={props.enzoDispatch}/>
-					<SynthMode synthMode={synthMode.value} enzoDispatch={props.enzoDispatch}/>
+					<DelayMode
+						hedraDispatch={props.hedraDispatch}
+						delayMode={delayMode}
+					/>
 				</div>
-				<Bypass bypass={bypass.value} enzoDispatch={props.enzoDispatch}/>
+				<Bypass bypass={bypass} dispatch={props.hedraDispatch}/>
 			</div>
 		</div>
 	)

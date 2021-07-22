@@ -15,7 +15,6 @@ export default function Expression(props){
 				return x.name == midiData.output
 			})[0]
 			let parsedVal = parseInt(e.target.value);
-			console.log(4, parsedVal, {channels: parseInt(midiData.channel)})
 			deviceOutput.sendControlChange(4, parsedVal, {channels: parseInt(midiData.channel)})
 			setExpressionVal(parsedVal)
 		}

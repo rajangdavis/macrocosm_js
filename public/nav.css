@@ -21,7 +21,6 @@ nav{
   align-items: center;
 }
 
-
 .nav-button{
   display: flex;
   position: relative;
@@ -29,6 +28,11 @@ nav{
 }
 .nav-button:hover{
   cursor: pointer;
+}
+
+a.fullscreen{
+  position: absolute;
+  right: 15px;
 }
 
 .nav-button > .line{
@@ -120,4 +124,12 @@ nav{
   position: absolute;
   right: -10px;
   top: -15px;
+}
+
+:fullscreen .fullscreen.full, .fullscreen.normal{
+  display: none;
+}
+
+.fullscreen.full, :fullscreen .fullscreen.normal{
+  display: block;
 }

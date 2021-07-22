@@ -1,8 +1,22 @@
 import {LittleKnob, BigKnob} from '../knob'
+import TapButton from '../tap_button'
+import HalfspeedEnable from './halfspeed_enable'
+import VolumeSwellEnable from './volume_swell_enable'
+import PitchControlSmoothing from './pitch_control_smoothing'
 import ScaleType from './scale_type'
 export default function FirstRow(props){
 	
-	let {22:scaleType, 16:key, 17:microTune, 18:mix, 19:delayFeedback} = props.hedraState;
+	let {
+		15:tempo,
+		30:halfspeedEnable,
+		31:volumeSwellEnable,
+		22:scaleType,
+		16:key,
+		17:microTune,
+		18:mix,
+		19:delayFeedback,
+		30:pitchControlSmoothing
+	} = props.hedraState;
 	
 	let setScaleType = (value) =>{ 
 		props.hedraDispatch({key: 22, value: value})
@@ -21,8 +35,20 @@ export default function FirstRow(props){
 	}
 
 	return(
-		<div className="flex-row">
-			<ScaleType scaleType={scaleType} hedraDispatch={props.hedraDispatch}/>
+		<div className="flex-row first-row">
+			<div >
+				<ScaleType scaleType={scaleType} hedraDispatch={props.hedraDispatch}/>
+				<PitchControlSmoothing
+					pitchControlSmoothing={pitchControlSmoothing}
+					dispatch={props.hedraDispatch}/>
+				<div className="flex-row first-row">
+					<HalfspeedEnable halfspeedEnable={halfspeedEnable} dispatch={props.hedraDispatch}/>
+					<VolumeSwellEnable volumeSwellEnable={volumeSwellEnable} dispatch={props.hedraDispatch}/>
+				</div>
+				<div className="flex-row tap">
+					<TapButton tempo={tempo} midiData={props.midiData} midiObject={props.midiObject}/>
+				</div>
+			</div>
 			<BigKnob
 				className="top-row key"
 				label="Key"
@@ -31,7 +57,7 @@ export default function FirstRow(props){
 				sliderData={props.sliderData}
 				/>
 			<LittleKnob
-				className="top-row microTune"
+				className="top-row micro-tune"
 				label="Micro Tune"
 				setVal={setmicroTune}
 				val={microTune}

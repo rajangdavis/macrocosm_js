@@ -64,7 +64,7 @@ export default function MerisEnzoLayout(props){
           return Math.floor(props.expressionVal*((y - x)/128)) + x
         }
       })
-      sysexKnobsUpdate({data: presetValWithExpression, dispatch: enzoDispatch, expression: true})
+      sysexKnobsUpdate({data: presetValWithExpression.slice(5,22), dispatch: enzoDispatch, expression: true})
     }
   }
 

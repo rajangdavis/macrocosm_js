@@ -14,40 +14,40 @@ export default function ScaleType(props){
 		props.hedraDispatch({key: 22, value: value})
 	}
 	return (
-		<div className="text-center filter-type">
+		<div className="text-center scale-type">
 			<div className="flex-row">
 				<SmallPadButton 
-					label="LP"
-					className={isSelected(0, 4)}
+					label="&#9651;"
+					className={isSelected(0, 19)}
 					onClick={()=> setScaleType(0)}/>
 				<SmallPadButton 
-					label="BP"
-					className={isSelected(5, 32)}
-					onClick={()=> setScaleType(32)}/>
+					label="—"
+					className={isSelected(20, 39)}
+					onClick={()=> setScaleType(39)}/>
 				<SmallPadButton 
-					label="HP"
-					className={isSelected(33, 59)}
+					label="mel—"
+					className={isSelected(40, 59)}
 					onClick={()=> setScaleType(59)}/>
 			</div>
-			<div className="flex-row text-reset">
+			<div className="flex-row">
 				<SmallPadButton 
-					label="v. LP"
-					className={isSelected(60, 87)}
-					onClick={()=> setScaleType(84)}/>
+					label="har—"
+					className={isSelected(60, 79)}
+					onClick={()=> setScaleType(79)}/>
 				<SmallPadButton 
-					label="v. BP"
-					className={isSelected(88, 115)}
-					onClick={()=> setScaleType(115)}/>
+					label="dblhar—"
+					className={isSelected(80, 99)}
+					onClick={()=> setScaleType(99)}/>
 				<SmallPadButton 
-					label="v. HP"
-					className={isSelected(116, 127)}
-					onClick={()=> setScaleType(127)}/>
+					label="&#9651;#11P"
+					className={isSelected(100, 120)}
+					onClick={()=> setScaleType(120)}/>
 			</div>
 			<div className="flex-row text-reset">
 				<SmallPadButton 
-					label="v. BP"
-					className={isSelected(88, 115)}
-					onClick={()=> setScaleType(115)}/>
+					label="—P"
+					className={isSelected(121, 127)}
+					onClick={()=> setScaleType(127)}/>
 			</div>
 			<label>Scale Type</label>
 		</div>

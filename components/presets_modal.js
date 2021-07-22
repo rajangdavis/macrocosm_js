@@ -30,7 +30,7 @@ export default function PresetsModal(props){
         return x.name == midiData.output
       })[0]
       deviceOutput.sendSysex(manufacturer, data)
-      sysexKnobsUpdate({data: data, dispatch: dispatch, expression: false})
+      sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
       setSelectedPreset(preset)
     }
   }

@@ -11,6 +11,8 @@ function MyApp({ Component, pageProps }) {
     outputs: []
   });
 
+  const [isConnected, setIsConnected] = useState(false);
+
 	useEffect(()=>{
 	  WebMidi.enable({sysex: true})
 	    .then((access)=>{
@@ -18,15 +20,28 @@ function MyApp({ Component, pageProps }) {
 	    })
 	}, []);
 
+	useEffect(()=>{
+		document.body.className = addStripesIfConnected();
+	}, [isConnected]);
+
 	const [sliderData, setSliderData] = useLocalStorage('slider_data', {
     opacity: 0,
     rotation: 0,
     placement: 0
   })
 
-  return (<div className="main">
+  const addStripesIfConnected = () =>{
+		if(isConnected){
+			return "main diagonal-stripe-1"
+		}else{
+			return "main"
+		}
+  }
+
+  return (<div>
 			<MidiConfigProvider>
 				<HeaderNav
+					setIsConnected={setIsConnected}
 					midiObject={midiObject}
 					setMidiObject={setMidiObject}
 					sliderData={sliderData}

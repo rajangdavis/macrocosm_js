@@ -1,10 +1,5 @@
-@media (min-width: 1400px){
-  .meris-hedra-bigbox{
-    width: 916px;
-  }
-}
-
 .meris-hedra-bigbox{
+  width: 916px;
   margin-bottom: 48px;
   height: 715px;
   padding: 20px;
@@ -24,22 +19,26 @@
 	left: calc(50% - (247px/2) + 30px);
 }
 
+.first-row{
+  align-items: baseline;
+}
+
 .flex-row{
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.flex-row > .top-row{
-  margin: 45px 14px 24px;
+.meris-hedra-bigbox > .flex-row > .top-row{
+
 }
 
-.flex-row > .middle-row{
-  margin: 16px -1px 16px;
+.meris-hedra-bigbox > .flex-row > .middle-row{
+
 }
 
-.flex-row > .bottom-row{
-  margin: 16px 14px 16px;
+.meris-hedra-bigbox > .flex-row > .bottom-row{
+
 }
 
 .flex-row:last-of-type{
@@ -74,18 +73,16 @@
 	top: -10px;
   left: 19px;
 }
-
-.filter-env{
-  margin-top: 3px !important;
+.delay-mode{
+  display: flex;
+  flex-direction: row;
 }
-
-/*.filter-env:before{
-	content: url(./meris_hedra/filter_env.svg);
-	position: absolute;
-	top: -15px;
-  left: 2px;
+.delay-mode > div{
+  flex: 2;
 }
-*/
+.delay-mode > label{
+  flex: 2;
+}
 .key:before{
 	content: url(./meris_hedra/key.svg);
 	position: absolute;
@@ -120,26 +117,15 @@
   justify-content: center;
 }
 
-.wave-shape{
-  flex: 1;
-}
-.scale-type, .envelope-type, .synth-mode{
-  flex: 2;
+.scale-type{
+  margin-left: -30px;
 }
 
-.synth-mode{
-  margin-right: 20px;
-}
-
-.wave-shape > div {
+.scale-type > div, .envelope-type > div{
   margin-bottom: 15px;
 }
 
-.scale-type > div, .envelope-type > div, .synth-mode  > div > div {
-  margin-bottom: 15px;
-}
-
-.scale-type > div > div, .synth-mode  > div > div{
+.scale-type > div > div{
   margin-left: 15px;
 } 
 
