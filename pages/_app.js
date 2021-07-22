@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }) {
 
 	useEffect(()=>{
 		document.body.className = addStripesIfConnected();
-	}, [isConnected]);
+	}, [isConnected, addStripesIfConnected]);
 
 	const [sliderData, setSliderData] = useLocalStorage('slider_data', {
     opacity: 0,
