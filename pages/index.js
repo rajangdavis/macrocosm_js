@@ -19,7 +19,7 @@ export default function Home(props) {
     <div className="container">
       <Head>
         <title>macrocosm</title>
-        <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+        <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
       </Head>
       <div className="view-port">
