@@ -1,6 +1,4 @@
 import FirstRow from './first_row'
-import SecondRow from './second_row'
-import ThirdRow from './third_row'
 import {useState, useEffect, useContext} from 'react'
 import hedraInitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
@@ -79,19 +77,6 @@ export default function MerisHedraLayout(props){
 	        hedraState={hedraState}
 	        hedraDispatch={hedraDispatch}
 	       />
-	      {/*<SecondRow
-					sliderData={props.sliderData}
-	        midiObject={props.midiObject}
-	        hedraState={hedraState}
-	        hedraDispatch={hedraDispatch}
-	       />
-				<ThirdRow
-					sliderData={props.sliderData}
-	        midiObject={props.midiObject}
-	        midiData={midiData}
-	        hedraState={hedraState}
-	        hedraDispatch={hedraDispatch}
-	       />*/}
 			</div>
 			{
         presetsOpen &&

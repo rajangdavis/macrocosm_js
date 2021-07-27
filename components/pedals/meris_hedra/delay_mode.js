@@ -17,7 +17,7 @@ export default function DelayMode(props){
 
 	return(
 		<div className="text-center delay-mode">
-			<div>
+			<div className="flex-row">
 				<WidePadButton 
 					label="series + pitch fdbk" 
 					className={isSelected(0, 31)}
@@ -27,7 +27,7 @@ export default function DelayMode(props){
 					className={isSelected(32, 63)}
 					onClick={()=> setDelayMode(63)}/>
 			</div>
-			<div>
+			<div className="flex-row">
 				<WidePadButton 
 					label="dual + cross fdbk" 
 					className={isSelected(64, 95)}

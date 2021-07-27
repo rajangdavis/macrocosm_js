@@ -12,34 +12,34 @@ export default function ThirdRow(props){
 	} = props.hedraState;
 	
 	let setTimeDivision1 = (value) =>{ 
-		props.hedraDispatch({key: 'timeDivision1', value: value})
+		props.hedraDispatch({key: 25, value: value})
 	}
 
 	let setTimeDivision2 = (value) =>{ 
-		props.hedraDispatch({key: 'timeDivision2', value: value})
+		props.hedraDispatch({key: 26, value: value})
 	}
 
 	let setTimeDivision3 = (value) =>{ 
-		props.hedraDispatch({key: 'timeDivision3', value: value})
+		props.hedraDispatch({key: 27, value: value})
 	}
 	
 	return(
 		<div className="flex-row">
 			<div className="flex-row middle-controls">
 				<LittleKnob
-					className=""
+					className="td1"
 					label="Time Division 1" 
 					setVal={setTimeDivision1} 
 					val={timeDivision1} 
 					sliderData={props.sliderData}/>
 					<LittleKnob
-						className=""
+						className="td2"
 						label="Time Division 2" 
 						setVal={setTimeDivision2} 
 						val={timeDivision2} 
 						sliderData={props.sliderData}/>
 					<LittleKnob
-						className=""
+						className="td3"
 						label="Time Division 3" 
 						setVal={setTimeDivision3} 
 						val={timeDivision3} 

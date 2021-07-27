@@ -9,13 +9,13 @@ export default function SecondRow(props){
 	} = props.hedraState;
 	
 	let setPitch1 = (value) =>{ 
-		props.hedraDispatch({key: 25, value: value})
+		props.hedraDispatch({key: 19, value: value})
 	}
 	let setPitch2 = (value) =>{ 
-		props.hedraDispatch({key: 26, value: value})
+		props.hedraDispatch({key: 20, value: value})
 	}
 	let setPitch3 = (value) =>{ 
-		props.hedraDispatch({key: 27, value: value})
+		props.hedraDispatch({key: 21, value: value})
 	}
 	let setPitchCorrectionAndGlide = (value) =>{ 
 		props.hedraDispatch({key: 23, value: value})
@@ -25,25 +25,25 @@ export default function SecondRow(props){
 	return(
 		<div className="flex-row">
 			<LittleKnob 
-				className="middle-row pitch1"
+				className="middle-row pitch"
 				label="Pitch 1"
 				setVal={setPitch1}
 				val={pitch1}
 				sliderData={props.sliderData}/>
 			<LittleKnob
-				className="middle-row pitch2"
+				className="middle-row pitch"
 				label="Pitch 2"
 				setVal={setPitch2}
 				val={pitch2}
 				sliderData={props.sliderData}/>
 			<LittleKnob
-				className="middle-row pitch3"
+				className="middle-row pitch"
 				label="Pitch 3"
 				setVal={setPitch3}
 				val={pitch3}
 				sliderData={props.sliderData}/>
 			<LittleKnob
-				className="middle-row delay-feedback"
+				className="middle-row pitch-correction-and-glide"
 				label="Pitch Correction and Glide"
 				setVal={setPitchCorrectionAndGlide}
 				val={pitchCorrectionAndGlide}

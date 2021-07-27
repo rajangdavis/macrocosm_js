@@ -19,28 +19,6 @@
 	left: calc(50% - (247px/2) + 30px);
 }
 
-.first-row{
-  align-items: baseline;
-}
-
-.flex-row{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-}
-
-.meris-hedra-bigbox > .flex-row > .top-row{
-
-}
-
-.meris-hedra-bigbox > .flex-row > .middle-row{
-
-}
-
-.meris-hedra-bigbox > .flex-row > .bottom-row{
-
-}
-
 .flex-row:last-of-type{
   flex:1;
 }
@@ -66,16 +44,26 @@
 .ring-modulation:before,
 .sustain:before,
 .modulation:before,
-.delay-feedback:before,
+.pitch-correction-and-glide:before,
+.td1:before,
+.td2:before,
+.td3:before,
 .filter-bandwidth:before{
 	content: url(./meris_hedra/generic_little_knob.svg);
 	position: absolute;
 	top: -10px;
   left: 19px;
 }
+
+.pitch:before{
+  content: url(./meris_hedra/pitch.svg);
+  position: absolute;
+  left: 1px;
+}
+
 .delay-mode{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .delay-mode > div{
   flex: 2;
