@@ -9,6 +9,8 @@ export default function Expression(props){
 		midiData
 	} = props;
 
+	const [expressCount, setExpressCount] = useState(0);
+
 	const createListener = (midiData, midiObject)=>{
 		if(midiData.inputForExpression != ""){
 			let deviceInput = midiObject.inputs.filter(x =>{
@@ -17,16 +19,18 @@ export default function Expression(props){
 			let someFunction = (e) => {
 				if(e.statusByte && e.statusByte == 176){
 					let val = e.data[2]
-				  setExpressionVal(val)
+					e.target = {
+						value: val
+					}
+				  express(e)
 				}
 			};
-
 			deviceInput.addListener('midimessage', someFunction);
 		}
 	}
 	useEffect(()=>{
 		createListener(midiData, midiObject)
-	},[midiData, midiObject])
+	},[midiData.inputForExpression, midiObject])
 
 	const express = (e)=>{
 		if(midiObject && midiData.output && midiData.channel){
