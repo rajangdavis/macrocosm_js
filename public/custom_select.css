@@ -1,5 +1,6 @@
 .custom-select{
 	position: relative;
+	margin-bottom: 25px !important;
 }
 
 .custom-select > label{
@@ -67,6 +68,7 @@
 	font-size: 25px;
 	opacity: 1;
 	width: 100%;
+	z-index: 1;
 }
 
 .select-options.open:hover, .select-selected:hover{

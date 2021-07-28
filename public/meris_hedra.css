@@ -55,10 +55,11 @@
   left: 19px;
 }
 
-.pitch:before{
+.pitch1:before, .pitch2:before, .pitch3:before{
   content: url(./meris_hedra/pitch.svg);
   position: absolute;
   left: 1px;
+  top: -20px;
 }
 
 .delay-mode{
