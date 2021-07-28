@@ -43,12 +43,6 @@ export default function MerisEnzoLayout(props){
     }
   }, [expressionVal, applyExpression]);
 
-  useEffect(()=>{
-    if(selectedPreset.label != null){
-      setExpressionVal(0)
-    }
-  }, [selectedPreset, setExpressionVal]);
-
   const applyExpression = ()=>{
     if(props.midiObject && midiData.output && midiData.channel){
       let {manufacturer, data} = parseSysexToBinary(selectedPreset.message)
