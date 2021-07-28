@@ -9,7 +9,7 @@ export default function Home(props) {
   const [selectedPedal, setSelectedPedal] = useState('hedra')
   const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
-  const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output}
+  const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
 
   useEffect(()=>{
     setExpressionVal(0);

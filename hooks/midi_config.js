@@ -2,6 +2,7 @@ import {createContext, useState} from 'react'
 
 const defaultConfig = {
 	output: '',
+	inputForExpression: '',
 	enzoChannel: 1,
 	hedraChannel: 2,
 	polymoonChannel: 3,
@@ -15,7 +16,7 @@ const MidiConfigProvider = ({children, initialConfig= defaultConfig })=>{
 	
 	const [midiConfig, setMidiConfig] = useState(initialConfig)
 	const updateConfig = (key, value) => {
-		let copiedConfig = {...defaultConfig}
+		let copiedConfig = {...midiConfig}
 		copiedConfig[key] = value
 		setMidiConfig(copiedConfig)
 	}

@@ -17,7 +17,13 @@ export default function NavMenu(props){
 		props.setIsConnected(true)
   }
 
+  const updateMidiInputForExpression = (option)=>{
+		updateConfig('inputForExpression', option)
+		// props.setIsConnected(true)
+  }
+
 	const outputOptions = props.midiObject != undefined ? props.midiObject.outputs.map(x=> x.name) : []
+	const inputOptions = props.midiObject != undefined ? props.midiObject.inputs.map(x=> x.name) : []
 	let className = props.headerOpen ? "nav-menu open" : "nav-menu closed"
   
   return (<div className={className}>
@@ -25,6 +31,13 @@ export default function NavMenu(props){
 			<label>MIDI OPTIONS</label>
 			<hr/>
 			<div className="midi-options">
+				<CustomSelect
+					onChange={updateMidiInputForExpression}
+					defaultOption={midiConfig.inputForExpression}
+					closeIf={props.headerOpen}
+					inputLabel={"MIDI INPUT FOR EXPRESSION"}
+					options={inputOptions}
+				/>
 				<CustomSelect
 					onChange={updateMidiOutput}
 					defaultOption={midiConfig.output}

@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../utilities/parse_sysex'
 export default function Expression(props){
@@ -8,6 +8,25 @@ export default function Expression(props){
 		midiObject, 
 		midiData
 	} = props;
+
+	const createListener = (midiData, midiObject)=>{
+		if(midiData.inputForExpression != ""){
+			let deviceInput = midiObject.inputs.filter(x =>{
+				return x.name == midiData.inputForExpression
+			})[0]
+			let someFunction = (e) => {
+				if(e.statusByte && e.statusByte == 176){
+					let val = e.data[2]
+				  setExpressionVal(val)
+				}
+			};
+
+			deviceInput.addListener('midimessage', someFunction);
+		}
+	}
+	useEffect(()=>{
+		createListener(midiData, midiObject)
+	},[midiData, midiObject])
 
 	const express = (e)=>{
 		if(midiObject && midiData.output && midiData.channel){
