@@ -10,7 +10,7 @@ export default function PitchControlSmoothing(props){
 		props.dispatch({key: 30, value: value})
 	}
 	return(
-		<div className="text-center">
+		<div className="text-center pitch-control-smoothing">
 			<div className="flex-row">
 				<SmallPadButton 
 					label="On"

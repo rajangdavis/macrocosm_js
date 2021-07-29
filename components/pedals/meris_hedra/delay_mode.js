@@ -1,4 +1,4 @@
-import {WidePadButton} from '../pad_button'
+import {SmallPadButton} from '../pad_button'
 import {useState} from 'react'
 
 export default function DelayMode(props){
@@ -18,21 +18,21 @@ export default function DelayMode(props){
 	return(
 		<div className="text-center delay-mode">
 			<div className="flex-row">
-				<WidePadButton 
-					label="series + pitch fdbk" 
+				<SmallPadButton
+					label="series+ pfdbk"
 					className={isSelected(0, 31)}
 					onClick={()=> setDelayMode(0)}/>
-				<WidePadButton 
+				<SmallPadButton
 					label="series"
 					className={isSelected(32, 63)}
 					onClick={()=> setDelayMode(63)}/>
 			</div>
 			<div className="flex-row">
-				<WidePadButton 
-					label="dual + cross fdbk" 
+				<SmallPadButton
+					label="dual+ cfdbk"
 					className={isSelected(64, 95)}
 					onClick={()=> setDelayMode(95)}/>
-				<WidePadButton 
+				<SmallPadButton
 					label="dual"
 					className={isSelected(96, 127)}
 					onClick={()=> setDelayMode(127)}/>

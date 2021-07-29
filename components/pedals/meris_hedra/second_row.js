@@ -23,7 +23,7 @@ export default function SecondRow(props){
 
 	
 	return(
-		<div className="flex-row">
+		<div className="flex-row second-row">
 			<LittleKnob 
 				className="middle-row pitch1"
 				label="Pitch 1"
@@ -44,7 +44,7 @@ export default function SecondRow(props){
 				sliderData={props.sliderData}/>
 			<LittleKnob
 				className="middle-row pitch-correction-and-glide"
-				label="Pitch Correction and Glide"
+				label="Pitch Corr./Glide"
 				setVal={setPitchCorrectionAndGlide}
 				val={pitchCorrectionAndGlide}
 				sliderData={props.sliderData}/>

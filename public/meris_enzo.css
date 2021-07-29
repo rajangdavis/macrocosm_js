@@ -97,19 +97,19 @@
   flex-direction: column;
 }
 
-.left-side-controls > .first-row{
+.meris-enzo-bigbox .left-side-controls > .first-row{
   flex: 1;
   justify-content: flex-end;
   margin-top: 15px;
 }
-.right-side-controls > .first-row{
+.meris-enzo-bigbox .right-side-controls > .first-row{
   flex: 1;
   justify-content: flex-start;
   margin-top: 15px;
   margin-left:-15px;
 }
 
-.left-side-controls > .tap{
+.meris-enzo-bigbox .left-side-controls > .tap{
   flex: 1;
   justify-content: center;
 }

@@ -10,7 +10,7 @@ export default function VolumeSwellEnable(props){
 		props.dispatch({key: 31, value: value})
 	}
 	return(
-		<div className="text-center">
+		<div className="text-center volume-swell-enable">
 			<div className="flex-row">
 				<SmallPadButton 
 					label="On"

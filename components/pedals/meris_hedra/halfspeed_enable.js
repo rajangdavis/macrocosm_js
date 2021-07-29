@@ -10,7 +10,7 @@ export default function HalfspeedEnable(props){
 		props.dispatch({key: 9, value: value})
 	}
 	return(
-		<div className="text-center">
+		<div className="text-center half-speed-enable">
 			<div className="flex-row">
 				<SmallPadButton 
 					label="On"
