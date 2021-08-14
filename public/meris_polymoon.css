@@ -82,8 +82,8 @@
   margin-top: 3px !important;
 }
 
-.middle-controls{
-  flex: 1.45;
+.meris-polymoon-bigbox .middle-controls{
+  flex: 4;
 }
 
 .left-side-controls,

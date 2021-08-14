@@ -40,22 +40,16 @@ export default function ThirdRow(props){
 			</div>
 			<div className="flex-row middle-controls">
 				<LittleKnob
-					className="dynamic-flanger-mode invisible"
-					label="Dynamic Flanger Mode" 
-					setVal={setDynamicFlangerMode}
-					val={dynamicFlangerMode}
+					className="feedback-filter"
+					label="feedback filter"
+					setVal={setFeedbackFilter}
+					val={feedbackFilter}
 					sliderData={props.sliderData}/>
 				<LittleKnob
 					className="dynamic-flanger-mode"
 					label="Dynamic Flanger Mode" 
 					setVal={setDynamicFlangerMode}
 					val={dynamicFlangerMode}
-					sliderData={props.sliderData}/>
-				<LittleKnob
-					className="feedback-filter"
-					label="feedback filter" 
-					setVal={setFeedbackFilter}
-					val={feedbackFilter}
 					sliderData={props.sliderData}/>
 			</div>
 			<div className="right-side-controls">
