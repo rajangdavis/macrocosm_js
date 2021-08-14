@@ -1,0 +1,144 @@
+.meris-polymoon-bigbox{
+  width: 916px;
+  margin-bottom: 48px;
+  height: 715px;
+  padding: 20px;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background: white;
+  border: 3px solid;
+}
+
+.meris-polymoon-bigbox:after{
+  content: url(./meris_polymoon/logo.svg);
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - (267px/2));
+}
+
+.flex-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.flex-row > .top-row{
+  margin: 45px 14px 24px;
+}
+
+.flex-row > .middle-row{
+  margin: 16px -1px 16px;
+}
+
+.flex-row > .bottom-row{
+  margin: 16px 14px 16px;
+}
+
+.flex-row:last-of-type{
+  flex:1;
+}
+
+.text-center > label{
+  margin-top: 1px;
+}
+
+.mix:before,
+.early-modulations:before,
+.time:before,
+.delay-level:before{
+  content: url(./meris_polymoon/generic_big_knob.svg);
+  position: absolute;
+  top:-12px;
+  left: 1px;
+}
+
+.feedback{
+  margin-top: 59px !important;
+}
+
+.feedback:before,
+.late-modulation:before,
+.dimension:before,
+.dynamics:before,
+.dynamic-flanger-speed:before,
+.feedback-filter:before,
+.dynamic-flanger-mode:before{
+  content: url(./meris_polymoon/generic_little_knob.svg);
+  position: absolute;
+  top: -10px;
+  left: 19px;
+}
+
+.multiply:before{
+  content: url(./meris_polymoon/multiply.svg);
+  position: absolute;
+  top: -12px;
+  left: 15px;
+}
+
+.dimension{
+  margin-top: 3px !important;
+}
+
+.middle-controls{
+  flex: 1.45;
+}
+
+.left-side-controls,
+.right-side-controls{
+  flex: 2;
+  flex-direction: column;
+}
+
+.meris-polymoon-bigbox .left-side-controls > .first-row{
+  flex: 1;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+.meris-polymoon-bigbox .right-side-controls > .first-row{
+  flex: 1;
+  justify-content: flex-start;
+  margin-top: 15px;
+  margin-left:-15px;
+}
+
+.meris-polymoon-bigbox .left-side-controls > .tap{
+  flex: 1;
+  justify-content: center;
+}
+
+.half-speed, .flanger-feedback, .phaser-mode, .dotted-eighth{
+  flex: 2;
+}
+
+.half-speed > div, .flanger-feedback > div, .dotted-eighth > div, .phaser-mode  > div > div {
+  margin-bottom: 15px;
+}
+
+.phaser-mode  > div > div{
+  margin-left: 15px;
+} 
+
+.tap-button{
+  flex: 2;
+  margin-top: 20px !important;
+}
+
+.tap-button > div, .bypass > div{
+  margin-bottom: 15px;
+}
+
+.bypass{
+  flex: 2;
+  margin-top: 30px;
+}
+
+.bypass > div > div{
+  margin-right: 15px;
+}
+
+.bypass > label{
+  margin-right: 9px;
+}

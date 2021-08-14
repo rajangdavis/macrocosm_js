@@ -13,7 +13,6 @@ export default function SysexKnobsUpdate(props){
 	dispatch({skipMidi: true, key: 26, value: data[10]})
 	dispatch({skipMidi: true, key: 27, value: data[11]})
 	if(expression == false){
-		console.log(data)
 		dispatch({skipMidi: true, key: 14, value: data[12]})
 		dispatch({skipMidi: true, key: 9, value: data[13]})
 		dispatch({skipMidi: true, key: 29, value: data[14]})

@@ -6,6 +6,7 @@
 @import url("midi_channel_input.css");
 @import url("meris_enzo.css");
 @import url("meris_hedra.css");
+@import url("meris_polymoon.css");
 
 html,
 body {
@@ -38,6 +39,10 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.invisible{
+  visibility: hidden;
 }
 
 .view-port{

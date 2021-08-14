@@ -49,7 +49,6 @@
 }
 
 .pitch-correction-and-glide:before,
-.micro-tune:before,
 .td1:before,
 .td2:before,
 .td3:before,
@@ -58,6 +57,13 @@
 	position: absolute;
 	top: -10px;
   left: 19px;
+}
+
+.micro-tune:before{
+  content: url(./meris_hedra/micro_tune.svg);
+  position: absolute;
+  left: 18px;
+  top: -10px;
 }
 
 .pitch1:before, .pitch2:before, .pitch3:before{
