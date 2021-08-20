@@ -2,12 +2,13 @@ import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
+import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
 import {MidiConfigContext} from '../hooks/midi_config'
 import Expression from '../components/expression'
 import {useState, useContext, useEffect} from 'react'
 
 export default function Home(props) {
-  const [selectedPedal, setSelectedPedal] = useState('polymoon')
+  const [selectedPedal, setSelectedPedal] = useState('mercury7')
   const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
@@ -28,7 +29,7 @@ export default function Home(props) {
           <a onClick={()=> setSelectedPedal('enzo')}>Enzo</a>
           <a onClick={()=> setSelectedPedal('hedra')}>Hedra</a>
           <a onClick={()=> setSelectedPedal('polymoon')}>Polymoon</a>
-          {/*<a onClick={()=> setSelectedPedal('mercury7')}>Mercury 7</a>*/}
+          <a onClick={()=> setSelectedPedal('mercury7')}>Mercury 7</a>
           {/*<a onClick={()=> setSelectedPedal('ottobitjr')}>Ottobit Jr.</a>*/}
         </div>
         {
@@ -54,6 +55,16 @@ export default function Home(props) {
         {
           selectedPedal == 'polymoon' &&
           <MerisPolymoonLayout
+            expressionVal={expressionVal}
+            setExpressionVal={setExpressionVal}
+            selectedPedal={selectedPedal}
+            sliderData={props.sliderData}
+            midiObject={props.midiObject}
+          />
+        }
+        {
+          selectedPedal == 'mercury7' &&
+          <MerisMercury7Layout
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}

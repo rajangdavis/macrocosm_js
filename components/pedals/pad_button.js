@@ -17,12 +17,14 @@ module.exports = {
 } 
 
 
-function PadButton(props){	
+function PadButton(props){
 	return(
 		<div className="text-center">
 			<div className={`pad-button ${props.className}`} 
 					 style={props.style} 
-					 onClick={props.onClick}>
+					 onClick={props.onClick}
+					 >
+
 				{ props.label && 
 					<label>{props.label}</label>
 				}
