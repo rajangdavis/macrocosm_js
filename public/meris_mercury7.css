@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: white;
+  background: #286BB3;
   border: 3px solid;
 }
 
@@ -16,6 +16,16 @@
   position: absolute;
   bottom: 30px;
   left: calc(50% - (243px/2));
+}
+
+.meris-mercury7-bigbox span,
+.meris-mercury7-bigbox .tap label,
+.meris-mercury7-bigbox .bypass label{
+  color: white;
+}
+
+.meris-mercury7-bigbox .bypass .pad-button.not-selected label{
+  color: black !important;
 }
 
 .flex-row{
@@ -40,7 +50,7 @@
   flex:1;
 }
 
-.mix:before,
+.meris-mercury7-bigbox .mix:before,
 .pre-delay:before,
 .space-decay:before,
 .pitch-vector-mix:before{
@@ -70,7 +80,8 @@
 .pitch-vector:before{
   content: url(./meris_mercury7/pitch_vector.svg);
   position: absolute;
-  top: -20px;
+  top: -22px;
+  left: 1px;
 }
 
 .pitch-vector{
@@ -104,17 +115,17 @@
   justify-content: center;
 }
 
-.half-speed, .flanger-feedback, .phaser-mode, .dotted-eighth{
+.half-speed, .flanger-feedback, .algorithm, .dotted-eighth{
   flex: 2;
 }
 
-.half-speed > div, .flanger-feedback > div, .dotted-eighth > div, .phaser-mode  > div > div {
-  margin-bottom: 15px;
+.algorithm > label{
+  color: white;
 }
 
-.phaser-mode  > div > div{
-  margin-left: 15px;
-} 
+.half-speed > div, .flanger-feedback > div, .dotted-eighth > div, .algorithm  > div > div {
+  margin-bottom: 15px;
+}
 
 .tap-button{
   flex: 2;

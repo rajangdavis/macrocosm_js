@@ -11,7 +11,7 @@ export default function ReverbAlgorithm(props){
 	}
 	
 	return(
-		<div className="text-center phaser-mode">
+		<div className="text-center algorithm">
 			<WidePadButton
 				onClick={()=> setPhaserMode(63)}
 				className={isSelected(63)}
@@ -20,7 +20,7 @@ export default function ReverbAlgorithm(props){
 				onClick={()=> setPhaserMode(0)}
 				className={isSelected(0)}
 				label="Off"/>
-			<label className>Algorithm</label>
+			<label>Algorithm</label>
 		</div>
 	)
 

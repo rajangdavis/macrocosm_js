@@ -4,12 +4,13 @@ import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
 import MerisOttobitJrLayout from '../components/pedals/meris_ottobit_jr/layout'
 import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
+import useLocalStorage from '../hooks/use_local_storage'
 import {MidiConfigContext} from '../hooks/midi_config'
 import Expression from '../components/expression'
 import {useState, useContext, useEffect} from 'react'
 
 export default function Home(props) {
-  const [selectedPedal, setSelectedPedal] = useState('ottobitJr')
+  const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
   const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
