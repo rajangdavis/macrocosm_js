@@ -20,7 +20,7 @@ export default function ReverbAlgorithm(props){
 				onClick={()=> setPhaserMode(0)}
 				className={isSelected(0)}
 				label="Off"/>
-			<label>Algorithm</label>
+			<label className>Algorithm</label>
 		</div>
 	)
 

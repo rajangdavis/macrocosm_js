@@ -1,55 +1,37 @@
 import {LittleKnob} from '../knob'
 
 export default function SecondRow(props){
-	let {25:lateModulation, 19:multiply, 20:dimension, 21:dynamics, 27:dynamicFlangerSpeed} = props.polymoonState;
+	let {19:stutter, 20:sequencer, 21:sequencerMult} = props.ottobitJrState;
 
-	let setLateModulation = (value) =>{
-		props.polymoonDispatch({key: 25, value: value})
+	let setStutter = (value) =>{
+		props.ottobitJrDispatch({key: 19, value: value})
 	}
-	let setMultiply = (value) =>{
-		props.polymoonDispatch({key: 19, value: value})
+	let setSequencer = (value) =>{
+		props.ottobitJrDispatch({key: 20, value: value})
 	}
-	let setDimension = (value) =>{
-		props.polymoonDispatch({key: 20, value: value})
-	}
-	let setDynamics = (value) =>{
-		props.polymoonDispatch({key: 21, value: value})
-	}
-	let setDynamicFlangerSpeed = (value) =>{
-		props.polymoonDispatch({key: 27, value: value})
+	let setSequencerMult = (value) =>{
+		props.ottobitJrDispatch({key: 21, value: value})
 	}
 	
 	return(
 		<div className="flex-row">
 			<LittleKnob
-				className="middle-row late-modulation"
-				label="Late Modulation"
-				setVal={setLateModulation}
-				val={lateModulation}
+				className="middle-row stutter"
+				label="Stutter"
+				setVal={setStutter}
+				val={stutter}
 				sliderData={props.sliderData}/>
 			<LittleKnob
-				className="middle-row multiply"
-				label="Multiply"
-				setVal={setMultiply}
-				val={multiply}
+				className="middle-row sequencer"
+				label="Sequencer"
+				setVal={setSequencer}
+				val={sequencer}
 				sliderData={props.sliderData}/>
 			<LittleKnob
-				className="middle-row dimension"
-				label="Dimension"
-				setVal={setDimension}
-				val={dimension}
-				sliderData={props.sliderData}/>
-			<LittleKnob
-				className="middle-row dynamics"
-				label="dynamics"
-				setVal={setDynamics}
-				val={dynamics}
-				sliderData={props.sliderData}/>
-			<LittleKnob
-				className="middle-row dynamic-flanger-speed"
-				label="Dynamic Flanger Speed"
-				setVal={setDynamicFlangerSpeed}
-				val={dynamicFlangerSpeed}
+				className="middle-row sequencer-mult"
+				label="sequencer mult"
+				setVal={setSequencerMult}
+				val={sequencerMult}
 				sliderData={props.sliderData}/>
 		</div>
 	)

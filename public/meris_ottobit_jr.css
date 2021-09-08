@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: white;
+  background: black;
   border: 3px solid;
 }
 
@@ -15,7 +15,28 @@
   content: url(./meris_ottobit_jr/logo.svg);
   position: absolute;
   bottom: 30px;
-  left: calc(50% - (267px/2));
+  left: calc(50% - (223px/2));
+}
+
+.meris-ottobit-jr-bigbox span,
+.meris-ottobit-jr-bigbox .tap label,
+.meris-ottobit-jr-bigbox .bypass label{
+  color: white;
+}
+
+.meris-ottobit-jr-bigbox .bypass .pad-button.not-selected label{
+  color: black !important;
+}
+
+.meris-ottobit-jr-bigbox .knob > div:first-of-type{
+  border: 1px solid white;
+}
+
+.pad-button.selected, .tap-button:active{
+  background-color: white !important;
+  border: black;
+  color: black;
+  transition: background-color, border, color linear .05s;
 }
 
 .flex-row{
@@ -40,40 +61,58 @@
   flex:1;
 }
 
-.text-center > label{
-  margin-top: 1px;
-}
-
-.mix:before,
-.early-modulations:before,
-.time:before,
-.delay-level:before{
+.sample-rate:before,
+.bits:before{
   content: url(./meris_ottobit_jr/generic_big_knob.svg);
   position: absolute;
   top:-12px;
   left: 1px;
 }
 
+.stutter:before{
+  content: url(./meris_ottobit_jr/stutter.svg);
+  position: absolute;
+  top:-12px;
+  left: 16px;
+}
+
+.sequencer:before{
+  content: url(./meris_ottobit_jr/sequencer.svg);
+  position: absolute;
+  top:-12px;
+  left: 5px;
+}
+
+.sequencer{
+  margin-top: 3px !important;
+}
+
+.sequencer-mult:before{
+  content: url(./meris_ottobit_jr/sequencer_mult.svg);
+  position: absolute;
+  top:-13px;
+  left: 11px;
+}
+
 .feedback{
   margin-top: 59px !important;
 }
 
-.feedback:before,
-.late-modulation:before,
-.dimension:before,
-.dynamics:before,
-.dynamic-flanger-speed:before,
-.feedback-filter:before,
-.dynamic-flanger-mode:before{
+.filter:before,
+.step:before{
   content: url(./meris_ottobit_jr/generic_little_knob.svg);
   position: absolute;
-  top: -10px;
+  top:-11px;
   left: 19px;
 }
 
-
-.dimension{
-  margin-top: 3px !important;
+.sequencer-type{
+  position: absolute;
+  right: 50px;
+  top: 100px;
+}
+.sequencer-type > label{
+  color: white;
 }
 
 .meris-ottobit-jr-bigbox .middle-controls{
@@ -101,38 +140,4 @@
 .meris-ottobit-jr-bigbox .left-side-controls > .tap{
   flex: 1;
   justify-content: center;
-}
-
-.half-speed, .flanger-feedback, .phaser-mode, .dotted-eighth{
-  flex: 2;
-}
-
-.half-speed > div, .flanger-feedback > div, .dotted-eighth > div, .phaser-mode  > div > div {
-  margin-bottom: 15px;
-}
-
-.phaser-mode  > div > div{
-  margin-left: 15px;
-} 
-
-.tap-button{
-  flex: 2;
-  margin-top: 20px !important;
-}
-
-.tap-button > div, .bypass > div{
-  margin-bottom: 15px;
-}
-
-.bypass{
-  flex: 2;
-  margin-top: 30px;
-}
-
-.bypass > div > div{
-  margin-right: 15px;
-}
-
-.bypass > label{
-  margin-right: 9px;
 }

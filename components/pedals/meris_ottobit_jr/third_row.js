@@ -1,62 +1,86 @@
 import {LittleKnob} from '../knob'
-import DottedEighth from './dotted_eighth'
-import HalfSpeed from './half_speed'
 import TapButton from '../tap_button'
-import FlangerFeedback from './flanger_feedback'
-import PhaserMode from './phaser_mode'
 import Bypass from '../bypass'
+
 
 export default function ThirdRow(props){
 	let {
-		26:dynamicFlangerMode,
-		31:halfSpeed,
-		9:dottedEighth,
-		23:feedbackFilter,
-		30:flangerFeedback,
-		29:phaserMode,
 		14:bypass,
-		15:tempo
-	} = props.polymoonState;
-	
-	let setDynamicFlangerMode = (value) =>{ 
-		props.polymoonDispatch({key: 26, value: value})
-	}
+		15:tempo,
+		22:step1,
+		23:step2,
+		24:step3,
+		25:step4,
+		26:step5,
+		27:step6
+	} = props.ottobitJrState;
 
-	let setFeedbackFilter = (value) =>{ 
-		props.polymoonDispatch({key: 23, value: value})
+	let setStep1 = (value) =>{
+		props.ottobitJrDispatch({key: 22, value: value})
+	}
+	let setStep2 = (value) =>{
+		props.ottobitJrDispatch({key: 23, value: value})
+	}
+	let setStep3 = (value) =>{
+		props.ottobitJrDispatch({key: 24, value: value})
+	}
+	let setStep4 = (value) =>{
+		props.ottobitJrDispatch({key: 25, value: value})
+	}
+	let setStep5 = (value) =>{
+		props.ottobitJrDispatch({key: 26, value: value})
+	}
+	let setStep6 = (value) =>{
+		props.ottobitJrDispatch({key: 27, value: value})
 	}
 
 	return(
 		<div className="flex-row">
 			<div className="left-side-controls">
-				<div className="flex-row first-row">
-					<DottedEighth dottedEighth={dottedEighth} polymoonDispatch={props.polymoonDispatch}/>
-					<HalfSpeed halfSpeed={halfSpeed} polymoonDispatch={props.polymoonDispatch}/>
-					<FlangerFeedback flangerFeedback={flangerFeedback} polymoonDispatch={props.polymoonDispatch}/>
-				</div>
 				<div className="flex-row tap">
 					<TapButton tempo={tempo} midiData={props.midiData} midiObject={props.midiObject}/>
 				</div>
 			</div>
 			<div className="flex-row middle-controls">
 				<LittleKnob
-					className="feedback-filter"
-					label="feedback filter"
-					setVal={setFeedbackFilter}
-					val={feedbackFilter}
+					className="step"
+					label="step 1"
+					setVal={setStep1}
+					val={step1}
 					sliderData={props.sliderData}/>
 				<LittleKnob
-					className="dynamic-flanger-mode"
-					label="Dynamic Flanger Mode" 
-					setVal={setDynamicFlangerMode}
-					val={dynamicFlangerMode}
+					className="step"
+					label="step 2"
+					setVal={setStep2}
+					val={step2}
+					sliderData={props.sliderData}/>
+				<LittleKnob
+					className="step"
+					label="step 3"
+					setVal={setStep3}
+					val={step3}
+					sliderData={props.sliderData}/>
+				<LittleKnob
+					className="step"
+					label="step 4"
+					setVal={setStep4}
+					val={step4}
+					sliderData={props.sliderData}/>
+				<LittleKnob
+					className="step"
+					label="step 5"
+					setVal={setStep5}
+					val={step5}
+					sliderData={props.sliderData}/>
+				<LittleKnob
+					className="step"
+					label="step 6"
+					setVal={setStep6}
+					val={step6}
 					sliderData={props.sliderData}/>
 			</div>
 			<div className="right-side-controls">
-				<div className="flex-row first-row">
-					<PhaserMode phaserMode={phaserMode} polymoonDispatch={props.polymoonDispatch}/>
-				</div>
-				<Bypass bypass={bypass} dispatch={props.polymoonDispatch}/>
+				<Bypass bypass={bypass} dispatch={props.ottobitJrDispatch}/>
 			</div>
 		</div>
 	)

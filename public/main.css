@@ -247,6 +247,16 @@ input[type=number] {
 .tap-button-container{
   position: relative;
 }
+.tap{
+  position: absolute;
+  left: 135px;
+  bottom: 42px;
+}
+.bypass{
+  position: absolute;
+  right: 105px;
+  bottom: 42px;
+}
 
 .pad-button.selected, .tap-button:active{
   background-color: black !important;

@@ -23,11 +23,6 @@ export default function ThirdRow(props){
 	return(
 		<div className="flex-row">
 			<div className="left-side-controls">
-				{/*<div className="flex-row first-row">
-					<DottedEighth dottedEighth={dottedEighth} mercury7Dispatch={props.mercury7Dispatch}/>
-					<HalfSpeed halfSpeed={halfSpeed} mercury7Dispatch={props.mercury7Dispatch}/>
-					<FlangerFeedback flangerFeedback={flangerFeedback} mercury7Dispatch={props.mercury7Dispatch}/>
-				</div>*/}
 				<div className="flex-row tap">
 					<SwellButton tempo={tempo} midiData={props.midiData} midiObject={props.midiObject}/>
 				</div>

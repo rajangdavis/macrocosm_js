@@ -40,10 +40,6 @@
   flex:1;
 }
 
-.text-center > label{
-  margin-top: 1px;
-}
-
 .mix:before,
 .early-modulations:before,
 .time:before,

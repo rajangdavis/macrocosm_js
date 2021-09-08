@@ -2,21 +2,21 @@ import FirstRow from './first_row'
 import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import {useState, useEffect, useContext} from 'react'
-import polymoonInitialState from './initial_state'
+import ottobitJrInitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisPolymoonPresets from '../factory_presets/meris_polymoon'
+import MerisOttobitJrPresets from '../factory_presets/meris_ottobit_jr'
 import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
 
-export default function MerisPolymoonLayout(props){
+export default function MerisOttobitJrLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
-	const midiData = {channel: midiConfig.polymoonChannel, output: midiConfig.output}
-	const [initialState, setState] = useLocalStorage('polymoon_state', polymoonInitialState)
-	const [polymoonState, polymoonDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
+	const midiData = {channel: midiConfig.ottobitJrChannel, output: midiConfig.output}
+	const [initialState, setState] = useLocalStorage('ottobit_jr_state', ottobitJrInitialState)
+	const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
@@ -34,8 +34,8 @@ export default function MerisPolymoonLayout(props){
 	}
 
 	useEffect(()=>{
-	  setState(polymoonState)
-  }, [polymoonState, setState]);
+	  setState(ottobitJrState)
+  }, [ottobitJrState, setState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -58,44 +58,44 @@ export default function MerisPolymoonLayout(props){
           return Math.floor(props.expressionVal*((y - x)/128)) + x
         }
       })
-      sysexKnobsUpdate({data: presetValWithExpression.slice(5,22), dispatch: polymoonDispatch, expression: true})
+      sysexKnobsUpdate({data: presetValWithExpression.slice(5,22), dispatch: ottobitJrDispatch, expression: true})
     }
   }
 
 	return(
 		<div className="main-display">
 			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
-			<div className="meris-pedal meris-polymoon-bigbox">
+			<div className="meris-pedal meris-ottobit-jr-bigbox">
 				<FirstRow
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
-	        polymoonState={polymoonState}
-	        polymoonDispatch={polymoonDispatch}
+	        ottobitJrState={ottobitJrState}
+	        ottobitJrDispatch={ottobitJrDispatch}
 	       />
 				<SecondRow
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
-	        polymoonState={polymoonState}
-	        polymoonDispatch={polymoonDispatch}
+	        ottobitJrState={ottobitJrState}
+	        ottobitJrDispatch={ottobitJrDispatch}
 	       />
 				<ThirdRow
 					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        midiData={midiData}
-	        polymoonState={polymoonState}
-	        polymoonDispatch={polymoonDispatch}
+	        ottobitJrState={ottobitJrState}
+	        ottobitJrDispatch={ottobitJrDispatch}
 	       />
 			</div>
 			{
         presetsOpen &&
         <PresetsModal
 					selectedPedal={props.selectedPedal}
-					dispatch={polymoonDispatch}
+					dispatch={ottobitJrDispatch}
 					expressionVal={props.expressionVal}
 					sysexByte={3}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisPolymoonPresets}
+          presets={MerisOttobitJrPresets}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />

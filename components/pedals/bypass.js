@@ -3,7 +3,7 @@ import {SmallPadButton} from './pad_button'
 export default function Bypass(props){
 
 	const isSelected = (value)=>{
-		return props.bypass == value ? 'selected' : ''
+		return props.bypass == value ? 'selected' : 'not-selected'
 	}
 
 	const setBypass = (value)=>{

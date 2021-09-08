@@ -15,7 +15,7 @@ export default function FirstRow(props){
 	let setSpaceDecay = (value) =>{
 		props.mercury7Dispatch({key: 16, value: value})
 	}
-	let setFeedback = (value) =>{
+	let setModulate = (value) =>{
 		props.mercury7Dispatch({key: 17, value: value})
 	}
 	let setMix = (value) =>{
@@ -43,8 +43,8 @@ export default function FirstRow(props){
 				/>
 			<LittleKnob
 				className="top-row modulate"
-				label="Feedback"
-				setVal={setFeedback}
+				label="Modulate"
+				setVal={setModulate}
 				val={modulate}
 				sliderData={props.sliderData}
 				/>

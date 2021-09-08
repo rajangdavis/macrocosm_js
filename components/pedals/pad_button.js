@@ -18,11 +18,17 @@ module.exports = {
 
 
 function PadButton(props){
+	const handleMouseDown = (e)=>{
+		if(props.onMouseDown){
+			return props.onMouseDown(e);
+		}
+	}
 	return(
 		<div className="text-center">
 			<div className={`pad-button ${props.className}`} 
 					 style={props.style} 
 					 onClick={props.onClick}
+					 onMouseDown={handleMouseDown}
 					 >
 
 				{ props.label && 

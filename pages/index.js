@@ -2,13 +2,14 @@ import Head from 'next/head'
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
+import MerisOttobitJrLayout from '../components/pedals/meris_ottobit_jr/layout'
 import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
 import {MidiConfigContext} from '../hooks/midi_config'
 import Expression from '../components/expression'
 import {useState, useContext, useEffect} from 'react'
 
 export default function Home(props) {
-  const [selectedPedal, setSelectedPedal] = useState('mercury7')
+  const [selectedPedal, setSelectedPedal] = useState('ottobitJr')
   const [expressionVal, setExpressionVal] = useState(0);
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
@@ -30,7 +31,7 @@ export default function Home(props) {
           <a onClick={()=> setSelectedPedal('hedra')}>Hedra</a>
           <a onClick={()=> setSelectedPedal('polymoon')}>Polymoon</a>
           <a onClick={()=> setSelectedPedal('mercury7')}>Mercury 7</a>
-          {/*<a onClick={()=> setSelectedPedal('ottobitjr')}>Ottobit Jr.</a>*/}
+          <a onClick={()=> setSelectedPedal('ottobitJr')}>Ottobit Jr.</a>
         </div>
         {
           selectedPedal == 'enzo' &&
@@ -65,6 +66,16 @@ export default function Home(props) {
         {
           selectedPedal == 'mercury7' &&
           <MerisMercury7Layout
+            expressionVal={expressionVal}
+            setExpressionVal={setExpressionVal}
+            selectedPedal={selectedPedal}
+            sliderData={props.sliderData}
+            midiObject={props.midiObject}
+          />
+        }
+        {
+          selectedPedal == 'ottobitJr' &&
+          <MerisOttobitJrLayout
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}

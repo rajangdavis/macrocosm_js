@@ -15,7 +15,7 @@
   content: url(./meris_mercury7/logo.svg);
   position: absolute;
   bottom: 30px;
-  left: calc(50% - (267px/2));
+  left: calc(50% - (243px/2));
 }
 
 .flex-row{
@@ -38,10 +38,6 @@
 
 .flex-row:last-of-type{
   flex:1;
-}
-
-.text-center > label{
-  margin-top: 1px;
 }
 
 .mix:before,
