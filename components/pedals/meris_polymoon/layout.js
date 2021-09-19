@@ -1,6 +1,7 @@
 import FirstRow from './first_row'
 import SecondRow from './second_row'
 import ThirdRow from './third_row'
+import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import polymoonInitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
@@ -64,22 +65,19 @@ export default function MerisPolymoonLayout(props){
 
 	return(
 		<div className="main-display">
-			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
+			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
 			<div className="meris-pedal meris-polymoon-bigbox">
 				<FirstRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        polymoonState={polymoonState}
 	        polymoonDispatch={polymoonDispatch}
 	       />
 				<SecondRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        polymoonState={polymoonState}
 	        polymoonDispatch={polymoonDispatch}
 	       />
 				<ThirdRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        midiData={midiData}
 	        polymoonState={polymoonState}

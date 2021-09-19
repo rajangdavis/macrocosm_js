@@ -37,8 +37,7 @@ export default function ThirdRow(props){
 					className="filter-bandwidth"
 					label="Filter Bandwidth" 
 					setVal={setFilterBandwidth}
-					val={filterBandwidth}
-					sliderData={props.sliderData}/>
+					val={filterBandwidth}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">

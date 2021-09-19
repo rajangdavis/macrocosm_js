@@ -4,6 +4,7 @@ import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
 import MerisOttobitJrLayout from '../components/pedals/meris_ottobit_jr/layout'
 import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
+import PresetsModal from '../components/presets_modal'
 import useLocalStorage from '../hooks/use_local_storage'
 import {MidiConfigContext} from '../hooks/midi_config'
 import Expression from '../components/expression'
@@ -34,56 +35,51 @@ export default function Home(props) {
           <a onClick={()=> setSelectedPedal('mercury7')}>Mercury 7</a>
           <a onClick={()=> setSelectedPedal('ottobitJr')}>Ottobit Jr.</a>
         </div>
-        {
-          selectedPedal == 'enzo' &&
-          <MerisEnzoLayout
-            expressionVal={expressionVal}
-            setExpressionVal={setExpressionVal}
-            selectedPedal={selectedPedal}
-            sliderData={props.sliderData}
-            midiObject={props.midiObject}
-          />
-        }
-        {
-          selectedPedal == 'hedra' &&
-          <MerisHedraLayout
-            expressionVal={expressionVal}
-            setExpressionVal={setExpressionVal}
-            selectedPedal={selectedPedal}
-            sliderData={props.sliderData}
-            midiObject={props.midiObject}
-          />
-        }
-        {
-          selectedPedal == 'polymoon' &&
-          <MerisPolymoonLayout
-            expressionVal={expressionVal}
-            setExpressionVal={setExpressionVal}
-            selectedPedal={selectedPedal}
-            sliderData={props.sliderData}
-            midiObject={props.midiObject}
-          />
-        }
-        {
-          selectedPedal == 'mercury7' &&
-          <MerisMercury7Layout
-            expressionVal={expressionVal}
-            setExpressionVal={setExpressionVal}
-            selectedPedal={selectedPedal}
-            sliderData={props.sliderData}
-            midiObject={props.midiObject}
-          />
-        }
-        {
-          selectedPedal == 'ottobitJr' &&
-          <MerisOttobitJrLayout
-            expressionVal={expressionVal}
-            setExpressionVal={setExpressionVal}
-            selectedPedal={selectedPedal}
-            sliderData={props.sliderData}
-            midiObject={props.midiObject}
-          />
-        }
+          {
+            selectedPedal == 'enzo' &&
+            <MerisEnzoLayout
+              expressionVal={expressionVal}
+              setExpressionVal={setExpressionVal}
+              selectedPedal={selectedPedal}
+              midiObject={props.midiObject}
+            />
+          }
+          {
+            selectedPedal == 'hedra' &&
+            <MerisHedraLayout
+              expressionVal={expressionVal}
+              setExpressionVal={setExpressionVal}
+              selectedPedal={selectedPedal}
+              midiObject={props.midiObject}
+            />
+          }
+          {
+            selectedPedal == 'polymoon' &&
+            <MerisPolymoonLayout
+              expressionVal={expressionVal}
+              setExpressionVal={setExpressionVal}
+              selectedPedal={selectedPedal}
+              midiObject={props.midiObject}
+            />
+          }
+          {
+            selectedPedal == 'mercury7' &&
+            <MerisMercury7Layout
+              expressionVal={expressionVal}
+              setExpressionVal={setExpressionVal}
+              selectedPedal={selectedPedal}
+              midiObject={props.midiObject}
+            />
+          }
+          {
+            selectedPedal == 'ottobitJr' &&
+            <MerisOttobitJrLayout
+              expressionVal={expressionVal}
+              setExpressionVal={setExpressionVal}
+              selectedPedal={selectedPedal}
+              midiObject={props.midiObject}
+            />
+          }
         <Expression
           expressionVal={expressionVal}
           setExpressionVal={setExpressionVal}

@@ -1,20 +1,24 @@
 import CloseButton from './close_button'
+import NavMenu from './nav_menu'
 import GlobalSettingsTable from './global_settings_table'
 import {useContext, useState, useEffect} from 'react'
 import {MidiConfigContext} from '../hooks/midi_config'
+import useLocalStorage from '../hooks/use_local_storage'
 import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../utilities/parse_sysex'
 
 export default function PresetsModal(props){
-  
-  const {midiConfig} = useContext(MidiConfigContext)
+  const {midiConfig} = useContext(MidiConfigContext);
+  const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo');
+  const [menu, setMenu] = useState('midi');
+
   const {
-    midiObject, 
-    selectedPedal,
+    midiObject,
     sysexByte,
     dispatch,
-    selectedPreset, 
+    selectedPreset,
     setSelectedPreset,
+    setPresetsOpen
   } = props
   
   const midiData = {
@@ -43,26 +47,49 @@ export default function PresetsModal(props){
     }
   }
 
+  const selectedMenu = (menuLink)=>{
+    if(menuLink == menu){
+      return 'selected menu-link';
+    }else{
+      return 'menu-link';
+    }
+  }
+
   return (
 		<div className="presets-modal zoom-in">
       <div className="presets-modal-background">
 			<CloseButton
-				headerOpen={true} 
-				setHeaderOpen={props.setPresetsOpen}
+				setHeaderOpen={setPresetsOpen}
+        headerOpen={true}
 				/>
       </div>
       <div className="presets-modal-content">
-        <label>GLOBAL SETTINGS</label>
-        <hr/>
-        <div className="global-settings">
-          <GlobalSettingsTable sysexByte={props.sysexByte} midiObject={props.midiObject}/>
+        <div className="menu-select">
+          <a className={selectedMenu('midi')} onClick={()=>{setMenu('midi')}}>MIDI AND CONTROLS</a>
+          <a className={selectedMenu('presets')} onClick={()=>{setMenu('presets')}}>PEDAL PRESETS AND SETTINGS</a>
         </div>
-        <label>PRESETS</label>
-        <hr/>
-        <div className="presets-container">
-          {props.presets.map((preset, i) =>{
-            return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
-        	})}
+        <div>
+          {
+            menu == 'midi' &&
+            <NavMenu midiObject={midiObject}/>
+          }
+          {
+            menu == 'presets' &&
+            <div className="sysex-menu fade-in">
+              <label>GLOBAL SETTINGS</label>
+              <hr/>
+              <div className="global-settings">
+                <GlobalSettingsTable sysexByte={props.sysexByte} midiObject={props.midiObject}/>
+              </div>
+              <label>PRESETS</label>
+              <hr/>
+              <div className="presets-container">
+                {props.presets.map((preset, i) =>{
+                  return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
+                })}
+              </div>
+            </div>
+          }
         </div>
       </div>
     </div>

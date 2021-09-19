@@ -28,26 +28,22 @@ export default function SecondRow(props){
 				className="middle-row pitch1"
 				label="Pitch 1"
 				setVal={setPitch1}
-				val={pitch1}
-				sliderData={props.sliderData}/>
+				val={pitch1}/>
 			<LittleKnob
 				className="middle-row pitch2"
 				label="Pitch 2"
 				setVal={setPitch2}
-				val={pitch2}
-				sliderData={props.sliderData}/>
+				val={pitch2}/>
 			<LittleKnob
 				className="middle-row pitch3"
 				label="Pitch 3"
 				setVal={setPitch3}
-				val={pitch3}
-				sliderData={props.sliderData}/>
+				val={pitch3}/>
 			<LittleKnob
 				className="middle-row pitch-correction-and-glide"
 				label="Pitch Corr./Glide"
 				setVal={setPitchCorrectionAndGlide}
-				val={pitchCorrectionAndGlide}
-				sliderData={props.sliderData}/>
+				val={pitchCorrectionAndGlide}/>
 		</div>
 	)
 }

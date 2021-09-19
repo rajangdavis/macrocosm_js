@@ -57,7 +57,7 @@ a.fullscreen{
   opacity: 0;
 }
 
-.nav-menu.open{
+/*.nav-menu.open{
   width: 100vw;
   position: absolute;
   left: 0;
@@ -69,7 +69,7 @@ a.fullscreen{
   display: flex;
   flex-direction: column;
   align-items: center;
-}
+}*/
 
 .nav-menu > .options-block{
   display: flex;

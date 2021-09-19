@@ -43,14 +43,12 @@ export default function ThirdRow(props){
 					className="feedback-filter"
 					label="feedback filter"
 					setVal={setFeedbackFilter}
-					val={feedbackFilter}
-					sliderData={props.sliderData}/>
+					val={feedbackFilter}/>
 				<LittleKnob
 					className="dynamic-flanger-mode"
 					label="Dynamic Flanger Mode" 
 					setVal={setDynamicFlangerMode}
-					val={dynamicFlangerMode}
-					sliderData={props.sliderData}/>
+					val={dynamicFlangerMode}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">

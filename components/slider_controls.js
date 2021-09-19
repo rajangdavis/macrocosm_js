@@ -9,21 +9,21 @@ export default function SliderControls(props){
 				min="0"
 				max="100"
 				value={sliderData.opacity}
-				onChange={(e)=> setSliderData({...sliderData, opacity: e.target.value})}
+				onChange={(e)=> setSliderData('opacity', e.target.value)}
 			/>
 			<CustomSlider
 				label="Slider Rotation"
 				min="0"
 				max="359"
 				value={sliderData.rotation}
-				onChange={(e)=> setSliderData({...sliderData, rotation: e.target.value})}
+				onChange={(e)=> setSliderData('rotation', e.target.value)}
 			/>
 			<CustomSlider
 				label="Slider Placement"
 				min="0"
 				max="80"
 				value={sliderData.placement}
-				onChange={(e)=> setSliderData({...sliderData, placement: e.target.value})}
+				onChange={(e)=> setSliderData('placement', e.target.value)}
 			/>
     </div>
 	)

@@ -21,23 +21,17 @@ export default function FirstRow(props){
 				className="top-row sample-rate"
 				label="Sample Rate"
 				setVal={setSampleRate}
-				val={sampleRate}
-				sliderData={props.sliderData}
-				/>
+				val={sampleRate}/>
 			<LittleKnob
 				className="top-row filter"
 				label="Filter"
 				setVal={setFilter}
-				val={filter}
-				sliderData={props.sliderData}
-				/>
+				val={filter}/>
 			<BigKnob
 				className="top-row bits"
 				label="bits"
 				setVal={setBits}
-				val={bits}
-				sliderData={props.sliderData}
-				/>
+				val={bits}/>
 			<SequencerType sequencerType={sequencerType} ottobitJrDispatch={props.ottobitJrDispatch}/>
 		</div>
 	)

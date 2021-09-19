@@ -31,32 +31,27 @@ export default function SecondRow(props){
 				className="middle-row density"
 				label="Density"
 				setVal={setDensity}
-				val={density}
-				sliderData={props.sliderData}/>
+				val={density}/>
 			<LittleKnob
 				className="middle-row low-frequency"
 				label="Lo Freq"
 				setVal={setLoFrequency}
-				val={loFreq}
-				sliderData={props.sliderData}/>
+				val={loFreq}/>
 			<LittleKnob
 				className="middle-row pitch-vector"
 				label="pitch Vector"
 				setVal={setPitchVector}
-				val={pitchVector}
-				sliderData={props.sliderData}/>
+				val={pitchVector}/>
 			<LittleKnob
 				className="middle-row high-frequency"
 				label="Hi Freq"
 				setVal={setHiFrequency}
-				val={hiFreq}
-				sliderData={props.sliderData}/>
+				val={hiFreq}/>
 			<LittleKnob
 				className="middle-row vibrato-depth"
 				label="Vibrato Depth"
 				setVal={setVibratoDepth}
-				val={vibratoDepth}
-				sliderData={props.sliderData}/>
+				val={vibratoDepth}/>
 		</div>
 	)
 }

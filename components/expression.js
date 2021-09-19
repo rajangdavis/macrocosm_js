@@ -11,7 +11,7 @@ export default function Expression(props){
 
 
 	useEffect(()=>{
-		if(midiData.inputForExpression != "" && midiData.output !="" && midiData.channel!=0){
+		if(midiData.inputForExpression != "" && midiData.output && midiObject && midiObject.inputs && midiData.channel!=0){
 			let deviceInput = midiObject.inputs.filter(x =>{
 				return x.name == midiData.inputForExpression
 			})[0]

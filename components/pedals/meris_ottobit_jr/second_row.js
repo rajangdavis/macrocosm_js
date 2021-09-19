@@ -19,20 +19,17 @@ export default function SecondRow(props){
 				className="middle-row stutter"
 				label="Stutter"
 				setVal={setStutter}
-				val={stutter}
-				sliderData={props.sliderData}/>
+				val={stutter}/>
 			<LittleKnob
 				className="middle-row sequencer"
 				label="Sequencer"
 				setVal={setSequencer}
-				val={sequencer}
-				sliderData={props.sliderData}/>
+				val={sequencer}/>
 			<LittleKnob
 				className="middle-row sequencer-mult"
 				label="sequencer mult"
 				setVal={setSequencerMult}
-				val={sequencerMult}
-				sliderData={props.sliderData}/>
+				val={sequencerMult}/>
 		</div>
 	)
 }

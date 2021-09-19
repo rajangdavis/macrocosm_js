@@ -1,4 +1,6 @@
 import * as style from './knob_styles'
+import {useContext} from 'react'
+import {SliderStateContext} from '../../hooks/slider_state'
 
 module.exports = {
 	LittleKnob: (props) => {
@@ -27,6 +29,7 @@ module.exports = {
 
 
 function Knob(props){
+	const {sliderState} = useContext(SliderStateContext);
 
 	const updateVal = (event) => {
 	  props.setVal(parseInt(event.target.value));
@@ -49,7 +52,7 @@ function Knob(props){
 	      min="0" 
 	      max="127"
 	      value={props.val}
-	      style={style.inputRange(props.sliderData)}
+	      style={style.inputRange(sliderState)}
 	      onChange={updateVal}
 	      onClickCapture={updateVal}/>
 		</div>

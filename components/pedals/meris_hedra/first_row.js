@@ -40,45 +40,38 @@ export default function FirstRow(props){
 						label="Scale Type"
 						setVal={setScaleType}
 						val={scaleType}
-						sliderData={props.sliderData}
 					/>
 					<BigKnob
 						className="top-row key"
 						label="Key"
 						setVal={setKey}
 						val={key}
-						sliderData={props.sliderData}
 						/>
 					<LittleKnob
 						className="top-row micro-tune"
 						label="Micro Tune"
 						setVal={setmicroTune}
 						val={microTune}
-						sliderData={props.sliderData}
 						/>
 					<BigKnob
 						className="top-row mix"
 						label="Mix"
 						setVal={setMix}
 						val={mix}
-						sliderData={props.sliderData}
 						/>
 					<BigKnob
 						className="top-row delay-level"
 						label="Delay Feedback"
 						setVal={setDelayFeedback}
 						val={delayFeedback}
-						sliderData={props.sliderData}
 						/>
 				</div>
 				<SecondRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        hedraState={props.hedraState}
 	        hedraDispatch={props.hedraDispatch}
 	       />
 	       <ThirdRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        midiData={props.midiData}
 	        hedraState={props.hedraState}

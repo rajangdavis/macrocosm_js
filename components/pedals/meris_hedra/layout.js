@@ -1,4 +1,5 @@
 import FirstRow from './first_row'
+import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import hedraInitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
@@ -62,11 +63,10 @@ export default function MerisHedraLayout(props){
 
 	return(
 		<div className="main-display">
-			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
+			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
 			<div className="meris-pedal meris-hedra-bigbox">
 				<FirstRow
 					midiData={midiData}
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        hedraState={hedraState}
 	        hedraDispatch={hedraDispatch}

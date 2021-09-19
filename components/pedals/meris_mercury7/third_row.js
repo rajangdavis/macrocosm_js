@@ -32,14 +32,12 @@ export default function ThirdRow(props){
 					className="mod-speed"
 					label="mod speed"
 					setVal={setModSpeed}
-					val={modSpeed}
-					sliderData={props.sliderData}/>
+					val={modSpeed}/>
 				<LittleKnob
 					className="attack-time"
 					label="Attack Time" 
 					setVal={setAttackTime}
-					val={attackTime}
-					sliderData={props.sliderData}/>
+					val={attackTime}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">

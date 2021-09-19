@@ -15,11 +15,11 @@ export default function ReverbAlgorithm(props){
 			<WidePadButton
 				onClick={()=> setPhaserMode(63)}
 				className={isSelected(63)}
-				label="Slow"/>
+				label="Cathedra"/>
 			<WidePadButton
 				onClick={()=> setPhaserMode(0)}
 				className={isSelected(0)}
-				label="Off"/>
+				label="Utlraplate"/>
 			<label>Algorithm</label>
 		</div>
 	)

@@ -25,32 +25,27 @@ export default function SecondRow(props){
 				className="middle-row ring-modulation"
 				label="Ring Modulation"
 				setVal={setRingModulation}
-				val={ringModulation}
-				sliderData={props.sliderData}/>
+				val={ringModulation}/>
 			<LittleKnob
 				className="middle-row sustain"
 				label="Sustain"
 				setVal={setSustain}
-				val={sustain}
-				sliderData={props.sliderData}/>
+				val={sustain}/>
 			<LittleKnob
 				className="middle-row filter-env"
 				label="Filter Env"
 				setVal={setFilterEnv}
-				val={filterEnv}
-				sliderData={props.sliderData}/>
+				val={filterEnv}/>
 			<LittleKnob
 				className="middle-row modulation"
 				label="Modulation"
 				setVal={setModulation}
-				val={modulation}
-				sliderData={props.sliderData}/>
+				val={modulation}/>
 			<LittleKnob
 				className="middle-row delay-feedback"
 				label="Delay Feedback"
 				setVal={setDelayFeedback}
-				val={delayFeedback}
-				sliderData={props.sliderData}/>
+				val={delayFeedback}/>
 		</div>
 	)
 }

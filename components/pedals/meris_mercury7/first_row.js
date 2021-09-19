@@ -31,37 +31,27 @@ export default function FirstRow(props){
 				className="top-row pre-delay"
 				label="Predelay"
 				setVal={setPreDelay}
-				val={preDelay}
-				sliderData={props.sliderData}
-				/>
+				val={preDelay}/>
 			<BigKnob
 				className="top-row space-decay"
 				label="Space Decay"
 				setVal={setSpaceDecay}
-				val={spaceDecay}
-				sliderData={props.sliderData}
-				/>
+				val={spaceDecay}/>
 			<LittleKnob
 				className="top-row modulate"
 				label="Modulate"
 				setVal={setModulate}
-				val={modulate}
-				sliderData={props.sliderData}
-				/>
+				val={modulate}/>
 			<BigKnob
 				className="top-row mix"
 				label="Mix"
 				setVal={setMix}
-				val={mix}
-				sliderData={props.sliderData}
-				/>
+				val={mix}/>
 			<BigKnob
 				className="top-row pitch-vector-mix"
 				label="Pitch Vector Mix"
 				setVal={setPitchVectorMix}
-				val={pitchVectorMix}
-				sliderData={props.sliderData}
-				/>
+				val={pitchVectorMix}/>
 		</div>
 	)
 }

@@ -1,6 +1,7 @@
 import FirstRow from './first_row'
 import SecondRow from './second_row'
 import ThirdRow from './third_row'
+import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import enzoInitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
@@ -64,22 +65,19 @@ export default function MerisEnzoLayout(props){
 
 	return(
 		<div className="main-display">
-			<button disabled={noOutput} className={presetsButtonClass()} onClick={()=>setPresetsOpen(!presetsOpen)}>PRESETS/SETTINGS</button>
+			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
 			<div className="meris-pedal meris-enzo-bigbox">
 				<FirstRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        enzoState={enzoState}
 	        enzoDispatch={enzoDispatch}
 	       />
 				<SecondRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        enzoState={enzoState}
 	        enzoDispatch={enzoDispatch}
 	       />
 				<ThirdRow
-					sliderData={props.sliderData}
 	        midiObject={props.midiObject}
 	        midiData={midiData}
 	        enzoState={enzoState}

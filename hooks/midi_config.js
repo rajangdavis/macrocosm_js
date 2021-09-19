@@ -1,5 +1,5 @@
 import {createContext, useState} from 'react'
-
+import useLocalStorage from './use_local_storage'
 const defaultConfig = {
 	output: '',
 	inputForExpression: '',
@@ -14,7 +14,7 @@ const MidiConfigContext = createContext(defaultConfig);
 
 const MidiConfigProvider = ({children, initialConfig= defaultConfig })=>{
 	
-	const [midiConfig, setMidiConfig] = useState(initialConfig)
+	const [midiConfig, setMidiConfig] = useLocalStorage('midi_config', initialConfig)
 	const updateConfig = (key, value) => {
 		let copiedConfig = {...midiConfig}
 		copiedConfig[key] = value

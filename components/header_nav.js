@@ -4,7 +4,6 @@ import {useState,useEffect} from 'react'
 
 export default function HeaderNav(props){
   const [headerOpen, setHeaderOpen] = useState(false);
-	const [fullScreen, setFullScreen] = useState(false);
 
   const engageFullScreen = (e)=>{
     let body = document.getElementsByTagName('html')
@@ -28,8 +27,6 @@ export default function HeaderNav(props){
                  setSliderData={props.setSliderData}
                  headerOpen={headerOpen}/>
       }
-      <a className="fullscreen full" onClick={engageFullScreen}>Fullscreen</a>
-      <a className="fullscreen normal" onClick={exitFullScreen}>Normal</a>
   	</nav>
    </div>)
 }

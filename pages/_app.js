@@ -1,8 +1,8 @@
 import dynamic from "next/dynamic";
 import '../public/main.css'
 import HeaderNav from '../components/header_nav'
-import useLocalStorage from '../hooks/use_local_storage'
-import {MidiConfigProvider, MidiConfigContext} from '../hooks/midi_config'
+import {MidiConfigProvider} from '../hooks/midi_config'
+import {SliderStateProvider} from '../hooks/slider_state'
 import {WebMidi} from 'webmidi'
 import {useState, useEffect} from 'react'
 
@@ -20,34 +20,11 @@ function MyApp({ Component, pageProps }) {
 	    })
 	}, []);
 
-	useEffect(()=>{
-		document.body.className = addStripesIfConnected();
-	}, [isConnected, addStripesIfConnected]);
-
-	const [sliderData, setSliderData] = useLocalStorage('slider_data', {
-    opacity: 0,
-    rotation: 0,
-    placement: 0
-  })
-
-  const addStripesIfConnected = () =>{
-		if(isConnected){
-			return "main diagonal-stripe-1"
-		}else{
-			return "main"
-		}
-  }
-
   return (<div>
 			<MidiConfigProvider>
-				<HeaderNav
-					setIsConnected={setIsConnected}
-					midiObject={midiObject}
-					setMidiObject={setMidiObject}
-					sliderData={sliderData}
-					setSliderData={setSliderData}
-					/>
-				<Component {...pageProps} midiObject={midiObject} sliderData={sliderData}/>
+				<SliderStateProvider>
+					<Component {...pageProps} midiObject={midiObject}/>
+				</SliderStateProvider>
 			</MidiConfigProvider>
 	</div>)
 }

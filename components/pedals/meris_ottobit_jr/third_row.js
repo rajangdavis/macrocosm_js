@@ -46,38 +46,32 @@ export default function ThirdRow(props){
 					className="step"
 					label="step 1"
 					setVal={setStep1}
-					val={step1}
-					sliderData={props.sliderData}/>
+					val={step1}/>
 				<LittleKnob
 					className="step"
 					label="step 2"
 					setVal={setStep2}
-					val={step2}
-					sliderData={props.sliderData}/>
+					val={step2}/>
 				<LittleKnob
 					className="step"
 					label="step 3"
 					setVal={setStep3}
-					val={step3}
-					sliderData={props.sliderData}/>
+					val={step3}/>
 				<LittleKnob
 					className="step"
 					label="step 4"
 					setVal={setStep4}
-					val={step4}
-					sliderData={props.sliderData}/>
+					val={step4}/>
 				<LittleKnob
 					className="step"
 					label="step 5"
 					setVal={setStep5}
-					val={step5}
-					sliderData={props.sliderData}/>
+					val={step5}/>
 				<LittleKnob
 					className="step"
 					label="step 6"
 					setVal={setStep6}
-					val={step6}
-					sliderData={props.sliderData}/>
+					val={step6}/>
 			</div>
 			<div className="right-side-controls">
 				<Bypass bypass={bypass} dispatch={props.ottobitJrDispatch}/>

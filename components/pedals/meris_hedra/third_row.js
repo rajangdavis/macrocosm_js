@@ -52,20 +52,17 @@ export default function ThirdRow(props){
 					className="td1"
 					label="Time Division 1" 
 					setVal={setTimeDivision1} 
-					val={timeDivision1} 
-					sliderData={props.sliderData}/>
+					val={timeDivision1} />
 				<LittleKnob
 					className="td2"
 					label="Time Division 2"
 					setVal={setTimeDivision2}
-					val={timeDivision2}
-					sliderData={props.sliderData}/>
+					val={timeDivision2}/>
 				<LittleKnob
 					className="td3"
 					label="Time Division 3"
 					setVal={setTimeDivision3}
-					val={timeDivision3}
-					sliderData={props.sliderData}/>
+					val={timeDivision3}/>
 			</div>
 			<div className="right-side-controls">
 				<div className="flex-row first-row">

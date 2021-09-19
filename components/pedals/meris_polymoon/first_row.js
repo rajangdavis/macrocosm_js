@@ -25,37 +25,27 @@ export default function FirstRow(props){
 				className="top-row early-modulations"
 				label="Early Modulations"
 				setVal={setEarlyModulations}
-				val={earlyModulations}
-				sliderData={props.sliderData}
-				/>
+				val={earlyModulations}/>
 			<BigKnob
 				className="top-row time"
 				label="Time"
 				setVal={setTime}
-				val={time}
-				sliderData={props.sliderData}
-				/>
+				val={time}/>
 			<LittleKnob
 				className="top-row feedback"
 				label="Feedback"
 				setVal={setFeedback}
-				val={feedback}
-				sliderData={props.sliderData}
-				/>
+				val={feedback}/>
 			<BigKnob
 				className="top-row mix"
 				label="Mix"
 				setVal={setMix}
-				val={mix}
-				sliderData={props.sliderData}
-				/>
+				val={mix}/>
 			<BigKnob
 				className="top-row delay-level"
 				label="Delay Level"
 				setVal={setDelayLevel}
-				val={delayLevel}
-				sliderData={props.sliderData}
-				/>
+				val={delayLevel}/>
 		</div>
 	)
 }

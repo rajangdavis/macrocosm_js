@@ -25,32 +25,27 @@ export default function SecondRow(props){
 				className="middle-row late-modulation"
 				label="Late Modulation"
 				setVal={setLateModulation}
-				val={lateModulation}
-				sliderData={props.sliderData}/>
+				val={lateModulation}/>
 			<LittleKnob
 				className="middle-row multiply"
 				label="Multiply"
 				setVal={setMultiply}
-				val={multiply}
-				sliderData={props.sliderData}/>
+				val={multiply}/>
 			<LittleKnob
 				className="middle-row dimension"
 				label="Dimension"
 				setVal={setDimension}
-				val={dimension}
-				sliderData={props.sliderData}/>
+				val={dimension}/>
 			<LittleKnob
 				className="middle-row dynamics"
 				label="dynamics"
 				setVal={setDynamics}
-				val={dynamics}
-				sliderData={props.sliderData}/>
+				val={dynamics}/>
 			<LittleKnob
 				className="middle-row dynamic-flanger-speed"
 				label="Dynamic Flanger Speed"
 				setVal={setDynamicFlangerSpeed}
-				val={dynamicFlangerSpeed}
-				sliderData={props.sliderData}/>
+				val={dynamicFlangerSpeed}/>
 		</div>
 	)
 }
