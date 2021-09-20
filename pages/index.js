@@ -13,6 +13,38 @@ import {useState, useContext, useEffect} from 'react'
 export default function Home(props) {
   const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
   const [expressionVal, setExpressionVal] = useState(0);
+  const [dragId, setDragId] = useState();
+  const handleDrag = (ev) => {
+    setDragId(ev.currentTarget.id);
+  };
+  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
+    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg'},
+    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg'},
+    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg'},
+    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg'},
+    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg'}
+  ]);
+
+  const handleDrop = (ev) => {
+    const dragBox = pedalSelectAndOrder.find((pedal) => pedal.key === dragId);
+    const dropBox = pedalSelectAndOrder.find((pedal) => pedal.key === ev.currentTarget.id);
+
+    const dragBoxOrder = dragBox.order;
+    const dropBoxOrder = dropBox.order;
+
+    const newPedalOrder = pedalSelectAndOrder.map((pedal) => {
+      if (pedal.key === dragId) {
+        pedal.order = dropBoxOrder;
+      }
+      if (pedal.key === ev.currentTarget.id) {
+        pedal.order = dragBoxOrder;
+      }
+      return pedal;
+    });
+
+    setPedalSelectAndOrder(newPedalOrder);
+  };
+
   const {midiConfig} = useContext(MidiConfigContext)
   const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
 
@@ -29,11 +61,23 @@ export default function Home(props) {
       </Head>
       <div className="view-port">
         <div className="pedal-selector">
-          <a onClick={()=> setSelectedPedal('enzo')}>Enzo</a>
-          <a onClick={()=> setSelectedPedal('hedra')}>Hedra</a>
-          <a onClick={()=> setSelectedPedal('polymoon')}>Polymoon</a>
-          <a onClick={()=> setSelectedPedal('mercury7')}>Mercury 7</a>
-          <a onClick={()=> setSelectedPedal('ottobitJr')}>Ottobit Jr.</a>
+          {
+            pedalSelectAndOrder
+              .sort((a, b) => a.order - b.order)
+              .filter((x)=> parseInt(midiConfig[`${x['key']}Channel`]) > 0)
+              .map((pedal)=>{
+                let className = selectedPedal == pedal['key'] ? 'selected pedal-option' : 'pedal-option';
+                let iconSource = selectedPedal == pedal['key'] ? pedal.iconSource.replace('button','button_selected') : pedal.iconSource;
+                let changePedal = (e, key)=>{
+                  setSelectedPedal(key);
+                }
+                return <div key={pedal.key} id={pedal.key} onDragOver={(ev) => ev.preventDefault()} draggable="true" onDragStart={handleDrag} onDrop={handleDrop}>
+                  <a className={className} onClick={(e)=> changePedal(e, pedal['key'])}>
+                    <img src={iconSource}/>
+                  </a>
+                </div>
+            })
+          }
         </div>
           {
             selectedPedal == 'enzo' &&

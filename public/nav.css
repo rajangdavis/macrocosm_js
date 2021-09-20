@@ -1,38 +1,14 @@
-.header-nav{
-  height: 10vh;
-  width: 100vw;
-  background:black;
+.nav-button{ 
   display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-
-nav{
-  color:white;
-  width: 90vw;
-  height: 5vh;
-  display: flex;
-  align-items: center;
-}
-
-.nav-button{
-  display: flex;
-  position: relative;
+  position: absolute;
+  top: 30px;
+  left: 30px;
   flex-direction: column;
 }
+
+
 .nav-button:hover{
   cursor: pointer;
-}
-
-a.fullscreen{
-  position: absolute;
-  right: 15px;
 }
 
 .nav-button > .line{
@@ -57,31 +33,21 @@ a.fullscreen{
   opacity: 0;
 }
 
-/*.nav-menu.open{
-  width: 100vw;
-  position: absolute;
-  left: 0;
-  height: 90vh;
-  top: 10vh;
-  background: black;
-  opacity: 1;
-  transition:.1s linear;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}*/
-
 .nav-menu > .options-block{
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .nav-menu > .options-block:first-of-type{
-  margin-bottom: 130px;
+  margin: 50px 0;
 }
 
 .nav-menu > .options-block > label{
   font-size: 25px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+  width: 100%;
+  padding: 25px;
 }
 
 .nav-menu > .options-block > hr{
@@ -94,7 +60,18 @@ a.fullscreen{
   flex-direction: row;
   justify-content: center; 
   width: 80vw;
+  height: 50vh;
   align-items: center;
+}
+
+.channels-block{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.channels-block > div{
+  margin: 50px 50px 0px 50px;
 }
 
 .midi-options > div, .control-options > div{

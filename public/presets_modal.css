@@ -14,7 +14,7 @@
   padding: 50px 0 0 50px;
 	background: black;
   opacity: .95;
-  height: 100vh;
+  height: 105vh;
   width: 100vw;
   position: absolute;
 }
@@ -24,11 +24,14 @@
   position: absolute;
   color: white;
 	z-index: 1000;
+  top: 0;
+  border-right: 1px solid white;
 	left: 20vw;
   right: 20vw;
 	height: 100vh;
   width: 60vw;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .presets-modal-content > label, .preset-row{
@@ -38,7 +41,6 @@
 .preset-row{
 	border-bottom: 3px solid white;
 	text-align: left;
-	margin-bottom: 15px;
 }
 
 .preset-row.selected{
@@ -85,23 +87,56 @@ a.menu-link{
   text-decoration-color: rgba(255, 255, 255, 0);
 }
 
+.menu-select{
+  border-right: 1px solid white;
+  color: white;
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  flex-direction: column;
+  left: 0;
+  width: 20vw;
+  z-index: 100;
+  justify-content: center;
+  top: 0;
+  height: 105vh;
+}
+
 .menu-select a.selected.menu-link{
   text-decoration: underline;
   text-decoration-color: rgba(255, 255, 255, 1) !important;
   transition: text-decoration-color .25s;
 }
 
+.sysex-menu{
+  margin: 50px 0;
+}
 
-.global-settings{
-  margin-bottom: 75px;
+.sysex-menu label{
+  width: 100%;
+  padding: 25px;
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.global-settings, .presets-container, .settings-container{
   display: flex;
   flex-direction: column;
   font-size: 25px;
+  margin: 50px 0;
 }
 
-.settings-container, .presets-container{
-  font-size: 25px;
-  margin: 25px 25px 0px;
+.settings-container, .preset-row{
+  padding: 10px 50px;
+}
+
+
+.presets-container{
+  height: 100vh;
+}
+
+.presets-container > label{
+  margin-bottom: 50px;
 }
 
 .settings-container table{
@@ -122,13 +157,6 @@ a.menu-link{
   transition: .2s;
 }
 
-.menu-select{
-  display: flex;
-  position: relative;
-  justify-content: center;
-  top: 0;
-}
-
 .sysex-menu label{
   font-size: 25px;
 }
@@ -136,4 +164,9 @@ a.menu-link{
 .menu-select a{
   font-size: 25px;
   padding: 25px;
+  text-align: center;
+}
+
+.menu-select a:hover{
+  cursor: pointer;
 }

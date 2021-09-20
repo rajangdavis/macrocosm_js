@@ -57,17 +57,16 @@ export default function PresetsModal(props){
 
   return (
 		<div className="presets-modal zoom-in">
+      <div className="menu-select">
+        <CloseButton
+          setHeaderOpen={setPresetsOpen}
+          headerOpen={true} />
+        <a className={selectedMenu('midi')} onClick={()=>{setMenu('midi')}}>MIDI AND CONTROLS</a>
+        <a className={selectedMenu('presets')} onClick={()=>{setMenu('presets')}}>PEDAL PRESETS AND SETTINGS</a>
+      </div>
       <div className="presets-modal-background">
-			<CloseButton
-				setHeaderOpen={setPresetsOpen}
-        headerOpen={true}
-				/>
       </div>
       <div className="presets-modal-content">
-        <div className="menu-select">
-          <a className={selectedMenu('midi')} onClick={()=>{setMenu('midi')}}>MIDI AND CONTROLS</a>
-          <a className={selectedMenu('presets')} onClick={()=>{setMenu('presets')}}>PEDAL PRESETS AND SETTINGS</a>
-        </div>
         <div>
           {
             menu == 'midi' &&
@@ -76,14 +75,12 @@ export default function PresetsModal(props){
           {
             menu == 'presets' &&
             <div className="sysex-menu fade-in">
-              <label>GLOBAL SETTINGS</label>
-              <hr/>
               <div className="global-settings">
+                <label>GLOBAL SETTINGS</label>
                 <GlobalSettingsTable sysexByte={props.sysexByte} midiObject={props.midiObject}/>
               </div>
-              <label>PRESETS</label>
-              <hr/>
               <div className="presets-container">
+                <label>PRESETS</label>
                 {props.presets.map((preset, i) =>{
                   return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
                 })}
