@@ -78,7 +78,7 @@ export default function MerisHedraLayout(props){
 					selectedPedal={props.selectedPedal}
 					dispatch={hedraDispatch}
 					expressionVal={props.expressionVal}
-					sysexByte={3}
+					sysexByte={4}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
           presets={MerisHedraPresets}

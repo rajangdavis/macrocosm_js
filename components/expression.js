@@ -1,12 +1,14 @@
 import {useState, useEffect} from 'react'
 import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
+import {LittleKnob, BigKnob} from './pedals/knob'
 import parseSysexToBinary from '../utilities/parse_sysex'
 export default function Expression(props){
 	const {
 		expressionVal, 
 		setExpressionVal, 
 		midiObject, 
-		midiData
+		midiData,
+		pedalSelectAndOrder
 	} = props;
 
 
@@ -27,9 +29,19 @@ export default function Expression(props){
 			};
 			deviceInput.addListener('midimessage', sendExpressData);
 		}
-	},[midiData.inputForExpression,midiData.output, midiData.channel, midiObject])
+	},[midiData.inputForExpression, midiData.output, midiData.channel, midiObject])
+
+	// let setTempo = (value) =>{
+	// 	if(midiObject && midiData.output && midiData.channel){
+	// 		let deviceOutput = midiObject.outputs.filter(x =>{
+	// 			return x.name == midiData.output
+	// 		})[0]
+	// 		// props.ottobitJrDispatch({key: 14, value: value})
+	// 	}
+	// }
 
 	const express = (e)=>{
+
 		if(midiObject && midiData.output && midiData.channel){
 			let deviceOutput = midiObject.outputs.filter(x =>{
 				return x.name == midiData.output
@@ -42,6 +54,11 @@ export default function Expression(props){
 
 	return(
 		<div className="expression-container">
+			{/*<BigKnob
+				className="top-row sample-rate"
+				label="Sample Rate"
+				setVal={()=>{}}
+				val={0}/>*/}
       <div className="expression">
         <input type="range"
                value={expressionVal}

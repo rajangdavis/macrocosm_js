@@ -12,11 +12,11 @@ export default function SysexKnobsUpdate(props){
 	dispatch({skipMidi: true, key: 25, value: data[9]})
 	dispatch({skipMidi: true, key: 26, value: data[10]})
 	dispatch({skipMidi: true, key: 27, value: data[11]})
+	dispatch({skipMidi: true, key: 15, value: data[16]})
 	if(expression == false){
 		dispatch({skipMidi: true, key: 14, value: data[12]})
 		dispatch({skipMidi: true, key: 9, value: data[13]})
 		dispatch({skipMidi: true, key: 29, value: data[14]})
 		dispatch({skipMidi: true, key: 30, value: data[15]})
-		dispatch({skipMidi: true, key: 15, value: data[16]})
 	}
 }

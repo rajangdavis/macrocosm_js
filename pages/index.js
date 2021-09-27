@@ -18,11 +18,11 @@ export default function Home(props) {
     setDragId(ev.currentTarget.id);
   };
   const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
-    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg'},
-    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg'},
-    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg'},
-    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg'},
-    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg'}
+    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg', 'state': 'enzo_state'},
+    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg', 'state': 'hedra_state'},
+    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg', 'state': 'polymoon_state'},
+    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg', 'state': 'mercury7_state'},
+    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg', 'state': 'ottobit_jr_state'}
   ]);
 
   const handleDrop = (ev) => {
@@ -128,7 +128,8 @@ export default function Home(props) {
           expressionVal={expressionVal}
           setExpressionVal={setExpressionVal}
           midiData={midiData}
-          midiObject={props.midiObject} />
+          midiObject={props.midiObject}
+          pedalSelectAndOrder={pedalSelectAndOrder}/>
       </div>
     </div>
   )

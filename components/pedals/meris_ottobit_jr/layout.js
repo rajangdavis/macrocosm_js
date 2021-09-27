@@ -90,7 +90,7 @@ export default function MerisOttobitJrLayout(props){
 					selectedPedal={props.selectedPedal}
 					dispatch={ottobitJrDispatch}
 					expressionVal={props.expressionVal}
-					sysexByte={3}
+					sysexByte={0}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
           presets={MerisOttobitJrPresets}

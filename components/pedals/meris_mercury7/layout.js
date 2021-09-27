@@ -90,7 +90,7 @@ export default function MerisPolymoonLayout(props){
 					selectedPedal={props.selectedPedal}
 					dispatch={mercury7Dispatch}
 					expressionVal={props.expressionVal}
-					sysexByte={3}
+					sysexByte={1}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
           presets={MerisPolymoonPresets}
