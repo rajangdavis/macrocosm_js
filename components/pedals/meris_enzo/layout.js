@@ -17,13 +17,13 @@ export default function MerisEnzoLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
+	const [presetsState, setPresetsState] = useLocalStorage('enzo_presets', MerisEnzoPresets)
 	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
   let {
-		expressionVal,
-		setExpressionVal
+		expressionVal
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -37,6 +37,10 @@ export default function MerisEnzoLayout(props){
 	useEffect(()=>{
 	  setState(enzoState)
   }, [enzoState, setState]);
+
+	useEffect(()=>{
+	  setPresetsState(MerisEnzoPresets)
+  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -93,7 +97,7 @@ export default function MerisEnzoLayout(props){
 					sysexByte={3}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisEnzoPresets}
+          presets={presetsState}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />

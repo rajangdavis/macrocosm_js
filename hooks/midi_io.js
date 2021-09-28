@@ -1,5 +1,5 @@
 module.exports = {
-	HandleMidiOutput: (state, action, props = {})=>{
+	HandleMidiOutput: (action, props = {})=>{
 		if(action.skipMidi && action.skipMidi == true)
 			return
 		let {midiObject, midiData} = props;

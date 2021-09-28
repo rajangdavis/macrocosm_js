@@ -7,8 +7,7 @@ export default function Expression(props){
 		expressionVal, 
 		setExpressionVal, 
 		midiObject, 
-		midiData,
-		pedalSelectAndOrder
+		midiData
 	} = props;
 
 

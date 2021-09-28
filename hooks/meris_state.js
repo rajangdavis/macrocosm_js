@@ -4,7 +4,7 @@ import { HandleMidiOutput } from "./midi_io"
 export default function MerisState(initialState, props = {}){
 
   let reducer = (state, action) =>{
-    HandleMidiOutput(state, action, props);
+    HandleMidiOutput(action, props);
     state[action.key] = action.value
   }
 

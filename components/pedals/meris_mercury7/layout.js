@@ -7,7 +7,7 @@ import mercury7InitialState from './initial_state'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisPolymoonPresets from '../factory_presets/meris_mercury_7'
+import MerisMercury7Presets from '../factory_presets/meris_mercury_7'
 import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
@@ -17,13 +17,13 @@ export default function MerisPolymoonLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.mercury7Channel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('mercury7_state', mercury7InitialState)
+	const [presetsState, setPresetsState] = useLocalStorage('mercury7_presets', MerisMercury7Presets)
 	const [mercury7State, mercury7Dispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
   let {
-		expressionVal,
-		setExpressionVal
+		expressionVal
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -37,6 +37,10 @@ export default function MerisPolymoonLayout(props){
 	useEffect(()=>{
 	  setState(mercury7State)
   }, [mercury7State, setState]);
+
+	useEffect(()=>{
+	  setPresetsState(MerisMercury7Presets)
+  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -93,7 +97,7 @@ export default function MerisPolymoonLayout(props){
 					sysexByte={1}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisPolymoonPresets}
+          presets={presetsState}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />

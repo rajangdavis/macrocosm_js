@@ -17,13 +17,13 @@ export default function MerisOttobitJrLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.ottobitJrChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('ottobit_jr_state', ottobitJrInitialState)
+	const [presetsState, setPresetsState] = useLocalStorage('ottobit_jr_presets', MerisOttobitJrPresets)
 	const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
   let {
-		expressionVal,
-		setExpressionVal
+		expressionVal
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -37,6 +37,10 @@ export default function MerisOttobitJrLayout(props){
 	useEffect(()=>{
 	  setState(ottobitJrState)
   }, [ottobitJrState, setState]);
+
+	useEffect(()=>{
+	  setPresetsState(MerisOttobitJrPresets)
+  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -93,7 +97,7 @@ export default function MerisOttobitJrLayout(props){
 					sysexByte={0}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisOttobitJrPresets}
+          presets={presetsState}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />

@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
@@ -13,18 +14,17 @@ import {useState, useContext, useEffect} from 'react'
 export default function Home(props) {
   const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
   const [expressionVal, setExpressionVal] = useState(0);
+  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
+    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg'},
+    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg'},
+    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg'},
+    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg'},
+    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg'}
+  ]);
   const [dragId, setDragId] = useState();
   const handleDrag = (ev) => {
     setDragId(ev.currentTarget.id);
   };
-  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
-    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg', 'state': 'enzo_state'},
-    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg', 'state': 'hedra_state'},
-    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg', 'state': 'polymoon_state'},
-    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg', 'state': 'mercury7_state'},
-    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg', 'state': 'ottobit_jr_state'}
-  ]);
-
   const handleDrop = (ev) => {
     const dragBox = pedalSelectAndOrder.find((pedal) => pedal.key === dragId);
     const dropBox = pedalSelectAndOrder.find((pedal) => pedal.key === ev.currentTarget.id);
@@ -61,6 +61,7 @@ export default function Home(props) {
       </Head>
       <div className="view-port">
         <div className="pedal-selector">
+          {/*<Link href="/macros"><a>Macros</a></Link>*/}
           {
             pedalSelectAndOrder
               .sort((a, b) => a.order - b.order)
@@ -83,7 +84,6 @@ export default function Home(props) {
             selectedPedal == 'enzo' &&
             <MerisEnzoLayout
               expressionVal={expressionVal}
-              setExpressionVal={setExpressionVal}
               selectedPedal={selectedPedal}
               midiObject={props.midiObject}
             />
@@ -92,7 +92,6 @@ export default function Home(props) {
             selectedPedal == 'hedra' &&
             <MerisHedraLayout
               expressionVal={expressionVal}
-              setExpressionVal={setExpressionVal}
               selectedPedal={selectedPedal}
               midiObject={props.midiObject}
             />
@@ -101,7 +100,6 @@ export default function Home(props) {
             selectedPedal == 'polymoon' &&
             <MerisPolymoonLayout
               expressionVal={expressionVal}
-              setExpressionVal={setExpressionVal}
               selectedPedal={selectedPedal}
               midiObject={props.midiObject}
             />
@@ -110,7 +108,6 @@ export default function Home(props) {
             selectedPedal == 'mercury7' &&
             <MerisMercury7Layout
               expressionVal={expressionVal}
-              setExpressionVal={setExpressionVal}
               selectedPedal={selectedPedal}
               midiObject={props.midiObject}
             />
@@ -119,7 +116,6 @@ export default function Home(props) {
             selectedPedal == 'ottobitJr' &&
             <MerisOttobitJrLayout
               expressionVal={expressionVal}
-              setExpressionVal={setExpressionVal}
               selectedPedal={selectedPedal}
               midiObject={props.midiObject}
             />

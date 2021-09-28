@@ -16,12 +16,12 @@ export default function MerisHedraLayout(props){
 	const midiData = {channel: midiConfig.hedraChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('hedra_state', hedraInitialState)
 	const [hedraState, hedraDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
+	const [presetsState, setPresetsState] = useLocalStorage('hedra_presets', MerisHedraPresets)
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
   let {
-		expressionVal,
-		setExpressionVal
+		expressionVal
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -35,6 +35,10 @@ export default function MerisHedraLayout(props){
 	useEffect(()=>{
 	  setState(hedraState)
   }, [hedraState, setState]);
+
+  useEffect(()=>{
+	  setPresetsState(MerisHedraPresets)
+  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -81,7 +85,7 @@ export default function MerisHedraLayout(props){
 					sysexByte={4}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisHedraPresets}
+          presets={presetsState}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />

@@ -188,6 +188,12 @@ how to remove the virtical space around the range input in IE*/
   text-align: center;
 }
 
+.presets-button-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .presets-button{
   font-weight: 100;
   width: 468px;

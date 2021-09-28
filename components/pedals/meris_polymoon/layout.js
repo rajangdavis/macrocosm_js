@@ -17,13 +17,13 @@ export default function MerisPolymoonLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.polymoonChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('polymoon_state', polymoonInitialState)
+	const [presetsState, setPresetsState] = useLocalStorage('polymoon_presets', MerisPolymoonPresets)
 	const [polymoonState, polymoonDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsOpen, setPresetsOpen] = useState(false)
 	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   let noOutput = midiConfig.output == ""
   let {
-		expressionVal,
-		setExpressionVal
+		expressionVal
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -37,6 +37,10 @@ export default function MerisPolymoonLayout(props){
 	useEffect(()=>{
 	  setState(polymoonState)
   }, [polymoonState, setState]);
+
+	useEffect(()=>{
+	  setPresetsState(MerisPolymoonPresets)
+  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
@@ -93,7 +97,7 @@ export default function MerisPolymoonLayout(props){
 					sysexByte={2}
           midiObject={props.midiObject}
           setPresetsOpen={setPresetsOpen}
-          presets={MerisPolymoonPresets}
+          presets={presetsState}
           selectedPreset={selectedPreset}
           setSelectedPreset={setSelectedPreset}
         />
