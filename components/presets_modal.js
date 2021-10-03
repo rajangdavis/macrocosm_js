@@ -1,4 +1,4 @@
-import CloseButton from './close_button'
+  import CloseButton from './close_button'
 import NavMenu from './nav_menu'
 import GlobalSettingsTable from './global_settings_table'
 import {useContext, useState, useEffect} from 'react'
@@ -10,7 +10,8 @@ import parseSysexToBinary from '../utilities/parse_sysex'
 export default function PresetsModal(props){
   const {midiConfig} = useContext(MidiConfigContext);
   const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo');
-  const [menu, setMenu] = useState('midi');
+  const defaultMenu = midiConfig.output ? 'presets' : 'midi';
+  const [menu, setMenu] = useState(defaultMenu);
 
   const {
     midiObject,
@@ -62,7 +63,10 @@ export default function PresetsModal(props){
           setHeaderOpen={setPresetsOpen}
           headerOpen={true} />
         <a className={selectedMenu('midi')} onClick={()=>{setMenu('midi')}}>MIDI AND CONTROLS</a>
-        <a className={selectedMenu('presets')} onClick={()=>{setMenu('presets')}}>PEDAL PRESETS AND SETTINGS</a>
+        {
+          midiData.output &&
+          <a className={selectedMenu('presets')} onClick={()=>{setMenu('presets')}}>PEDAL PRESETS AND SETTINGS</a>
+        }
       </div>
       <div className="presets-modal-background">
       </div>

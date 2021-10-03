@@ -13,7 +13,7 @@ export default function NavMenu(props){
 
   const updateMidiOutput = (option)=>{
 		updateConfig('output', option)
-		props.setIsConnected(true)
+		// props.setIsConnected(true)
   }
 
   const updateMidiInputForExpression = (option)=>{
@@ -28,13 +28,13 @@ export default function NavMenu(props){
 		<div className="options-block">
 			<label>MIDI OPTIONS</label>
 			<div className="midi-options">
-				<CustomSelect
+				{/*<CustomSelect
 					onChange={updateMidiInputForExpression}
 					defaultOption={midiConfig.inputForExpression}
 					closeIf={props.headerOpen}
 					inputLabel={"MIDI INPUT FOR EXPRESSION"}
 					options={inputOptions}
-				/>
+				/>*/}
 				<CustomSelect
 					onChange={updateMidiOutput}
 					defaultOption={midiConfig.output}

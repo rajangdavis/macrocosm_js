@@ -49,6 +49,7 @@ body {
 }
 
 .view-port{
+  margin-top: 100px;
   display: flex;
   flex-direction: row;
   width: 90%;
@@ -56,6 +57,7 @@ body {
 
 .pedal-selector{
   display: flex;
+  gap: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -68,7 +70,6 @@ body {
   cursor: pointer;
 }
 .main-display{
-  margin-top: 5vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,20 +191,23 @@ how to remove the virtical space around the range input in IE*/
 
 .presets-button-container{
   display: flex;
+  position: relative;
   flex-direction: row;
   justify-content: center;
+  width: 916px;
 }
 
 .presets-button{
   font-weight: 100;
   width: 468px;
   height: 62px;
-  margin-bottom: 48px;
+  margin: 0 auto 48px;
   background: white;
   color: black;
   font-size: 25px;
   border: 3px solid;
   transition: .1s linear;
+  align-self: center;
 }
 
 .presets-button.open{
@@ -215,6 +219,11 @@ how to remove the virtical space around the range input in IE*/
   background: black;
   color: white;
   cursor: pointer;
+}
+
+.fullscreen-button{
+  position: absolute;
+  right: 0;
 }
 
 input::-webkit-outer-spin-button,

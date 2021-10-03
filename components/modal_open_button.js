@@ -14,9 +14,9 @@ export default function ModalOpenButton(props){
   }
   return (
     <div className="presets-button-container">
-      <Link href="/macros"><a>Macros</a></Link>
+      {/*<Link href="/macros"><a>Macros</a></Link>*/}
 		  <button className="presets-button" onClick={()=>props.setPresetsOpen(!props.presetsOpen)}>{text}</button>
-      <div>
+      <div className="fullscreen-button">
         <a className="fullscreen full" onClick={engageFullScreen}>Fullscreen</a>
         <a className="fullscreen normal" onClick={exitFullScreen}>Normal</a>
       </div>
