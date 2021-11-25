@@ -4,11 +4,10 @@ import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import enzoInitialState from './initial_state'
+import MerisEnzoPresets from '../factory_presets/meris_enzo'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisEnzoPresets from '../factory_presets/meris_enzo'
-import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
 
@@ -17,22 +16,14 @@ export default function MerisEnzoLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
-	const [presetsState, setPresetsState] = useLocalStorage('enzo_presets', MerisEnzoPresets)
 	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsOpen, setPresetsOpen] = useState(false)
-	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
-  let noOutput = midiConfig.output == ""
-  let {
-		expressionVal
-  } = props;
 
-  let presetsButtonClass = ()=>{
-		if(noOutput){
-			return "presets-button crosshatch"
-		}else{
-			return presetsOpen ? "presets-button open" : "presets-button"
-		}
-	}
+	const [presetsState, setPresetsState] = useLocalStorage('enzo_presets', MerisEnzoPresets)
+
+  let {
+		expressionVal,
+		selectedPreset
+  } = props;
 
 	useEffect(()=>{
 	  setState(enzoState)
@@ -46,7 +37,7 @@ export default function MerisEnzoLayout(props){
     if(selectedPreset.label != null){
       applyExpression()
     }
-  }, [expressionVal, applyExpression]);
+  }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = ()=>{
     if(props.midiObject && midiData.output && midiData.channel){
@@ -68,8 +59,7 @@ export default function MerisEnzoLayout(props){
   }
 
 	return(
-		<div className="main-display">
-			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
+		<div>
 			<div className="meris-pedal meris-enzo-bigbox">
 				<FirstRow
 	        midiObject={props.midiObject}
@@ -88,20 +78,6 @@ export default function MerisEnzoLayout(props){
 	        enzoDispatch={enzoDispatch}
 	       />
 			</div>
-			{
-        presetsOpen &&
-        <PresetsModal
-					selectedPedal={props.selectedPedal}
-					dispatch={enzoDispatch}
-					expressionVal={props.expressionVal}
-					sysexByte={3}
-          midiObject={props.midiObject}
-          setPresetsOpen={setPresetsOpen}
-          presets={presetsState}
-          selectedPreset={selectedPreset}
-          setSelectedPreset={setSelectedPreset}
-        />
-      }
 		</div>
 	)
 }

@@ -5,6 +5,7 @@ import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
 import MerisOttobitJrLayout from '../components/pedals/meris_ottobit_jr/layout'
 import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
+import ModalOpenButton from '../components/modal_open_button'
 import PresetsModal from '../components/presets_modal'
 import useLocalStorage from '../hooks/use_local_storage'
 import {MidiConfigContext} from '../hooks/midi_config'
@@ -14,14 +15,47 @@ import {useState, useContext, useEffect} from 'react'
 export default function Home(props) {
   const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
   const [expressionVal, setExpressionVal] = useState(0);
+  const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
   const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
-    {key: 'enzo', label: 'Enzo', order: 1, iconSource: './enzo_button.svg'},
-    {key: 'hedra', label: 'Hedra', order: 2, iconSource: './hedra_button.svg'},
-    {key: 'polymoon', label: 'Polymoon', order: 3, iconSource: './polymoon_button.svg'},
-    {key: 'mercury7', label: 'Mercury7', order: 4, iconSource: './mercury7_button.svg'},
-    {key: 'ottobitJr', label: 'Ottobit Jr.', order: 5, iconSource: './ottobit_jr_button.svg'}
+    {
+      key: 'enzo',
+      label: 'Enzo',
+      sysexByte: 3,
+      order: 1,
+      iconSource: './enzo_button.svg'
+    },
+    {
+      key: 'hedra',
+      label: 'Hedra',
+      sysexByte: 4,
+      order: 2,
+      iconSource: './hedra_button.svg'
+    },
+    {
+      key: 'polymoon',
+      label: 'Polymoon',
+      sysexByte: 2,
+      order: 3,
+      iconSource: './polymoon_button.svg'
+    },
+    {
+      key: 'mercury7',
+      label: 'Mercury7',
+      sysexByte: 1,
+      order: 4,
+      iconSource: './mercury7_button.svg'
+    },
+    {
+      key: 'ottobitJr',
+      label: 'Ottobit Jr.',
+      sysexByte: 0,
+      order: 5,
+      iconSource: './ottobit_jr_button.svg'
+    }
   ]);
+  const [sysexByte, setSysexByte] = useState(1);
   const [dragId, setDragId] = useState();
+  const [presetsOpen, setPresetsOpen] = useState(false);
   const handleDrag = (ev) => {
     setDragId(ev.currentTarget.id);
   };
@@ -50,6 +84,8 @@ export default function Home(props) {
 
   useEffect(()=>{
     setExpressionVal(0);
+    let currentSysexByte = pedalSelectAndOrder.filter(x => x.key == selectedPedal)[0].sysexByte
+    setSelectedPreset({label: null, message: null})
   }, [selectedPedal]);
 
   return (
@@ -61,7 +97,6 @@ export default function Home(props) {
       </Head>
       <div className="view-port">
         <div className="pedal-selector">
-          {/*<Link href="/macros"><a>Macros</a></Link>*/}
           {
             pedalSelectAndOrder
               .sort((a, b) => a.order - b.order)
@@ -69,22 +104,26 @@ export default function Home(props) {
               .map((pedal)=>{
                 let className = selectedPedal == pedal['key'] ? 'selected pedal-option' : 'pedal-option';
                 let iconSource = selectedPedal == pedal['key'] ? pedal.iconSource.replace('button','button_selected') : pedal.iconSource;
-                let changePedal = (e, key)=>{
-                  setSelectedPedal(key);
+                let changePedal = (e, pedal)=>{
+                  setSelectedPedal(pedal['key']);
+                  setSysexByte(pedal['sysexByte']);
                 }
                 return <div key={pedal.key} id={pedal.key} onDragOver={(ev) => ev.preventDefault()} draggable="true" onDragStart={handleDrag} onDrop={handleDrop}>
-                  <a className={className} onClick={(e)=> changePedal(e, pedal['key'])}>
+                  <a className={className} onClick={(e)=> changePedal(e, pedal)}>
                     <img src={iconSource}/>
                   </a>
                 </div>
             })
           }
         </div>
+        <div className="main-display">
+          <ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
           {
             selectedPedal == 'enzo' &&
             <MerisEnzoLayout
               expressionVal={expressionVal}
               selectedPedal={selectedPedal}
+              selectedPreset={selectedPreset}
               midiObject={props.midiObject}
             />
           }
@@ -93,6 +132,7 @@ export default function Home(props) {
             <MerisHedraLayout
               expressionVal={expressionVal}
               selectedPedal={selectedPedal}
+              selectedPreset={selectedPreset}
               midiObject={props.midiObject}
             />
           }
@@ -101,6 +141,7 @@ export default function Home(props) {
             <MerisPolymoonLayout
               expressionVal={expressionVal}
               selectedPedal={selectedPedal}
+              selectedPreset={selectedPreset}
               midiObject={props.midiObject}
             />
           }
@@ -109,6 +150,7 @@ export default function Home(props) {
             <MerisMercury7Layout
               expressionVal={expressionVal}
               selectedPedal={selectedPedal}
+              selectedPreset={selectedPreset}
               midiObject={props.midiObject}
             />
           }
@@ -117,9 +159,11 @@ export default function Home(props) {
             <MerisOttobitJrLayout
               expressionVal={expressionVal}
               selectedPedal={selectedPedal}
+              selectedPreset={selectedPreset}
               midiObject={props.midiObject}
             />
           }
+        </div>
         <Expression
           expressionVal={expressionVal}
           setExpressionVal={setExpressionVal}
@@ -127,6 +171,20 @@ export default function Home(props) {
           midiObject={props.midiObject}
           pedalSelectAndOrder={pedalSelectAndOrder}/>
       </div>
+      {/*{
+        presetsOpen &&
+        <PresetsModal
+          selectedPedal={selectedPedal}
+          dispatch={mercury7Dispatch}
+          expressionVal={expressionVal}
+          sysexByte={sysexByte}
+          midiObject={props.midiObject}
+          setPresetsOpen={setPresetsOpen}
+          presets={presetsState}
+          selectedPreset={selectedPreset}
+          setSelectedPreset={setSelectedPreset}
+        />
+      }*/}
     </div>
   )
 }

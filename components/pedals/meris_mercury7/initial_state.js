@@ -12,7 +12,7 @@ module.exports = {
   26:0,
   27:0,
   30: null,
-  23: null,
+  23: 0,
   9: null,
   29: null,
   14: null,

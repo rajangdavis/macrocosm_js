@@ -1,5 +1,5 @@
 module.exports = {
-  22:null,
+  22:0,
   16:0,
   17:0,
   18:0,
@@ -11,7 +11,7 @@ module.exports = {
   26:0,
   27:0,
   30: null,
-  23: null,
+  23: 0,
   9: null,
   29: null,
   14: null,

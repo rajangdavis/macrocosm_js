@@ -4,35 +4,26 @@ import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import mercury7InitialState from './initial_state'
+import MerisMercury7Presets from '../factory_presets/meris_mercury_7'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisMercury7Presets from '../factory_presets/meris_mercury_7'
-import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
 
-export default function MerisPolymoonLayout(props){
+export default function MerisMercury7Layout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.mercury7Channel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('mercury7_state', mercury7InitialState)
-	const [presetsState, setPresetsState] = useLocalStorage('mercury7_presets', MerisMercury7Presets)
 	const [mercury7State, mercury7Dispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsOpen, setPresetsOpen] = useState(false)
-	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
-  let noOutput = midiConfig.output == ""
-  let {
-		expressionVal
-  } = props;
 
-  let presetsButtonClass = ()=>{
-		if(noOutput){
-			return "presets-button crosshatch"
-		}else{
-			return presetsOpen ? "presets-button open" : "presets-button"
-		}
-	}
+	const [presetsState, setPresetsState] = useLocalStorage('mercury7_presets', MerisMercury7Presets)
+
+  let {
+		expressionVal,
+		selectedPreset
+  } = props;
 
 	useEffect(()=>{
 	  setState(mercury7State)
@@ -46,7 +37,7 @@ export default function MerisPolymoonLayout(props){
     if(selectedPreset.label != null){
       applyExpression()
     }
-  }, [expressionVal, applyExpression]);
+  }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = ()=>{
     if(props.midiObject && midiData.output && midiData.channel){
@@ -68,8 +59,7 @@ export default function MerisPolymoonLayout(props){
   }
 
 	return(
-		<div className="main-display">
-			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
+		<div>
 			<div className="meris-pedal meris-mercury7-bigbox">
 				<FirstRow
 	        midiObject={props.midiObject}
@@ -88,20 +78,6 @@ export default function MerisPolymoonLayout(props){
 	        mercury7Dispatch={mercury7Dispatch}
 	       />
 			</div>
-			{
-        presetsOpen &&
-        <PresetsModal
-					selectedPedal={props.selectedPedal}
-					dispatch={mercury7Dispatch}
-					expressionVal={props.expressionVal}
-					sysexByte={1}
-          midiObject={props.midiObject}
-          setPresetsOpen={setPresetsOpen}
-          presets={presetsState}
-          selectedPreset={selectedPreset}
-          setSelectedPreset={setSelectedPreset}
-        />
-      }
 		</div>
 	)
 }

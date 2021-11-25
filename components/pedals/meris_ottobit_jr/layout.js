@@ -4,11 +4,10 @@ import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import ottobitJrInitialState from './initial_state'
+import MerisOttobitJrPresets from '../factory_presets/meris_ottobit_jr'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisOttobitJrPresets from '../factory_presets/meris_ottobit_jr'
-import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
 
@@ -17,22 +16,13 @@ export default function MerisOttobitJrLayout(props){
 	const {midiConfig} = useContext(MidiConfigContext)
 	const midiData = {channel: midiConfig.ottobitJrChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('ottobit_jr_state', ottobitJrInitialState)
-	const [presetsState, setPresetsState] = useLocalStorage('ottobit_jr_presets', MerisOttobitJrPresets)
 	const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsOpen, setPresetsOpen] = useState(false)
-	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
-  let noOutput = midiConfig.output == ""
-  let {
-		expressionVal
-  } = props;
+	const [presetsState, setPresetsState] = useLocalStorage('ottobit_jr_presets', MerisOttobitJrPresets)
 
-  let presetsButtonClass = ()=>{
-		if(noOutput){
-			return "presets-button crosshatch"
-		}else{
-			return presetsOpen ? "presets-button open" : "presets-button"
-		}
-	}
+  let {
+		expressionVal,
+		selectedPreset
+  } = props;
 
 	useEffect(()=>{
 	  setState(ottobitJrState)
@@ -46,7 +36,7 @@ export default function MerisOttobitJrLayout(props){
     if(selectedPreset.label != null){
       applyExpression()
     }
-  }, [expressionVal, applyExpression]);
+  }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = ()=>{
     if(props.midiObject && midiData.output && midiData.channel){
@@ -68,8 +58,7 @@ export default function MerisOttobitJrLayout(props){
   }
 
 	return(
-		<div className="main-display">
-			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
+		<div>
 			<div className="meris-pedal meris-ottobit-jr-bigbox">
 				<FirstRow
 	        midiObject={props.midiObject}
@@ -88,20 +77,6 @@ export default function MerisOttobitJrLayout(props){
 	        ottobitJrDispatch={ottobitJrDispatch}
 	       />
 			</div>
-			{
-        presetsOpen &&
-        <PresetsModal
-					selectedPedal={props.selectedPedal}
-					dispatch={ottobitJrDispatch}
-					expressionVal={props.expressionVal}
-					sysexByte={0}
-          midiObject={props.midiObject}
-          setPresetsOpen={setPresetsOpen}
-          presets={presetsState}
-          selectedPreset={selectedPreset}
-          setSelectedPreset={setSelectedPreset}
-        />
-      }
 		</div>
 	)
 }

@@ -2,11 +2,10 @@ import FirstRow from './first_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
 import hedraInitialState from './initial_state'
+import MerisHedraPresets from '../factory_presets/meris_hedra'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
-import MerisHedraPresets from '../factory_presets/meris_hedra'
-import PresetsModal from '../../presets_modal'
 import sysexKnobsUpdate from '../../../hooks/sysex_knobs_update'
 import parseSysexToBinary from '../../../utilities/parse_sysex'
 
@@ -17,11 +16,10 @@ export default function MerisHedraLayout(props){
 	const [initialState, setState] = useLocalStorage('hedra_state', hedraInitialState)
 	const [hedraState, hedraDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
 	const [presetsState, setPresetsState] = useLocalStorage('hedra_presets', MerisHedraPresets)
-	const [presetsOpen, setPresetsOpen] = useState(false)
-	const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
-  let noOutput = midiConfig.output == ""
+
   let {
-		expressionVal
+		expressionVal,
+		selectedPreset
   } = props;
 
   let presetsButtonClass = ()=>{
@@ -44,7 +42,7 @@ export default function MerisHedraLayout(props){
     if(selectedPreset.label != null){
       applyExpression()
     }
-  }, [expressionVal, applyExpression]);
+  }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = ()=>{
     if(props.midiObject && midiData.output && midiData.channel){
@@ -66,8 +64,7 @@ export default function MerisHedraLayout(props){
   }
 
 	return(
-		<div className="main-display">
-			<ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
+		<div>
 			<div className="meris-pedal meris-hedra-bigbox">
 				<FirstRow
 					midiData={midiData}
@@ -76,20 +73,6 @@ export default function MerisHedraLayout(props){
 	        hedraDispatch={hedraDispatch}
 	       />
 			</div>
-			{
-        presetsOpen &&
-        <PresetsModal
-					selectedPedal={props.selectedPedal}
-					dispatch={hedraDispatch}
-					expressionVal={props.expressionVal}
-					sysexByte={4}
-          midiObject={props.midiObject}
-          setPresetsOpen={setPresetsOpen}
-          presets={presetsState}
-          selectedPreset={selectedPreset}
-          setSelectedPreset={setSelectedPreset}
-        />
-      }
 		</div>
 	)
 }

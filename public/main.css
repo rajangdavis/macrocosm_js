@@ -313,9 +313,9 @@ input[type=number] {
 
 /* LARGE SCREENS */
 
-@media(max-width: 1400px){
+@media(min-width: 1400px){
   .view-port{
-    width: 100%;
+    max-width: 1615px;
   }
 }
 
@@ -331,22 +331,17 @@ input[type=number] {
 
 @media(max-width: 1340px) and (orientation: landscape){
   html, body {
-    margin: 0; 
-    height: 100%; 
-    overflow: hidden
+    margin: -40px -50px;
+    transform: scale(.90);
   }
   .view-port{
     margin: 0;
-    transform: scale(.80);
   }
   .main-display{
     margin-top: 25px;
   }
   .nav-menu.open{
     overflow-y: auto;
-  }
-  .header-nav{
-    height: 10vh;
   }
   .expression{
     margin-top: 350px;
@@ -360,26 +355,18 @@ input[type=number] {
 /* TABLET AND MOBILE TEMPLATE */
 @media(max-width: 991px) and (orientation:  portrait){
   .view-port{
-    margin-top: 100px;
-    margin-right: -150px;
     transform: rotate(90deg) scale(.83);
-    width: 100vh;
-  }
-  .expression-container{
-    width: 15%;
+    top: 10vh;
+    position: absolute;
+    width: 120vh;
+    height: 120vw;
   }
 }
 
 
 /* MOBILE TEMPLATE */
 @media(max-width: 767px){
-  .view-port{
-    transform: rotate(90deg) scale(.6);
-    width: 200vh;
-  }
-  .expression-container{
-    width: 40%;
-  }
+
 }
 
 @-webkit-keyframes fadeIn {
