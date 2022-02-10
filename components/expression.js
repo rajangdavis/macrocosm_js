@@ -1,7 +1,6 @@
 import {useState, useEffect} from 'react'
 import sysexKnobsUpdate from '../hooks/sysex_knobs_update'
 import {LittleKnob, BigKnob} from './pedals/knob'
-import parseSysexToBinary from '../utilities/parse_sysex'
 export default function Expression(props){
 	const {
 		expressionVal, 

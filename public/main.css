@@ -237,6 +237,12 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+/* MACROS PEDALS */
+.macro{
+  border: 1px solid;
+  height: 250px;
+  width: 250px;
+}
 
 /* MERIS PEDALS */
 

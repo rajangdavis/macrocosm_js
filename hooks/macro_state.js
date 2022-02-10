@@ -2,21 +2,18 @@ import cloneDeep from 'lodash/cloneDeep';
 import merge from 'lodash/merge';
 import { useImmerReducer } from "use-immer";
 import { v4 as uuidv4 } from 'uuid';
-export default function ManageState(initialState){
+export default function ManageMacroState(initialState){
 
   let reducer = (state, action) =>{
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     // CREATE
-    let createMacro = (state)=>{
+    let createMacro = (state, action)=>{
       let initialState = {
         macro_id: uuidv4(),
-        name: `Macro #${state.length + 1}`,
-        midi_devices: [],
-        open: true,
-        order: state.length,
-        show_midi_devices: false
+        ...action
       }
+      delete initialState.type;
       state.push(initialState)
     }
 
@@ -48,7 +45,7 @@ export default function ManageState(initialState){
 
     switch(action.type){
       case 'create-macro':
-        return createMacro(state)
+        return createMacro(state, action)
       case 'clone-macro':
         return cloneMacro(state, action)
       case 'update-macro':

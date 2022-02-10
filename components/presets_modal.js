@@ -1,4 +1,4 @@
-  import CloseButton from './close_button'
+import CloseButton from './close_button'
 import NavMenu from './nav_menu'
 import GlobalSettingsTable from './global_settings_table'
 import {useContext, useState, useEffect} from 'react'
@@ -16,7 +16,8 @@ export default function PresetsModal(props){
   const {
     midiObject,
     sysexByte,
-    dispatch,
+    // dispatch,
+    // presets
     selectedPreset,
     setSelectedPreset,
     setPresetsOpen
@@ -35,7 +36,7 @@ export default function PresetsModal(props){
         return x.name == midiData.output
       })[0]
       deviceOutput.sendSysex(manufacturer, data)
-      sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
+      // sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
       setSelectedPreset(preset)
     }
   }
@@ -81,13 +82,13 @@ export default function PresetsModal(props){
             <div className="sysex-menu fade-in">
               <div className="global-settings">
                 <label>GLOBAL SETTINGS</label>
-                <GlobalSettingsTable sysexByte={props.sysexByte} midiObject={props.midiObject}/>
+                <GlobalSettingsTable sysexByte={sysexByte} midiObject={midiObject}/>
               </div>
               <div className="presets-container">
                 <label>PRESETS</label>
-                {props.presets.map((preset, i) =>{
+                {/*{presets.map((preset, i) =>{
                   return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
-                })}
+                })}*/}
               </div>
             </div>
           }
