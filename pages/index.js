@@ -4,6 +4,7 @@ import ManageMacroState from '../hooks/macro_state'
 import { MidiConfigContext } from '../hooks/midi_config'
 import { HandleMidiOutput } from "../hooks/midi_io"
 import MacrosModal from '../components/macros_modal'
+import MacrosModalEdit from '../components/macros_modal_edit'
 import {useEffect, useContext, useState} from 'react'
 import parseSysexToBinary from '../utilities/parse_sysex'
 
@@ -11,6 +12,8 @@ export default function Macros(props) {
 	const {midiConfig} = useContext(MidiConfigContext)
 	const {midiObject} = props;
 	const [macrosModalOpen, setMacrosModalOpen] = useState(false);
+	const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
+	const [macroToEdit, setMacroToEdit] = useState(null);
 	let [initialState, setState] = useLocalStorage('macro_state', [])
   let [macros, macroDispatch] = ManageMacroState(initialState);
   useEffect(() => {
@@ -47,13 +50,17 @@ export default function Macros(props) {
 	return (
 		<div>
 			<div className="view-port">
-				<Link href="/controllers">Presets</Link>
+				<Link href="/pedals">Pedals</Link>
 				<div className="main-display">
 					{
 						macros.map((macro, i) =>{
 							return <div className="macro" key={i} onClick={()=>{callMacro(macro.data)}}>
 											{macro.data.name}
 											<a href="#" onClick={()=>{macroDispatch({type: 'remove-macro', macro_id: macro.macro_id }) } }>remove</a>
+											|
+											<a href="#" onClick={()=>{macroDispatch({type: 'clone-macro', macro_id: macro.macro_id }) } }>clone</a>
+											|
+											<a href="#" onClick={()=>{setMacroToEdit(macro); setMacrosModalEditOpen(true)} }>edit</a>
 										</div>
 						})
 					}
@@ -65,6 +72,15 @@ export default function Macros(props) {
         <MacrosModal
           macroDispatch={macroDispatch}
           setMacrosModalOpen={setMacrosModalOpen}
+        />
+      }
+      {
+				macrosModalEditOpen &&
+        <MacrosModalEdit
+          macroDispatch={macroDispatch}
+          macroToEdit={macroToEdit}
+          setMacroToEdit={setMacroToEdit}
+          setMacrosModalOpen={setMacrosModalEditOpen}
         />
       }
 		</div>

@@ -1,4 +1,4 @@
-import Head from 'next/head'
+
 import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
 import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
 import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
@@ -7,11 +7,13 @@ import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
 import ModalOpenButton from '../components/modal_open_button'
 import PresetsModal from '../components/presets_modal'
 import useLocalStorage from '../hooks/use_local_storage'
-import {MidiConfigContext} from '../hooks/midi_config'
+import { MidiConfigContext } from '../hooks/midi_config'
+import { FactoryPresetsContext } from '../hooks/presets_state'
 import Expression from '../components/expression'
 import {useState, useContext, useEffect} from 'react'
 
-export default function Home(props) {
+export default function Pedals(props) {
+  const {factoryPresets} = useContext(FactoryPresetsContext)
   const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
   const [expressionVal, setExpressionVal] = useState(0);
   const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
@@ -52,6 +54,10 @@ export default function Home(props) {
       iconSource: './ottobit_jr_button.svg'
     }
   ]);
+
+  // useEffect(()=>{
+  //   setPresetsState(MerisPolymoonPresets)
+  // }, [presetsState, setPresetsState]);
   const [sysexByte, setSysexByte] = useState(1);
   const [dragId, setDragId] = useState();
   const [presetsOpen, setPresetsOpen] = useState(false);
@@ -88,11 +94,6 @@ export default function Home(props) {
 
   return (
     <div className="container">
-      <Head>
-        <title>macrocosm</title>
-        <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-      </Head>
       <div className="view-port">
         <div className="pedal-selector">
           {
@@ -172,6 +173,7 @@ export default function Home(props) {
       {
         presetsOpen &&
         <PresetsModal
+          presets={factoryPresets[selectedPedal]}
           selectedPedal={selectedPedal}
           expressionVal={expressionVal}
           sysexByte={sysexByte}

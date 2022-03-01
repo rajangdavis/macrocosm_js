@@ -3,8 +3,7 @@ import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
-import ottobitJrInitialState from './initial_state'
-import MerisOttobitJrPresets from '../../../factory_presets/meris_ottobit_jr'
+import {PedalStatesContext} from '../../../hooks/pedal_states'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
@@ -14,10 +13,10 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 export default function MerisOttobitJrLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
+	const {ottobitJr: ottobitJrInitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.ottobitJrChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('ottobit_jr_state', ottobitJrInitialState)
 	const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsState, setPresetsState] = useLocalStorage('ottobit_jr_presets', MerisOttobitJrPresets)
 
   let {
 		expressionVal,
@@ -27,10 +26,6 @@ export default function MerisOttobitJrLayout(props){
 	useEffect(()=>{
 	  setState(ottobitJrState)
   }, [ottobitJrState, setState]);
-
-	useEffect(()=>{
-	  setPresetsState(MerisOttobitJrPresets)
-  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){

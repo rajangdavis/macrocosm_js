@@ -20,7 +20,8 @@ export default function ManageMacroState(initialState){
     let cloneMacro = (state, action)=>{
       let [index, macro] = readMacro(state, action)
       let clone = cloneDeep(macro);
-      let newMacroId = uuidv4();
+      clone.macro_id = uuidv4();
+      clone.data.name = `Clone of ${clone.data.name}`
       state.push(clone);
     }
 
@@ -34,7 +35,7 @@ export default function ManageMacroState(initialState){
     // UPDATE
     let updateMacro = (state, action)=>{
       let [index, macro] = readMacro(state, action)
-      macro[action.field] = action.new_value;
+      macro.data = action.data;
       state.splice(index, 1 , macro);
     }
 

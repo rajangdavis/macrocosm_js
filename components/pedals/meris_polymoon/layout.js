@@ -3,8 +3,7 @@ import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
-import polymoonInitialState from './initial_state'
-import MerisPolymoonPresets from '../../../factory_presets/meris_polymoon'
+import {PedalStatesContext} from '../../../hooks/pedal_states'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
@@ -14,10 +13,10 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 export default function MerisPolymoonLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
+	const {polymoon: polymoonInitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.polymoonChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('polymoon_state', polymoonInitialState)
 	const [polymoonState, polymoonDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsState, setPresetsState] = useLocalStorage('polymoon_presets', MerisPolymoonPresets)
 
   let {
 		expressionVal,
@@ -27,10 +26,6 @@ export default function MerisPolymoonLayout(props){
 	useEffect(()=>{
 	  setState(polymoonState)
   }, [polymoonState, setState]);
-
-	useEffect(()=>{
-	  setPresetsState(MerisPolymoonPresets)
-  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){

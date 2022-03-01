@@ -17,7 +17,7 @@ export default function PresetsModal(props){
     midiObject,
     sysexByte,
     // dispatch,
-    // presets
+    presets,
     selectedPreset,
     setSelectedPreset,
     setPresetsOpen
@@ -86,9 +86,9 @@ export default function PresetsModal(props){
               </div>
               <div className="presets-container">
                 <label>PRESETS</label>
-                {/*{presets.map((preset, i) =>{
+                {presets.map((preset, i) =>{
                   return <div key={i} onClick={()=> setPreset(preset)} className={selectedClassName(preset)}>{preset.label}</div>
-                })}*/}
+                })}
               </div>
             </div>
           }

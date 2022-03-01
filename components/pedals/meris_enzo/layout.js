@@ -3,8 +3,7 @@ import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
-import enzoInitialState from './initial_state'
-import MerisEnzoPresets from '../../../factory_presets/meris_enzo'
+import {PedalStatesContext} from '../../../hooks/pedal_states'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
@@ -14,11 +13,10 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 export default function MerisEnzoLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
+	const {enzo: enzoInitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
 	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-
-	const [presetsState, setPresetsState] = useLocalStorage('enzo_presets', MerisEnzoPresets)
 
   let {
 		expressionVal,
@@ -28,10 +26,6 @@ export default function MerisEnzoLayout(props){
 	useEffect(()=>{
 	  setState(enzoState)
   }, [enzoState, setState]);
-
-	useEffect(()=>{
-	  setPresetsState(MerisEnzoPresets)
-  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){

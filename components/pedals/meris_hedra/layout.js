@@ -1,8 +1,7 @@
 import FirstRow from './first_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
-import hedraInitialState from './initial_state'
-import MerisHedraPresets from '../../../factory_presets/meris_hedra'
+import {PedalStatesContext} from '../../../hooks/pedal_states'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
@@ -12,10 +11,10 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 export default function MerisHedraLayout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
+	const {hedra: hedraInitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.hedraChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('hedra_state', hedraInitialState)
 	const [hedraState, hedraDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-	const [presetsState, setPresetsState] = useLocalStorage('hedra_presets', MerisHedraPresets)
 
   let {
 		expressionVal,
@@ -33,10 +32,6 @@ export default function MerisHedraLayout(props){
 	useEffect(()=>{
 	  setState(hedraState)
   }, [hedraState, setState]);
-
-  useEffect(()=>{
-	  setPresetsState(MerisHedraPresets)
-  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){

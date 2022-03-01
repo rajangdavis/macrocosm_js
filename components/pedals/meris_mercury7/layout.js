@@ -3,8 +3,7 @@ import SecondRow from './second_row'
 import ThirdRow from './third_row'
 import ModalOpenButton from '../../modal_open_button'
 import {useState, useEffect, useContext} from 'react'
-import mercury7InitialState from './initial_state'
-import MerisMercury7Presets from '../../../factory_presets/meris_mercury_7'
+import {PedalStatesContext} from '../../../hooks/pedal_states'
 import merisStateReducer from '../../../hooks/meris_state'
 import {MidiConfigContext} from '../../../hooks/midi_config'
 import useLocalStorage from '../../../hooks/use_local_storage'
@@ -14,11 +13,10 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 export default function MerisMercury7Layout(props){
 
 	const {midiConfig} = useContext(MidiConfigContext)
+	const {mercury7: mercury7InitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.mercury7Channel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('mercury7_state', mercury7InitialState)
 	const [mercury7State, mercury7Dispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-
-	const [presetsState, setPresetsState] = useLocalStorage('mercury7_presets', MerisMercury7Presets)
 
   let {
 		expressionVal,
@@ -28,10 +26,6 @@ export default function MerisMercury7Layout(props){
 	useEffect(()=>{
 	  setState(mercury7State)
   }, [mercury7State, setState]);
-
-	useEffect(()=>{
-	  setPresetsState(MerisMercury7Presets)
-  }, [presetsState, setPresetsState]);
 
 	useEffect(()=>{
     if(selectedPreset.label != null){
