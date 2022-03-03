@@ -1,7 +1,7 @@
-import {useState} from 'react'
-import GlobalSettingsRow from "./global_settings_row"
+import { useState } from "react";
+import GlobalSettingsRow from "./global_settings_row";
 
-export default function GlobalSettingsTable(props){
+export default function GlobalSettingsTable(props) {
   const [inputMode, setInputMode] = useState(null);
   const [level, setLevel] = useState(null);
   const [bypassMode, setBypassMode] = useState(null);
@@ -9,8 +9,8 @@ export default function GlobalSettingsTable(props){
   const [trails, setTrails] = useState(null);
   const [globalTempo, setGlobalTempo] = useState(null);
 
-  return(
-		<div className="settings-container">
+  return (
+    <div className="settings-container">
       <table>
         <tbody>
           <GlobalSettingsRow
@@ -75,5 +75,5 @@ export default function GlobalSettingsTable(props){
         </tbody>
       </table>
     </div>
-	)
+  );
 }

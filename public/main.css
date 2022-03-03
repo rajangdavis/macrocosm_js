@@ -14,9 +14,8 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -26,11 +25,10 @@ body {
 
 * {
   box-sizing: border-box;
-  font-family: 'YWFTUltramagnetic-Light', sans-serif;
+  font-family: "YWFTUltramagnetic-Light", sans-serif;
 }
 
-
-.main{
+.main {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,18 +42,18 @@ body {
   width: 100%;
 }
 
-.invisible{
+.invisible {
   visibility: hidden;
 }
 
-.view-port{
+.view-port {
   margin-top: 100px;
   display: flex;
   flex-direction: row;
   width: 90%;
 }
 
-.pedal-selector{
+.pedal-selector {
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -63,27 +61,33 @@ body {
   justify-content: center;
   width: 15%;
 }
-.pedal-selector a{
+.pedal-selector a {
   margin: 10px;
 }
-.pedal-selector a:hover{
+.pedal-selector a:hover {
   cursor: pointer;
 }
-.main-display{
+.main-display,
+.macro-display {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 70%;
 }
 
-.expression-container{
+.add.macro > div {
+}
+
+.view-port.macro {
+}
+.expression-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 15%;
 }
-.expression{
+.expression {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -93,20 +97,20 @@ body {
   margin-top: 450px;
 }
 
-.expression > label{
+.expression > label {
   font-size: 25px;
 }
-.expression > input[type=range] {
+.expression > input[type="range"] {
   transform: rotate(-90deg);
   width: 500px;
   margin: 20.8px 0;
   background-color: transparent;
   -webkit-appearance: none;
 }
-.expression > input[type=range]:focus {
+.expression > input[type="range"]:focus {
   outline: none;
 }
-.expression > input[type=range]::-webkit-slider-runnable-track {
+.expression > input[type="range"]::-webkit-slider-runnable-track {
   background: #000000;
   border: 0.2px solid #010101;
   border-radius: 1.3px;
@@ -114,7 +118,7 @@ body {
   height: 26px;
   cursor: pointer;
 }
-.expression > input[type=range]::-webkit-slider-thumb {
+.expression > input[type="range"]::-webkit-slider-thumb {
   margin-top: -21px;
   width: 26px;
   height: 66px;
@@ -123,10 +127,10 @@ body {
   cursor: pointer;
   -webkit-appearance: none;
 }
-.expression > input[type=range]:focus::-webkit-slider-runnable-track {
+.expression > input[type="range"]:focus::-webkit-slider-runnable-track {
   background: #0d0d0d;
 }
-.expression > input[type=range]::-moz-range-track {
+.expression > input[type="range"]::-moz-range-track {
   background: #000000;
   border: 0.2px solid #010101;
   border-radius: 1.3px;
@@ -134,14 +138,14 @@ body {
   height: 8.4px;
   cursor: pointer;
 }
-.expression > input[type=range]::-moz-range-thumb {
+.expression > input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 50px;
   background: #ffffff;
   border: 1px solid #000000;
   cursor: pointer;
 }
-.expression > input[type=range]::-ms-track {
+.expression > input[type="range"]::-ms-track {
   background: transparent;
   border-color: transparent;
   border-width: 21.8px 0;
@@ -150,17 +154,17 @@ body {
   height: 8.4px;
   cursor: pointer;
 }
-.expression > input[type=range]::-ms-fill-lower {
+.expression > input[type="range"]::-ms-fill-lower {
   background: #000000;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
 }
-.expression > input[type=range]::-ms-fill-upper {
+.expression > input[type="range"]::-ms-fill-upper {
   background: #000000;
   border: 0.2px solid #010101;
   border-radius: 2.6px;
 }
-.expression > input[type=range]::-ms-thumb {
+.expression > input[type="range"]::-ms-thumb {
   width: 16px;
   height: 50px;
   background: #ffffff;
@@ -169,27 +173,27 @@ body {
   margin-top: 0px;
   /*Needed to keep the Edge thumb centred*/
 }
-.expression > input[type=range]:focus::-ms-fill-lower {
+.expression > input[type="range"]:focus::-ms-fill-lower {
   background: #000000;
 }
-.expression > input[type=range]:focus::-ms-fill-upper {
+.expression > input[type="range"]:focus::-ms-fill-upper {
   background: #0d0d0d;
 }
 /*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
 how to remove the virtical space around the range input in IE*/
-@supports (-ms-ime-align:auto) {
+@supports (-ms-ime-align: auto) {
   /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
-  .expression > input[type=range] {
+  .expression > input[type="range"] {
     margin: 0;
     /*Edge starts the margin from the thumb, not the track as other browsers do*/
   }
 }
 
-.text-center{
+.text-center {
   text-align: center;
 }
 
-.presets-button-container{
+.presets-button-container {
   display: flex;
   position: relative;
   flex-direction: row;
@@ -197,7 +201,7 @@ how to remove the virtical space around the range input in IE*/
   width: 916px;
 }
 
-.presets-button{
+.presets-button {
   font-weight: 100;
   width: 468px;
   height: 62px;
@@ -206,22 +210,22 @@ how to remove the virtical space around the range input in IE*/
   color: black;
   font-size: 25px;
   border: 3px solid;
-  transition: .1s linear;
+  transition: 0.1s linear;
   align-self: center;
 }
 
-.presets-button.open{
+.presets-button.open {
   background: black;
   color: white;
 }
 
-.presets-button:not(:disabled):hover{
+.presets-button:not(:disabled):hover {
   background: black;
   color: white;
   cursor: pointer;
 }
 
-.fullscreen-button{
+.fullscreen-button {
   position: absolute;
   right: 0;
 }
@@ -233,74 +237,93 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* MACROS PEDALS */
+.macro-display {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.macro {
+  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  height: 150px;
+  width: 150px;
+  margin: 50px;
+}
 
 /* MERIS PEDALS */
 
-.meris-pedal{
-  font-family: 'YWFTUltramagnetic-Light', sans-serif;
+.meris-pedal {
+  font-family: "YWFTUltramagnetic-Light", sans-serif;
   font-weight: 100;
   text-transform: uppercase;
   position: relative;
 }
 
-.text-reset{
+.text-reset {
   text-transform: none !important;
 }
 
 /*  buttons */
-.pad-button{
-  margin:0 auto;
+.pad-button {
+  margin: 0 auto;
 }
 
-.pad-button:active > label{
+.pad-button:active > label {
   font-size: 15px;
 }
 
-.tap-button-container{
+.tap-button-container {
   position: relative;
 }
-.tap{
+.tap {
   position: absolute;
   left: 135px;
   bottom: 42px;
 }
-.bypass{
+.bypass {
   position: absolute;
   right: 105px;
   bottom: 42px;
 }
 
-.pad-button.selected, .tap-button:active{
+.pad-button.selected,
+.tap-button:active {
   background-color: black !important;
   border: white;
   color: white;
-  transition: background-color, border, color linear .05s;
+  transition: background-color, border, color linear 0.05s;
 }
 
 .knob:hover,
 .knob > input:hover,
 .pad-button:hover,
-.controls > details:hover{
+.controls > details:hover {
   cursor: pointer;
 }
 
-.hidden{
+.hidden {
   display: none !important;
 }
 
-
 @keyframes blink-animation {
-  75% {background-color: black;}
+  75% {
+    background-color: black;
+  }
 }
 @-webkit-keyframes blink-animation {
-  75% {background-color: black;}
+  75% {
+    background-color: black;
+  }
 }
 
-.tempo-dot{
+.tempo-dot {
   height: 20px;
   width: 20px;
   background-color: white;
@@ -313,49 +336,48 @@ input[type=number] {
 
 /* LARGE SCREENS */
 
-@media(min-width: 1400px){
-  .view-port{
+@media (min-width: 1400px) {
+  .view-port {
     max-width: 1615px;
   }
 }
 
 /* DESKTOP TEMPLATE */
-@media(min-width: 992px){
-
+@media (min-width: 992px) {
 }
 
 /* TABLET ONLY TEMPLATE */
-@media (min-width: 768px) and (max-width: 991px){
-
+@media (min-width: 768px) and (max-width: 991px) {
 }
 
-@media(max-width: 1340px) and (orientation: landscape){
-  html, body {
+@media (max-width: 1340px) and (orientation: landscape) {
+  html,
+  body {
     margin: -40px -50px;
-    transform: scale(.90);
+    transform: scale(0.9);
   }
-  .view-port{
+  .view-port {
     margin: 0;
   }
-  .main-display{
+  .main-display,
+  .macro-display {
     margin-top: 25px;
   }
-  .nav-menu.open{
+  .nav-menu.open {
     overflow-y: auto;
   }
-  .expression{
+  .expression {
     margin-top: 350px;
   }
-  .pedal-selector{
+  .pedal-selector {
     margin: 0px;
   }
 }
 
-
 /* TABLET AND MOBILE TEMPLATE */
-@media(max-width: 991px) and (orientation:  portrait){
-  .view-port{
-    transform: rotate(90deg) scale(.83);
+@media (max-width: 991px) and (orientation: portrait) {
+  .view-port {
+    transform: rotate(90deg) scale(0.83);
     top: 10vh;
     position: absolute;
     width: 120vh;
@@ -363,21 +385,31 @@ input[type=number] {
   }
 }
 
-
 /* MOBILE TEMPLATE */
-@media(max-width: 767px){
-
+@media (max-width: 767px) {
 }
 
 @-webkit-keyframes fadeIn {
-  0% { opacity:0; }
-  66% { opacity:0; }
-  100% { opacity:1; }
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes fadeIn {
-  0% { opacity:0; }
-  66% { opacity:0; }
-  100% { opacity:1; }
+  0% {
+    opacity: 0;
+  }
+  66% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .fade-in {

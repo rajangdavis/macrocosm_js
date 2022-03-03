@@ -1,190 +1,152 @@
-import Head from 'next/head'
-import Link from 'next/link'
-import MerisEnzoLayout from '../components/pedals/meris_enzo/layout'
-import MerisHedraLayout from '../components/pedals/meris_hedra/layout'
-import MerisPolymoonLayout from '../components/pedals/meris_polymoon/layout'
-import MerisOttobitJrLayout from '../components/pedals/meris_ottobit_jr/layout'
-import MerisMercury7Layout from '../components/pedals/meris_mercury7/layout'
-import ModalOpenButton from '../components/modal_open_button'
-import PresetsModal from '../components/presets_modal'
-import useLocalStorage from '../hooks/use_local_storage'
-import {MidiConfigContext} from '../hooks/midi_config'
-import Expression from '../components/expression'
-import {useState, useContext, useEffect} from 'react'
+import Link from "next/link";
+import useLocalStorage from "../hooks/use_local_storage";
+import ManageMacroState from "../hooks/macro_state";
+import { MidiConfigContext } from "../hooks/midi_config";
+import { HandleMidiOutput } from "../hooks/midi_io";
+import MacrosModal from "../components/macros_modal";
+import MacrosModalEdit from "../components/macros_modal_edit";
+import { useEffect, useContext, useState } from "react";
+import parseSysexToBinary from "../utilities/parse_sysex";
 
-export default function Home(props) {
-  const [selectedPedal, setSelectedPedal] = useLocalStorage('selected_pedal', 'enzo')
-  const [expressionVal, setExpressionVal] = useState(0);
-  const [selectedPreset, setSelectedPreset] = useState({label: null, message: null});
-  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage('pedals_to_select',[
-    {
-      key: 'enzo',
-      label: 'Enzo',
-      sysexByte: 3,
-      order: 1,
-      iconSource: './enzo_button.svg'
-    },
-    {
-      key: 'hedra',
-      label: 'Hedra',
-      sysexByte: 4,
-      order: 2,
-      iconSource: './hedra_button.svg'
-    },
-    {
-      key: 'polymoon',
-      label: 'Polymoon',
-      sysexByte: 2,
-      order: 3,
-      iconSource: './polymoon_button.svg'
-    },
-    {
-      key: 'mercury7',
-      label: 'Mercury7',
-      sysexByte: 1,
-      order: 4,
-      iconSource: './mercury7_button.svg'
-    },
-    {
-      key: 'ottobitJr',
-      label: 'Ottobit Jr.',
-      sysexByte: 0,
-      order: 5,
-      iconSource: './ottobit_jr_button.svg'
-    }
-  ]);
-  const [sysexByte, setSysexByte] = useState(1);
-  const [dragId, setDragId] = useState();
-  const [presetsOpen, setPresetsOpen] = useState(false);
-  const handleDrag = (ev) => {
-    setDragId(ev.currentTarget.id);
-  };
-  const handleDrop = (ev) => {
-    const dragBox = pedalSelectAndOrder.find((pedal) => pedal.key === dragId);
-    const dropBox = pedalSelectAndOrder.find((pedal) => pedal.key === ev.currentTarget.id);
+export default function Macros(props) {
+  const { midiConfig } = useContext(MidiConfigContext);
+  const { midiObject } = props;
+  const [macrosModalOpen, setMacrosModalOpen] = useState(false);
+  const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
+  const [macroToEdit, setMacroToEdit] = useState(null);
+  let [initialState, setState] = useLocalStorage("macro_state", []);
+  let [macros, macroDispatch] = ManageMacroState(initialState);
+  useEffect(() => {
+    setState(macros);
+  });
 
-    const dragBoxOrder = dragBox.order;
-    const dropBoxOrder = dropBox.order;
+  const callMacro = async (macroData) => {
+    let macroSelectedPedals = macroData.pedals.filter(
+      (x) => x.showing == true && x.selectedPreset != {}
+    );
+    let notSelectedPedals = macroData.pedals.filter((x) => x.showing == false);
 
-    const newPedalOrder = pedalSelectAndOrder.map((pedal) => {
-      if (pedal.key === dragId) {
-        pedal.order = dropBoxOrder;
-      }
-      if (pedal.key === ev.currentTarget.id) {
-        pedal.order = dragBoxOrder;
-      }
-      return pedal;
+    let macroMessageData = macroSelectedPedals.map((x) => {
+      let message = parseSysexToBinary(x.selectedPreset.message);
+      return {
+        name: x.name,
+        channel: midiConfig[`${x.name}Channel`],
+        message: message,
+      };
     });
 
-    setPedalSelectAndOrder(newPedalOrder);
+    let turnOffThesePedals = notSelectedPedals.map((x) => {
+      return { name: x.name, channel: midiConfig[`${x.name}Channel`] };
+    });
+
+    let deviceOutput = midiObject.outputs.filter((x) => {
+      return x.name == midiConfig.output;
+    })[0];
+
+    if (deviceOutput) {
+      const results = await Promise.all(
+        turnOffThesePedals
+          .map((x) => {
+            console.log("TURNING OFF PEDAL: " + x.name);
+            return deviceOutput.sendControlChange(14, 0, {
+              channels: parseInt(x.channel),
+            });
+          })
+          .concat(
+            macroMessageData.map((x) => {
+              console.log("TURNING ON PRESET: " + x.name);
+              return [
+                deviceOutput.sendControlChange(14, 127, {
+                  channels: parseInt(x.channel),
+                }),
+                deviceOutput.sendSysex(x.message.manufacturer, x.message.data),
+              ];
+            })
+          )
+      );
+      console.log(results);
+    }
   };
-
-  const {midiConfig} = useContext(MidiConfigContext)
-  const midiData = {channel: midiConfig[`${selectedPedal}Channel`], output: midiConfig.output, inputForExpression: midiConfig.inputForExpression}
-
-  useEffect(()=>{
-    setExpressionVal(0);
-    let currentSysexByte = pedalSelectAndOrder.filter(x => x.key == selectedPedal)[0].sysexByte
-    setSelectedPreset({label: null, message: null})
-  }, [selectedPedal]);
 
   return (
     <div className="container">
-      <Head>
-        <title>macrocosm</title>
-        <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-      </Head>
       <div className="view-port">
-        <div className="pedal-selector">
-          {
-            pedalSelectAndOrder
-              .sort((a, b) => a.order - b.order)
-              .filter((x)=> parseInt(midiConfig[`${x['key']}Channel`]) > 0)
-              .map((pedal)=>{
-                let className = selectedPedal == pedal['key'] ? 'selected pedal-option' : 'pedal-option';
-                let iconSource = selectedPedal == pedal['key'] ? pedal.iconSource.replace('button','button_selected') : pedal.iconSource;
-                let changePedal = (e, pedal)=>{
-                  setSelectedPedal(pedal['key']);
-                  setSysexByte(pedal['sysexByte']);
-                }
-                return <div key={pedal.key} id={pedal.key} onDragOver={(ev) => ev.preventDefault()} draggable="true" onDragStart={handleDrag} onDrop={handleDrop}>
-                  <a className={className} onClick={(e)=> changePedal(e, pedal)}>
-                    <img src={iconSource}/>
-                  </a>
-                </div>
-            })
-          }
+        <div className="pedal-selector"></div>
+        <Link href="/pedals">Pedals</Link>
+        <div className="main-display macro-display">
+          {macros.map((macro, i) => {
+            return (
+              <div
+                className="macro"
+                key={i}
+                onClick={() => {
+                  callMacro(macro.data);
+                }}
+              >
+                {macro.data.name}
+                <a
+                  href="#"
+                  onClick={() => {
+                    macroDispatch({
+                      type: "remove-macro",
+                      macro_id: macro.macro_id,
+                    });
+                  }}
+                >
+                  remove
+                </a>
+                |
+                <a
+                  href="#"
+                  onClick={() => {
+                    macroDispatch({
+                      type: "clone-macro",
+                      macro_id: macro.macro_id,
+                    });
+                  }}
+                >
+                  clone
+                </a>
+                |
+                <a
+                  href="#"
+                  onClick={() => {
+                    setMacroToEdit(macro);
+                    setMacrosModalEditOpen(true);
+                  }}
+                >
+                  edit
+                </a>
+              </div>
+            );
+          })}
+          <div
+            className="add macro"
+            onClick={() => {
+              console.log(macrosModalOpen);
+              setMacrosModalOpen(true);
+            }}
+          >
+            <div></div>
+            <div></div>
+            <span>Add Macro</span>
+          </div>
         </div>
-        <div className="main-display">
-          <ModalOpenButton presetsOpen={presetsOpen} setPresetsOpen={setPresetsOpen} />
-          {
-            selectedPedal == 'enzo' &&
-            <MerisEnzoLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          }
-          {
-            selectedPedal == 'hedra' &&
-            <MerisHedraLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          }
-          {
-            selectedPedal == 'polymoon' &&
-            <MerisPolymoonLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          }
-          {
-            selectedPedal == 'mercury7' &&
-            <MerisMercury7Layout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          }
-          {
-            selectedPedal == 'ottobitJr' &&
-            <MerisOttobitJrLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          }
-        </div>
-        <Expression
-          expressionVal={expressionVal}
-          setExpressionVal={setExpressionVal}
-          midiData={midiData}
-          midiObject={props.midiObject}
-          pedalSelectAndOrder={pedalSelectAndOrder}/>
       </div>
-      {/*{
-        presetsOpen &&
-        <PresetsModal
-          selectedPedal={selectedPedal}
-          dispatch={mercury7Dispatch}
-          expressionVal={expressionVal}
-          sysexByte={sysexByte}
-          midiObject={props.midiObject}
-          setPresetsOpen={setPresetsOpen}
-          presets={presetsState}
-          selectedPreset={selectedPreset}
-          setSelectedPreset={setSelectedPreset}
+      {macrosModalOpen && (
+        <MacrosModal
+          macroDispatch={macroDispatch}
+          setMacrosModalOpen={setMacrosModalOpen}
         />
-      }*/}
+      )}
+      {macrosModalEditOpen && (
+        <MacrosModalEdit
+          macroDispatch={macroDispatch}
+          macroToEdit={macroToEdit}
+          setMacroToEdit={setMacroToEdit}
+          setMacrosModalOpen={setMacrosModalEditOpen}
+        />
+      )}
     </div>
-  )
+  );
 }

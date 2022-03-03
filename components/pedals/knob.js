@@ -1,61 +1,60 @@
-import * as style from './knob_styles'
-import {useContext} from 'react'
-import {SliderStateContext} from '../../hooks/slider_state'
+import * as style from "./knob_styles";
+import { useContext } from "react";
+import { SliderStateContext } from "../../hooks/slider_state";
 
 module.exports = {
-	LittleKnob: (props) => {
-		let newProps = {
-			...props,
-			dialStyle: style.littleKnobDial,
-			knobContainer: style.littleKnobContainer,
-			knobFunction: style.littleKnob,
-			hiddenKnob: style.hiddenLittleKnob,
-			magicNumber: 149
-		}
-		return Knob(newProps)
-	},
-	BigKnob: (props) => {
-		let newProps = {
-			...props,
-			dialStyle: style.bigKnobDial,
-			knobContainer: style.bigKnobContainer,
-			knobFunction: style.bigKnob,
-			hiddenKnob: style.hiddenBigKnob,
-			magicNumber: 146
-		}
-		return Knob(newProps)
-	},
-} 
+  LittleKnob: (props) => {
+    let newProps = {
+      ...props,
+      dialStyle: style.littleKnobDial,
+      knobContainer: style.littleKnobContainer,
+      knobFunction: style.littleKnob,
+      hiddenKnob: style.hiddenLittleKnob,
+      magicNumber: 149,
+    };
+    return Knob(newProps);
+  },
+  BigKnob: (props) => {
+    let newProps = {
+      ...props,
+      dialStyle: style.bigKnobDial,
+      knobContainer: style.bigKnobContainer,
+      knobFunction: style.bigKnob,
+      hiddenKnob: style.hiddenBigKnob,
+      magicNumber: 146,
+    };
+    return Knob(newProps);
+  },
+};
 
+function Knob(props) {
+  const { sliderState } = useContext(SliderStateContext);
 
-function Knob(props){
-	const {sliderState} = useContext(SliderStateContext);
+  const updateVal = (event) => {
+    props.setVal(parseInt(event.target.value));
+  };
 
-	const updateVal = (event) => {
-	  props.setVal(parseInt(event.target.value));
-	}
+  const angleCalc = (intValue) => {
+    return (298 / 127) * intValue - props.magicNumber;
+  };
 
-	const angleCalc = (intValue)=>{
-		return ((298/127)*intValue)-props.magicNumber;
-	}
-	
-	return(
-		<div className={`knob ${props.className}`} style={props.knobContainer}>
-			<div style={props.knobFunction(angleCalc(props.val))}>
-				<div style={props.dialStyle}></div>
-			</div>
-			<div style={style.textLabel}>
-				<span>{props.label}</span>
-			</div>
-			<input 
-	      type="range" 
-	      min="0" 
-	      max="127"
-	      value={props.val}
-	      style={style.inputRange(sliderState)}
-	      onChange={updateVal}
-	      onClickCapture={updateVal}/>
-		</div>
-	)
-
+  return (
+    <div className={`knob ${props.className}`} style={props.knobContainer}>
+      <div style={props.knobFunction(angleCalc(props.val))}>
+        <div style={props.dialStyle}></div>
+      </div>
+      <div style={style.textLabel}>
+        <span>{props.label}</span>
+      </div>
+      <input
+        type="range"
+        min="0"
+        max="127"
+        value={props.val}
+        style={style.inputRange(sliderState)}
+        onChange={updateVal}
+        onClickCapture={updateVal}
+      />
+    </div>
+  );
 }
