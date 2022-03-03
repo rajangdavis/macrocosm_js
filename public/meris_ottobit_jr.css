@@ -124,7 +124,7 @@
 
 .left-side-controls,
 .right-side-controls{
-  flex: 2;
+  flex: 3;
   flex-direction: column;
 }
 

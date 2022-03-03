@@ -46,15 +46,16 @@ export default function Macros(props) {
 		}
 	}
 
-
 	return (
-		<div>
+		<div className="container">
 			<div className="view-port">
+				<div className="pedal-selector">
+				</div>
 				<Link href="/pedals">Pedals</Link>
-				<div className="main-display">
+				<div className="main-display macro-display">
 					{
 						macros.map((macro, i) =>{
-							return <div className="macro" key={i} onClick={()=>{callMacro(macro.data)}}>
+							return<div className="macro" key={i} onClick={()=>{callMacro(macro.data)}}>
 											{macro.data.name}
 											<a href="#" onClick={()=>{macroDispatch({type: 'remove-macro', macro_id: macro.macro_id }) } }>remove</a>
 											|
@@ -62,10 +63,15 @@ export default function Macros(props) {
 											|
 											<a href="#" onClick={()=>{setMacroToEdit(macro); setMacrosModalEditOpen(true)} }>edit</a>
 										</div>
+
 						})
 					}
+					<div className="add macro" onClick={()=>{console.log(macrosModalOpen); setMacrosModalOpen(true)}}>
+						<div></div>
+						<div></div>
+						<span>Add Macro</span>
+					</div>
 				</div>
-				<a href="#" onClick={()=>{setMacrosModalOpen(true)}}>Add</a>
 			</div>
 			{
         macrosModalOpen &&

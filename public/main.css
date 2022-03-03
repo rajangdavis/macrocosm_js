@@ -69,13 +69,22 @@ body {
 .pedal-selector a:hover{
   cursor: pointer;
 }
-.main-display{
+.main-display, .macro-display{
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 70%;
 }
 
+
+.add.macro > div{
+
+}
+
+
+.view-port.macro{
+
+}
 .expression-container{
   display: flex;
   flex-direction: column;
@@ -238,10 +247,19 @@ input[type=number] {
 }
 
 /* MACROS PEDALS */
+.macro-display{
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+}
 .macro{
-  border: 1px solid;
-  height: 250px;
-  width: 250px;
+  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  height: 150px;
+  width: 150px;
+  margin: 50px;
 }
 
 /* MERIS PEDALS */
@@ -343,7 +361,7 @@ input[type=number] {
   .view-port{
     margin: 0;
   }
-  .main-display{
+  .main-display, .macro-display{
     margin-top: 25px;
   }
   .nav-menu.open{

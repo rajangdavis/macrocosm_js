@@ -102,7 +102,13 @@
 
 .on-off-row > div{
   margin-left: -30px;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
+}
+
+.volume-swell-enable > div > div,
+.half-speed-enable > div > div,
+.pitch-control-smoothing > div > div {
+  margin: 10px;
 }
 
 .meris-hedra-bigbox .tap{

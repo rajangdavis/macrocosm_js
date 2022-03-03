@@ -27,7 +27,7 @@ export default function Expression(props){
 			};
 			deviceInput.addListener('midimessage', sendExpressData);
 		}
-	},[midiData.inputForExpression, midiData.output, midiData.channel, midiObject])
+	},[midiData.inputForExpression, midiData.output, midiData.channel, midiObject, express])
 
 	// let setTempo = (value) =>{
 	// 	if(midiObject && midiData.output && midiData.channel){

@@ -12,31 +12,29 @@ import parseSysexToBinary from '../../../utilities/parse_sysex'
 
 export default function MerisEnzoLayout(props){
 
+  let {
+		midiObject,
+		expressionVal,
+		selectedPreset
+  } = props;
+
 	const {midiConfig} = useContext(MidiConfigContext)
 	const {enzo: enzoInitialState} = useContext(PedalStatesContext)
 	const midiData = {channel: midiConfig.enzoChannel, output: midiConfig.output}
 	const [initialState, setState] = useLocalStorage('enzo_state', enzoInitialState)
-	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: props.midiObject});
-
-  let {
-		expressionVal,
-		selectedPreset
-  } = props;
+	const [enzoState, enzoDispatch] = merisStateReducer(initialState, {midiData: midiData, midiObject: midiObject});
 
 	useEffect(()=>{
 	  setState(enzoState)
   }, [enzoState, setState]);
 
-	useEffect(()=>{
-    if(selectedPreset.label != null){
-      applyExpression()
-    }
-  }, [expressionVal, applyExpression, selectedPreset]);
-
   const applyExpression = ()=>{
-    if(props.midiObject && midiData.output && midiData.channel){
+		if(selectedPreset.label == null){
+			return
+		}
+    if(midiObject && midiData.output && midiData.channel){
       let {manufacturer, data} = parseSysexToBinary(selectedPreset.message)
-      let deviceOutput = props.midiObject.outputs.filter(x =>{
+      let deviceOutput = midiObject.outputs.filter(x =>{
         return x.name == midiData.output
       })[0]
       let presetValWithExpression = data.map((_, i)=>{
@@ -52,21 +50,23 @@ export default function MerisEnzoLayout(props){
     }
   }
 
+  useEffect(applyExpression, [expressionVal , selectedPreset, enzoDispatch, midiData.output]);
+
 	return(
 		<div>
 			<div className="meris-pedal meris-enzo-bigbox">
 				<FirstRow
-	        midiObject={props.midiObject}
+	        midiObject={midiObject}
 	        enzoState={enzoState}
 	        enzoDispatch={enzoDispatch}
 	       />
 				<SecondRow
-	        midiObject={props.midiObject}
+	        midiObject={midiObject}
 	        enzoState={enzoState}
 	        enzoDispatch={enzoDispatch}
 	       />
 				<ThirdRow
-	        midiObject={props.midiObject}
+	        midiObject={midiObject}
 	        midiData={midiData}
 	        enzoState={enzoState}
 	        enzoDispatch={enzoDispatch}
