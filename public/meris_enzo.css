@@ -1,4 +1,4 @@
-.meris-enzo-bigbox{
+.meris-enzo-bigbox {
   width: 916px;
   margin-bottom: 48px;
   height: 715px;
@@ -7,50 +7,50 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: #DEAE1B;
+  background: #deae1b;
   border: 3px solid;
 }
 
-.meris-enzo-bigbox:after{
-	content: url(./meris_enzo/logo.svg);
-	position: absolute;
-	bottom: 30px;
-	left: calc(50% - (148px/2));
+.meris-enzo-bigbox:after {
+  content: url(./meris_enzo/logo.svg);
+  position: absolute;
+  bottom: 30px;
+  left: calc(50% - (148px / 2));
 }
 
-.flex-row{
+.flex-row {
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
 
-.flex-row > .top-row{
+.flex-row > .top-row {
   margin: 45px 14px 24px;
 }
 
-.flex-row > .middle-row{
+.flex-row > .middle-row {
   margin: 16px -1px 16px;
 }
 
-.flex-row > .bottom-row{
+.flex-row > .bottom-row {
   margin: 16px 14px 16px;
 }
 
-.flex-row:last-of-type{
-  flex:1;
+.flex-row:last-of-type {
+  flex: 1;
 }
 
 .mix:before,
 .portamento:before,
-.delay-level:before{
-	content: url(./meris_enzo/generic_big_knob.svg);
-	position: absolute;
-	top:-12px;
-	left: 1px;
+.delay-level:before {
+  content: url(./meris_enzo/generic_big_knob.svg);
+  position: absolute;
+  top: -12px;
+  left: 1px;
 }
 
-.filter{
-	margin-top: 59px !important;
+.filter {
+  margin-top: 59px !important;
 }
 
 .filter:before,
@@ -58,70 +58,72 @@
 .sustain:before,
 .modulation:before,
 .delay-feedback:before,
-.filter-bandwidth:before{
-	content: url(./meris_enzo/generic_little_knob.svg);
-	position: absolute;
-	top: -10px;
+.filter-bandwidth:before {
+  content: url(./meris_enzo/generic_little_knob.svg);
+  position: absolute;
+  top: -10px;
   left: 19px;
 }
 
-.filter-env{
+.filter-env {
   margin-top: 3px !important;
 }
 
-.filter-env:before{
-	content: url(./meris_enzo/filter_env.svg);
-	position: absolute;
-	top: -15px;
+.filter-env:before {
+  content: url(./meris_enzo/filter_env.svg);
+  position: absolute;
+  top: -15px;
   left: 2px;
 }
 
-.pitch:before{
-	content: url(./meris_enzo/pitch.svg);
-	position: absolute;
-	top: -22px;
+.pitch:before {
+  content: url(./meris_enzo/pitch.svg);
+  position: absolute;
+  top: -22px;
   left: -8px;
 }
 
-.middle-controls{
+.middle-controls {
   flex: 1.45;
 }
 
 .left-side-controls,
-.right-side-controls{
+.right-side-controls {
   flex: 2;
   flex-direction: column;
 }
 
-.meris-enzo-bigbox .left-side-controls > .first-row{
+.meris-enzo-bigbox .left-side-controls > .first-row {
   flex: 1;
   justify-content: flex-end;
   margin-top: 15px;
 }
-.meris-enzo-bigbox .right-side-controls > .first-row{
+.meris-enzo-bigbox .right-side-controls > .first-row {
   flex: 1;
   justify-content: flex-start;
   margin-top: 15px;
-  margin-left:-15px;
+  margin-left: -15px;
 }
 
-.meris-enzo-bigbox .left-side-controls > .tap{
+.meris-enzo-bigbox .left-side-controls > .tap {
   flex: 1;
   justify-content: center;
 }
 
-.wave-shape{
+.wave-shape {
   flex: 1;
 }
-.filter-type, .envelope-type, .synth-mode{
+.filter-type,
+.envelope-type,
+.synth-mode {
   flex: 2;
 }
 
-.synth-mode{
+.synth-mode {
   margin-right: 20px;
 }
 
-.filter-type{
+.filter-type {
   margin-left: -15px;
 }
 
@@ -129,32 +131,36 @@
   margin-bottom: 15px;
 }
 
-.filter-type > div, .envelope-type > div, .synth-mode  > div > div {
+.filter-type > div,
+.envelope-type > div,
+.synth-mode > div > div {
   margin-bottom: 15px;
 }
 
-.filter-type > div > div, .synth-mode  > div > div{
+.filter-type > div > div,
+.synth-mode > div > div {
   margin-left: 15px;
-} 
+}
 
-.tap-button{
+.tap-button {
   flex: 2;
   margin-top: 20px !important;
 }
 
-.tap-button > div, .bypass > div{
+.tap-button > div,
+.bypass > div {
   margin-bottom: 15px;
 }
 
-.bypass{
+.bypass {
   flex: 2;
   margin-top: 30px;
 }
 
-.bypass > div > div{
+.bypass > div > div {
   margin-right: 15px;
 }
 
-.bypass > label{
+.bypass > label {
   margin-right: 9px;
 }

@@ -1,4 +1,4 @@
-.meris-hedra-bigbox{
+.meris-hedra-bigbox {
   width: 916px;
   margin-bottom: 48px;
   height: 715px;
@@ -7,40 +7,40 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background: #CFCFCF;
+  background: #cfcfcf;
   border: 3px solid;
 }
 
-.meris-hedra-bigbox:after{
-	content: url(./meris_hedra/logo.svg);
-	position: absolute;
-	bottom: 30px;
-  transform: scale(.95);
-	left: calc(50% - (247px/2) + 30px);
+.meris-hedra-bigbox:after {
+  content: url(./meris_hedra/logo.svg);
+  position: absolute;
+  bottom: 30px;
+  transform: scale(0.95);
+  left: calc(50% - (247px / 2) + 30px);
 }
 
-.flex-row:last-of-type{
-  flex:1;
+.flex-row:last-of-type {
+  flex: 1;
 }
 
 .mix:before,
 .scale-type:before,
-.delay-level:before{
-	content: url(./meris_hedra/generic_big_knob.svg);
-	position: absolute;
-	top:-12px;
-	left: 1px;
+.delay-level:before {
+  content: url(./meris_hedra/generic_big_knob.svg);
+  position: absolute;
+  top: -12px;
+  left: 1px;
 }
 
-.meris-hedra-bigbox .second-row{
+.meris-hedra-bigbox .second-row {
   margin-right: -129px;
 }
 
-.pitch2{
+.pitch2 {
   margin-top: 3px !important;
 }
 
-.micro-tune{
+.micro-tune {
   margin-top: 58px !important;
 }
 
@@ -48,59 +48,61 @@
 .td1:before,
 .td2:before,
 .td3:before,
-.filter-bandwidth:before{
-	content: url(./meris_hedra/generic_little_knob.svg);
-	position: absolute;
-	top: -10px;
+.filter-bandwidth:before {
+  content: url(./meris_hedra/generic_little_knob.svg);
+  position: absolute;
+  top: -10px;
   left: 19px;
 }
 
-.micro-tune:before{
+.micro-tune:before {
   content: url(./meris_hedra/micro_tune.svg);
   position: absolute;
   left: 18px;
   top: -10px;
 }
 
-.pitch1:before, .pitch2:before, .pitch3:before{
+.pitch1:before,
+.pitch2:before,
+.pitch3:before {
   content: url(./meris_hedra/pitch.svg);
   position: absolute;
   left: 1px;
   top: -20px;
 }
 
-.delay-mode{
+.delay-mode {
   display: flex;
   flex-direction: column;
   margin-top: 25px !important;
 }
-.delay-mode > div > div{
+.delay-mode > div > div {
   margin: 10px;
 }
-.delay-mode > label{
+.delay-mode > label {
   flex: 2;
 }
-.key:before{
-	content: url(./meris_hedra/key.svg);
-	position: absolute;
-	top: -22px;
+.key:before {
+  content: url(./meris_hedra/key.svg);
+  position: absolute;
+  top: -22px;
   left: -3px;
 }
 
-.meris-hedra-bigbox .left-side-controls{
+.meris-hedra-bigbox .left-side-controls {
   margin-top: -130px;
   /*margin-left: -102px;*/
 }
 
-.meris-hedra-bigbox .right-side-controls{
+.meris-hedra-bigbox .right-side-controls {
   margin-top: -20px;
 }
 
-.meris-hedra-bigbox .right-side-controls  .delay-mode{
+.meris-hedra-bigbox .right-side-controls .delay-mode {
   margin-right: -25px !important;
 }
 
-.on-off-row > div{
+.on-off-row > div {
   margin-left: -30px;
   margin-bottom: 10px;
 }
@@ -111,19 +113,19 @@
   margin: 10px;
 }
 
-.meris-hedra-bigbox .tap{
+.meris-hedra-bigbox .tap {
   margin-right: -12px;
 }
 
-.bypass{
+.bypass {
   flex: 2;
   margin-top: 30px;
 }
 
-.bypass > div > div{
+.bypass > div > div {
   margin-right: 15px;
 }
 
-.bypass > label{
+.bypass > label {
   margin-right: 9px;
 }

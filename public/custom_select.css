@@ -1,30 +1,30 @@
-.custom-select{
-	position: relative;
-	margin-bottom: 25px !important;
+.custom-select {
+  position: relative;
+  margin-bottom: 25px !important;
 }
 
-.custom-select > label{
-	font-size: 25px;
-	color: red;
+.custom-select > label {
+  font-size: 25px;
+  color: red;
 }
 
-.custom-select.selected > label{
-	font-size: 25px;
-	color: white;
-	transition: .1s linear;
+.custom-select.selected > label {
+  font-size: 25px;
+  color: white;
+  transition: 0.1s linear;
 }
 
-.custom-select > .select-selected{
-	border: 3px solid red;
+.custom-select > .select-selected {
+  border: 3px solid red;
 }
 
-.custom-select.selected > .select-selected{
-	border: 3px solid white;
+.custom-select.selected > .select-selected {
+  border: 3px solid white;
 }
 
 .select-selected {
-	padding: 5px 15px;
-	position: relative;
+  padding: 5px 15px;
+  position: relative;
   width: 350px;
   height: 55px;
   font-size: 25px;
@@ -38,48 +38,48 @@
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  transition:.1s linear;
+  transition: 0.1s linear;
 }
 
-.custom-select > .select-selected:after{
+.custom-select > .select-selected:after {
   border-color: red transparent transparent transparent;
 }
 
-.custom-select.selected > .select-selected:after{
+.custom-select.selected > .select-selected:after {
   border-color: #fff transparent transparent transparent;
 }
-
 
 .select-selected.open:after {
   transform: rotate(180deg);
   top: 14px;
 }
 
-.select-options{
-	border: 3px solid white;
-	font-size: 25px;
-	opacity: 0;
-	transition:.1s;
-	position: absolute;
+.select-options {
+  border: 3px solid white;
+  font-size: 25px;
+  opacity: 0;
+  transition: 0.1s;
+  position: absolute;
 }
 
-.select-options.open{
-	border: 3px solid white;
-	font-size: 25px;
-	opacity: 1;
-	width: 100%;
-	z-index: 1;
+.select-options.open {
+  border: 3px solid white;
+  font-size: 25px;
+  opacity: 1;
+  width: 100%;
+  z-index: 1;
 }
 
-.select-options.open:hover, .select-selected:hover{
-	cursor: pointer;
+.select-options.open:hover,
+.select-selected:hover {
+  cursor: pointer;
 }
 
-.custom-select-option{
-	background: black;
-	padding: 15px;
+.custom-select-option {
+  background: black;
+  padding: 15px;
 }
-.custom-select-option:hover{
-	background:white;
-	color: black;
+.custom-select-option:hover {
+  background: white;
+  color: black;
 }
