@@ -4,15 +4,15 @@ import defaultConfig from "../data/pedal_states";
 const PedalStatesContext = createContext(defaultConfig);
 
 const PedalStatesProvider = ({ children, initialConfig = defaultConfig }) => {
-  const [factoryPresets, setPedalStates] = useState(defaultConfig);
-  const updatePedalStates = (key, value) => {
-    let copiedConfig = { ...factoryPresets };
+  const [pedalStates, setPedalStates] = useState(defaultConfig);
+  const updatePedalStates = (pedal, key, value) => {
+    let copiedConfig = { ...pedalStates[pedal] };
     copiedConfig[key] = value;
     setPedalStates(copiedConfig);
   };
 
   return (
-    <PedalStatesContext.Provider value={{ factoryPresets, updatePedalStates }}>
+    <PedalStatesContext.Provider value={{ pedalStates, updatePedalStates }}>
       {children}
     </PedalStatesContext.Provider>
   );

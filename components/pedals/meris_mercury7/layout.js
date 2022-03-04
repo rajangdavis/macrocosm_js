@@ -3,16 +3,19 @@ import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
 import ModalOpenButton from "../../modal_open_button";
 import { useState, useEffect, useContext } from "react";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
 import merisStateReducer from "../../../hooks/meris_state";
 import { MidiConfigContext } from "../../../hooks/midi_config";
+import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
 
 export default function MerisMercury7Layout(props) {
+  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
+
   const { midiConfig } = useContext(MidiConfigContext);
-  const { mercury7: mercury7InitialState } = useContext(PedalStatesContext);
+  const { mercury7: mercury7InitialState } = useContext(PedalStatesContext).pedalStates;
+
   const midiData = {
     channel: midiConfig.mercury7Channel,
     output: midiConfig.output,
@@ -25,8 +28,6 @@ export default function MerisMercury7Layout(props) {
     midiData: midiData,
     midiObject: props.midiObject,
   });
-
-  let { expressionVal, selectedPreset } = props;
 
   useEffect(() => {
     setState(mercury7State);
@@ -61,26 +62,31 @@ export default function MerisMercury7Layout(props) {
     }
   };
 
-  return (
-    <div>
-      <div className="meris-pedal meris-mercury7-bigbox">
-        <FirstRow
-          midiObject={props.midiObject}
-          mercury7State={mercury7State}
-          mercury7Dispatch={mercury7Dispatch}
-        />
-        <SecondRow
-          midiObject={props.midiObject}
-          mercury7State={mercury7State}
-          mercury7Dispatch={mercury7Dispatch}
-        />
-        <ThirdRow
-          midiObject={props.midiObject}
-          midiData={midiData}
-          mercury7State={mercury7State}
-          mercury7Dispatch={mercury7Dispatch}
-        />
+  if( selectedPedal =='mercury7'){
+    return (
+      <div>
+        <div className="meris-pedal meris-mercury7-bigbox">
+          <FirstRow
+            midiObject={props.midiObject}
+            mercury7State={mercury7State}
+            mercury7Dispatch={mercury7Dispatch}
+          />
+          <SecondRow
+            midiObject={props.midiObject}
+            mercury7State={mercury7State}
+            mercury7Dispatch={mercury7Dispatch}
+          />
+          <ThirdRow
+            midiObject={props.midiObject}
+            midiData={midiData}
+            mercury7State={mercury7State}
+            mercury7Dispatch={mercury7Dispatch}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }else{
+    return null;
+  }
+
 }

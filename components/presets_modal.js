@@ -1,25 +1,24 @@
 import CloseButton from "./close_button";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
+import merisStateReducer from "../hooks/meris_state";
 import { useContext, useState, useEffect } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
+import { PedalStatesContext } from "../hooks/pedal_states";
 import useLocalStorage from "../hooks/use_local_storage";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../utilities/parse_sysex";
 
 export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const [selectedPedal, setSelectedPedal] = useLocalStorage(
-    "selected_pedal",
-    "enzo"
-  );
+  const { pedalStates } = useContext(PedalStatesContext);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
 
   const {
     midiObject,
     sysexByte,
-    // dispatch,
+    selectedPedal,
     presets,
     selectedPreset,
     setSelectedPreset,
@@ -32,6 +31,11 @@ export default function PresetsModal(props) {
     sysexByte: sysexByte,
   };
 
+  const [_, dispatch] = merisStateReducer(pedalStates[selectedPedal], {
+    midiData: midiData,
+    midiObject: midiObject,
+  });
+
   const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
       let { manufacturer, data } = parseSysexToBinary(preset.message);
@@ -39,7 +43,7 @@ export default function PresetsModal(props) {
         return x.name == midiData.output;
       })[0];
       deviceOutput.sendSysex(manufacturer, data);
-      // sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
+      sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
       setSelectedPreset(preset);
     }
   };
