@@ -79,9 +79,6 @@ export default function Pedals(props) {
     ]
   );
 
-  // useEffect(()=>{
-  //   setPresetsState(MerisPolymoonPresets)
-  // }, [presetsState, setPresetsState]);
   const [sysexByte, setSysexByte] = useState(1);
   const [dragId, setDragId] = useState();
   const [presetsOpen, setPresetsOpen] = useState(false);
@@ -173,46 +170,36 @@ export default function Pedals(props) {
             presetsOpen={presetsOpen}
             setPresetsOpen={setPresetsOpen}
           />
-          {selectedPedal == "enzo" && (
-            <MerisEnzoLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          )}
-          {selectedPedal == "hedra" && (
-            <MerisHedraLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          )}
-          {selectedPedal == "polymoon" && (
-            <MerisPolymoonLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          )}
-          {selectedPedal == "mercury7" && (
-            <MerisMercury7Layout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          )}
-          {selectedPedal == "ottobitJr" && (
-            <MerisOttobitJrLayout
-              expressionVal={expressionVal}
-              selectedPedal={selectedPedal}
-              selectedPreset={selectedPreset}
-              midiObject={props.midiObject}
-            />
-          )}
+          <MerisEnzoLayout
+            expressionVal={expressionVal}
+            selectedPedal={selectedPedal}
+            selectedPreset={selectedPreset}
+            midiObject={props.midiObject}
+          />
+          <MerisHedraLayout
+            expressionVal={expressionVal}
+            selectedPedal={selectedPedal}
+            selectedPreset={selectedPreset}
+            midiObject={props.midiObject}
+          />
+          <MerisPolymoonLayout
+            expressionVal={expressionVal}
+            selectedPedal={selectedPedal}
+            selectedPreset={selectedPreset}
+            midiObject={props.midiObject}
+          />
+          <MerisMercury7Layout
+            expressionVal={expressionVal}
+            selectedPedal={selectedPedal}
+            selectedPreset={selectedPreset}
+            midiObject={props.midiObject}
+          />
+          <MerisOttobitJrLayout
+            expressionVal={expressionVal}
+            selectedPedal={selectedPedal}
+            selectedPreset={selectedPreset}
+            midiObject={props.midiObject}
+          />
         </div>
         <Expression
           expressionVal={expressionVal}

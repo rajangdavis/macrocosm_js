@@ -3,16 +3,19 @@ import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
 import ModalOpenButton from "../../modal_open_button";
 import { useState, useEffect, useContext } from "react";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
 import merisStateReducer from "../../../hooks/meris_state";
 import { MidiConfigContext } from "../../../hooks/midi_config";
+import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
 
 export default function MerisOttobitJrLayout(props) {
+  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
+
   const { midiConfig } = useContext(MidiConfigContext);
-  const { ottobitJr: ottobitJrInitialState } = useContext(PedalStatesContext);
+  const { ottobitJr: ottobitJrInitialState } = useContext(PedalStatesContext).pedalStates;
+
   const midiData = {
     channel: midiConfig.ottobitJrChannel,
     output: midiConfig.output,
@@ -25,8 +28,6 @@ export default function MerisOttobitJrLayout(props) {
     midiData: midiData,
     midiObject: props.midiObject,
   });
-
-  let { expressionVal, selectedPreset } = props;
 
   useEffect(() => {
     setState(ottobitJrState);
@@ -61,26 +62,30 @@ export default function MerisOttobitJrLayout(props) {
     }
   };
 
-  return (
-    <div>
-      <div className="meris-pedal meris-ottobit-jr-bigbox">
-        <FirstRow
-          midiObject={props.midiObject}
-          ottobitJrState={ottobitJrState}
-          ottobitJrDispatch={ottobitJrDispatch}
-        />
-        <SecondRow
-          midiObject={props.midiObject}
-          ottobitJrState={ottobitJrState}
-          ottobitJrDispatch={ottobitJrDispatch}
-        />
-        <ThirdRow
-          midiObject={props.midiObject}
-          midiData={midiData}
-          ottobitJrState={ottobitJrState}
-          ottobitJrDispatch={ottobitJrDispatch}
-        />
+  if( selectedPedal =='ottobitJr'){
+    return (
+      <div>
+        <div className="meris-pedal meris-ottobit-jr-bigbox">
+          <FirstRow
+            midiObject={props.midiObject}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
+          />
+          <SecondRow
+            midiObject={props.midiObject}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
+          />
+          <ThirdRow
+            midiObject={props.midiObject}
+            midiData={midiData}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }else{
+    return null;
+  }
 }

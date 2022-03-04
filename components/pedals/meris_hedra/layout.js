@@ -1,16 +1,19 @@
 import FirstRow from "./first_row";
 import ModalOpenButton from "../../modal_open_button";
 import { useState, useEffect, useContext } from "react";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
 import merisStateReducer from "../../../hooks/meris_state";
 import { MidiConfigContext } from "../../../hooks/midi_config";
+import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
 
 export default function MerisHedraLayout(props) {
+  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
+
   const { midiConfig } = useContext(MidiConfigContext);
-  const { hedra: hedraInitialState } = useContext(PedalStatesContext);
+  const { hedra: hedraInitialState } = useContext(PedalStatesContext).pedalStates;
+
   const midiData = {
     channel: midiConfig.hedraChannel,
     output: midiConfig.output,
@@ -23,16 +26,6 @@ export default function MerisHedraLayout(props) {
     midiData: midiData,
     midiObject: props.midiObject,
   });
-
-  let { expressionVal, selectedPreset } = props;
-
-  let presetsButtonClass = () => {
-    if (noOutput) {
-      return "presets-button crosshatch";
-    } else {
-      return presetsOpen ? "presets-button open" : "presets-button";
-    }
-  };
 
   useEffect(() => {
     setState(hedraState);
@@ -67,16 +60,20 @@ export default function MerisHedraLayout(props) {
     }
   };
 
-  return (
-    <div>
-      <div className="meris-pedal meris-hedra-bigbox">
-        <FirstRow
-          midiData={midiData}
-          midiObject={props.midiObject}
-          hedraState={hedraState}
-          hedraDispatch={hedraDispatch}
-        />
+  if( selectedPedal =='hedra'){
+    return (
+      <div>
+        <div className="meris-pedal meris-hedra-bigbox">
+          <FirstRow
+            midiData={midiData}
+            midiObject={props.midiObject}
+            hedraState={hedraState}
+            hedraDispatch={hedraDispatch}
+          />
+        </div>
       </div>
-    </div>
-  );
+    );
+  }else{
+    return null;
+  }
 }

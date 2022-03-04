@@ -3,18 +3,19 @@ import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
 import ModalOpenButton from "../../modal_open_button";
 import { useState, useEffect, useContext } from "react";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
 import merisStateReducer from "../../../hooks/meris_state";
 import { MidiConfigContext } from "../../../hooks/midi_config";
+import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
 
 export default function MerisEnzoLayout(props) {
-  let { midiObject, expressionVal, selectedPreset } = props;
+  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { enzo: enzoInitialState } = useContext(PedalStatesContext);
+  const { enzo: enzoInitialState } = useContext(PedalStatesContext).pedalStates;
+
   const midiData = {
     channel: midiConfig.enzoChannel,
     output: midiConfig.output,
@@ -30,7 +31,7 @@ export default function MerisEnzoLayout(props) {
 
   useEffect(() => {
     setState(enzoState);
-  }, [enzoState, setState]);
+  }, [enzoInitialState, initialState, enzoState, setState]);
 
   const applyExpression = () => {
     if (selectedPreset.label == null) {
@@ -65,26 +66,30 @@ export default function MerisEnzoLayout(props) {
     midiData.output,
   ]);
 
-  return (
-    <div>
-      <div className="meris-pedal meris-enzo-bigbox">
-        <FirstRow
-          midiObject={midiObject}
-          enzoState={enzoState}
-          enzoDispatch={enzoDispatch}
-        />
-        <SecondRow
-          midiObject={midiObject}
-          enzoState={enzoState}
-          enzoDispatch={enzoDispatch}
-        />
-        <ThirdRow
-          midiObject={midiObject}
-          midiData={midiData}
-          enzoState={enzoState}
-          enzoDispatch={enzoDispatch}
-        />
-      </div>
-    </div>
-  );
+  if( selectedPedal =='enzo'){
+	  return (
+	    <div>
+	      <div className="meris-pedal meris-enzo-bigbox">
+	        <FirstRow
+	          midiObject={midiObject}
+	          enzoState={enzoState}
+	          enzoDispatch={enzoDispatch}
+	        />
+	        <SecondRow
+	          midiObject={midiObject}
+	          enzoState={enzoState}
+	          enzoDispatch={enzoDispatch}
+	        />
+	        <ThirdRow
+	          midiObject={midiObject}
+	          midiData={midiData}
+	          enzoState={enzoState}
+	          enzoDispatch={enzoDispatch}
+	        />
+	      </div>
+	    </div>
+	  );
+  }else{
+    return null;
+  }
 }
