@@ -14,7 +14,8 @@ export default function MerisMercury7Layout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { mercury7: mercury7InitialState } = useContext(PedalStatesContext).pedalStates;
+  const { mercury7: mercury7InitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
     channel: midiConfig.mercury7Channel,
@@ -62,7 +63,7 @@ export default function MerisMercury7Layout(props) {
     }
   };
 
-  if( selectedPedal =='mercury7'){
+  if (selectedPedal == "mercury7") {
     return (
       <div>
         <div className="meris-pedal meris-mercury7-bigbox">
@@ -85,8 +86,7 @@ export default function MerisMercury7Layout(props) {
         </div>
       </div>
     );
-  }else{
+  } else {
     return null;
   }
-
 }

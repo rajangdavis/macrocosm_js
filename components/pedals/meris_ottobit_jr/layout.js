@@ -14,7 +14,8 @@ export default function MerisOttobitJrLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { ottobitJr: ottobitJrInitialState } = useContext(PedalStatesContext).pedalStates;
+  const { ottobitJr: ottobitJrInitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
     channel: midiConfig.ottobitJrChannel,
@@ -62,7 +63,7 @@ export default function MerisOttobitJrLayout(props) {
     }
   };
 
-  if( selectedPedal =='ottobitJr'){
+  if (selectedPedal == "ottobitJr") {
     return (
       <div>
         <div className="meris-pedal meris-ottobit-jr-bigbox">
@@ -85,7 +86,7 @@ export default function MerisOttobitJrLayout(props) {
         </div>
       </div>
     );
-  }else{
+  } else {
     return null;
   }
 }

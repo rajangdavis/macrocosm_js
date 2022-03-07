@@ -66,30 +66,30 @@ export default function MerisEnzoLayout(props) {
     midiData.output,
   ]);
 
-  if( selectedPedal =='enzo'){
-	  return (
-	    <div>
-	      <div className="meris-pedal meris-enzo-bigbox">
-	        <FirstRow
-	          midiObject={midiObject}
-	          enzoState={enzoState}
-	          enzoDispatch={enzoDispatch}
-	        />
-	        <SecondRow
-	          midiObject={midiObject}
-	          enzoState={enzoState}
-	          enzoDispatch={enzoDispatch}
-	        />
-	        <ThirdRow
-	          midiObject={midiObject}
-	          midiData={midiData}
-	          enzoState={enzoState}
-	          enzoDispatch={enzoDispatch}
-	        />
-	      </div>
-	    </div>
-	  );
-  }else{
+  if (selectedPedal == "enzo") {
+    return (
+      <div>
+        <div className="meris-pedal meris-enzo-bigbox">
+          <FirstRow
+            midiObject={midiObject}
+            enzoState={enzoState}
+            enzoDispatch={enzoDispatch}
+          />
+          <SecondRow
+            midiObject={midiObject}
+            enzoState={enzoState}
+            enzoDispatch={enzoDispatch}
+          />
+          <ThirdRow
+            midiObject={midiObject}
+            midiData={midiData}
+            enzoState={enzoState}
+            enzoDispatch={enzoDispatch}
+          />
+        </div>
+      </div>
+    );
+  } else {
     return null;
   }
 }

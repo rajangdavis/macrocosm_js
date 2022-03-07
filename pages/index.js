@@ -1,4 +1,6 @@
-import Link from "next/link";
+import ExpressionMacros from "../components/expression_macros";
+import ModalOpenButtonMacros from "../components/modal_open_button_macros";
+import PresetsModalMacros from "../components/presets_modal_macros";
 import useLocalStorage from "../hooks/use_local_storage";
 import ManageMacroState from "../hooks/macro_state";
 import { MidiConfigContext } from "../hooks/midi_config";
@@ -11,6 +13,9 @@ import parseSysexToBinary from "../utilities/parse_sysex";
 export default function Macros(props) {
   const { midiConfig } = useContext(MidiConfigContext);
   const { midiObject } = props;
+  const [expressionVal, setExpressionVal] = useState(0);
+  const [selectedMacro, setSelectedMacro] = useState({});
+  const [midiConfigModalOpen, setMidiConfigModalOpen] = useState(false);
   const [macrosModalOpen, setMacrosModalOpen] = useState(false);
   const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
   const [macroToEdit, setMacroToEdit] = useState(null);
@@ -20,7 +25,9 @@ export default function Macros(props) {
     setState(macros);
   });
 
-  const callMacro = async (macroData) => {
+  const callMacro = async (macro) => {
+    setSelectedMacro(macro);
+    let macroData = macro.data;
     let macroSelectedPedals = macroData.pedals.filter(
       (x) => x.showing == true && x.selectedPreset != {}
     );
@@ -72,66 +79,68 @@ export default function Macros(props) {
     <div className="container">
       <div className="view-port">
         <div className="pedal-selector"></div>
-        <Link href="/pedals">Pedals</Link>
-        <div className="main-display macro-display">
-          {macros.map((macro, i) => {
-            return (
-              <div
-                className="macro"
-                key={i}
-                onClick={() => {
-                  callMacro(macro.data);
-                }}
-              >
-                {macro.data.name}
-                <a
-                  href="#"
+        <div className="main-display">
+          <ModalOpenButtonMacros
+            midiConfigModalOpen={midiConfigModalOpen}
+            setMidiConfigModalOpen={setMidiConfigModalOpen}
+          />
+          <div className="macro-display">
+            {macros.map((macro, i) => {
+              return (
+                <div
+                  className="macro"
+                  key={i}
                   onClick={() => {
-                    macroDispatch({
-                      type: "remove-macro",
-                      macro_id: macro.macro_id,
-                    });
+                    callMacro(macro);
                   }}
                 >
-                  remove
-                </a>
-                |
-                <a
-                  href="#"
-                  onClick={() => {
-                    macroDispatch({
-                      type: "clone-macro",
-                      macro_id: macro.macro_id,
-                    });
-                  }}
-                >
-                  clone
-                </a>
-                |
-                <a
-                  href="#"
-                  onClick={() => {
-                    setMacroToEdit(macro);
-                    setMacrosModalEditOpen(true);
-                  }}
-                >
-                  edit
-                </a>
-              </div>
-            );
-          })}
-          <div
-            className="add macro"
-            onClick={() => {
-              console.log(macrosModalOpen);
-              setMacrosModalOpen(true);
-            }}
-          >
-            <div></div>
-            <div></div>
-            <span>Add Macro</span>
+                  {macro.data.name}
+                  <a
+                    href="#"
+                    onClick={() => {
+                      macroDispatch({
+                        type: "remove-macro",
+                        macro_id: macro.macro_id,
+                      });
+                    }}
+                  >
+                    remove
+                  </a>
+                  |
+                  <a
+                    href="#"
+                    onClick={() => {
+                      macroDispatch({
+                        type: "clone-macro",
+                        macro_id: macro.macro_id,
+                      });
+                    }}
+                  >
+                    clone
+                  </a>
+                  |
+                  <a
+                    href="#"
+                    onClick={() => {
+                      setMacroToEdit(macro);
+                      setMacrosModalEditOpen(true);
+                    }}
+                  >
+                    edit
+                  </a>
+                </div>
+              );
+            })}
           </div>
         </div>
+        <ExpressionMacros
+          expressionVal={expressionVal}
+          setMacrosModalOpen={setMacrosModalOpen}
+          setExpressionVal={setExpressionVal}
+          selectedMacro={selectedMacro}
+          midiObject={midiObject}
+          midiConfig={midiConfig}
+        />
       </div>
       {macrosModalOpen && (
         <MacrosModal
@@ -145,6 +154,13 @@ export default function Macros(props) {
           macroToEdit={macroToEdit}
           setMacroToEdit={setMacroToEdit}
           setMacrosModalOpen={setMacrosModalEditOpen}
+        />
+      )}
+      {midiConfigModalOpen && (
+        <PresetsModalMacros
+          expressionVal={expressionVal}
+          midiObject={midiObject}
+          setMidiConfigModalOpen={setMidiConfigModalOpen}
         />
       )}
     </div>

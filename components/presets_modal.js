@@ -38,12 +38,18 @@ export default function PresetsModal(props) {
 
   const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
+      console.log(preset);
       let { manufacturer, data } = parseSysexToBinary(preset.message);
       let deviceOutput = midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
+      console.log(manufacturer, data);
       deviceOutput.sendSysex(manufacturer, data);
-      sysexKnobsUpdate({data: data.slice(5,22), dispatch: dispatch, expression: false})
+      sysexKnobsUpdate({
+        data: data.slice(5, 22),
+        dispatch: dispatch,
+        expression: false,
+      });
       setSelectedPreset(preset);
     }
   };

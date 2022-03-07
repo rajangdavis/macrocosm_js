@@ -12,7 +12,8 @@ export default function MerisHedraLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { hedra: hedraInitialState } = useContext(PedalStatesContext).pedalStates;
+  const { hedra: hedraInitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
     channel: midiConfig.hedraChannel,
@@ -60,7 +61,7 @@ export default function MerisHedraLayout(props) {
     }
   };
 
-  if( selectedPedal =='hedra'){
+  if (selectedPedal == "hedra") {
     return (
       <div>
         <div className="meris-pedal meris-hedra-bigbox">
@@ -73,7 +74,7 @@ export default function MerisHedraLayout(props) {
         </div>
       </div>
     );
-  }else{
+  } else {
     return null;
   }
 }

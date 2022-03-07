@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build && next export",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "npx prettier --write ./components/ ./data/ ./hooks/ ./pages/ ./public/ ./utilities/"
   },
   "dependencies": {
     "immer": "^9.0.0",

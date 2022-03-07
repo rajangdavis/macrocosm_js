@@ -14,7 +14,8 @@ export default function MerisPolymoonLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { polymoon: polymoonInitialState } = useContext(PedalStatesContext).pedalStates;
+  const { polymoon: polymoonInitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
     channel: midiConfig.polymoonChannel,
@@ -62,7 +63,7 @@ export default function MerisPolymoonLayout(props) {
     }
   };
 
-  if(selectedPedal =='polymoon'){
+  if (selectedPedal == "polymoon") {
     return (
       <div>
         <div className="meris-pedal meris-polymoon-bigbox">
@@ -85,7 +86,7 @@ export default function MerisPolymoonLayout(props) {
         </div>
       </div>
     );
-  }else{
+  } else {
     return null;
   }
 }

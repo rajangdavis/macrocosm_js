@@ -35,15 +35,6 @@ export default function Expression(props) {
     express,
   ]);
 
-  // let setTempo = (value) =>{
-  // 	if(midiObject && midiData.output && midiData.channel){
-  // 		let deviceOutput = midiObject.outputs.filter(x =>{
-  // 			return x.name == midiData.output
-  // 		})[0]
-  // 		// props.ottobitJrDispatch({key: 14, value: value})
-  // 	}
-  // }
-
   const express = (e) => {
     if (midiObject && midiData.output && midiData.channel) {
       let deviceOutput = midiObject.outputs.filter((x) => {
