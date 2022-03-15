@@ -2,7 +2,9 @@
 const parseSysexToBinary = (commandArg) => {
   let firstPass = cleanNewlines(commandArg);
   let parsedCommand = convertToBinary(firstPass);
-  return mapToCommandStructure(parsedCommand);
+  let commandStructure = mapToCommandStructure(parsedCommand);
+  commandStructure.raw = firstPass;
+  return commandStructure;
 };
 
 // Removes newlines and splits on spaces

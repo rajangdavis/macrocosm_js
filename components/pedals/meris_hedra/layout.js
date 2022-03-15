@@ -7,6 +7,7 @@ import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
+import expressionSysex from "../../../utilities/expression_sysex";
 
 export default function MerisHedraLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
@@ -33,7 +34,7 @@ export default function MerisHedraLayout(props) {
   }, [hedraState, setState]);
 
   useEffect(() => {
-    if (selectedPreset.label != null) {
+    if (selectedPedal == "hedra" && selectedPreset.label != null) {
       applyExpression();
     }
   }, [expressionVal, applyExpression, selectedPreset]);
@@ -44,26 +45,17 @@ export default function MerisHedraLayout(props) {
       let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      let presetValWithExpression = data.map((_, i) => {
-        if (i < 5) {
-          return 0;
-        } else {
-          let x = data[i];
-          let y = data[i + 17];
-          return Math.floor(props.expressionVal * ((y - x) / 128)) + x;
-        }
-      });
+      let presetValWithExpression = expressionSysex(data, expressionVal);
       sysexKnobsUpdate({
         data: presetValWithExpression.slice(5, 22),
         dispatch: hedraDispatch,
-        expression: true,
       });
     }
   };
 
   if (selectedPedal == "hedra") {
     return (
-      <div>
+      <>
         <div className="meris-pedal meris-hedra-bigbox">
           <FirstRow
             midiData={midiData}
@@ -72,7 +64,7 @@ export default function MerisHedraLayout(props) {
             hedraDispatch={hedraDispatch}
           />
         </div>
-      </div>
+      </>
     );
   } else {
     return null;

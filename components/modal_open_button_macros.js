@@ -1,6 +1,6 @@
 import Link from "next/link";
 export default function ModalOpenButtonMacros(props) {
-  let text = "MAIN MENU";
+  let text = "MIDI AND CONTROLS";
 
   const engageFullScreen = (e) => {
     let body = document.getElementsByTagName("html");

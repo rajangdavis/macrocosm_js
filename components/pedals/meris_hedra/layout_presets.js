@@ -1,6 +1,4 @@
 import FirstRow from "./first_row";
-import SecondRow from "./second_row";
-import ThirdRow from "./third_row";
 import ModalOpenButton from "../../modal_open_button";
 import { useState, useEffect, useContext } from "react";
 import merisStateReducer from "../../../hooks/meris_state";
@@ -9,71 +7,69 @@ import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
-import expressionSysex from "../../../utilities/expression_sysex";
 
-export default function MerisEnzoLayout(props) {
+export default function MerisHedraLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { enzo: enzoInitialState } = useContext(PedalStatesContext).pedalStates;
+  const { hedra: hedraInitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
-    channel: midiConfig.enzoChannel,
+    channel: midiConfig.hedraChannel,
     output: midiConfig.output,
   };
   const [initialState, setState] = useLocalStorage(
-    "enzo_state",
-    enzoInitialState
+    "hedra_state",
+    hedraInitialState
   );
-  const [enzoState, enzoDispatch] = merisStateReducer(initialState, {
+  const [hedraState, hedraDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
-    midiObject: midiObject,
+    midiObject: props.midiObject,
   });
 
   useEffect(() => {
-    setState(enzoState);
-  }, [enzoInitialState, initialState, enzoState, setState]);
+    setState(hedraState);
+  }, [hedraState, setState]);
 
   useEffect(() => {
-    if (selectedPedal == "enzo" && selectedPreset.label != null) {
+    if (selectedPreset.label != null) {
       applyExpression();
     }
   }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = () => {
-    if (midiObject && midiData.output && midiData.channel) {
+    if (props.midiObject && midiData.output && midiData.channel) {
       let { manufacturer, data } = parseSysexToBinary(selectedPreset.message);
-      let deviceOutput = midiObject.outputs.filter((x) => {
+      let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      let presetValWithExpression = expressionSysex(data, expressionVal);
-
+      let presetValWithExpression = data.map((_, i) => {
+        if (i < 5) {
+          return 0;
+        } else {
+          let x = data[i];
+          let y = data[i + 17];
+          return Math.floor(props.expressionVal * ((y - x) / 128)) + x;
+        }
+      });
       sysexKnobsUpdate({
         data: presetValWithExpression.slice(5, 22),
-        dispatch: enzoDispatch,
+        dispatch: hedraDispatch,
+        expression: true,
       });
     }
   };
 
-  if (selectedPedal == "enzo") {
+  if (selectedPedal == "hedra") {
     return (
       <>
-        <div className="meris-pedal meris-enzo-bigbox">
+        <div className="meris-pedal meris-hedra-bigbox">
           <FirstRow
-            midiObject={midiObject}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
-          />
-          <SecondRow
-            midiObject={midiObject}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
-          />
-          <ThirdRow
-            midiObject={midiObject}
             midiData={midiData}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
+            midiObject={props.midiObject}
+            hedraState={hedraState}
+            hedraDispatch={hedraDispatch}
           />
         </div>
       </>

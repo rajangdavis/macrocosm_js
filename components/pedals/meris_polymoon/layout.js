@@ -9,6 +9,7 @@ import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
+import expressionSysex from "../../../utilities/expression_sysex";
 
 export default function MerisPolymoonLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
@@ -27,7 +28,7 @@ export default function MerisPolymoonLayout(props) {
   );
   const [polymoonState, polymoonDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
-    midiObject: props.midiObject,
+    midiObject: midiObject,
   });
 
   useEffect(() => {
@@ -35,7 +36,7 @@ export default function MerisPolymoonLayout(props) {
   }, [polymoonState, setState]);
 
   useEffect(() => {
-    if (selectedPreset.label != null) {
+    if (selectedPedal == "polymoon" && selectedPreset.label != null) {
       applyExpression();
     }
   }, [expressionVal, applyExpression, selectedPreset]);
@@ -46,26 +47,17 @@ export default function MerisPolymoonLayout(props) {
       let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      let presetValWithExpression = data.map((_, i) => {
-        if (i < 5) {
-          return 0;
-        } else {
-          let x = data[i];
-          let y = data[i + 17];
-          return Math.floor(props.expressionVal * ((y - x) / 128)) + x;
-        }
-      });
+      let presetValWithExpression = expressionSysex(data, expressionVal);
       sysexKnobsUpdate({
         data: presetValWithExpression.slice(5, 22),
         dispatch: polymoonDispatch,
-        expression: true,
       });
     }
   };
 
   if (selectedPedal == "polymoon") {
     return (
-      <div>
+      <>
         <div className="meris-pedal meris-polymoon-bigbox">
           <FirstRow
             midiObject={props.midiObject}
@@ -84,7 +76,7 @@ export default function MerisPolymoonLayout(props) {
             polymoonDispatch={polymoonDispatch}
           />
         </div>
-      </div>
+      </>
     );
   } else {
     return null;

@@ -76,10 +76,21 @@ export default function Macros(props) {
   };
 
   return (
-    <div className="container">
+    <div className="container fade-in">
       <div className="view-port">
-        <div className="pedal-selector"></div>
-        <div className="main-display">
+        <div className="pedal-selector">
+          <div
+            className="add macro"
+            onClick={() => {
+              setMacrosModalOpen(true);
+            }}
+          >
+            <div></div>
+            <div></div>
+            <span>Add Macro</span>
+          </div>
+        </div>
+        <div className="main-display macros">
           <ModalOpenButtonMacros
             midiConfigModalOpen={midiConfigModalOpen}
             setMidiConfigModalOpen={setMidiConfigModalOpen}

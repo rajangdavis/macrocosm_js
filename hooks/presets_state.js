@@ -1,4 +1,5 @@
 import { useState, createContext } from "react";
+import useLocalStorage from "./use_local_storage";
 import defaultConfig from "../data/factory_presets";
 
 const FactoryPresetsContext = createContext(defaultConfig);
@@ -7,10 +8,13 @@ const FactoryPresetsProvider = ({
   children,
   initialConfig = defaultConfig,
 }) => {
-  const [factoryPresets, setFactoryPresets] = useState(defaultConfig);
-  const updateFactoryPresets = (key, value) => {
+  const [factoryPresets, setFactoryPresets] = useLocalStorage(
+    "presets_state",
+    defaultConfig
+  );
+  const updateFactoryPresets = (pedal, newPreset) => {
     let copiedConfig = { ...factoryPresets };
-    copiedConfig[key] = value;
+    copiedConfig[pedal].unshift(newPreset);
     setFactoryPresets(copiedConfig);
   };
 

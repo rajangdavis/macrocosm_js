@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
 import { LittleKnob, BigKnob } from "./pedals/knob";
 export default function ExpressionMacros(props) {
   const {
@@ -37,17 +36,7 @@ export default function ExpressionMacros(props) {
   };
 
   return (
-    <div className="expression-container">
-      <div
-        className="add macro"
-        onClick={() => {
-          setMacrosModalOpen(true);
-        }}
-      >
-        <div></div>
-        <div></div>
-        <span>Add Macro</span>
-      </div>
+    <div className="expression-container macros">
       <div className="expression expression-macro">
         <input
           type="range"

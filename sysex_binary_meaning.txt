@@ -1,9 +1,11 @@
 0					Header - 240, 
 1 2 3			Manufacturer - 0, 32, 16, 
+
 4 5				Group ID - 0, 1, 
 6					Model Number - 3, 
 7					Command - 38,
 8					Preset Number - 3, 
+
 9					CC16-Heel - 58, 
 10					CC17-Heel - 90,
 11					CC18-Heel - 83,

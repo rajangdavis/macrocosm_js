@@ -1,10 +1,12 @@
 import CloseButton from "./close_button";
+import PresetsBuilder from "./presets_builder";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
 import merisStateReducer from "../hooks/meris_state";
 import { useContext, useState, useEffect } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { PedalStatesContext } from "../hooks/pedal_states";
+import { FactoryPresetsContext } from "../hooks/presets_state";
 import useLocalStorage from "../hooks/use_local_storage";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../utilities/parse_sysex";
@@ -12,6 +14,7 @@ import parseSysexToBinary from "../utilities/parse_sysex";
 export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
   const { pedalStates } = useContext(PedalStatesContext);
+  const { factoryPresets } = useContext(FactoryPresetsContext);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
 
@@ -19,7 +22,6 @@ export default function PresetsModal(props) {
     midiObject,
     sysexByte,
     selectedPedal,
-    presets,
     selectedPreset,
     setSelectedPreset,
     setPresetsOpen,
@@ -36,14 +38,12 @@ export default function PresetsModal(props) {
     midiObject: midiObject,
   });
 
-  const setPreset = (preset) => {
+  const setPreset = (e, preset) => {
     if (midiObject && midiData.output && midiData.channel) {
-      console.log(preset);
       let { manufacturer, data } = parseSysexToBinary(preset.message);
       let deviceOutput = midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      console.log(manufacturer, data);
       deviceOutput.sendSysex(manufacturer, data);
       sysexKnobsUpdate({
         data: data.slice(5, 22),
@@ -92,6 +92,16 @@ export default function PresetsModal(props) {
             PEDAL PRESETS AND SETTINGS
           </a>
         )}
+        {midiData.output && (
+          <a
+            className={selectedMenu("new-preset")}
+            onClick={(e) => {
+              setMenu("new-preset");
+            }}
+          >
+            CREATE NEW PRESET
+          </a>
+        )}
       </div>
       <div className="presets-modal-background"></div>
       <div className="presets-modal-content">
@@ -108,11 +118,11 @@ export default function PresetsModal(props) {
               </div>
               <div className="presets-container">
                 <label>PRESETS</label>
-                {presets.map((preset, i) => {
+                {factoryPresets[selectedPedal].map((preset, i) => {
                   return (
                     <div
                       key={i}
-                      onClick={() => setPreset(preset)}
+                      onClick={(e) => setPreset(e, preset)}
                       className={selectedClassName(preset)}
                     >
                       {preset.label}
@@ -121,6 +131,14 @@ export default function PresetsModal(props) {
                 })}
               </div>
             </div>
+          )}
+          {menu == "new-preset" && (
+            <PresetsBuilder
+              selectedPedal={selectedPedal}
+              midiObject={midiObject}
+              midiData={midiData}
+              setMenu={setMenu}
+            />
           )}
         </div>
       </div>

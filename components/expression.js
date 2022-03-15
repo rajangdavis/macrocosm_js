@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
 import { LittleKnob, BigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const { expressionVal, setExpressionVal, midiObject, midiData } = props;
@@ -15,17 +14,18 @@ export default function Expression(props) {
       let deviceInput = midiObject.inputs.filter((x) => {
         return x.name == midiData.inputForExpression;
       })[0];
-
-      const sendExpressData = (e) => {
-        if (e.statusByte && e.statusByte == 176) {
-          let val = e.data[2];
-          e.target = {
-            value: val,
-          };
-          express(e);
-        }
-      };
-      deviceInput.addListener("midimessage", sendExpressData);
+      if (deviceInput) {
+        const sendExpressData = (e) => {
+          if (e.statusByte && e.statusByte == 176) {
+            let val = e.data[2];
+            e.target = {
+              value: val,
+            };
+            express(e);
+          }
+        };
+        deviceInput.addListener("midimessage", sendExpressData);
+      }
     }
   }, [
     midiData.inputForExpression,

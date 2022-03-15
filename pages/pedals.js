@@ -18,12 +18,10 @@ import ModalOpenButton from "../components/modal_open_button";
 import PresetsModal from "../components/presets_modal";
 import useLocalStorage from "../hooks/use_local_storage";
 import { MidiConfigContext } from "../hooks/midi_config";
-import { FactoryPresetsContext } from "../hooks/presets_state";
 import Expression from "../components/expression";
 import { useState, useContext, useEffect } from "react";
 
 export default function Pedals(props) {
-  const { factoryPresets } = useContext(FactoryPresetsContext);
   const [selectedPedal, setSelectedPedal] = useLocalStorage(
     "selected_pedal",
     "enzo"
@@ -113,16 +111,18 @@ export default function Pedals(props) {
     output: midiConfig.output,
     inputForExpression: midiConfig.inputForExpression,
   };
+
   useEffect(() => {
     setExpressionVal(0);
-    let currentSysexByte = pedalSelectAndOrder.filter(
-      (x) => x.key == selectedPedal
-    )[0].sysexByte;
     setSelectedPreset({ label: null, message: null });
   }, [pedalSelectAndOrder, selectedPedal]);
 
+  useEffect(() => {
+    setExpressionVal(0);
+  }, [selectedPreset]);
+
   return (
-    <div className="container">
+    <div className="container fade-in">
       <div className="view-port">
         <div className="pedal-selector">
           {pedalSelectAndOrder
@@ -211,7 +211,6 @@ export default function Pedals(props) {
       </div>
       {presetsOpen && (
         <PresetsModal
-          presets={factoryPresets[selectedPedal]}
           selectedPedal={selectedPedal}
           expressionVal={expressionVal}
           sysexByte={sysexByte}

@@ -1,5 +1,5 @@
 export default function SysexKnobsUpdate(props) {
-  const { data, dispatch, expression } = props;
+  const { data, dispatch } = props;
   dispatch({ skipMidi: true, key: 16, value: data[0] });
   dispatch({ skipMidi: true, key: 17, value: data[1] });
   dispatch({ skipMidi: true, key: 18, value: data[2] });
@@ -12,11 +12,9 @@ export default function SysexKnobsUpdate(props) {
   dispatch({ skipMidi: true, key: 25, value: data[9] });
   dispatch({ skipMidi: true, key: 26, value: data[10] });
   dispatch({ skipMidi: true, key: 27, value: data[11] });
-  if (expression == false) {
-    dispatch({ skipMidi: true, key: 15, value: data[16] });
-    dispatch({ skipMidi: true, key: 14, value: data[12] });
-    dispatch({ skipMidi: true, key: 9, value: data[13] });
-    dispatch({ skipMidi: true, key: 29, value: data[14] });
-    dispatch({ skipMidi: true, key: 30, value: data[15] });
-  }
+  dispatch({ skipMidi: true, key: 15, value: data[16] });
+  dispatch({ skipMidi: true, key: 14, value: data[12] });
+  dispatch({ skipMidi: true, key: 9, value: data[13] });
+  dispatch({ skipMidi: true, key: 29, value: data[14] });
+  dispatch({ skipMidi: true, key: 30, value: data[15] });
 }

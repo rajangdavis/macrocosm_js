@@ -9,6 +9,7 @@ import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
+import expressionSysex from "../../../utilities/expression_sysex";
 
 export default function MerisMercury7Layout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
@@ -35,7 +36,7 @@ export default function MerisMercury7Layout(props) {
   }, [mercury7State, setState]);
 
   useEffect(() => {
-    if (selectedPreset.label != null) {
+    if (selectedPedal == "mercury7" && selectedPreset.label != null) {
       applyExpression();
     }
   }, [expressionVal, applyExpression, selectedPreset]);
@@ -46,26 +47,17 @@ export default function MerisMercury7Layout(props) {
       let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      let presetValWithExpression = data.map((_, i) => {
-        if (i < 5) {
-          return 0;
-        } else {
-          let x = data[i];
-          let y = data[i + 17];
-          return Math.floor(props.expressionVal * ((y - x) / 128)) + x;
-        }
-      });
+      let presetValWithExpression = expressionSysex(data, expressionVal);
       sysexKnobsUpdate({
         data: presetValWithExpression.slice(5, 22),
         dispatch: mercury7Dispatch,
-        expression: true,
       });
     }
   };
 
   if (selectedPedal == "mercury7") {
     return (
-      <div>
+      <>
         <div className="meris-pedal meris-mercury7-bigbox">
           <FirstRow
             midiObject={props.midiObject}
@@ -84,7 +76,7 @@ export default function MerisMercury7Layout(props) {
             mercury7Dispatch={mercury7Dispatch}
           />
         </div>
-      </div>
+      </>
     );
   } else {
     return null;

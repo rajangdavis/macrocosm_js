@@ -1,6 +1,7 @@
 @import url("ywft-ultramagnetic-light.css");
 @import url("nav.css");
 @import url("presets_modal.css");
+@import url("midi_config_modal.css");
 @import url("custom_select.css");
 @import url("custom_slider.css");
 @import url("midi_channel_input.css");
@@ -67,13 +68,11 @@ body {
 .pedal-selector a:hover {
   cursor: pointer;
 }
-.main-display,
-.macro-display {
+.main-display {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 70%;
-  height: 875px;
 }
 
 .expression-container {
@@ -91,10 +90,6 @@ body {
   justify-content: space-between;
   height: 350px;
   margin-top: 450px;
-}
-
-.expression-macro {
-  margin-top: 200px;
 }
 
 .expression > label {
@@ -265,6 +260,8 @@ input[type="number"] {
   font-weight: 100;
   text-transform: uppercase;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 .text-reset {
@@ -352,26 +349,28 @@ input[type="number"] {
 }
 
 @media (max-width: 1340px) and (orientation: landscape) {
-  html,
-  body {
-    margin: -40px -50px;
-    transform: scale(0.9);
-  }
   .view-port {
     margin: 0;
   }
-  .main-display,
-  .macro-display {
-    margin-top: 25px;
+  .main-display:not(.macros) {
+    margin-top: -50px;
+  }
+  .main-display {
+    transform: scale(0.8);
   }
   .nav-menu.open {
     overflow-y: auto;
   }
   .expression {
-    margin-top: 350px;
+    margin-top: 200px;
+  }
+  .expression-container {
+    margin-top: -90px;
+    transform: scale(0.8);
   }
   .pedal-selector {
-    margin: 0px;
+    transform: scale(0.8);
+    margin-top: -100px;
   }
 }
 
@@ -413,7 +412,8 @@ input[type="number"] {
   }
 }
 
-.fade-in {
+.fade-in,
+.meris-pedal {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
   -webkit-animation-duration: 1s;

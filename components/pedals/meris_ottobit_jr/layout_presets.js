@@ -9,71 +9,79 @@ import { PedalStatesContext } from "../../../hooks/pedal_states";
 import useLocalStorage from "../../../hooks/use_local_storage";
 import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../../../utilities/parse_sysex";
-import expressionSysex from "../../../utilities/expression_sysex";
 
-export default function MerisEnzoLayout(props) {
+export default function MerisOttobitJrLayout(props) {
   let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
 
   const { midiConfig } = useContext(MidiConfigContext);
-  const { enzo: enzoInitialState } = useContext(PedalStatesContext).pedalStates;
+  const { ottobitJr: ottobitJrInitialState } =
+    useContext(PedalStatesContext).pedalStates;
 
   const midiData = {
-    channel: midiConfig.enzoChannel,
+    channel: midiConfig.ottobitJrChannel,
     output: midiConfig.output,
   };
   const [initialState, setState] = useLocalStorage(
-    "enzo_state",
-    enzoInitialState
+    "ottobit_jr_state",
+    ottobitJrInitialState
   );
-  const [enzoState, enzoDispatch] = merisStateReducer(initialState, {
+  const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
-    midiObject: midiObject,
+    midiObject: props.midiObject,
   });
 
   useEffect(() => {
-    setState(enzoState);
-  }, [enzoInitialState, initialState, enzoState, setState]);
+    setState(ottobitJrState);
+  }, [ottobitJrState, setState]);
 
   useEffect(() => {
-    if (selectedPedal == "enzo" && selectedPreset.label != null) {
+    if (selectedPreset.label != null) {
       applyExpression();
     }
   }, [expressionVal, applyExpression, selectedPreset]);
 
   const applyExpression = () => {
-    if (midiObject && midiData.output && midiData.channel) {
+    if (props.midiObject && midiData.output && midiData.channel) {
       let { manufacturer, data } = parseSysexToBinary(selectedPreset.message);
-      let deviceOutput = midiObject.outputs.filter((x) => {
+      let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
-      let presetValWithExpression = expressionSysex(data, expressionVal);
-
+      let presetValWithExpression = data.map((_, i) => {
+        if (i < 5) {
+          return 0;
+        } else {
+          let x = data[i];
+          let y = data[i + 17];
+          return Math.floor(props.expressionVal * ((y - x) / 128)) + x;
+        }
+      });
       sysexKnobsUpdate({
         data: presetValWithExpression.slice(5, 22),
-        dispatch: enzoDispatch,
+        dispatch: ottobitJrDispatch,
+        expression: true,
       });
     }
   };
 
-  if (selectedPedal == "enzo") {
+  if (selectedPedal == "ottobitJr") {
     return (
       <>
-        <div className="meris-pedal meris-enzo-bigbox">
+        <div className="meris-pedal meris-ottobit-jr-bigbox">
           <FirstRow
-            midiObject={midiObject}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
+            midiObject={props.midiObject}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
           />
           <SecondRow
-            midiObject={midiObject}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
+            midiObject={props.midiObject}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
           />
           <ThirdRow
-            midiObject={midiObject}
+            midiObject={props.midiObject}
             midiData={midiData}
-            enzoState={enzoState}
-            enzoDispatch={enzoDispatch}
+            ottobitJrState={ottobitJrState}
+            ottobitJrDispatch={ottobitJrDispatch}
           />
         </div>
       </>
