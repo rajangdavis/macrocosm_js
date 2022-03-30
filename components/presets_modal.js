@@ -38,6 +38,10 @@ export default function PresetsModal(props) {
     midiObject: midiObject,
   });
 
+  const { deleteFactoryPreset, updateFactoryPresets } = useContext(
+    FactoryPresetsContext
+  );
+
   const setPreset = (e, preset) => {
     if (midiObject && midiData.output && midiData.channel) {
       let { manufacturer, data } = parseSysexToBinary(preset.message);
@@ -52,6 +56,18 @@ export default function PresetsModal(props) {
       });
       setSelectedPreset(preset);
     }
+  };
+
+  const clonePreset = (preset) => {
+    let presetClone = {
+      label: `Clone of ${preset.label}`,
+      message: preset.message,
+    };
+    updateFactoryPresets(selectedPedal, presetClone);
+  };
+
+  const deletePreset = (i) => {
+    deleteFactoryPreset(selectedPedal, i);
   };
 
   const selectedClassName = (preset) => {
@@ -69,6 +85,18 @@ export default function PresetsModal(props) {
       return "menu-link";
     }
   };
+
+  // Figure out how to hide deletes
+
+  // const showDelete = (index)=>{
+  //   let presetsLength = factoryPresets.length;
+  //   if(presetsLength > 16){
+  //     presetsLength - (index + 1)
+  //     if()
+  //   }else{
+  //     return false;
+  //   }
+  // }
 
   return (
     <div className="presets-modal zoom-in">
@@ -120,12 +148,15 @@ export default function PresetsModal(props) {
                 <label>PRESETS</label>
                 {factoryPresets[selectedPedal].map((preset, i) => {
                   return (
-                    <div
-                      key={i}
-                      onClick={(e) => setPreset(e, preset)}
-                      className={selectedClassName(preset)}
-                    >
-                      {preset.label}
+                    <div key={i} className={selectedClassName(preset)}>
+                      <a onClick={(e) => setPreset(e, preset)}>
+                        {preset.label}
+                      </a>
+                      <span className="pull-right">
+                        <a>EDIT</a> |{" "}
+                        <a onClick={(e) => clonePreset(preset)}>CLONE</a> |{" "}
+                        <a onClick={(e) => deletePreset(preset)}>DELETE</a>
+                      </span>
                     </div>
                   );
                 })}

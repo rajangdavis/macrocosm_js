@@ -8,9 +8,7 @@ import { useContext, useState, useEffect } from "react";
 
 export default function PresetsBuilder(props) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const { factoryPresets, updateFactoryPresets } = useContext(
-    FactoryPresetsContext
-  );
+  const { updateFactoryPresets } = useContext(FactoryPresetsContext);
   let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
   let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
   let [presetExpressionVal, setPresetExpressionVal] = useState(0);
@@ -56,6 +54,18 @@ export default function PresetsBuilder(props) {
     updateFactoryPresets(selectedPedal, presetTemplate);
     setMenu("presets");
   };
+
+  // Insert code to keep track of
+
+  // CC14 -> On Off => always on
+  // CC9  -> Toggle
+  // CC29 -> Toggle
+  // CC30 -> Toggle
+  // CC15 -> Tempo
+
+  // // useEffect(()=>{
+
+  // // }, [heelState, heelDispatch, toeState, toeDispatch])
 
   return (
     <div className="fade-in">

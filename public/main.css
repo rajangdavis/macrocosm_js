@@ -53,7 +53,9 @@ body {
   flex-direction: row;
   width: 90%;
 }
-
+.pull-right {
+  float: right;
+}
 .pedal-selector {
   display: flex;
   gap: 20px;
