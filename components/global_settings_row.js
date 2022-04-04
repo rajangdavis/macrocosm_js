@@ -17,12 +17,10 @@ export default function GlobalSettingsRow(props) {
     let { sysexByte, settingNumber, midiObject } = props;
     if (midiObject && midiConfig.output != "") {
       let sysexString = MerisGlobalSettings(sysexByte, settingNumber, val);
-      console.log(sysexString);
       let { manufacturer, data } = parseSysexToBinary(sysexString);
       let deviceOutput = midiObject.outputs.filter((x) => {
         return x.name == midiConfig.output;
       })[0];
-      console.log(manufacturer, data);
       deviceOutput.sendSysex(manufacturer, data);
     }
     props.setState(thisVal);
@@ -33,13 +31,13 @@ export default function GlobalSettingsRow(props) {
       <td className="title">{props.title}</td>
       <td
         className={selected(props.option1)}
-        onClick={() => sendMessage(props.option1, 0)}
+        onClick={() => sendMessage(props.option1, 127)}
       >
         {props.option1}
       </td>
       <td
         className={selected(props.option2)}
-        onClick={() => sendMessage(props.option2, 1)}
+        onClick={() => sendMessage(props.option2, 0)}
       >
         {props.option2}
       </td>

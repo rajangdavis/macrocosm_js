@@ -31,8 +31,7 @@ export default function Pedals(props) {
     label: null,
     message: null,
   });
-  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useLocalStorage(
-    "pedals_to_select",
+  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useState(
     [
       {
         key: "enzo",
@@ -77,7 +76,8 @@ export default function Pedals(props) {
     ]
   );
 
-  const [sysexByte, setSysexByte] = useState(1);
+  let selectedPedalHash = pedalSelectAndOrder.filter(x => x.key == selectedPedal)[0]
+  const [sysexByte, setSysexByte] = useState(selectedPedalHash.sysexByte);
   const [dragId, setDragId] = useState();
   const [presetsOpen, setPresetsOpen] = useState(false);
   const handleDrag = (ev) => {
@@ -155,7 +155,7 @@ export default function Pedals(props) {
                     onClick={(e) => changePedal(e, pedal)}
                   >
                     <Image
-                      alt="selectedPedal"
+                      alt={pedal.key}
                       src={iconSource}
                       width="146"
                       height="146"
