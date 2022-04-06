@@ -8,12 +8,11 @@ import computeSysex from "../utilities/compute_sysex";
 import applyExpression from "../hooks/apply_expression";
 import { useContext, useState, useEffect } from "react";
 
-export default function PresetsBuilder(props) {
+export default function PresetsEditor(props) {
   const { updateFactoryPresets } = useContext(FactoryPresetsContext);
-  let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
-  let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
+  let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(true);
+  let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(true);
   let [presetNumber, setPresetNumber] = useState(1);
-  let [presetName, setPresetName] = useState("New Preset");
 
   let {
     setMenu,
@@ -22,7 +21,13 @@ export default function PresetsBuilder(props) {
     midiData,
     expressionVal,
     setExpressionVal,
+    presetToEdit,
   } = props;
+  console.log(presetToEdit);
+  let [presetName, setPresetName] = useState(presetToEdit.label);
+
+  // DO SOMETHING HERE
+  // TO Deconstruct the message
 
   let initialState = { ...pedalStates[selectedPedal] };
   initialState[9] = 0; // 2-Way Toggle
@@ -70,7 +75,7 @@ export default function PresetsBuilder(props) {
     };
   };
 
-  let createPreset = () => {
+  let savePreset = () => {
     let presetTemplate = computedPreset();
     updateFactoryPresets(selectedPedal, presetTemplate);
     setMenu("presets");
@@ -83,7 +88,7 @@ export default function PresetsBuilder(props) {
         midiObject,
         midiData,
         expressionVal,
-        presetTemplate,
+        presetToEdit,
         finalDispatch
       );
     }
@@ -203,10 +208,10 @@ export default function PresetsBuilder(props) {
             <a
               style={{ color: "white" }}
               onClick={() => {
-                return createPreset();
+                return savePreset();
               }}
             >
-              Save Preset
+              Update Preset
             </a>
           </div>
         )}

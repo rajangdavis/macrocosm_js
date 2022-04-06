@@ -16,5 +16,4 @@ module.exports = {
   27: 0,
   29: null,
   30: null,
-  31: null,
 };

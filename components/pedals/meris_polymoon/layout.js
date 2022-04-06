@@ -1,84 +1,30 @@
 import FirstRow from "./first_row";
 import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
-import ModalOpenButton from "../../modal_open_button";
-import { useState, useEffect, useContext } from "react";
-import merisStateReducer from "../../../hooks/meris_state";
-import { MidiConfigContext } from "../../../hooks/midi_config";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
-import useLocalStorage from "../../../hooks/use_local_storage";
-import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
-import parseSysexToBinary from "../../../utilities/parse_sysex";
-import expressionSysex from "../../../utilities/expression_sysex";
 
 export default function MerisPolymoonLayout(props) {
-  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
+  let { state, dispatch, midiObject, midiData } = props;
 
-  const { midiConfig } = useContext(MidiConfigContext);
-  const { polymoon: polymoonInitialState } =
-    useContext(PedalStatesContext).pedalStates;
-
-  const midiData = {
-    channel: midiConfig.polymoonChannel,
-    output: midiConfig.output,
-  };
-  const [initialState, setState] = useLocalStorage(
-    "polymoon_state",
-    polymoonInitialState
+  return (
+    <>
+      <div className="meris-pedal meris-polymoon-bigbox">
+        <FirstRow
+          midiObject={midiObject}
+          polymoonState={state}
+          polymoonDispatch={dispatch}
+        />
+        <SecondRow
+          midiObject={midiObject}
+          polymoonState={state}
+          polymoonDispatch={dispatch}
+        />
+        <ThirdRow
+          midiObject={midiObject}
+          midiData={midiData}
+          polymoonState={state}
+          polymoonDispatch={dispatch}
+        />
+      </div>
+    </>
   );
-  const [polymoonState, polymoonDispatch] = merisStateReducer(initialState, {
-    midiData: midiData,
-    midiObject: midiObject,
-  });
-
-  useEffect(() => {
-    setState(polymoonState);
-  }, [polymoonState, setState]);
-
-  useEffect(() => {
-    if (selectedPedal == "polymoon" && selectedPreset.label != null) {
-      applyExpression();
-    }
-  }, [expressionVal, applyExpression, selectedPreset]);
-
-  const applyExpression = () => {
-    if (props.midiObject && midiData.output && midiData.channel) {
-      let { manufacturer, data } = parseSysexToBinary(selectedPreset.message);
-      let deviceOutput = props.midiObject.outputs.filter((x) => {
-        return x.name == midiData.output;
-      })[0];
-      let presetValWithExpression = expressionSysex(data, expressionVal);
-      sysexKnobsUpdate({
-        data: presetValWithExpression.slice(5, 22),
-        dispatch: polymoonDispatch,
-      });
-    }
-  };
-
-  if (selectedPedal == "polymoon") {
-    return (
-      <>
-        <div className="meris-pedal meris-polymoon-bigbox">
-          <FirstRow
-            midiObject={props.midiObject}
-            polymoonState={polymoonState}
-            polymoonDispatch={polymoonDispatch}
-          />
-          <SecondRow
-            midiObject={props.midiObject}
-            polymoonState={polymoonState}
-            polymoonDispatch={polymoonDispatch}
-          />
-          <ThirdRow
-            midiObject={props.midiObject}
-            midiData={midiData}
-            polymoonState={polymoonState}
-            polymoonDispatch={polymoonDispatch}
-          />
-        </div>
-      </>
-    );
-  } else {
-    return null;
-  }
 }

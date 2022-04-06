@@ -1,5 +1,7 @@
 import CloseButton from "./close_button";
+import Expression from "./expression";
 import PresetsBuilder from "./presets_builder";
+import PresetsEditor from "./presets_editor";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
 import merisStateReducer from "../hooks/meris_state";
@@ -15,6 +17,8 @@ export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
   const { pedalStates } = useContext(PedalStatesContext);
   const { factoryPresets } = useContext(FactoryPresetsContext);
+  const [presetExpressionVal, setPresetExpressionVal] = useState(0);
+  const [presetToEdit, setPresetToEdit] = useState(null);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
 
@@ -66,6 +70,11 @@ export default function PresetsModal(props) {
     updateFactoryPresets(selectedPedal, presetClone);
   };
 
+  const editPreset = (preset) => {
+    setPresetToEdit(preset);
+    setMenu("edit-preset");
+  };
+
   const deletePreset = (i) => {
     deleteFactoryPreset(selectedPedal, i);
   };
@@ -86,17 +95,22 @@ export default function PresetsModal(props) {
     }
   };
 
-  // Figure out how to hide deletes
+  const skipOgPresets = (index) => {
+    let presetsLength = factoryPresets[selectedPedal].length;
+    if (presetsLength > 16) {
+      if (index + 16 < presetsLength) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  };
 
-  // const showDelete = (index)=>{
-  //   let presetsLength = factoryPresets.length;
-  //   if(presetsLength > 16){
-  //     presetsLength - (index + 1)
-  //     if()
-  //   }else{
-  //     return false;
-  //   }
-  // }
+  useEffect(() => {
+    setPresetExpressionVal(0);
+  }, [presetExpressionVal, setPresetExpressionVal, menu]);
 
   return (
     <div className="presets-modal zoom-in">
@@ -153,9 +167,18 @@ export default function PresetsModal(props) {
                         {preset.label}
                       </a>
                       <span className="pull-right">
-                        <a>EDIT</a> |{" "}
-                        <a onClick={(e) => clonePreset(preset)}>CLONE</a> |{" "}
-                        <a onClick={(e) => deletePreset(preset)}>DELETE</a>
+                        {skipOgPresets(i) && (
+                          <>
+                            <a onClick={(e) => editPreset(preset)}>EDIT</a> |{" "}
+                          </>
+                        )}
+                        <a onClick={(e) => clonePreset(preset)}>CLONE</a>
+                        {skipOgPresets(i) && <> | </>}
+                        {skipOgPresets(i) && (
+                          <>
+                            <a onClick={(e) => deletePreset(preset)}>DELETE</a>
+                          </>
+                        )}
                       </span>
                     </div>
                   );
@@ -169,9 +192,31 @@ export default function PresetsModal(props) {
               midiObject={midiObject}
               midiData={midiData}
               setMenu={setMenu}
+              expressionVal={presetExpressionVal}
+            />
+          )}
+          {menu == "edit-preset" && (
+            <PresetsEditor
+              selectedPedal={selectedPedal}
+              midiObject={midiObject}
+              midiData={midiData}
+              setMenu={setMenu}
+              presetToEdit={presetToEdit}
+              expressionVal={presetExpressionVal}
             />
           )}
         </div>
+      </div>
+      <div className="menu-select right">
+        {(menu == "new-preset" || menu == "edit-preset") && (
+          <Expression
+            expressionVal={presetExpressionVal}
+            setExpressionVal={setPresetExpressionVal}
+            midiData={midiData}
+            midiObject={midiObject}
+            tempo={0}
+          />
+        )}
       </div>
     </div>
   );

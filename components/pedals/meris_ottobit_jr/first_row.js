@@ -6,7 +6,7 @@ export default function FirstRow(props) {
     16: sampleRate,
     17: filter,
     18: bits,
-    28: sequencerType,
+    29: sequencerType,
   } = props.ottobitJrState;
 
   let setSampleRate = (value) => {

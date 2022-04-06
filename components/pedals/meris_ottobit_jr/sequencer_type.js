@@ -6,7 +6,7 @@ export default function SequencerType(props) {
   };
 
   const setSequencerType = (value) => {
-    props.ottobitJrDispatch({ key: 28, value: value });
+    props.ottobitJrDispatch({ key: 29, value: value });
   };
 
   return (

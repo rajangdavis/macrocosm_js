@@ -1,84 +1,29 @@
 import FirstRow from "./first_row";
 import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
-import ModalOpenButton from "../../modal_open_button";
-import { useState, useEffect, useContext } from "react";
-import merisStateReducer from "../../../hooks/meris_state";
-import { MidiConfigContext } from "../../../hooks/midi_config";
-import { PedalStatesContext } from "../../../hooks/pedal_states";
-import useLocalStorage from "../../../hooks/use_local_storage";
-import sysexKnobsUpdate from "../../../hooks/sysex_knobs_update";
-import parseSysexToBinary from "../../../utilities/parse_sysex";
-import expressionSysex from "../../../utilities/expression_sysex";
 
 export default function MerisOttobitJrLayout(props) {
-  let { midiObject, expressionVal, selectedPreset, selectedPedal } = props;
-
-  const { midiConfig } = useContext(MidiConfigContext);
-  const { ottobitJr: ottobitJrInitialState } =
-    useContext(PedalStatesContext).pedalStates;
-
-  const midiData = {
-    channel: midiConfig.ottobitJrChannel,
-    output: midiConfig.output,
-  };
-  const [initialState, setState] = useLocalStorage(
-    "ottobit_jr_state",
-    ottobitJrInitialState
+  let { state, dispatch, midiObject, midiData } = props;
+  return (
+    <>
+      <div className="meris-pedal meris-ottobit-jr-bigbox">
+        <FirstRow
+          midiObject={midiObject}
+          ottobitJrState={state}
+          ottobitJrDispatch={dispatch}
+        />
+        <SecondRow
+          midiObject={midiObject}
+          ottobitJrState={state}
+          ottobitJrDispatch={dispatch}
+        />
+        <ThirdRow
+          midiObject={midiObject}
+          midiData={midiData}
+          ottobitJrState={state}
+          ottobitJrDispatch={dispatch}
+        />
+      </div>
+    </>
   );
-  const [ottobitJrState, ottobitJrDispatch] = merisStateReducer(initialState, {
-    midiData: midiData,
-    midiObject: props.midiObject,
-  });
-
-  useEffect(() => {
-    setState(ottobitJrState);
-  }, [ottobitJrState, setState]);
-
-  useEffect(() => {
-    if (selectedPedal == "ottobitJr" && selectedPreset.label != null) {
-      applyExpression();
-    }
-  }, [expressionVal, applyExpression, selectedPreset]);
-
-  const applyExpression = () => {
-    if (props.midiObject && midiData.output && midiData.channel) {
-      let { manufacturer, data } = parseSysexToBinary(selectedPreset.message);
-      let deviceOutput = props.midiObject.outputs.filter((x) => {
-        return x.name == midiData.output;
-      })[0];
-      let presetValWithExpression = expressionSysex(data, expressionVal);
-      sysexKnobsUpdate({
-        data: presetValWithExpression.slice(5, 22),
-        dispatch: ottobitJrDispatch,
-      });
-    }
-  };
-
-  if (selectedPedal == "ottobitJr") {
-    return (
-      <>
-        <div className="meris-pedal meris-ottobit-jr-bigbox">
-          <FirstRow
-            midiObject={props.midiObject}
-            ottobitJrState={ottobitJrState}
-            ottobitJrDispatch={ottobitJrDispatch}
-          />
-          <SecondRow
-            midiObject={props.midiObject}
-            ottobitJrState={ottobitJrState}
-            ottobitJrDispatch={ottobitJrDispatch}
-          />
-          <ThirdRow
-            midiObject={props.midiObject}
-            midiData={midiData}
-            ottobitJrState={ottobitJrState}
-            ottobitJrDispatch={ottobitJrDispatch}
-          />
-        </div>
-      </>
-    );
-  } else {
-    return null;
-  }
 }

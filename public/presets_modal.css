@@ -103,6 +103,11 @@ a.menu-link {
   height: 105vh;
 }
 
+.menu-select.right {
+  left: unset;
+  right: 0;
+}
+
 .menu-select a.selected.menu-link {
   text-decoration: underline;
   text-decoration-color: rgba(255, 255, 255, 1) !important;

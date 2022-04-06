@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: stretch;
   background: black;
-  border: 3px solid;
+  border: 3px solid honeydew;
 }
 
 .meris-ottobit-jr-bigbox:after {
