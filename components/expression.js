@@ -1,8 +1,14 @@
 import { useState, useEffect } from "react";
 import { LittleKnob, BigKnob } from "./pedals/knob";
 export default function Expression(props) {
-  const { expressionVal, setExpressionVal, midiObject, midiData, tempo } =
-    props;
+  const {
+    expressionVal,
+    setExpressionVal,
+    midiObject,
+    midiData,
+    tempo,
+    dispatch,
+  } = props;
 
   useEffect(() => {
     if (
@@ -49,6 +55,10 @@ export default function Expression(props) {
     }
   };
 
+  const setTempo = (value) => {
+    dispatch({ key: 15, value: value });
+  };
+
   return (
     <div className="expression-container">
       <div className="expression">
@@ -63,11 +73,12 @@ export default function Expression(props) {
         />
         <label>EXPRESSION</label>
       </div>
-      {/*<BigKnob
-				className="top-row sample-rate"
-				label="TEMPO"
-				setVal={()=>{}}
-				val={0}/>*/}
+      <BigKnob
+        className="top-row sample-rate"
+        label="TEMPO"
+        setVal={setTempo}
+        val={tempo}
+      />
     </div>
   );
 }

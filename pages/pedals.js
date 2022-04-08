@@ -75,11 +75,14 @@ export default function Pedals(props) {
           midiData={midiData}
           midiObject={midiObject}
           tempo={selectedPedalState[15]}
+          dispatch={selectedPedalDispatch}
         />
       </div>
       {presetsOpen && (
         <PresetsModal
           selectedPedal={selectedPedal}
+          state={selectedPedalState}
+          dispatch={selectedPedalDispatch}
           expressionVal={expressionVal}
           sysexByte={sysexByte}
           midiObject={midiObject}

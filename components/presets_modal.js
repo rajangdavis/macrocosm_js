@@ -7,7 +7,6 @@ import GlobalSettingsTable from "./global_settings_table";
 import merisStateReducer from "../hooks/meris_state";
 import { useContext, useState, useEffect } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
-import { PedalStatesContext } from "../hooks/pedal_states";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import useLocalStorage from "../hooks/use_local_storage";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
@@ -15,7 +14,6 @@ import parseSysexToBinary from "../utilities/parse_sysex";
 
 export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const { pedalStates } = useContext(PedalStatesContext);
   const { factoryPresets } = useContext(FactoryPresetsContext);
   const [presetExpressionVal, setPresetExpressionVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
@@ -26,6 +24,8 @@ export default function PresetsModal(props) {
   const {
     midiObject,
     sysexByte,
+    state,
+    dispatch,
     selectedPedal,
     selectedPreset,
     setSelectedPreset,
@@ -37,11 +37,6 @@ export default function PresetsModal(props) {
     output: midiConfig.output,
     sysexByte: sysexByte,
   };
-
-  const [_, dispatch] = merisStateReducer(pedalStates[selectedPedal], {
-    midiData: midiData,
-    midiObject: midiObject,
-  });
 
   const { deleteFactoryPreset, updateFactoryPresets } = useContext(
     FactoryPresetsContext
@@ -214,7 +209,8 @@ export default function PresetsModal(props) {
             setExpressionVal={setPresetExpressionVal}
             midiData={midiData}
             midiObject={midiObject}
-            tempo={0}
+            tempo={state[15]}
+            dispatch={dispatch}
           />
         )}
       </div>
