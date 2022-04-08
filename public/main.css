@@ -354,10 +354,11 @@ input[type="number"] {
   .view-port {
     margin: 0;
   }
-  .main-display:not(.macros) {
+  .meris-pedal {
     margin-top: -50px;
   }
-  .main-display {
+  .meris-pedal,
+  .presets-button-container {
     transform: scale(0.8);
   }
   .nav-menu.open {

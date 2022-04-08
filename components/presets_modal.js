@@ -19,6 +19,7 @@ export default function PresetsModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
   const [presetExpressionVal, setPresetExpressionVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
+  const [presetToEditIndex, setPresetToEditIndex] = useState(null);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
 
@@ -70,8 +71,9 @@ export default function PresetsModal(props) {
     updateFactoryPresets(selectedPedal, presetClone);
   };
 
-  const editPreset = (preset) => {
+  const editPreset = (preset, i) => {
     setPresetToEdit(preset);
+    setPresetToEditIndex(i);
     setMenu("edit-preset");
   };
 
@@ -107,10 +109,6 @@ export default function PresetsModal(props) {
       return false;
     }
   };
-
-  useEffect(() => {
-    setPresetExpressionVal(0);
-  }, [presetExpressionVal, setPresetExpressionVal, menu]);
 
   return (
     <div className="presets-modal zoom-in">
@@ -169,7 +167,7 @@ export default function PresetsModal(props) {
                       <span className="pull-right">
                         {skipOgPresets(i) && (
                           <>
-                            <a onClick={(e) => editPreset(preset)}>EDIT</a> |{" "}
+                            <a onClick={(e) => editPreset(preset, i)}>EDIT</a> |{" "}
                           </>
                         )}
                         <a onClick={(e) => clonePreset(preset)}>CLONE</a>
@@ -202,7 +200,9 @@ export default function PresetsModal(props) {
               midiData={midiData}
               setMenu={setMenu}
               presetToEdit={presetToEdit}
+              presetToEditIndex={presetToEditIndex}
               expressionVal={presetExpressionVal}
+              setExpressionVal={setPresetExpressionVal}
             />
           )}
         </div>

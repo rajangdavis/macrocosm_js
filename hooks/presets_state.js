@@ -18,6 +18,12 @@ const FactoryPresetsProvider = ({
     setFactoryPresets(copiedConfig);
   };
 
+  const replaceFactoryPresets = (pedal, presetIndex, updatedPreset) => {
+    let copiedConfig = { ...factoryPresets };
+    copiedConfig[pedal].splice(presetIndex, 1, updatedPreset);
+    setFactoryPresets(copiedConfig);
+  };
+
   const deleteFactoryPreset = (pedal, presetIndex) => {
     let copiedConfig = { ...factoryPresets };
     copiedConfig[pedal].splice(presetIndex, 1);
@@ -26,7 +32,12 @@ const FactoryPresetsProvider = ({
 
   return (
     <FactoryPresetsContext.Provider
-      value={{ factoryPresets, updateFactoryPresets, deleteFactoryPreset }}
+      value={{
+        factoryPresets,
+        updateFactoryPresets,
+        replaceFactoryPresets,
+        deleteFactoryPreset,
+      }}
     >
       {children}
     </FactoryPresetsContext.Provider>
