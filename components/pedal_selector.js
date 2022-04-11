@@ -136,7 +136,6 @@ export default function PedalSelector(props) {
             </div>
           );
         })}
-      ;
     </>
   );
 }

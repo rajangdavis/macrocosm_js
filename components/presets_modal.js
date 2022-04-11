@@ -52,7 +52,6 @@ export default function PresetsModal(props) {
       sysexKnobsUpdate({
         data: data.slice(5, 22),
         dispatch: dispatch,
-        expression: false,
       });
       setSelectedPreset(preset);
     }
