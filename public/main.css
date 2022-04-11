@@ -70,6 +70,10 @@ body {
 .pedal-selector a:hover {
   cursor: pointer;
 }
+
+.page-state {
+  width: 10px;
+}
 .main-display {
   display: flex;
   flex-direction: column;
@@ -245,13 +249,12 @@ input[type="number"] {
   align-content: space-between;
   justify-content: space-between;
   flex-direction: row;
+  gap: 75px;
 }
 .macro {
-  box-shadow: 1px 1px 9px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border: 3px solid;
   height: 150px;
   width: 150px;
-  margin: 50px;
   background: white;
 }
 
@@ -415,8 +418,7 @@ input[type="number"] {
   }
 }
 
-.fade-in,
-.meris-pedal {
+.fade-in {
   -webkit-animation-name: fadeIn;
   animation-name: fadeIn;
   -webkit-animation-duration: 1s;

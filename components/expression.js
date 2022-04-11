@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { LittleKnob, BigKnob } from "./pedals/knob";
+import { BigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const {
     expressionVal,

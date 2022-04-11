@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { LittleKnob, BigKnob } from "./pedals/knob";
+import { BigKnob } from "./pedals/knob";
 export default function ExpressionMacros(props) {
   const {
     expressionVal,
@@ -7,7 +7,8 @@ export default function ExpressionMacros(props) {
     midiObject,
     selectedMacro,
     midiConfig,
-    setMacrosModalOpen,
+    macroTempo,
+    setMacroTempo,
   } = props;
 
   const express = async (e) => {
@@ -35,9 +36,32 @@ export default function ExpressionMacros(props) {
     }
   };
 
+  const tempoChange = async (val) => {
+    if (Object.keys(selectedMacro).length > 0 && midiObject) {
+      let selectedPedals = selectedMacro.data.pedals
+        .filter((x) => x.showing)
+        .map((x) => x.name);
+      let deviceOutput = midiObject.outputs.filter((x) => {
+        return x.name == midiConfig.output;
+      })[0];
+      if (deviceOutput) {
+        let macroTempoResults = await Promise.all(
+          selectedPedals.map((x) => {
+            let channel = parseInt(midiConfig[`${x}Channel`]);
+            return deviceOutput.sendControlChange(val, parsedVal, {
+              channels: channel,
+            });
+          })
+        );
+        setMacroTempo(val);
+        console.log(macroTempoResults);
+      }
+    }
+  };
+
   return (
-    <div className="expression-container macros">
-      <div className="expression expression-macro">
+    <div className="expression-container">
+      <div className="expression">
         <input
           type="range"
           value={expressionVal}
@@ -49,6 +73,14 @@ export default function ExpressionMacros(props) {
         />
         <label>EXPRESSION</label>
       </div>
+      <BigKnob
+        className="top-row sample-rate"
+        label="TEMPO"
+        setVal={(val) => {
+          tempoChange(val);
+        }}
+        val={macroTempo}
+      />
     </div>
   );
 }

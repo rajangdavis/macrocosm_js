@@ -80,6 +80,7 @@ export default function Pedals(props) {
       </div>
       {presetsOpen && (
         <PresetsModal
+          pageState={pageState}
           selectedPedal={selectedPedal}
           state={selectedPedalState}
           dispatch={selectedPedalDispatch}
