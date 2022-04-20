@@ -21,9 +21,9 @@ export default function ModalOpenButton(props) {
   };
   return (
     <div className="presets-button-container">
-      <a className="page-state" onClick={changePageState}>
+      <button className="page-state" onClick={changePageState}>
         {linkText}
-      </a>
+      </button>
       <button
         className="presets-button"
         onClick={() => setPresetsOpen(!presetsOpen)}
@@ -31,12 +31,12 @@ export default function ModalOpenButton(props) {
         {text}
       </button>
       <div className="fullscreen-button">
-        <a className="fullscreen full" onClick={engageFullScreen}>
+        <button className="fullscreen full" onClick={engageFullScreen}>
           Fullscreen
-        </a>
-        <a className="fullscreen normal" onClick={exitFullScreen}>
+        </button>
+        <button className="fullscreen normal" onClick={exitFullScreen}>
           Normal
-        </a>
+        </button>
       </div>
     </div>
   );

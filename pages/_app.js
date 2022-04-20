@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    <div>
+    <>
       <Head>
         <title>macrocosm</title>
         <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
           </MidiConfigProvider>
         </FactoryPresetsProvider>
       </PedalStatesProvider>
-    </div>
+    </>
   );
 }
 

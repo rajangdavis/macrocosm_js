@@ -3,6 +3,7 @@ import { BigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const {
     expressionVal,
+    selectedPedal,
     setExpressionVal,
     midiObject,
     midiData,
@@ -59,6 +60,8 @@ export default function Expression(props) {
     dispatch({ key: 15, value: value });
   };
 
+  const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
+
   return (
     <div className="expression-container">
       <div className="expression">
@@ -74,7 +77,7 @@ export default function Expression(props) {
         <label>EXPRESSION</label>
       </div>
       <BigKnob
-        className="top-row sample-rate"
+        className={merc7Selected}
         label="TEMPO"
         setVal={setTempo}
         val={tempo}

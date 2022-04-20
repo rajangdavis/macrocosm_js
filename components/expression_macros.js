@@ -48,7 +48,7 @@ export default function ExpressionMacros(props) {
         let macroTempoResults = await Promise.all(
           selectedPedals.map((x) => {
             let channel = parseInt(midiConfig[`${x}Channel`]);
-            return deviceOutput.sendControlChange(val, parsedVal, {
+            return deviceOutput.sendControlChange(15, val, {
               channels: channel,
             });
           })
@@ -74,7 +74,7 @@ export default function ExpressionMacros(props) {
         <label>EXPRESSION</label>
       </div>
       <BigKnob
-        className="top-row sample-rate"
+        className="tempo"
         label="TEMPO"
         setVal={(val) => {
           tempoChange(val);

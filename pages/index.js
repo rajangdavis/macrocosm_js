@@ -83,9 +83,7 @@ export default function Index(props) {
                 setMacrosModalOpen(true);
               }}
             >
-              <div></div>
-              <div></div>
-              <span>Add Macro</span>
+              <span className="macro-name">Add Macro</span>
             </div>
           )}
         </div>
@@ -109,6 +107,7 @@ export default function Index(props) {
           {pageState == "macros" && (
             <MacrosLayout
               setSelectedMacro={setSelectedMacro}
+              selectedMacro={selectedMacro}
               macros={macros}
               macroDispatch={macroDispatch}
               setMacroToEdit={setMacroToEdit}
@@ -122,6 +121,7 @@ export default function Index(props) {
           <Expression
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
+            selectedPedal={selectedPedal}
             midiData={midiData}
             midiObject={midiObject}
             tempo={selectedPedalState[15]}

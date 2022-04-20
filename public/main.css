@@ -40,7 +40,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
 }
 
 .invisible {
@@ -48,7 +49,7 @@ body {
 }
 
 .view-port {
-  margin-top: 100px;
+  align-items: center;
   display: flex;
   flex-direction: row;
   width: 90%;
@@ -71,22 +72,29 @@ body {
   cursor: pointer;
 }
 
-.page-state {
-  width: 10px;
+.pedal-option > span > img {
+  transition: all 0.3s ease-in-out;
 }
+
 .main-display {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   width: 70%;
+  height: 100vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .expression-container {
   display: flex;
+  position: relative;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   width: 15%;
+  height: 840px;
 }
 .expression {
   width: 100%;
@@ -95,10 +103,16 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 350px;
-  margin-top: 450px;
+  position: absolute;
+  top: 230px;
 }
 
-.expression > label {
+.tempo {
+  bottom: 15px;
+}
+
+.expression > label,
+.tempo span {
   font-size: 25px;
 }
 .expression > input[type="range"] {
@@ -198,21 +212,30 @@ how to remove the virtical space around the range input in IE*/
   display: flex;
   position: relative;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   width: 916px;
+  margin: 5px;
 }
 
 .presets-button {
-  font-weight: 100;
   width: 468px;
+  align-self: center;
+}
+
+.page-state {
+  width: 100px;
+}
+
+.presets-button,
+.page-state,
+.fullscreen {
+  font-weight: 100;
   height: 62px;
-  margin: 0 auto 48px;
   background: white;
   color: black;
   font-size: 25px;
   border: 3px solid;
   transition: 0.1s linear;
-  align-self: center;
 }
 
 .presets-button.open {
@@ -220,15 +243,12 @@ how to remove the virtical space around the range input in IE*/
   color: white;
 }
 
-.presets-button:not(:disabled):hover {
+.presets-button:not(:disabled):hover,
+.page-state:hover,
+.fullscreen:hover {
   background: black;
   color: white;
   cursor: pointer;
-}
-
-.fullscreen-button {
-  position: absolute;
-  right: 0;
 }
 
 input::-webkit-outer-spin-button,
@@ -246,16 +266,38 @@ input[type="number"] {
 .macro-display {
   display: flex;
   flex-flow: row wrap;
-  align-content: space-between;
-  justify-content: space-between;
+  align-content: baseline;
+  justify-content: left;
   flex-direction: row;
-  gap: 75px;
+  gap: 60px;
+  width: 916px;
+  height: 715px;
+  margin: 30px;
 }
 .macro {
   border: 3px solid;
   height: 150px;
   width: 150px;
   background: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.macro.selected {
+  color: white;
+  background: linear-gradient(to top, #fff 50%, #000 50%);
+  background-size: 100% 200%;
+  background-position: top left;
+  transition: all 0.5s ease-out;
+}
+
+.macro-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.macro-name {
 }
 
 /* MERIS PEDALS */
@@ -267,6 +309,7 @@ input[type="number"] {
   position: relative;
   display: flex;
   justify-content: center;
+  margin: 30px;
 }
 
 .text-reset {
@@ -342,15 +385,22 @@ input[type="number"] {
 @media (min-width: 1400px) {
   .view-port {
     max-width: 1615px;
+    min-height: 100vh;
   }
 }
 
 /* DESKTOP TEMPLATE */
 @media (min-width: 992px) {
+  .view-port {
+    min-height: 100vh;
+  }
 }
 
 /* TABLET ONLY TEMPLATE */
 @media (min-width: 768px) and (max-width: 991px) {
+  .view-port {
+    min-height: 100vh;
+  }
 }
 
 @media (max-width: 1340px) and (orientation: landscape) {
@@ -358,25 +408,25 @@ input[type="number"] {
     margin: 0;
   }
   .meris-pedal {
-    margin-top: -50px;
+    margin: -50px 0 0 0;
+  }
+  .main-display {
+    margin-top: 80px;
   }
   .meris-pedal,
-  .presets-button-container {
+  .presets-button-container,
+  .macro-display {
     transform: scale(0.8);
   }
   .nav-menu.open {
     overflow-y: auto;
   }
-  .expression {
-    margin-top: 200px;
-  }
   .expression-container {
-    margin-top: -90px;
-    transform: scale(0.8);
+    height: 100vh;
   }
-  .pedal-selector {
+  .pedal-selector,
+  .expression-container {
     transform: scale(0.8);
-    margin-top: -100px;
   }
 }
 
