@@ -222,8 +222,8 @@ how to remove the virtical space around the range input in IE*/
   align-self: center;
 }
 
-.page-state {
-  width: 100px;
+.page-state, .fullscreen {
+  width: 150px;
 }
 
 .presets-button,
