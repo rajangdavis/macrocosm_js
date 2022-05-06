@@ -73,17 +73,16 @@ export default function MacrosLayout(props) {
       {macros.map((macro, i) => {
         return (
           <div key={i}>
-            <div
+            <a
               className={isSelected(macro)}
               onClick={() => {
                 callMacro(macro);
               }}
             >
               <span className="macro-name">{macro.data.name}</span>
-            </div>
+            </a>
             <div className="macro-controls">
               <a
-                href="#"
                 onClick={() => {
                   macroDispatch({
                     type: "remove-macro",
@@ -95,7 +94,6 @@ export default function MacrosLayout(props) {
               </a>
               |
               <a
-                href="#"
                 onClick={() => {
                   macroDispatch({
                     type: "clone-macro",
@@ -107,7 +105,6 @@ export default function MacrosLayout(props) {
               </a>
               |
               <a
-                href="#"
                 onClick={() => {
                   setMacroToEdit(macro);
                   setMacrosModalEditOpen(true);

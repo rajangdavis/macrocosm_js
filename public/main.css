@@ -5,6 +5,7 @@
 @import url("custom_select.css");
 @import url("custom_slider.css");
 @import url("midi_channel_input.css");
+@import url("presets_builder_and_editor.css");
 @import url("meris_enzo.css");
 @import url("meris_hedra.css");
 @import url("meris_polymoon.css");
@@ -25,14 +26,13 @@ body {
 }
 
 * {
+  text-transform: uppercase;
   box-sizing: border-box;
   font-family: "YWFTUltramagnetic-Light", sans-serif;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+a:hover {
+  cursor: pointer !important;
 }
 
 .container {
@@ -83,8 +83,7 @@ body {
   align-items: center;
   width: 70%;
   height: 100vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 .expression-container {
@@ -94,7 +93,7 @@ body {
   align-items: center;
   justify-content: flex-end;
   width: 15%;
-  height: 840px;
+  height: 820px;
 }
 .expression {
   width: 100%;
@@ -222,7 +221,8 @@ how to remove the virtical space around the range input in IE*/
   align-self: center;
 }
 
-.page-state, .fullscreen {
+.page-state,
+.fullscreen {
   width: 150px;
 }
 
@@ -273,6 +273,8 @@ input[type="number"] {
   width: 916px;
   height: 715px;
   margin: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 .macro {
   border: 3px solid;
@@ -407,11 +409,13 @@ input[type="number"] {
   .view-port {
     margin: 0;
   }
-  .meris-pedal {
-    margin: -65px 0 0 0;
+  .meris-pedal,
+  .macro-display {
+    margin: -65px 0 -40px 0;
   }
   .main-display {
-    margin-top: 80px;
+    margin-top: 20px;
+    gap: 20px;
   }
   .meris-pedal,
   .presets-button-container,

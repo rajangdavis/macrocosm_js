@@ -62,6 +62,14 @@ export default function Index(props) {
     setMacroTempo(0);
   }, [selectedPreset, selectedMacro, selectedPreset, pageState]);
 
+  useEffect(() => {
+    setSelectedMacro({});
+    setSelectedPreset({
+      label: null,
+      message: null,
+    });
+  }, [pageState]);
+
   return (
     <div className="container fade-in">
       <div className="view-port">
@@ -77,14 +85,14 @@ export default function Index(props) {
             />
           )}
           {pageState == "macros" && (
-            <div
+            <a
               className="add macro"
               onClick={() => {
                 setMacrosModalOpen(true);
               }}
             >
               <span className="macro-name">Add Macro</span>
-            </div>
+            </a>
           )}
         </div>
         <div className="main-display">
