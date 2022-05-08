@@ -36,13 +36,6 @@ export default function NavMenu(props) {
         <label>MIDI OPTIONS</label>
         <div className="midi-options">
           <CustomSelect
-            onChange={updateMidiInputForExpression}
-            defaultOption={midiConfig.inputForExpression}
-            closeIf={props.headerOpen}
-            inputLabel={"MIDI INPUT FOR EXPRESSION"}
-            options={inputOptions}
-          />
-          <CustomSelect
             onChange={updateMidiOutput}
             defaultOption={midiConfig.output}
             closeIf={props.headerOpen}

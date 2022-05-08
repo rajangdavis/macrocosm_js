@@ -92,16 +92,8 @@ export default function PresetsEditor(props) {
 
   return (
     <div className="fade-in">
-      Create a new preset
-      <div
-        style={{
-          color: "black",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          alignItems: "center",
-        }}
-      >
+      Edit preset
+      <div className="preset-edit-container">
         {!heelSettingsConfirmed && (
           <div className="fade-in">
             <PedalLayouts
@@ -112,7 +104,6 @@ export default function PresetsEditor(props) {
               midiData={midiData}
             />
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return setHeelSettingsConfirmed(true);
               }}
@@ -131,25 +122,22 @@ export default function PresetsEditor(props) {
               midiData={midiData}
             />
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
               }}
             >
               Change Heel Settings
             </a>
-            <span style={{ color: "white" }}> | </span>
+            <span> | </span>
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return copyHeelSettings(heelState, toeDispatch);
               }}
             >
               Copy Heel Settings
             </a>
-            <span style={{ color: "white" }}> | </span>
+            <span> | </span>
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return setToeSettingsConfirmed(true);
               }}
@@ -184,25 +172,22 @@ export default function PresetsEditor(props) {
               }}
             />
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
               }}
             >
               Change Heel Settings
             </a>
-            <span style={{ color: "white" }}> | </span>
+            <span> | </span>
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return setToeSettingsConfirmed(false);
               }}
             >
               Change Toe Settings
             </a>
-            <span style={{ color: "white" }}> | </span>
+            <span> | </span>
             <a
-              style={{ color: "white" }}
               onClick={() => {
                 return updatePreset();
               }}

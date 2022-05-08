@@ -28,6 +28,7 @@ module.exports = {
 };
 
 function Knob(props) {
+  let maxValue = props.maxValue != undefined ? props.maxValue : 127;
   const { sliderState } = useContext(SliderStateContext);
 
   const updateVal = (event) => {
@@ -49,7 +50,7 @@ function Knob(props) {
       <input
         type="range"
         min="0"
-        max="127"
+        max={maxValue}
         value={props.val}
         style={style.inputRange(sliderState)}
         onChange={updateVal}

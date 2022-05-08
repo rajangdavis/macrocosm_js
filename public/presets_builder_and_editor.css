@@ -1,0 +1,15 @@
+.preset-create-container,
+.preset-edit-container {
+  color: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preset-create-container a,
+.preset-create-container span,
+.preset-edit-container a,
+.preset-edit-container span {
+  color: white;
+}
