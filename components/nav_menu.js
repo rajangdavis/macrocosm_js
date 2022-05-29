@@ -4,8 +4,7 @@ import MenuKnob from "./menu_knob";
 import MidiChannelInput from "./midi_channel_input";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { SliderStateContext } from "../hooks/slider_state";
-import useLocalStorage from "../hooks/use_local_storage";
-import { useState, useContext } from "react";
+import { useContext } from "react";
 
 export default function NavMenu(props) {
   const { midiConfig, updateConfig } = useContext(MidiConfigContext);
@@ -16,18 +15,9 @@ export default function NavMenu(props) {
     // props.setIsConnected(true)
   };
 
-  const updateMidiInputForExpression = (option) => {
-    updateConfig("inputForExpression", option);
-    // props.setIsConnected(true)
-  };
-
   const outputOptions =
     props.midiObject != undefined
       ? props.midiObject.outputs.map((x) => x.name)
-      : [];
-  const inputOptions =
-    props.midiObject != undefined
-      ? props.midiObject.inputs.map((x) => x.name)
       : [];
 
   return (

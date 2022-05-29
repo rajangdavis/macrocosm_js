@@ -9,6 +9,7 @@ const parseSysexToBinary = (commandArg) => {
 
 // Removes newlines and splits on spaces
 let cleanNewlines = (commandArg) => {
+  if (commandArg === undefined) return [];
   return commandArg.trim().replace(/\n/g, " ").replace(/\t/g, "").split(" ");
 };
 

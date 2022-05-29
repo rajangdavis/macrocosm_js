@@ -32,7 +32,7 @@ export default function TapButton(props) {
   return (
     <div className="tap-button-container">
       <BigPadButton onClick={tap} className="tap-button" bigButtonlabel="Tap" />
-      {/*<span className="tempo-dot" style={tempoDotStyle()}></span>*/}
+      <span className="tempo-dot" style={tempoDotStyle()}></span>
     </div>
   );
 }

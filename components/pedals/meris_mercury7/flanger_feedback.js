@@ -1,5 +1,4 @@
 import { SmallPadButton } from "../pad_button";
-import { useState } from "react";
 
 export default function FlangerFeedback(props) {
   const isSelected = (lb, ub) => {

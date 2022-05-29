@@ -1,8 +1,6 @@
 import { LittleKnob, BigKnob } from "../knob";
 import SecondRow from "./second_row";
 import ThirdRow from "./third_row";
-import HalfspeedEnable from "./halfspeed_enable";
-import PitchControlSmoothing from "./pitch_control_smoothing";
 
 export default function FirstRow(props) {
   let {

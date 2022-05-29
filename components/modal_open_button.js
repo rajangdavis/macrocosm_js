@@ -1,10 +1,9 @@
-import Link from "next/link";
 export default function ModalOpenButton(props) {
   let { pageState, setPageState, presetsOpen, setPresetsOpen } = props;
   let text = "MAIN MENU";
   let linkText = pageState == "pedals" ? "Macros" : "Pedals";
 
-  const engageFullScreen = (e) => {
+  const engageFullScreen = () => {
     let body = document.getElementsByTagName("html");
     if (body[0] && body[0].requestFullscreen) {
       body[0].requestFullscreen();
@@ -16,7 +15,7 @@ export default function ModalOpenButton(props) {
     setPageState(whereToGo);
   };
 
-  const exitFullScreen = (e) => {
+  const exitFullScreen = () => {
     document.exitFullscreen();
   };
   return (

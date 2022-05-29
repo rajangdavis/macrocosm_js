@@ -20,6 +20,7 @@ export default function PedalSelector(props) {
     setSelectedPedal,
     setSysexByte,
   } = props;
+
   const [pedalSelectAndOrder, setPedalSelectAndOrder] = useState([
     {
       key: "enzo",
@@ -63,10 +64,6 @@ export default function PedalSelector(props) {
     },
   ]);
 
-  let selectedPedalHash = pedalSelectAndOrder.filter(
-    (x) => x.key == selectedPedal
-  )[0];
-
   const [dragId, setDragId] = useState();
 
   const handleDrag = (ev) => {
@@ -97,7 +94,7 @@ export default function PedalSelector(props) {
   useEffect(() => {
     setExpressionVal(0);
     setSelectedPreset({ label: null, message: null });
-  }, [pedalSelectAndOrder, selectedPedal]);
+  }, [pedalSelectAndOrder, selectedPedal, setExpressionVal, setSelectedPreset]);
   return (
     <>
       {pedalSelectAndOrder

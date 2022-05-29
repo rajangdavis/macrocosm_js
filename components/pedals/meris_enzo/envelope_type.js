@@ -1,5 +1,4 @@
 import { WidePadButton } from "../pad_button";
-import { useState } from "react";
 
 export default function EnvelopeType(props) {
   const isSelected = (lb, ub) => {

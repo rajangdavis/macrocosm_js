@@ -1,8 +1,7 @@
 import PedalLayouts from "./pedal_layouts";
 import pedalStates from "../data/pedal_states";
 import merisStateReducer from "../hooks/meris_state";
-import trackToggles from "../hooks/track_toggles";
-import { MidiConfigContext } from "../hooks/midi_config";
+// import trackToggles from "../hooks/track_toggles";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import computeSysex from "../utilities/compute_sysex";
 import applyExpression from "../hooks/apply_expression";
@@ -15,14 +14,7 @@ export default function PresetsBuilder(props) {
   let [presetNumber, setPresetNumber] = useState(1);
   let [presetName, setPresetName] = useState("New Preset");
 
-  let {
-    setMenu,
-    selectedPedal,
-    midiObject,
-    midiData,
-    expressionVal,
-    setExpressionVal,
-  } = props;
+  let { setMenu, selectedPedal, midiObject, midiData, expressionVal } = props;
 
   let initialState = { ...pedalStates[selectedPedal] };
   initialState[9] = 0; // 2-Way Toggle

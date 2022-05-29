@@ -1,5 +1,4 @@
 import * as style from "./pad_button_styles";
-import { useState } from "react";
 
 module.exports = {
   SmallPadButton: (props) => {

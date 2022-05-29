@@ -1,7 +1,6 @@
 import PedalLayouts from "./pedal_layouts";
 import merisStateReducer from "../hooks/meris_state";
-import trackToggles from "../hooks/track_toggles";
-import { MidiConfigContext } from "../hooks/midi_config";
+// import trackToggles from "../hooks/track_toggles";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import computeSysex from "../utilities/compute_sysex";
 import decomposeSysex from "../utilities/decompose_sysex";
@@ -19,7 +18,6 @@ export default function PresetsEditor(props) {
     midiObject,
     midiData,
     expressionVal,
-    setExpressionVal,
     presetToEdit,
     presetToEditIndex,
   } = props;

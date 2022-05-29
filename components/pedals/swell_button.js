@@ -2,7 +2,7 @@ import { BigPadButton } from "./pad_button";
 
 export default function SwellButton(props) {
   let { midiObject, midiData } = props;
-  const release = (e) => {
+  const release = () => {
     if (midiObject && midiData.output && midiData.channel) {
       let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == props.midiData.output;
@@ -14,7 +14,7 @@ export default function SwellButton(props) {
     }
   };
 
-  const hold = (e) => {
+  const hold = () => {
     if (midiObject && midiData.output && midiData.channel) {
       let deviceOutput = props.midiObject.outputs.filter((x) => {
         return x.name == props.midiData.output;

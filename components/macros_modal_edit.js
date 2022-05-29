@@ -1,10 +1,7 @@
-import CloseButton from "./close_button";
 import cloneDeep from "lodash/cloneDeep";
-import NavMenu from "./nav_menu";
-import CustomSelect from "./custom_select";
-import GlobalSettingsTable from "./global_settings_table";
+import MacrosModalForm from "./macros_modal_form";
 import { FactoryPresetsContext } from "../hooks/presets_state";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 
 export default function MacrosModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
@@ -49,69 +46,19 @@ export default function MacrosModal(props) {
     setMacroToEdit(null);
   };
 
-  return (
-    <div className="presets-modal zoom-in">
-      <div className="menu-select">
-        <CloseButton setHeaderOpen={setMacrosModalOpen} headerOpen={true} />
-        <a className="menu-link">{}</a>
-      </div>
-      <div className="presets-modal-background"></div>
-      <div className="presets-modal-content">
-        <div>
-          <div className="sysex-menu fade-in">
-            <div className="presets-container">
-              <label>Update MACRO</label>
-              <div>
-                <input
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                  value={name}
-                />
-              </div>
+  const label = "UPDATE MACRO";
 
-              {pedals.map((pedal, index) => {
-                return (
-                  <a
-                    key={index}
-                    href="#"
-                    onClick={() => {
-                      showOrHidePedal(pedal);
-                    }}
-                  >
-                    {pedal.name}
-                  </a>
-                );
-              })}
-              {pedals.map((pedal, index) => {
-                if (pedal.showing) {
-                  let options = findPresets(pedal).map((x) => x.label);
-                  let setSelectedPreset = (option) => {
-                    let copiedPedalsConfig = [...pedals];
-                    let optionVals = findPresets(pedal).filter(
-                      (x) => x.label == option
-                    )[0];
-                    copiedPedalsConfig[index].selectedPreset = optionVals;
-                    setPedalState(copiedPedalsConfig);
-                  };
-                  return (
-                    <div key={index} className="options-block">
-                      <CustomSelect
-                        options={options}
-                        defaultOption={pedal.selectedPreset.label}
-                        onChange={setSelectedPreset}
-                      />
-                    </div>
-                  );
-                }
-              })}
-              <div>
-                <button onClick={saveMacro}>Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  return (
+    <MacrosModalForm
+      label={label}
+      setMacrosModalOpen={setMacrosModalOpen}
+      setName={setName}
+      name={name}
+      pedals={pedals}
+      setPedalState={setPedalState}
+      findPresets={findPresets}
+      showOrHidePedal={showOrHidePedal}
+      saveMacro={saveMacro}
+    />
   );
 }

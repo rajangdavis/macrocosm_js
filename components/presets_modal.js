@@ -4,11 +4,9 @@ import PresetsBuilder from "./presets_builder";
 import PresetsEditor from "./presets_editor";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
-import merisStateReducer from "../hooks/meris_state";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { FactoryPresetsContext } from "../hooks/presets_state";
-import useLocalStorage from "../hooks/use_local_storage";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
 import parseSysexToBinary from "../utilities/parse_sysex";
 
@@ -42,7 +40,7 @@ export default function PresetsModal(props) {
     FactoryPresetsContext
   );
 
-  const setPreset = (e, preset) => {
+  const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
       let { manufacturer, data } = parseSysexToBinary(preset.message);
       let deviceOutput = midiObject.outputs.filter((x) => {
@@ -129,7 +127,7 @@ export default function PresetsModal(props) {
         {midiData.output && (
           <a
             className={selectedMenu("new-preset")}
-            onClick={(e) => {
+            onClick={() => {
               setMenu("new-preset");
             }}
           >
@@ -155,20 +153,18 @@ export default function PresetsModal(props) {
                 {factoryPresets[selectedPedal].map((preset, i) => {
                   return (
                     <div key={i} className={selectedClassName(preset)}>
-                      <a onClick={(e) => setPreset(e, preset)}>
-                        {preset.label}
-                      </a>
+                      <a onClick={() => setPreset(preset)}>{preset.label}</a>
                       <span className="pull-right">
                         {skipOgPresets(i) && (
                           <>
-                            <a onClick={(e) => editPreset(preset, i)}>EDIT</a> |{" "}
+                            <a onClick={() => editPreset(preset, i)}>EDIT</a> |{" "}
                           </>
                         )}
-                        <a onClick={(e) => clonePreset(preset)}>CLONE</a>
+                        <a onClick={() => clonePreset(preset)}>CLONE</a>
                         {skipOgPresets(i) && <> | </>}
                         {skipOgPresets(i) && (
                           <>
-                            <a onClick={(e) => deletePreset(preset)}>DELETE</a>
+                            <a onClick={() => deletePreset(preset)}>DELETE</a>
                           </>
                         )}
                       </span>

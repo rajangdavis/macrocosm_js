@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { BigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const {
@@ -10,38 +9,6 @@ export default function Expression(props) {
     tempo,
     dispatch,
   } = props;
-
-  // useEffect(() => {
-  //   if (
-  //     midiData.inputForExpression != "" &&
-  //     midiData.output &&
-  //     midiObject &&
-  //     midiObject.inputs &&
-  //     midiData.channel != 0
-  //   ) {
-  //     let deviceInput = midiObject.inputs.filter((x) => {
-  //       return x.name == midiData.inputForExpression;
-  //     })[0];
-  //     if (deviceInput) {
-  //       const sendExpressData = (e) => {
-  //         if (e.statusByte && e.statusByte == 176) {
-  //           let val = e.data[2];
-  //           e.target = {
-  //             value: val,
-  //           };
-  //           express(e);
-  //         }
-  //       };
-  //       deviceInput.addListener("midimessage", sendExpressData);
-  //     }
-  //   }
-  // }, [
-  //   midiData.inputForExpression,
-  //   midiData.output,
-  //   midiData.channel,
-  //   midiObject,
-  //   express,
-  // ]);
 
   const express = (e) => {
     if (midiObject && midiData.output && midiData.channel) {

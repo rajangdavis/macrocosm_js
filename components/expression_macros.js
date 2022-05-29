@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import { BigKnob } from "./pedals/knob";
+
 export default function ExpressionMacros(props) {
   const {
     expressionVal,

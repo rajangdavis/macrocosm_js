@@ -1,7 +1,6 @@
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import "../public/main.css";
-import HeaderNav from "../components/header_nav";
 import { MidiConfigProvider } from "../hooks/midi_config";
 import { SliderStateProvider } from "../hooks/slider_state";
 import { FactoryPresetsProvider } from "../hooks/presets_state";
@@ -14,7 +13,7 @@ function MyApp({ Component, pageProps }) {
     outputs: [],
   });
 
-  const [isConnected, setIsConnected] = useState(false);
+  // const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
     WebMidi.enable({ sysex: true }).then((access) => {

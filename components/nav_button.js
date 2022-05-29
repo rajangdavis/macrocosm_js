@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
 
 export default function NavButton(props) {
