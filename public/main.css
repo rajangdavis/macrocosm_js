@@ -66,6 +66,13 @@ a:hover {
   justify-content: center;
   width: 15%;
 }
+
+.pedal-selector.macros {
+  flex-direction: row;
+  width: 90%;
+  margin: 50px auto;
+}
+
 .pedal-selector a {
   margin: 10px;
 }
@@ -229,6 +236,7 @@ how to remove the virtical space around the range input in IE*/
 
 .presets-button,
 .page-state,
+.save-button,
 .fullscreen {
   font-weight: 100;
   height: 62px;
@@ -237,6 +245,17 @@ how to remove the virtical space around the range input in IE*/
   font-size: 25px;
   border: 3px solid;
   transition: 0.1s linear;
+}
+
+.save-button {
+  background: black;
+  color: white;
+}
+
+.save-button:hover {
+  cursor: pointer;
+  background: white;
+  color: black;
 }
 
 .presets-button.open {
@@ -429,7 +448,7 @@ input[type="number"] {
   .expression-container {
     height: 100vh;
   }
-  .pedal-selector,
+  .pedal-selector:not(.macros),
   .expression-container {
     transform: scale(0.8);
   }

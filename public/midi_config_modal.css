@@ -113,7 +113,7 @@ a.menu-link {
   margin: 50px 0;
 }
 
-.sysex-menu label {
+.sysex-menu label:not(.custom-select) {
   width: 100%;
   padding: 25px;
   border-top: 1px solid white;

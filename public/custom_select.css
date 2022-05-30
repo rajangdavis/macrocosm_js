@@ -20,6 +20,7 @@
 
 .custom-select.selected > .select-selected {
   border: 3px solid white;
+  margin: 0 auto;
 }
 
 .select-selected {

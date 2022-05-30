@@ -26,7 +26,7 @@ export default function CustomSelect(props) {
 
   return (
     <div className={containerClass} onClick={openOrCloseSelect}>
-      <label>{props.inputLabel}</label>
+      <label className="custom-select">{props.inputLabel}</label>
       <div className={arrowClass}>{selectedOption}</div>
       {selectOpen && (
         <div className={optionsClass}>

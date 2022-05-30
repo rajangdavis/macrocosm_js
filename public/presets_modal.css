@@ -39,90 +39,9 @@
   font-size: 25px;
 }
 
-.preset-row {
-  border-bottom: 3px solid white;
-  text-align: left;
-}
-
-.preset-row.selected {
-  background: white;
-  color: black;
-  border-bottom: 3px solid black;
-}
-
-.preset-row:hover {
-  cursor: pointer;
-  background: white;
-  color: black;
-  border-bottom: 3px solid black;
-}
-
-@keyframes zoomIn {
-  from {
-    opacity: 0;
-    transform: scale3d(0.3, 0.3, 0.3);
-  }
-
-  50% {
-    opacity: 1;
-  }
-}
-
-:root {
-  --animate-duration: 0.2s;
-  --animate-delay: 0.2s;
-  --animate-repeat: 1;
-}
-
-.zoom-in {
-  animation-name: zoomIn;
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-  -webkit-animation-duration: var(--animate-duration);
-  animation-duration: var(--animate-duration);
-  -webkit-animation-fill-mode: both;
-  animation-fill-mode: both;
-}
-
-a.menu-link {
-  text-decoration-color: rgba(255, 255, 255, 0);
-}
-
-.menu-select {
-  border-right: 1px solid white;
-  color: white;
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  flex-direction: column;
-  left: 0;
-  width: 20vw;
-  z-index: 100;
-  justify-content: center;
-  top: 0;
-  height: 105vh;
-}
-
 .menu-select.right {
   left: unset;
   right: 0;
-}
-
-.menu-select a.selected.menu-link {
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 1) !important;
-  transition: text-decoration-color 0.25s;
-}
-
-.sysex-menu {
-  margin: 50px 0;
-}
-
-.sysex-menu label {
-  width: 100%;
-  padding: 25px;
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
 }
 
 .global-settings,
@@ -145,36 +64,4 @@ a.menu-link {
 
 .presets-container > label {
   margin-bottom: 50px;
-}
-
-.settings-container table {
-  width: 100%;
-  text-align: left;
-}
-
-.settings-container td:not(.title) {
-  color: grey;
-  text-align: center;
-}
-.settings-container td:not(.title):hover {
-  cursor: pointer;
-}
-
-.settings-container td.selected {
-  color: white;
-  transition: 0.2s;
-}
-
-.sysex-menu label {
-  font-size: 25px;
-}
-
-.menu-select a {
-  font-size: 25px;
-  padding: 25px;
-  text-align: center;
-}
-
-.menu-select a:hover {
-  cursor: pointer;
 }
