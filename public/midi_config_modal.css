@@ -173,3 +173,62 @@ a.menu-link {
 .menu-select a:hover {
   cursor: pointer;
 }
+
+.pedals.menu-select.right {
+  display: flex;
+  right: 0;
+  width: 15%;
+}
+
+.pedals.menu-select.right .expression > input[type="range"] {
+  background-color: white;
+  -webkit-appearance: none;
+}
+
+.pedals.menu-select.right
+  .expression
+  > input[type="range"]::-webkit-slider-runnable-track {
+  background: white;
+  border: 0.2px solid white;
+}
+.pedals.menu-select.right
+  .expression
+  > input[type="range"]::-webkit-slider-thumb {
+  background: black;
+  border: 1px solid white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-moz-range-track {
+  background: white;
+  border: 0.2px solid white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-moz-range-thumb {
+  background: black;
+  border: 1px solid white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-ms-track {
+  background: white;
+  border-color: white;
+  color: white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-ms-fill-lower {
+  background: white;
+  border: 0.2px solid white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-ms-fill-upper {
+  background: white;
+  border: 0.2px solid white;
+}
+.pedals.menu-select.right .expression > input[type="range"]::-ms-thumb {
+  background: black;
+  border: 1px solid white;
+}
+.pedals.menu-select.right
+  .expression
+  > input[type="range"]:focus::-ms-fill-lower {
+  background: white;
+}
+.pedals.menu-select.right
+  .expression
+  > input[type="range"]:focus::-ms-fill-upper {
+  background: #0d0d0d;
+}

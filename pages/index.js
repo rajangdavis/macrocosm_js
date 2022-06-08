@@ -154,6 +154,7 @@ export default function Index(props) {
           state={selectedPedalState}
           dispatch={selectedPedalDispatch}
           expressionVal={expressionVal}
+          setExpressionVal={setExpressionVal}
           sysexByte={sysexByte}
           midiObject={midiObject}
           setPresetsOpen={setPresetsOpen}

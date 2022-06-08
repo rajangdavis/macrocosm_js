@@ -93,7 +93,7 @@ export default function PresetsEditor(props) {
       Edit preset
       <div className="preset-edit-container">
         {!heelSettingsConfirmed && (
-          <div className="fade-in">
+          <div className="fade-in pedal-layouts">
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={heelState}
@@ -111,7 +111,7 @@ export default function PresetsEditor(props) {
           </div>
         )}
         {heelSettingsConfirmed && !toeSettingsConfirmed && (
-          <div className="fade-in">
+          <div className="fade-in pedal-layouts">
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={toeState}
@@ -145,7 +145,7 @@ export default function PresetsEditor(props) {
           </div>
         )}
         {heelSettingsConfirmed && toeSettingsConfirmed && (
-          <div className="fade-in">
+          <div className="fade-in pedal-layouts">
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={finalState}

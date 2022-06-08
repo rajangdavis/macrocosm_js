@@ -1,4 +1,4 @@
-import { BigKnob } from "./pedals/knob";
+import { BigKnob, InvertedBigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const {
     expressionVal,
@@ -8,6 +8,7 @@ export default function Expression(props) {
     midiData,
     tempo,
     dispatch,
+    invert,
   } = props;
 
   const express = (e) => {
@@ -43,12 +44,17 @@ export default function Expression(props) {
         />
         <label>EXPRESSION</label>
       </div>
-      <BigKnob
-        className={merc7Selected}
-        label="TEMPO"
-        setVal={setTempo}
-        val={tempo}
-      />
+      {invert == true && (
+        <InvertedBigKnob label="TEMPO" setVal={setTempo} val={tempo} />
+      )}
+      {invert != true && (
+        <BigKnob
+          className={merc7Selected}
+          label="TEMPO"
+          setVal={setTempo}
+          val={tempo}
+        />
+      )}
     </div>
   );
 }

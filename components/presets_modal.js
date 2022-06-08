@@ -23,6 +23,8 @@ export default function PresetsModal(props) {
     midiObject,
     sysexByte,
     state,
+    expressionVal,
+    setExpressionVal,
     dispatch,
     selectedPedal,
     selectedPreset,
@@ -197,7 +199,7 @@ export default function PresetsModal(props) {
           )}
         </div>
       </div>
-      <div className="menu-select right">
+      <div className="menu-select right pedals">
         {(menu == "new-preset" || menu == "edit-preset") && (
           <Expression
             expressionVal={presetExpressionVal}
@@ -206,6 +208,18 @@ export default function PresetsModal(props) {
             midiObject={midiObject}
             tempo={state[15]}
             dispatch={dispatch}
+            invert={true}
+          />
+        )}
+        {menu == "presets" && (
+          <Expression
+            expressionVal={expressionVal}
+            setExpressionVal={setExpressionVal}
+            midiData={midiData}
+            midiObject={midiObject}
+            tempo={state[15]}
+            dispatch={dispatch}
+            invert={true}
           />
         )}
       </div>
