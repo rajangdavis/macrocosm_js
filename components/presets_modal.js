@@ -208,6 +208,7 @@ export default function PresetsModal(props) {
             midiObject={midiObject}
             tempo={state[15]}
             dispatch={dispatch}
+            selectedPedal={selectedPedal}
             invert={true}
           />
         )}
@@ -219,6 +220,7 @@ export default function PresetsModal(props) {
             midiObject={midiObject}
             tempo={state[15]}
             dispatch={dispatch}
+            selectedPedal={selectedPedal}
             invert={true}
           />
         )}

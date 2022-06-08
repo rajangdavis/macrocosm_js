@@ -177,7 +177,7 @@ a.menu-link {
 .pedals.menu-select.right {
   display: flex;
   right: 0;
-  width: 15%;
+  width: 11%;
 }
 
 .pedals.menu-select.right .expression > input[type="range"] {

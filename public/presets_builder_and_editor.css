@@ -14,7 +14,7 @@
   color: white;
 }
 
-.presets-pedal-layout{
+.presets-pedal-layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,6 +22,6 @@
   height: 100vh;
 }
 
-.presets-pedal-layout > label{
+.presets-pedal-layout > label {
   font-size: 25px;
 }

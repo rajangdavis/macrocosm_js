@@ -28,7 +28,7 @@
   border-right: 1px solid white;
   left: 20vw;
   right: 20vw;
-  height: 100vh;
+  height: 105vh;
   width: 60vw;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -42,6 +42,7 @@
 .menu-select.right {
   left: unset;
   right: 0;
+  height: 105vh;
 }
 
 .global-settings,

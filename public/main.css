@@ -382,19 +382,22 @@ input[type="number"] {
 
 @keyframes blink-animation {
   75% {
-    background-color: black;
+    background-color: transparent;
+    box-shadow: unset;
   }
 }
 @-webkit-keyframes blink-animation {
   75% {
-    background-color: black;
+    background-color: transparent;
+    box-shadow: unset;
   }
 }
 
 .tempo-dot {
   height: 20px;
   width: 20px;
-  background-color: white;
+  box-shadow: 0 0 5px 8px #fff, 0 0 20px 5px #ff0;
+  background-color: #ffc107;
   border-radius: 50%;
   display: inline-block;
   position: absolute;

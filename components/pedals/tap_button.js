@@ -22,10 +22,10 @@ export default function TapButton(props) {
       animationDelay: "3ms",
     };
     let { midiObject, midiData } = props;
-    if (midiObject && midiData.output && midiData.channel) {
+    if (midiObject && midiData.output && midiData.channel && props.tempo > 0) {
       return initStyle;
-    } else {
-      return {};
+    }else {
+      return {display: "none"};
     }
   };
 

@@ -2,8 +2,7 @@
   "short_name": "macrocosm",
   "name": "macrocosm",
   "description": "...",
-  "icons": [
-  ],
+  "icons": [],
   "start_url": "/",
   "background_color": "honeydew",
   "display": "standalone",

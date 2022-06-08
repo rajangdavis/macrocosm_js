@@ -45,7 +45,12 @@ export default function Expression(props) {
         <label>EXPRESSION</label>
       </div>
       {invert == true && (
-        <InvertedBigKnob label="TEMPO" setVal={setTempo} val={tempo} />
+        <InvertedBigKnob
+          className={merc7Selected}
+          label="TEMPO"
+          setVal={setTempo}
+          val={tempo}
+        />
       )}
       {invert != true && (
         <BigKnob
