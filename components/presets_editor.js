@@ -89,8 +89,8 @@ export default function PresetsEditor(props) {
   };
 
   return (
-    <div className="fade-in">
-      Edit preset
+    <div className="fade-in presets-pedal-layout">
+      <label>Edit preset</label>
       <div className="preset-edit-container">
         {!heelSettingsConfirmed && (
           <div className="fade-in pedal-layouts">

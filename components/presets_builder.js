@@ -82,8 +82,8 @@ export default function PresetsBuilder(props) {
   }, [expressionVal]);
 
   return (
-    <div className="fade-in">
-      Create a new preset
+    <div className="fade-in presets-pedal-layout">
+      <label>Create a new preset</label>
       <div className="preset-create-container">
         {!heelSettingsConfirmed && (
           <div className="fade-in pedal-layouts">
