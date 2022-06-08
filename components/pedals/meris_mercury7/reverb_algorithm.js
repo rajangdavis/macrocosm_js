@@ -1,24 +1,28 @@
 import { WidePadButton } from "../pad_button";
 
 export default function ReverbAlgorithm(props) {
-  const isSelected = (value) => {
-    return props.reverbAlgorithm == value ? "selected" : "";
+  const isSelected = (lb, ub) => {
+    let lowerBoundCheck = lb <= props.reverbAlgorithm;
+    let upperBoundCheck = props.reverbAlgorithm <= ub;
+    let withinBounds = lowerBoundCheck && upperBoundCheck;
+    let withinBoundsAndNotNull = props.reverbAlgorithm != null && withinBounds;
+    return withinBoundsAndNotNull ? "selected" : "";
   };
 
-  const setPhaserMode = (value) => {
+  const setAlgorithm = (value) => {
     props.mercury7Dispatch({ key: 29, value: value });
   };
 
   return (
     <div className="text-center algorithm">
       <WidePadButton
-        onClick={() => setPhaserMode(63)}
-        className={isSelected(63)}
+        onClick={() => setAlgorithm(127)}
+        className={isSelected(64, 127)}
         label="Cathedra"
       />
       <WidePadButton
-        onClick={() => setPhaserMode(0)}
-        className={isSelected(0)}
+        onClick={() => setAlgorithm(0, 63)}
+        className={isSelected(0, 63)}
         label="Utlraplate"
       />
       <label>Algorithm</label>
