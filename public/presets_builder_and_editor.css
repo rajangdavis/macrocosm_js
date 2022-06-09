@@ -12,6 +12,7 @@
 .preset-edit-container > .pedal-layouts > a,
 .preset-edit-container > .pedal-layouts > span {
   color: white;
+  font-size: 25px;
 }
 
 .presets-pedal-layout {
@@ -24,4 +25,23 @@
 
 .presets-pedal-layout > label {
   font-size: 25px;
+}
+
+.pedal-layouts{
+  position: relative;
+}
+
+.pedal-layouts > .arrow{
+  content: url(./arrow.svg);
+  position: absolute;
+  bottom: 12px;
+}
+
+.pedal-layouts > .arrow.left{
+  transform: rotate(90deg);
+  left: 95px;
+}
+
+.pedal-layouts > .arrow.right{
+  transform: rotate(270deg);
 }

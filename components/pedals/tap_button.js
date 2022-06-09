@@ -25,7 +25,7 @@ export default function TapButton(props) {
     if (midiObject && midiData.output && midiData.channel && props.tempo > 0) {
       return initStyle;
     } else {
-      return { display: "none" };
+      return {};
     }
   };
 

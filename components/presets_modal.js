@@ -14,6 +14,7 @@ export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
   const { factoryPresets } = useContext(FactoryPresetsContext);
   const [presetExpressionVal, setPresetExpressionVal] = useState(0);
+  const [presetTempo, setPresetTempoVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
   const [presetToEditIndex, setPresetToEditIndex] = useState(null);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
@@ -41,6 +42,11 @@ export default function PresetsModal(props) {
   const { deleteFactoryPreset, updateFactoryPresets } = useContext(
     FactoryPresetsContext
   );
+
+  const presetTempoDispatch = (dispatchOverride)=>{
+    setPresetTempoVal(dispatchOverride.value);
+    return dispatch;
+  }
 
   const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
@@ -133,7 +139,7 @@ export default function PresetsModal(props) {
               setMenu("new-preset");
             }}
           >
-            CREATE NEW PRESET
+            CREATE A NEW PRESET
           </a>
         )}
       </div>
@@ -182,6 +188,7 @@ export default function PresetsModal(props) {
               midiObject={midiObject}
               midiData={midiData}
               setMenu={setMenu}
+              presetTempo={presetTempo}
               expressionVal={presetExpressionVal}
             />
           )}
@@ -191,6 +198,7 @@ export default function PresetsModal(props) {
               midiObject={midiObject}
               midiData={midiData}
               setMenu={setMenu}
+              presetTempo={presetTempo}
               presetToEdit={presetToEdit}
               presetToEditIndex={presetToEditIndex}
               expressionVal={presetExpressionVal}
@@ -203,11 +211,12 @@ export default function PresetsModal(props) {
         {(menu == "new-preset" || menu == "edit-preset") && (
           <Expression
             expressionVal={presetExpressionVal}
+            expressionVal={presetExpressionVal}
             setExpressionVal={setPresetExpressionVal}
             midiData={midiData}
             midiObject={midiObject}
-            tempo={state[15]}
-            dispatch={dispatch}
+            tempo={presetTempo}
+            dispatch={presetTempoDispatch}
             selectedPedal={selectedPedal}
             invert={true}
           />

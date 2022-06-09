@@ -108,6 +108,7 @@ export default function PresetsEditor(props) {
             >
               Confirm Heel Settings
             </a>
+            <span className="arrow right"></span>
           </div>
         )}
         {heelSettingsConfirmed && !toeSettingsConfirmed && (

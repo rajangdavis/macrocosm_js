@@ -14,7 +14,7 @@
   padding: 50px 0 0 50px;
   background: black;
   opacity: 0.95;
-  height: 105vh;
+  height: 100vh;
   width: 100vw;
   position: absolute;
 }
@@ -100,7 +100,7 @@ a.menu-link {
   z-index: 100;
   justify-content: center;
   top: 0;
-  height: 105vh;
+  height: 100vh;
 }
 
 .menu-select a.selected.menu-link {

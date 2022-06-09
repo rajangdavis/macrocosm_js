@@ -11,6 +11,10 @@ export default function PresetsBuilder(props) {
   const { updateFactoryPresets } = useContext(FactoryPresetsContext);
   let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
   let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
+  // move the settings confirmation to the modal
+  // only show the expression settings
+  // after both are confirmed
+
   let [presetNumber, setPresetNumber] = useState(1);
   let [presetName, setPresetName] = useState("New Preset");
 
@@ -101,6 +105,7 @@ export default function PresetsBuilder(props) {
             >
               Confirm Heel Settings
             </a>
+            <span className="arrow right"></span>
           </div>
         )}
         {heelSettingsConfirmed && !toeSettingsConfirmed && (
@@ -112,6 +117,7 @@ export default function PresetsBuilder(props) {
               midiObject={midiObject}
               midiData={midiData}
             />
+            <span className="arrow left"></span>
             <a
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
@@ -135,6 +141,7 @@ export default function PresetsBuilder(props) {
             >
               Confirm Toe Settings
             </a>
+            <span className="arrow right"></span>
           </div>
         )}
         {heelSettingsConfirmed && toeSettingsConfirmed && (
@@ -162,6 +169,8 @@ export default function PresetsBuilder(props) {
                 setPresetNumber(e.target.value);
               }}
             />
+            <br/>
+            <span className="arrow left"></span>
             <a
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
