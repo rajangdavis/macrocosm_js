@@ -9,7 +9,7 @@ export default function ThirdRow(props) {
     23: modSpeed,
     29: reverbAlgorithm,
     14: bypass,
-    28: swell
+    28: swell,
   } = props.mercury7State;
 
   let setAttackTime = (value) => {

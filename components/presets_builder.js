@@ -169,7 +169,7 @@ export default function PresetsBuilder(props) {
                 setPresetNumber(e.target.value);
               }}
             />
-            <br/>
+            <br />
             <span className="arrow left"></span>
             <a
               onClick={() => {

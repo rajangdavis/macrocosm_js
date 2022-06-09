@@ -43,10 +43,10 @@ export default function PresetsModal(props) {
     FactoryPresetsContext
   );
 
-  const presetTempoDispatch = (dispatchOverride)=>{
+  const presetTempoDispatch = (dispatchOverride) => {
     setPresetTempoVal(dispatchOverride.value);
     return dispatch;
-  }
+  };
 
   const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
@@ -211,7 +211,7 @@ export default function PresetsModal(props) {
         {(menu == "new-preset" || menu == "edit-preset") && (
           <Expression
             expressionVal={presetExpressionVal}
-            expressionVal={presetExpressionVal}
+            presetTempo={presetTempo}
             setExpressionVal={setPresetExpressionVal}
             midiData={midiData}
             midiObject={midiObject}

@@ -27,21 +27,21 @@
   font-size: 25px;
 }
 
-.pedal-layouts{
+.pedal-layouts {
   position: relative;
 }
 
-.pedal-layouts > .arrow{
+.pedal-layouts > .arrow {
   content: url(./arrow.svg);
   position: absolute;
   bottom: 12px;
 }
 
-.pedal-layouts > .arrow.left{
+.pedal-layouts > .arrow.left {
   transform: rotate(90deg);
   left: 95px;
 }
 
-.pedal-layouts > .arrow.right{
+.pedal-layouts > .arrow.right {
   transform: rotate(270deg);
 }

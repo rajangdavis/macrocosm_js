@@ -1,5 +1,4 @@
 import { BigPadButton } from "./pad_button";
-import { useState } from 'react'
 
 export default function SwellButton(props) {
   let { midiObject, midiData, swell, mercury7Dispatch } = props;
@@ -11,7 +10,9 @@ export default function SwellButton(props) {
       })[0];
       let newSwellVal = swell == 0 ? 127 : 0;
       mercury7Dispatch({ key: 28, value: newSwellVal });
-      console.log(28, newSwellVal, { channels: parseInt(props.midiData.channel) });
+      console.log(28, newSwellVal, {
+        channels: parseInt(props.midiData.channel),
+      });
       deviceOutput.sendControlChange(28, newSwellVal, {
         channels: parseInt(props.midiData.channel),
       });
@@ -23,7 +24,7 @@ export default function SwellButton(props) {
     if (midiObject && midiData.output && midiData.channel && swell > 0) {
       return {};
     } else {
-      return {display: 'none'};
+      return { display: "none" };
     }
   };
 
