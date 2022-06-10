@@ -8,17 +8,21 @@ import applyExpression from "../hooks/apply_expression";
 import { useContext, useState, useEffect } from "react";
 
 export default function PresetsBuilder(props) {
-  const { updateFactoryPresets } = useContext(FactoryPresetsContext);
-  let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
-  let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
-  // move the settings confirmation to the modal
-  // only show the expression settings
-  // after both are confirmed
-
+  let { updateFactoryPresets } = useContext(FactoryPresetsContext);
   let [presetNumber, setPresetNumber] = useState(1);
   let [presetName, setPresetName] = useState("New Preset");
 
-  let { setMenu, selectedPedal, midiObject, midiData, expressionVal } = props;
+  let {
+    setMenu,
+    selectedPedal,
+    midiObject,
+    midiData,
+    expressionVal,
+    heelSettingsConfirmed,
+    setHeelSettingsConfirmed,
+    toeSettingsConfirmed,
+    setToeSettingsConfirmed,
+  } = props;
 
   let initialState = { ...pedalStates[selectedPedal] };
   initialState[9] = 0; // 2-Way Toggle
@@ -29,17 +33,17 @@ export default function PresetsBuilder(props) {
   initialState[30] = 127; // 2-Way Toggle
   initialState[31] = 0; // 2-Way Toggle
 
-  const [heelState, heelDispatch] = merisStateReducer(initialState, {
+  let [heelState, heelDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
     midiObject: midiObject,
   });
 
-  const [toeState, toeDispatch] = merisStateReducer(initialState, {
+  let [toeState, toeDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
     midiObject: midiObject,
   });
 
-  const [finalState, finalDispatch] = merisStateReducer(heelState, {
+  let [finalState, finalDispatch] = merisStateReducer(heelState, {
     midiData: midiData,
     midiObject: midiObject,
   });

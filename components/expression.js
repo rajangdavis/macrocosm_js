@@ -9,6 +9,7 @@ export default function Expression(props) {
     tempo,
     dispatch,
     invert,
+    showExpression
   } = props;
 
   const express = (e) => {
@@ -29,10 +30,11 @@ export default function Expression(props) {
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
+  const expressionClassName = showExpression != false ? "expression" : "hidden"
 
   return (
     <div className="expression-container">
-      <div className="expression">
+      <div className={expressionClassName}>
         <input
           type="range"
           value={expressionVal}

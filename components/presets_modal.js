@@ -4,7 +4,7 @@ import PresetsBuilder from "./presets_builder";
 import PresetsEditor from "./presets_editor";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
@@ -17,8 +17,20 @@ export default function PresetsModal(props) {
   const [presetTempo, setPresetTempoVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
   const [presetToEditIndex, setPresetToEditIndex] = useState(null);
+  const [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
+  const [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
+
+  useEffect(()=>{
+    if(menu != "edit-preset"){
+      setToeSettingsConfirmed(false)
+      setHeelSettingsConfirmed(false)
+    }else{
+      setToeSettingsConfirmed(true)
+      setHeelSettingsConfirmed(true)
+    }
+  },[menu])
 
   const {
     midiObject,
@@ -184,6 +196,10 @@ export default function PresetsModal(props) {
           )}
           {menu == "new-preset" && (
             <PresetsBuilder
+              toeSettingsConfirmed={toeSettingsConfirmed}
+              setToeSettingsConfirmed={setToeSettingsConfirmed}
+              heelSettingsConfirmed={heelSettingsConfirmed}
+              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
               selectedPedal={selectedPedal}
               midiObject={midiObject}
               midiData={midiData}
@@ -194,6 +210,10 @@ export default function PresetsModal(props) {
           )}
           {menu == "edit-preset" && (
             <PresetsEditor
+              heelSettingsConfirmed={heelSettingsConfirmed}
+              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+              toeSettingsConfirmed={toeSettingsConfirmed}
+              setToeSettingsConfirmed={setToeSettingsConfirmed}
               selectedPedal={selectedPedal}
               midiObject={midiObject}
               midiData={midiData}
@@ -209,20 +229,22 @@ export default function PresetsModal(props) {
       </div>
       <div className="menu-select right pedals">
         {(menu == "new-preset" || menu == "edit-preset") && (
-          <Expression
-            expressionVal={presetExpressionVal}
-            presetTempo={presetTempo}
-            setExpressionVal={setPresetExpressionVal}
-            midiData={midiData}
-            midiObject={midiObject}
-            tempo={presetTempo}
-            dispatch={presetTempoDispatch}
-            selectedPedal={selectedPedal}
-            invert={true}
-          />
-        )}
+            <Expression
+              showExpression={heelSettingsConfirmed && toeSettingsConfirmed}
+              expressionVal={presetExpressionVal}
+              presetTempo={presetTempo}
+              setExpressionVal={setPresetExpressionVal}
+              midiData={midiData}
+              midiObject={midiObject}
+              tempo={presetTempo}
+              dispatch={presetTempoDispatch}
+              selectedPedal={selectedPedal}
+              invert={true}
+            />
+          )}
         {menu == "presets" && (
           <Expression
+            showExpression={true}
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             midiData={midiData}

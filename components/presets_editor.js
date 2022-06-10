@@ -9,8 +9,6 @@ import { useContext, useState, useEffect } from "react";
 
 export default function PresetsEditor(props) {
   const { replaceFactoryPresets } = useContext(FactoryPresetsContext);
-  let [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(true);
-  let [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(true);
 
   let {
     setMenu,
@@ -20,6 +18,10 @@ export default function PresetsEditor(props) {
     expressionVal,
     presetToEdit,
     presetToEditIndex,
+    heelSettingsConfirmed,
+    setHeelSettingsConfirmed,
+    toeSettingsConfirmed,
+    setToeSettingsConfirmed,
   } = props;
 
   let { heelStateInitial, toeStateInitial, presetNumberFromPreset, label } =
