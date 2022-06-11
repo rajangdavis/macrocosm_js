@@ -44,7 +44,7 @@ function Knob(props) {
   };
 
   const angleCalc = (intValue) => {
-    return (298 / 127) * intValue - props.magicNumber;
+    return (298 / maxValue) * intValue - props.magicNumber;
   };
 
   return (

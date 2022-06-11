@@ -9,7 +9,7 @@ export default function Expression(props) {
     tempo,
     dispatch,
     invert,
-    showExpression
+    showExpression,
   } = props;
 
   const express = (e) => {
@@ -30,7 +30,7 @@ export default function Expression(props) {
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
-  const expressionClassName = showExpression != false ? "expression" : "hidden"
+  const expressionClassName = showExpression != false ? "expression" : "hidden";
 
   return (
     <div className="expression-container">
@@ -50,6 +50,7 @@ export default function Expression(props) {
         <InvertedBigKnob
           className={merc7Selected}
           label="TEMPO"
+          maxValue={120}
           setVal={setTempo}
           val={tempo}
         />
@@ -58,6 +59,7 @@ export default function Expression(props) {
         <BigKnob
           className={merc7Selected}
           label="TEMPO"
+          maxValue={120}
           setVal={setTempo}
           val={tempo}
         />

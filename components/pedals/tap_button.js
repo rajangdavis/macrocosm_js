@@ -1,13 +1,33 @@
 import { BigPadButton } from "./pad_button";
+import { useState, useRef, useEffect } from "react";
 
 export default function TapButton(props) {
+  const [currentTapTime, setCurrentTapTime] = useState(Date.now());
+  const prevCurrentTapTimeRef = useRef();
+
+  useEffect(() => {
+    prevCurrentTapTimeRef.current = currentTapTime;
+  });
+
+  const prevCurrentTapTime = prevCurrentTapTimeRef.current;
+
+  const updateTempo = () => {
+    setCurrentTapTime(Date.now());
+    let elaspedTime = currentTapTime - prevCurrentTapTime;
+    let estimatedTapTime = Math.min(Math.floor(elaspedTime / 10), 120);
+    if (!isNaN(estimatedTapTime) && estimatedTapTime > 0) {
+      props.dispatch({ key: 15, value: estimatedTapTime, skipMidi: true });
+    }
+  };
+
   const tap = () => {
     let { midiObject, midiData } = props;
     if (midiObject && midiData.output && midiData.channel) {
-      let deviceOutput = props.midiObject.outputs.filter((x) => {
-        return x.name == props.midiData.output;
+      let deviceOutput = midiObject.outputs.filter((x) => {
+        return x.name == midiData.output;
       })[0];
       console.log(28, 127, { channels: parseInt(props.midiData.channel) });
+      updateTempo();
       deviceOutput.sendControlChange(28, 127, {
         channels: parseInt(props.midiData.channel),
       });
