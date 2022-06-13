@@ -1,4 +1,4 @@
-import { MidiConfigContext } from "../hooks/midi_config";
+import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
 import useLocalStorage from "../hooks/use_local_storage";
 import ManageMacroState from "../hooks/macro_state";
@@ -12,12 +12,10 @@ import MacrosModal from "../components/macros_modal";
 import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
 import ExpressionMacros from "../components/expression_macros";
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-export default function Index(props) {
-  // State for both pages
-  let { midiObject } = props;
-  let { midiConfig } = useContext(MidiConfigContext);
+export default function Index() {
+  const [midiObject, midiConfig, isConnected] = ManageMidi();
   let [pageState, setPageState] = useLocalStorage("page_state", "pedals");
   const [expressionVal, setExpressionVal] = useState(0);
   const [presetsOpen, setPresetsOpen] = useState(false);
@@ -28,10 +26,10 @@ export default function Index(props) {
   const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
   const [macroTempo, setMacroTempo] = useState(0);
   const [macroToEdit, setMacroToEdit] = useState(null);
-  let [initialMacrosState, setState] = useLocalStorage("macro_state", []);
+  let [initialMacrosState, setMacroState] = useLocalStorage("macro_state", []);
   let [macros, macroDispatch] = ManageMacroState(initialMacrosState);
   useEffect(() => {
-    setState(macros);
+    setMacroState(macros);
   });
 
   // State for pedals
@@ -74,7 +72,7 @@ export default function Index(props) {
     <div className="container fade-in">
       <div className="view-port">
         <div className="pedal-selector">
-          {pageState == "pedals" && (
+          {pageState == "pedals" && isConnected && (
             <PedalSelector
               midiConfig={midiConfig}
               setSysexByte={setSysexByte}
@@ -84,7 +82,7 @@ export default function Index(props) {
               setSelectedPreset={setSelectedPreset}
             />
           )}
-          {pageState == "macros" && (
+          {pageState == "macros" && isConnected && (
             <a
               className="add macro"
               onClick={() => {
@@ -101,8 +99,14 @@ export default function Index(props) {
             setPageState={setPageState}
             presetsOpen={presetsOpen}
             setPresetsOpen={setPresetsOpen}
+            isConnected={isConnected}
           />
-          {pageState == "pedals" && (
+          {!isConnected && (
+            <div className="not-connected">
+              No MIDI output has been set in the Main Menu
+            </div>
+          )}
+          {pageState == "pedals" && isConnected && (
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={selectedPedalState}
@@ -112,7 +116,7 @@ export default function Index(props) {
               setMacrosModalOpen={setMacrosModalOpen}
             />
           )}
-          {pageState == "macros" && (
+          {pageState == "macros" && isConnected && (
             <MacrosLayout
               setSelectedMacro={setSelectedMacro}
               selectedMacro={selectedMacro}
@@ -125,7 +129,7 @@ export default function Index(props) {
             />
           )}
         </div>
-        {pageState == "pedals" && (
+        {pageState == "pedals" && isConnected && (
           <Expression
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
@@ -136,7 +140,7 @@ export default function Index(props) {
             dispatch={selectedPedalDispatch}
           />
         )}
-        {pageState == "macros" && (
+        {pageState == "macros" && isConnected && (
           <ExpressionMacros
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}

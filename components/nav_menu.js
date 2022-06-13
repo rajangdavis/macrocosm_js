@@ -1,5 +1,5 @@
 import SliderControls from "./slider_controls";
-import CustomSelect from "./custom_select";
+import MidiOutputSelect from "./midi_output_select";
 import MenuKnob from "./menu_knob";
 import MidiChannelInput from "./midi_channel_input";
 import { MidiConfigContext } from "../hooks/midi_config";
@@ -12,7 +12,6 @@ export default function NavMenu(props) {
 
   const updateMidiOutput = (option) => {
     updateConfig("output", option);
-    // props.setIsConnected(true)
   };
 
   const outputOptions =
@@ -25,7 +24,7 @@ export default function NavMenu(props) {
       <div className="options-block">
         <label>MIDI OPTIONS</label>
         <div className="midi-options">
-          <CustomSelect
+          <MidiOutputSelect
             onChange={updateMidiOutput}
             defaultOption={midiConfig.output}
             closeIf={props.headerOpen}

@@ -12,12 +12,12 @@ export default function TapButton(props) {
   const prevCurrentTapTime = prevCurrentTapTimeRef.current;
 
   const updateTempo = () => {
-    setCurrentTapTime(Date.now());
     let elaspedTime = currentTapTime - prevCurrentTapTime;
     let estimatedTapTime = Math.min(Math.floor(elaspedTime / 10), 120);
     if (!isNaN(estimatedTapTime) && estimatedTapTime > 0) {
       props.dispatch({ key: 15, value: estimatedTapTime, skipMidi: true });
     }
+    setCurrentTapTime(Date.now());
   };
 
   const tap = () => {

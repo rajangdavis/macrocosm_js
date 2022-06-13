@@ -5,22 +5,9 @@ import { MidiConfigProvider } from "../hooks/midi_config";
 import { SliderStateProvider } from "../hooks/slider_state";
 import { FactoryPresetsProvider } from "../hooks/presets_state";
 import { PedalStatesProvider } from "../hooks/pedal_states";
-import { WebMidi } from "webmidi";
-import { useState, useEffect } from "react";
+import { WebMidiProvider } from "../hooks/web_midi_state";
 
 function MyApp({ Component, pageProps }) {
-  const [midiObject, setMidiObject] = useState({
-    outputs: [],
-  });
-
-  // const [isConnected, setIsConnected] = useState(false);
-
-  useEffect(() => {
-    WebMidi.enable({ sysex: true }).then((access) => {
-      setMidiObject(access);
-    });
-  }, []);
-
   return (
     <>
       <Head>
@@ -34,11 +21,13 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <PedalStatesProvider>
         <FactoryPresetsProvider>
-          <MidiConfigProvider>
-            <SliderStateProvider>
-              <Component {...pageProps} midiObject={midiObject} />
-            </SliderStateProvider>
-          </MidiConfigProvider>
+          <WebMidiProvider>
+            <MidiConfigProvider>
+              <SliderStateProvider>
+                <Component {...pageProps} />
+              </SliderStateProvider>
+            </MidiConfigProvider>
+          </WebMidiProvider>
         </FactoryPresetsProvider>
       </PedalStatesProvider>
     </>
