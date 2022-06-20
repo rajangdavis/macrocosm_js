@@ -31,6 +31,17 @@ module.exports = {
     top: "0%",
     bottom: "79.29%",
   },
+  invertedBigKnobDial: {
+    position: "absolute",
+    zIndex: 2,
+    borderLeft: "5px solid transparent",
+    borderRight: "5px solid transparent",
+    borderBottom: "14px solid black",
+    left: "42.35%",
+    right: "47.82%",
+    top: "0%",
+    bottom: "79.29%",
+  },
   bigKnob: (rotationAngle) => {
     return {
       zIndex: 2,
@@ -41,6 +52,19 @@ module.exports = {
       bottom: "25.69%",
       borderRadius: "50%",
       background: "black",
+      transform: `rotate(${rotationAngle}deg)`,
+    };
+  },
+  invertedBigKnob: (rotationAngle) => {
+    return {
+      zIndex: 2,
+      position: "absolute",
+      left: "11.48%",
+      right: "14.95%",
+      top: "0.09%",
+      bottom: "25.69%",
+      borderRadius: "50%",
+      background: "white",
       transform: `rotate(${rotationAngle}deg)`,
     };
   },

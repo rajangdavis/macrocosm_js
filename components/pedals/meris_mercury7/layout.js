@@ -4,7 +4,6 @@ import ThirdRow from "./third_row";
 
 export default function MerisMercury7Layout(props) {
   let { state, dispatch, midiObject, midiData } = props;
-
   return (
     <>
       <div className="meris-pedal meris-mercury7-bigbox">

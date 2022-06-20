@@ -11,9 +11,6 @@ export default function applyExpression(
 ) {
   if (midiObject && midiData.output && midiData.channel) {
     let { manufacturer, data } = parseSysexToBinary(preset.message);
-    let deviceOutput = midiObject.outputs.filter((x) => {
-      return x.name == midiData.output;
-    })[0];
     let presetValWithExpression = expressionSysex(data, expressionVal);
     sysexKnobsUpdate({
       data: presetValWithExpression.slice(5, 22),

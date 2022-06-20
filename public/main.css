@@ -6,12 +6,12 @@
 @import url("custom_select.css");
 @import url("custom_slider.css");
 @import url("midi_channel_input.css");
-@import url("presets_builder_and_editor.css");
 @import url("meris_enzo.css");
 @import url("meris_hedra.css");
 @import url("meris_polymoon.css");
 @import url("meris_mercury7.css");
 @import url("meris_ottobit_jr.css");
+@import url("presets_builder_and_editor.css");
 
 html,
 body {
@@ -24,6 +24,7 @@ body {
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
   background: honeydew;
+  overflow: hidden;
 }
 
 * {
@@ -224,6 +225,10 @@ how to remove the virtical space around the range input in IE*/
   margin: 5px;
 }
 
+.main-menu-container {
+  position: relative;
+}
+
 .presets-button {
   width: 468px;
   align-self: center;
@@ -282,6 +287,22 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
+/* NOT CONNECTED */
+
+.not-connected {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: baseline;
+  justify-content: center;
+  flex-direction: row;
+  gap: 60px;
+  width: 916px;
+  height: 715px;
+  margin: 30px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 /* MACROS PEDALS */
 .macro-display {
   display: flex;
@@ -306,7 +327,7 @@ input[type="number"] {
   justify-content: center;
 }
 
-.macro.selected {
+.macro.selected, .add.macro:active {
   color: white;
   background: linear-gradient(to top, #fff 50%, #000 50%);
   background-size: 100% 200%;
@@ -318,8 +339,6 @@ input[type="number"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.macro-name {
 }
 
 /* MERIS PEDALS */
@@ -382,19 +401,22 @@ input[type="number"] {
 
 @keyframes blink-animation {
   75% {
-    background-color: black;
+    background-color: transparent;
+    box-shadow: unset;
   }
 }
 @-webkit-keyframes blink-animation {
   75% {
-    background-color: black;
+    background-color: transparent;
+    box-shadow: unset;
   }
 }
 
 .tempo-dot {
   height: 20px;
   width: 20px;
-  background-color: white;
+  box-shadow: 0 0 5px 8px #fff, 0 0 20px 5px #ff0;
+  background-color: #ffc107;
   border-radius: 50%;
   display: inline-block;
   position: absolute;

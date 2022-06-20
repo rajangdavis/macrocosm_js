@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { WebMidiContext } from "../hooks/web_midi_state";
+import { useContext, useEffect, useState } from "react";
 
-export default function CustomSelect(props) {
+export default function MidiOutputSelect(props) {
+  let { updateWebMidi } = useContext(WebMidiContext);
   const [selectOpen, setSelectOpen] = useState(false);
   let closeIf = props.closeIf == undefined ? true : props.closeIf;
   const [selectedOption, setSelectedOption] = useState(props.defaultOption);
@@ -46,10 +48,12 @@ export default function CustomSelect(props) {
             }
           })}
           {props.options.length == 0 && (
-            <div className="custom-select-option">No options available</div>
+            <div className="custom-select-option" onClick={updateWebMidi}>
+              No options available
+            </div>
           )}
           {props.options.length > 0 && remainingOptions.length == 0 && (
-            <div className="custom-select-option">
+            <div className="custom-select-option" onClick={updateWebMidi}>
               No other options available
             </div>
           )}

@@ -9,7 +9,7 @@ export default function ThirdRow(props) {
     23: modSpeed,
     29: reverbAlgorithm,
     14: bypass,
-    15: tempo,
+    28: swell,
   } = props.mercury7State;
 
   let setAttackTime = (value) => {
@@ -25,9 +25,10 @@ export default function ThirdRow(props) {
       <div className="left-side-controls">
         <div className="flex-row tap">
           <SwellButton
-            tempo={tempo}
+            swell={swell}
             midiData={props.midiData}
             midiObject={props.midiObject}
+            mercury7Dispatch={props.mercury7Dispatch}
           />
         </div>
       </div>

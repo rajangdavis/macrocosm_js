@@ -45,7 +45,7 @@ export default function computeSysex(
 }
 
 let templateString = (heelState, toeState, sysexByte, presetNumber) => {
-  return `f000 2010 0001 0${sysexByte}26 ${fillNumber(presetNumber)}${
+  return `f000 2010 0001 0${sysexByte}26 ${fixPresetNumber(presetNumber)}${
     heelState[16]
   } ${heelState[17]}${heelState[18]} ${heelState[19]}${heelState[20]} ${
     heelState[21]
@@ -75,6 +75,10 @@ let parseValue = (object, key) => {
     let firstPass = object[key].toString(16);
     return fillNumber(firstPass);
   }
+};
+
+let fixPresetNumber = (presetNumber) => {
+  return fillNumber(parseInt(presetNumber).toString(16));
 };
 
 let fillNumber = (firstPass) => {

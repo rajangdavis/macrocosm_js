@@ -1,4 +1,4 @@
-import { BigKnob } from "./pedals/knob";
+import { BigKnob, InvertedBigKnob } from "./pedals/knob";
 export default function Expression(props) {
   const {
     expressionVal,
@@ -8,6 +8,8 @@ export default function Expression(props) {
     midiData,
     tempo,
     dispatch,
+    invert,
+    showExpression,
   } = props;
 
   const express = (e) => {
@@ -28,10 +30,11 @@ export default function Expression(props) {
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
+  const expressionClassName = showExpression != false ? "expression" : "hidden";
 
   return (
     <div className="expression-container">
-      <div className="expression">
+      <div className={expressionClassName}>
         <input
           type="range"
           value={expressionVal}
@@ -43,12 +46,24 @@ export default function Expression(props) {
         />
         <label>EXPRESSION</label>
       </div>
-      <BigKnob
-        className={merc7Selected}
-        label="TEMPO"
-        setVal={setTempo}
-        val={tempo}
-      />
+      {invert == true && (
+        <InvertedBigKnob
+          className={merc7Selected}
+          label="TEMPO"
+          maxValue={120}
+          setVal={setTempo}
+          val={tempo}
+        />
+      )}
+      {invert != true && (
+        <BigKnob
+          className={merc7Selected}
+          label="TEMPO"
+          maxValue={120}
+          setVal={setTempo}
+          val={tempo}
+        />
+      )}
     </div>
   );
 }

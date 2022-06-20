@@ -48,6 +48,7 @@ export default function ThirdRow(props) {
             tempo={tempo}
             midiData={props.midiData}
             midiObject={props.midiObject}
+            dispatch={props.polymoonDispatch}
           />
         </div>
       </div>

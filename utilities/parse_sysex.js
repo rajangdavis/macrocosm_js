@@ -18,7 +18,7 @@ let cleanNewlines = (commandArg) => {
 // Removes the header and footer
 let convertToBinary = (firstPassArg) => {
   return firstPassArg
-    .map((x) => {
+    .map((x, index) => {
       let firstHalf = x.slice(0, 2);
       let secondHalf = x.slice(2);
       return [firstHalf, secondHalf];

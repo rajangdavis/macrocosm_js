@@ -9,7 +9,6 @@ module.exports = {
       dialStyle: style.littleKnobDial,
       knobContainer: style.littleKnobContainer,
       knobFunction: style.littleKnob,
-      hiddenKnob: style.hiddenLittleKnob,
       magicNumber: 149,
     };
     return Knob(newProps);
@@ -20,7 +19,16 @@ module.exports = {
       dialStyle: style.bigKnobDial,
       knobContainer: style.bigKnobContainer,
       knobFunction: style.bigKnob,
-      hiddenKnob: style.hiddenBigKnob,
+      magicNumber: 146,
+    };
+    return Knob(newProps);
+  },
+  InvertedBigKnob: (props) => {
+    let newProps = {
+      ...props,
+      dialStyle: style.invertedBigKnobDial,
+      knobContainer: style.bigKnobContainer,
+      knobFunction: style.invertedBigKnob,
       magicNumber: 146,
     };
     return Knob(newProps);
@@ -36,7 +44,7 @@ function Knob(props) {
   };
 
   const angleCalc = (intValue) => {
-    return (298 / 127) * intValue - props.magicNumber;
+    return (298 / maxValue) * intValue - props.magicNumber;
   };
 
   return (

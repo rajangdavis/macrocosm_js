@@ -17,9 +17,27 @@ export default function trackToggles(props) {
   // CC29 -> Toggle
   // CC30 -> Toggle
   // CC15 -> Tempo
-  const channelstoWatch = [14, 9, 29, 30, 15];
+  const channelstoWatch = [9, 29, 30, 15];
 
   useEffect(() => {
-    [14, 9, 29, 30, 15].map((x) => {});
-  }, [heelState, heelDispatch, toeState, toeDispatch]);
+    if (heelState) {
+      for (var i = channelstoWatch.length - 1; i >= 0; i--) {
+        let value = heelState[channelstoWatch[i]];
+        toeDispatch({ key: channelstoWatch[i], value: value, skipMidi: true });
+      }
+      toeDispatch({ key: 14, value: 127, skipMidi: true });
+      heelDispatch({ key: 14, value: 127, skipMidi: true });
+    }
+  }, [heelState]);
+
+  useEffect(() => {
+    if (toeState) {
+      for (var i = channelstoWatch.length - 1; i >= 0; i--) {
+        let value = toeState[channelstoWatch[i]];
+        heelDispatch({ key: channelstoWatch[i], value: value, skipMidi: true });
+      }
+      toeDispatch({ key: 14, value: 127, skipMidi: true });
+      heelDispatch({ key: 14, value: 127, skipMidi: true });
+    }
+  }, [toeState]);
 }

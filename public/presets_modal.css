@@ -14,7 +14,7 @@
   padding: 50px 0 0 50px;
   background: black;
   opacity: 0.95;
-  height: 105vh;
+  height: 100vh;
   width: 100vw;
   position: absolute;
 }
@@ -42,6 +42,7 @@
 .menu-select.right {
   left: unset;
   right: 0;
+  height: 100vh;
 }
 
 .global-settings,
