@@ -327,7 +327,8 @@ input[type="number"] {
   justify-content: center;
 }
 
-.macro.selected, .add.macro:active {
+.macro.selected,
+.add.macro:active {
   color: white;
   background: linear-gradient(to top, #fff 50%, #000 50%);
   background-size: 100% 200%;

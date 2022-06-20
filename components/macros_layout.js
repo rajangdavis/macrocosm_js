@@ -26,7 +26,12 @@ export default function MacrosLayout(props) {
             <a
               className={isSelected(macro)}
               onClick={() => {
-                callMacro({macro: macro, setSelectedMacro: setSelectedMacro, midiConfig: midiConfig, midiObject: midiObject});
+                callMacro({
+                  macro: macro,
+                  setSelectedMacro: setSelectedMacro,
+                  midiConfig: midiConfig,
+                  midiObject: midiObject,
+                });
               }}
             >
               <span className="macro-name">{macro.data.name}</span>

@@ -90,7 +90,11 @@ export default function Index() {
               <a
                 className="add macro"
                 onClick={() => {
-                  turnOffAllPedals({setSelectedMacro: setSelectedMacro, midiConfig: midiConfig, midiObject: midiObject})
+                  turnOffAllPedals({
+                    setSelectedMacro: setSelectedMacro,
+                    midiConfig: midiConfig,
+                    midiObject: midiObject,
+                  });
                 }}
               >
                 <span className="macro-name">All Off</span>

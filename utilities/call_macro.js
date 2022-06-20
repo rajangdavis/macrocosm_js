@@ -1,14 +1,9 @@
 import parseSysexToBinary from "./parse_sysex";
 
-export default async function callMacro(props){
-	let {
-		macro,
-    setSelectedMacro,
-    midiConfig,
-    midiObject
-  } = props;
+export default async function callMacro(props) {
+  let { macro, setSelectedMacro, midiConfig, midiObject } = props;
 
-	setSelectedMacro(macro);
+  setSelectedMacro(macro);
   let macroData = macro.data;
   let macroSelectedPedals = macroData.pedals.filter(
     (x) => x.showing == true && x.selectedPreset != {}
