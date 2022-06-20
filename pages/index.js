@@ -1,5 +1,6 @@
 import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
+import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 import useLocalStorage from "../hooks/use_local_storage";
 import ManageMacroState from "../hooks/macro_state";
 import PedalSelector from "../components/pedal_selector";
@@ -89,7 +90,7 @@ export default function Index() {
               <a
                 className="add macro"
                 onClick={() => {
-                  console.log("TODO: turn off pedals");
+                  turnOffAllPedals({setSelectedMacro: setSelectedMacro, midiConfig: midiConfig, midiObject: midiObject})
                 }}
               >
                 <span className="macro-name">All Off</span>
