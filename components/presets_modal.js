@@ -4,7 +4,7 @@ import PresetsBuilder from "./presets_builder";
 import PresetsEditor from "./presets_editor";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect, useRef } from "react";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import sysexKnobsUpdate from "../hooks/sysex_knobs_update";
@@ -21,6 +21,16 @@ export default function PresetsModal(props) {
   const [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
+  const modalTop = useRef();
+
+  const scrollToTop = () => {
+    let modalTopNow = modalTop.current;
+    if (modalTopNow) {
+      setTimeout(() => {
+        modalTopNow.scrollTo({ top: 0 });
+      }, 0);
+    }
+  };
 
   useEffect(() => {
     if (menu != "edit-preset") {
@@ -30,6 +40,8 @@ export default function PresetsModal(props) {
       setToeSettingsConfirmed(true);
       setHeelSettingsConfirmed(true);
     }
+    scrollToTop();
+    setPresetExpressionVal(0);
   }, [menu]);
 
   const {
@@ -156,83 +168,81 @@ export default function PresetsModal(props) {
         )}
       </div>
       <div className="presets-modal-background"></div>
-      <div className="presets-modal-content">
-        <div>
-          {menu == "midi" && <NavMenu midiObject={midiObject} />}
-          {menu == "presets" && (
-            <div className="sysex-menu fade-in">
-              <div className="global-settings">
-                <label>GLOBAL SETTINGS</label>
-                <GlobalSettingsTable
-                  sysexByte={sysexByte}
-                  midiObject={midiObject}
-                />
-              </div>
-              <div className="presets-container">
-                <label>PRESETS</label>
-                {factoryPresets[selectedPedal].map((preset, i) => {
-                  return (
-                    <div key={i} className={selectedClassName(preset)}>
-                      <a onClick={() => setPreset(preset)}>{preset.label}</a>
-                      <span className="pull-right">
-                        {skipOgPresets(i) && (
-                          <>
-                            <a onClick={() => editPreset(preset, i)}>EDIT</a> |{" "}
-                          </>
-                        )}
-                        <a onClick={() => clonePreset(preset)}>CLONE</a>
-                        {skipOgPresets(i) && <> | </>}
-                        {skipOgPresets(i) && (
-                          <>
-                            <a onClick={() => deletePreset(preset)}>DELETE</a>
-                          </>
-                        )}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
+      <div className="presets-modal-content" ref={modalTop}>
+        {menu == "midi" && <NavMenu midiObject={midiObject} />}
+        {menu == "presets" && (
+          <div className="sysex-menu fade-in">
+            <div className="global-settings">
+              <label>GLOBAL SETTINGS</label>
+              <GlobalSettingsTable
+                sysexByte={sysexByte}
+                midiObject={midiObject}
+              />
             </div>
-          )}
-          {menu == "new-preset" && (
-            <PresetsBuilder
-              toeSettingsConfirmed={toeSettingsConfirmed}
-              setToeSettingsConfirmed={setToeSettingsConfirmed}
-              heelSettingsConfirmed={heelSettingsConfirmed}
-              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
-              selectedPedal={selectedPedal}
-              midiObject={midiObject}
-              midiData={midiData}
-              setMenu={setMenu}
-              presetTempo={presetTempo}
-              expressionVal={presetExpressionVal}
-            />
-          )}
-          {menu == "edit-preset" && (
-            <PresetsEditor
-              heelSettingsConfirmed={heelSettingsConfirmed}
-              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
-              toeSettingsConfirmed={toeSettingsConfirmed}
-              setToeSettingsConfirmed={setToeSettingsConfirmed}
-              selectedPedal={selectedPedal}
-              midiObject={midiObject}
-              midiData={midiData}
-              setMenu={setMenu}
-              presetTempo={presetTempo}
-              presetToEdit={presetToEdit}
-              presetToEditIndex={presetToEditIndex}
-              expressionVal={presetExpressionVal}
-              setExpressionVal={setPresetExpressionVal}
-            />
-          )}
-        </div>
+            <div className="presets-container">
+              <label>PRESETS</label>
+              {factoryPresets[selectedPedal].map((preset, i) => {
+                return (
+                  <div key={i} className={selectedClassName(preset)}>
+                    <a onClick={() => setPreset(preset)}>{preset.label}</a>
+                    <span className="pull-right">
+                      {skipOgPresets(i) && (
+                        <>
+                          <a onClick={() => editPreset(preset, i)}>EDIT</a> |{" "}
+                        </>
+                      )}
+                      <a onClick={() => clonePreset(preset)}>CLONE</a>
+                      {skipOgPresets(i) && <> | </>}
+                      {skipOgPresets(i) && (
+                        <>
+                          <a onClick={() => deletePreset(preset)}>DELETE</a>
+                        </>
+                      )}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {menu == "new-preset" && (
+          <PresetsBuilder
+            toeSettingsConfirmed={toeSettingsConfirmed}
+            setToeSettingsConfirmed={setToeSettingsConfirmed}
+            heelSettingsConfirmed={heelSettingsConfirmed}
+            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+            selectedPedal={selectedPedal}
+            midiObject={midiObject}
+            midiData={midiData}
+            setMenu={setMenu}
+            presetTempo={presetTempo}
+            expressionVal={presetExpressionVal}
+          />
+        )}
+        {menu == "edit-preset" && (
+          <PresetsEditor
+            heelSettingsConfirmed={heelSettingsConfirmed}
+            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+            toeSettingsConfirmed={toeSettingsConfirmed}
+            setToeSettingsConfirmed={setToeSettingsConfirmed}
+            selectedPedal={selectedPedal}
+            midiObject={midiObject}
+            midiData={midiData}
+            setMenu={setMenu}
+            presetTempo={presetTempo}
+            setPresetTempoVal={setPresetTempoVal}
+            presetToEdit={presetToEdit}
+            presetToEditIndex={presetToEditIndex}
+            expressionVal={presetExpressionVal}
+            setExpressionVal={setPresetExpressionVal}
+          />
+        )}
       </div>
       <div className="menu-select right pedals">
         {(menu == "new-preset" || menu == "edit-preset") && (
           <Expression
             showExpression={heelSettingsConfirmed && toeSettingsConfirmed}
             expressionVal={presetExpressionVal}
-            presetTempo={presetTempo}
             setExpressionVal={setPresetExpressionVal}
             midiData={midiData}
             midiObject={midiObject}

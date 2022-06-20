@@ -48,22 +48,12 @@ export default function MidiOutputSelect(props) {
             }
           })}
           {props.options.length == 0 && (
-            <div
-              className="custom-select-option"
-              onClick={async () => {
-                await updateWebMidi();
-              }}
-            >
+            <div className="custom-select-option" onClick={updateWebMidi}>
               No options available
             </div>
           )}
           {props.options.length > 0 && remainingOptions.length == 0 && (
-            <div
-              className="custom-select-option"
-              onClick={async () => {
-                await updateWebMidi();
-              }}
-            >
+            <div className="custom-select-option" onClick={updateWebMidi}>
               No other options available
             </div>
           )}

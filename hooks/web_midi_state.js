@@ -13,7 +13,7 @@ const WebMidiProvider = ({ children, initialConfig = defaultConfig }) => {
   const updateWebMidi = async () => {
     return WebMidi.enable({ sysex: true })
       .then((access) => {
-        setWebMidi(access);
+        if (access != undefined) setWebMidi(access);
       })
       .catch((err) => {
         alert("You must enable WebMIDI in order to use this application");

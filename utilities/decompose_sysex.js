@@ -7,7 +7,7 @@ export default function decomposeSysex(preset, selectedPedal) {
   let initialState = { ...pedalStates[selectedPedal] };
   let heelState = { ...initialState };
   let toeState = { ...initialState };
-  let { data } = parseSysexToBinary(message);
+  let { data, manufacturer } = parseSysexToBinary(message);
   let presetNumber = data[4];
   heelState[14] = data[17]; // Bypass
   heelState[9] = data[18]; // Toggle

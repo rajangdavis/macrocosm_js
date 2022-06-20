@@ -27,10 +27,10 @@ export default function TapButton(props) {
         return x.name == midiData.output;
       })[0];
       console.log(28, 127, { channels: parseInt(props.midiData.channel) });
-      updateTempo();
       deviceOutput.sendControlChange(28, 127, {
         channels: parseInt(props.midiData.channel),
       });
+      updateTempo();
     }
   };
 

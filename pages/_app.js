@@ -9,7 +9,7 @@ import { WebMidiProvider } from "../hooks/web_midi_state";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <>
+    <div style={{ background: "honeydew" }}>
       <Head>
         <title>macrocosm</title>
         <meta httpEquiv="ScreenOrientation" content="autoRotate:disabled" />
@@ -30,7 +30,7 @@ function MyApp({ Component, pageProps }) {
           </WebMidiProvider>
         </FactoryPresetsProvider>
       </PedalStatesProvider>
-    </>
+    </div>
   );
 }
 

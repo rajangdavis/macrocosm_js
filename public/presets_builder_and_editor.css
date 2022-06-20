@@ -5,8 +5,24 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  min-height: 66vh;
 }
 
+@media (max-width: 1340px) and (orientation: landscape) {
+  .preset-create-container,
+  .preset-edit-container {
+    min-height: 110vh;
+  }
+  .presets-pedal-layout.final {
+    min-height: 120vh;
+  }
+}
+
+.preset-create-container > label,
+.preset-edit-container > label {
+  color: white;
+  font-size: 25px;
+}
 .preset-create-container > .pedal-layouts > a,
 .preset-create-container > .pedal-layouts > span,
 .preset-edit-container > .pedal-layouts > a,
@@ -23,25 +39,14 @@
   height: 100vh;
 }
 
-.presets-pedal-layout > label {
-  font-size: 25px;
-}
-
 .pedal-layouts {
   position: relative;
 }
 
-.pedal-layouts > .arrow {
-  content: url(./arrow.svg);
-  position: absolute;
-  bottom: 12px;
-}
-
-.pedal-layouts > .arrow.left {
-  transform: rotate(90deg);
-  left: 95px;
-}
-
-.pedal-layouts > .arrow.right {
-  transform: rotate(270deg);
+.preset-input {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: white;
 }

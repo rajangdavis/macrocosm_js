@@ -1,7 +1,7 @@
 import PedalLayouts from "./pedal_layouts";
 import pedalStates from "../data/pedal_states";
 import merisStateReducer from "../hooks/meris_state";
-// import trackToggles from "../hooks/track_toggles";
+import trackToggles from "../hooks/track_toggles";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import computeSysex from "../utilities/compute_sysex";
 import applyExpression from "../hooks/apply_expression";
@@ -18,6 +18,7 @@ export default function PresetsBuilder(props) {
     midiObject,
     midiData,
     expressionVal,
+    presetTempo,
     heelSettingsConfirmed,
     setHeelSettingsConfirmed,
     toeSettingsConfirmed,
@@ -27,7 +28,7 @@ export default function PresetsBuilder(props) {
   let initialState = { ...pedalStates[selectedPedal] };
   initialState[9] = 0; // 2-Way Toggle
   initialState[14] = 127; // On/Off
-  initialState[15] = 0; // Tempo
+  initialState[15] = presetTempo; // Tempo
   initialState[23] = 0;
   initialState[29] = 0; // 4-Way Toggle
   initialState[30] = 127; // 2-Way Toggle
@@ -36,17 +37,53 @@ export default function PresetsBuilder(props) {
   let [heelState, heelDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
     midiObject: midiObject,
+    tag: "heelState",
   });
 
   let [toeState, toeDispatch] = merisStateReducer(initialState, {
     midiData: midiData,
     midiObject: midiObject,
+    tag: "toeState",
   });
 
   let [finalState, finalDispatch] = merisStateReducer(heelState, {
     midiData: midiData,
     midiObject: midiObject,
+    tag: "finalState",
   });
+
+  let noOpDispatch = () => {
+    return;
+  };
+
+  trackToggles({
+    heelState: heelState,
+    heelDispatch: heelDispatch,
+    toeState: toeState,
+    toeDispatch: toeDispatch,
+  });
+
+  let [computedPreset, setComputedPreset] = useState({
+    label: presetName,
+    message: computeSysex(
+      heelState,
+      toeState,
+      midiData.sysexByte,
+      presetNumber
+    ),
+  });
+
+  useEffect(() => {
+    setComputedPreset({
+      label: presetName,
+      message: computeSysex(
+        heelState,
+        toeState,
+        midiData.sysexByte,
+        presetNumber
+      ),
+    });
+  }, [heelState, heelSettingsConfirmed, presetName, presetNumber, toeState]);
 
   let copyHeelSettings = () => {
     let keys = Object.keys(heelState);
@@ -58,41 +95,39 @@ export default function PresetsBuilder(props) {
     return null;
   };
 
-  let computedPreset = () => {
-    return {
-      label: presetName,
-      message: computeSysex(
-        heelState,
-        toeState,
-        midiData.sysexByte,
-        presetNumber
-      ),
-    };
-  };
-
   let createPreset = () => {
-    let presetTemplate = computedPreset();
-    updateFactoryPresets(selectedPedal, presetTemplate);
+    updateFactoryPresets(selectedPedal, computedPreset);
     setMenu("presets");
   };
 
   useEffect(() => {
+    heelDispatch({ skipMidi: true, key: 15, value: presetTempo });
+    toeDispatch({ skipMidi: true, key: 15, value: presetTempo });
+    finalDispatch({ skipMidi: true, key: 15, value: presetTempo });
+  }, [presetTempo]);
+
+  useEffect(() => {
+    applyExpression(
+      midiObject,
+      midiData,
+      expressionVal,
+      computedPreset,
+      finalDispatch
+    );
+  }, [expressionVal, heelState, toeState]);
+
+  let presetsClassWhenFinal = () => {
     if (heelSettingsConfirmed && toeSettingsConfirmed) {
-      let presetTemplate = computedPreset();
-      applyExpression(
-        midiObject,
-        midiData,
-        expressionVal,
-        presetTemplate,
-        finalDispatch
-      );
+      return "fade-in presets-pedal-layout final";
+    } else {
+      return "fade-in presets-pedal-layout";
     }
-  }, [expressionVal]);
+  };
 
   return (
-    <div className="fade-in presets-pedal-layout">
-      <label>Create a new preset</label>
+    <div className={presetsClassWhenFinal()}>
       <div className="preset-create-container">
+        <label>Create a preset</label>
         {!heelSettingsConfirmed && (
           <div className="fade-in pedal-layouts">
             <PedalLayouts
@@ -109,7 +144,6 @@ export default function PresetsBuilder(props) {
             >
               Confirm Heel Settings
             </a>
-            <span className="arrow right"></span>
           </div>
         )}
         {heelSettingsConfirmed && !toeSettingsConfirmed && (
@@ -121,7 +155,6 @@ export default function PresetsBuilder(props) {
               midiObject={midiObject}
               midiData={midiData}
             />
-            <span className="arrow left"></span>
             <a
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
@@ -132,7 +165,7 @@ export default function PresetsBuilder(props) {
             <span> | </span>
             <a
               onClick={() => {
-                return copyHeelSettings();
+                return copyHeelSettings(heelState, toeDispatch);
               }}
             >
               Copy Heel Settings
@@ -145,7 +178,6 @@ export default function PresetsBuilder(props) {
             >
               Confirm Toe Settings
             </a>
-            <span className="arrow right"></span>
           </div>
         )}
         {heelSettingsConfirmed && toeSettingsConfirmed && (
@@ -153,28 +185,34 @@ export default function PresetsBuilder(props) {
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={finalState}
-              dispatch={finalDispatch}
+              dispatch={noOpDispatch}
               midiObject={midiObject}
               midiData={midiData}
             />
-            <input
-              type="text"
-              value={presetName}
-              onChange={(e) => {
-                setPresetName(e.target.value);
-              }}
-            />
-            <input
-              type="number"
-              min="1"
-              max="16"
-              value={presetNumber}
-              onChange={(e) => {
-                setPresetNumber(e.target.value);
-              }}
-            />
+            <div className="text-input">
+              <span>Preset Name</span>
+              <input
+                type="text"
+                value={presetName}
+                onChange={(e) => {
+                  setPresetName(e.target.value);
+                }}
+              />
+            </div>
             <br />
-            <span className="arrow left"></span>
+            <div className="preset-input">
+              <label>Preset Number</label>
+              <input
+                type="number"
+                min="1"
+                max="16"
+                value={parseInt(presetNumber)}
+                onChange={(e) => {
+                  setPresetNumber(e.target.value);
+                }}
+              />
+            </div>
+            <br />
             <a
               onClick={() => {
                 return setHeelSettingsConfirmed(false);
