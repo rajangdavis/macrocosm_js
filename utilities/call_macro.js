@@ -38,8 +38,11 @@ export default async function callMacro(props) {
         })
         .concat(
           macroMessageData.map((x) => {
-            console.log("TURNING ON PRESET: " + x.name);
+            console.log("TURNING ON PRESET, RESETTING EXPRESSION: " + x.name);
             return [
+              deviceOutput.sendControlChange(4, 0, {
+                channels: parseInt(x.channel),
+              }),
               deviceOutput.sendControlChange(14, 127, {
                 channels: parseInt(x.channel),
               }),

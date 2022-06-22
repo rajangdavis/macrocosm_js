@@ -1,5 +1,4 @@
 export default async function turnOffAllPedals(props) {
-  console.log(props);
   let { setSelectedMacro, midiConfig, midiObject } = props;
   setSelectedMacro({});
   let pedalChannels = Object.keys(midiConfig).filter(
