@@ -8,12 +8,12 @@ export default function ManageMacroState(initialState) {
 
     // CREATE
     let createMacro = (state, action) => {
-      let initialState = {
+      let initialMacroState = {
         macro_id: uuidv4(),
         ...action,
       };
-      delete initialState.type;
-      state.push(initialState);
+      delete initialMacroState.type;
+      state.push(initialMacroState);
     };
 
     let cloneMacro = (state, action) => {

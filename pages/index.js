@@ -12,12 +12,13 @@ import PresetsModalMacros from "../components/presets_modal_macros";
 import MacrosModal from "../components/macros_modal";
 import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
+import { PageStateContext } from "../hooks/page_state";
 import ExpressionMacros from "../components/expression_macros";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 export default function Index() {
   const [midiObject, midiConfig, isConnected] = ManageMidi();
-  let [pageState, setPageState] = useLocalStorage("page_state", "pedals");
+  const { pageState, setPageState } = useContext(PageStateContext);
   const [expressionVal, setExpressionVal] = useState(0);
   const [presetsOpen, setPresetsOpen] = useState(false);
   const isSupported = midiObject && midiObject.supported;
@@ -36,6 +37,7 @@ export default function Index() {
   });
 
   // State for pedals
+  // Wrap in context provider
   const [sysexByte, setSysexByte] = useState(0);
   const [selectedPedal, setSelectedPedal] = useLocalStorage(
     "selected_pedal",
@@ -59,11 +61,13 @@ export default function Index() {
 
   // State for both pages
   useEffect(() => {
+    console.log("DEFAULT EXPRESSION AND TEMPO");
     setExpressionVal(0);
     setMacroTempo(0);
   }, [selectedPreset, selectedMacro, selectedPreset, pageState]);
 
   useEffect(() => {
+    console.log("DEFAULT MACRO AND PRESET STATE");
     setSelectedMacro({});
     setSelectedPreset({
       label: null,

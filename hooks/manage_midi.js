@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { MidiConfigContext } from "./midi_config";
 import { WebMidiContext } from "./web_midi_state";
 
@@ -21,7 +21,7 @@ export default function ManageMidi() {
   let { midiObject } = useContext(WebMidiContext);
   let { midiConfig, updateConfig } = useContext(MidiConfigContext);
 
-  useEffect(() => {
+  useMemo(() => {
     if (midiObject && midiObject.getOutputByName && midiConfig.output != "") {
       let savedOutput = midiObject.getOutputByName(midiConfig.output);
       checkForDisconnect(savedOutput, updateConfig, setIsConnected);

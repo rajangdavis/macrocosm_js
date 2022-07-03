@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import merisStateReducer from "./meris_state";
+import { HandleMidiOutput } from "./midi_io";
 import applyExpression from "./apply_expression";
 import { MidiConfigContext } from "./midi_config";
 import { PedalStatesContext } from "./pedal_states";
@@ -62,7 +63,7 @@ export default function PedalInit(
         selectedPedalDispatch
       );
     }
-  }, [expressionVal, applyExpression, selectedPreset]);
+  }, [expressionVal, selectedPreset]);
 
   return [selectedPedalState, selectedPedalDispatch];
 }
