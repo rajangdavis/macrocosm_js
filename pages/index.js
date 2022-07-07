@@ -2,7 +2,6 @@ import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 import useLocalStorage from "../hooks/use_local_storage";
-import ManageMacroState from "../hooks/macro_state";
 import PedalSelector from "../components/pedal_selector";
 import PedalLayouts from "../components/pedal_layouts";
 import MacrosLayout from "../components/macros_layout";
@@ -30,11 +29,6 @@ export default function Index() {
   const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
   const [macroTempo, setMacroTempo] = useState(0);
   const [macroToEdit, setMacroToEdit] = useState(null);
-  let [initialMacrosState, setMacroState] = useLocalStorage("macro_state", []);
-  let [macros, macroDispatch] = ManageMacroState(initialMacrosState);
-  useEffect(() => {
-    setMacroState(macros);
-  });
 
   // State for pedals
   // Wrap in context provider
@@ -149,8 +143,6 @@ export default function Index() {
             <MacrosLayout
               setSelectedMacro={setSelectedMacro}
               selectedMacro={selectedMacro}
-              macros={macros}
-              macroDispatch={macroDispatch}
               setMacroToEdit={setMacroToEdit}
               midiConfig={midiConfig}
               midiObject={midiObject}
@@ -204,13 +196,11 @@ export default function Index() {
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
         <MacrosModal
-          macroDispatch={macroDispatch}
           setMacrosModalOpen={setMacrosModalOpen}
         />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit
-          macroDispatch={macroDispatch}
           macroToEdit={macroToEdit}
           setMacroToEdit={setMacroToEdit}
           setMacrosModalOpen={setMacrosModalEditOpen}

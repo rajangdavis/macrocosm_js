@@ -1,11 +1,12 @@
 import callMacro from "../utilities/call_macro";
+import { MacrosContext } from "../hooks/macro_state2";
+import { useContext } from "react";
 
 export default function MacrosLayout(props) {
+  const { macros, cloneMacro, removeMacro } = useContext(MacrosContext);
   let {
     setSelectedMacro,
     selectedMacro,
-    macros,
-    macroDispatch,
     setMacroToEdit,
     midiConfig,
     midiObject,
@@ -39,10 +40,7 @@ export default function MacrosLayout(props) {
             <div className="macro-controls">
               <a
                 onClick={() => {
-                  macroDispatch({
-                    type: "remove-macro",
-                    macro_id: macro.macro_id,
-                  });
+                  removeMacro(macro.macro_id);
                 }}
               >
                 remove
@@ -50,10 +48,7 @@ export default function MacrosLayout(props) {
               |
               <a
                 onClick={() => {
-                  macroDispatch({
-                    type: "clone-macro",
-                    macro_id: macro.macro_id,
-                  });
+                  cloneMacro(macro.macro_id)
                 }}
               >
                 clone

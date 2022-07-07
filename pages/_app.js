@@ -2,6 +2,7 @@ import Head from "next/head";
 import dynamic from "next/dynamic";
 import "../public/main.css";
 import { MidiConfigProvider } from "../hooks/midi_config";
+import { MacrosProvider } from "../hooks/macro_state2";
 import { SliderStateProvider } from "../hooks/slider_state";
 import { PageStateProvider } from "../hooks/page_state";
 import { FactoryPresetsProvider } from "../hooks/presets_state";
@@ -22,15 +23,17 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <PedalStatesProvider>
         <FactoryPresetsProvider>
-          <WebMidiProvider>
-            <MidiConfigProvider>
-              <SliderStateProvider>
-                <PageStateProvider>
-                  <Component {...pageProps} />
-                </PageStateProvider>
-              </SliderStateProvider>
-            </MidiConfigProvider>
-          </WebMidiProvider>
+          <MacrosProvider>
+            <WebMidiProvider>
+              <MidiConfigProvider>
+                <SliderStateProvider>
+                  <PageStateProvider>
+                    <Component {...pageProps} />
+                  </PageStateProvider>
+                </SliderStateProvider>
+              </MidiConfigProvider>
+            </WebMidiProvider>
+          </MacrosProvider>
         </FactoryPresetsProvider>
       </PedalStatesProvider>
     </div>

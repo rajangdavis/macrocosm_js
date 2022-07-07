@@ -1,12 +1,14 @@
 import MacrosModalForm from "./macros_modal_form";
 import { FactoryPresetsContext } from "../hooks/presets_state";
+import { MacrosContext } from "../hooks/macro_state2";
 import { useContext, useState } from "react";
 
 export default function MacrosModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
+  const { createMacro } = useContext(MacrosContext);
   const [name, setName] = useState("New Macro");
 
-  const { macroDispatch, setMacrosModalOpen } = props;
+  const { setMacrosModalOpen } = props;
 
   let PEDALS = Object.keys(factoryPresets);
 
@@ -43,7 +45,7 @@ export default function MacrosModal(props) {
       name: name,
       pedals: pedals,
     };
-    macroDispatch({ type: "create-macro", data: defaultHash });
+    createMacro(defaultHash)
     setMacrosModalOpen();
   };
 

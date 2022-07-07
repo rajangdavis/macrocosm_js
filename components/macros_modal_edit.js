@@ -1,12 +1,13 @@
 import cloneDeep from "lodash/cloneDeep";
 import MacrosModalForm from "./macros_modal_form";
+import { MacrosContext } from "../hooks/macro_state2";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import { useContext, useState } from "react";
 
 export default function MacrosModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
-
-  const { macroDispatch, setMacrosModalOpen, setMacroToEdit, macroToEdit } =
+  const { updateMacro } = useContext(MacrosContext);
+  const { setMacrosModalOpen, setMacroToEdit, macroToEdit } =
     props;
 
   const copiedState = cloneDeep(macroToEdit);
@@ -37,11 +38,7 @@ export default function MacrosModal(props) {
       name: name,
       pedals: pedals,
     };
-    macroDispatch({
-      type: "update-macro",
-      data: updatedData,
-      macro_id: macroToEdit.macro_id,
-    });
+    updateMacro(macroToEdit.macro_id, updatedData)
     setMacrosModalOpen();
     setMacroToEdit(null);
   };
