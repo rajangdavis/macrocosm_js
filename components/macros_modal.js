@@ -1,6 +1,6 @@
 import MacrosModalForm from "./macros_modal_form";
 import { FactoryPresetsContext } from "../hooks/presets_state";
-import { MacrosContext } from "../hooks/macro_state2";
+import { MacrosContext } from "../hooks/macro_state";
 import { useContext, useState } from "react";
 
 export default function MacrosModal(props) {

@@ -1,19 +1,20 @@
 import { useState, useEffect, useContext } from "react";
 import merisStateReducer from "./meris_state";
-import { HandleMidiOutput } from "./midi_io";
 import applyExpression from "./apply_expression";
 import { MidiConfigContext } from "./midi_config";
 import { PedalStatesContext } from "./pedal_states";
+import { SelectedPedalContext } from "./selected_pedal_state";
 import useLocalStorage from "./use_local_storage";
 
 export default function PedalInit(
   midiObject,
   expressionVal,
-  selectedPreset,
-  selectedPedal
+  selectedPreset
 ) {
   const { midiConfig } = useContext(MidiConfigContext);
   const pedalStates = useContext(PedalStatesContext).pedalStates;
+  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext)
+
   const midiData = {
     channel: midiConfig[`${selectedPedal}Channel`],
     output: midiConfig.output,
@@ -22,30 +23,28 @@ export default function PedalInit(
   const [initialState, setState] = useLocalStorage("pedal_states", pedalStates);
 
   const pedalStateMap = {
-    enzo: merisStateReducer(initialState["enzo"], {
-      midiData: midiData,
-      midiObject: midiObject,
-    }),
-    hedra: merisStateReducer(initialState["hedra"], {
-      midiData: midiData,
-      midiObject: midiObject,
-    }),
-    polymoon: merisStateReducer(initialState["polymoon"], {
-      midiData: midiData,
-      midiObject: midiObject,
-    }),
-    mercury7: merisStateReducer(initialState["mercury7"], {
-      midiData: midiData,
-      midiObject: midiObject,
-    }),
-    ottobitJr: merisStateReducer(initialState["ottobitJr"], {
-      midiData: midiData,
-      midiObject: midiObject,
-    }),
+    enzo: merisStateReducer(initialState["enzo"]),
+    hedra: merisStateReducer(initialState["hedra"]),
+    polymoon: merisStateReducer(initialState["polymoon"]),
+    mercury7: merisStateReducer(initialState["mercury7"]),
+    ottobitJr: merisStateReducer(initialState["ottobitJr"]),
   };
 
   const [selectedPedalState, selectedPedalDispatch] =
     pedalStateMap[selectedPedal];
+
+  const dispatchFinal = (action)=>{
+    console.log(action);
+    let ccValue = action.key;
+    let deviceOutput = midiObject.outputs.filter((x) => {
+      return x.name == midiData.output;
+    })[0];
+    console.log(ccValue, action.value, { channels: midiData.channel });
+    deviceOutput.sendControlChange(ccValue, action.value, {
+      channels: parseInt(midiData.channel),
+    });
+    return selectedPedalDispatch(action);
+  }
 
   useEffect(() => {
     let newPedalStates = { ...initialState };
@@ -60,10 +59,10 @@ export default function PedalInit(
         midiData,
         expressionVal,
         selectedPreset,
-        selectedPedalDispatch
+        dispatchFinal
       );
     }
   }, [expressionVal, selectedPreset]);
 
-  return [selectedPedalState, selectedPedalDispatch];
+  return [selectedPedalState, dispatchFinal, midiData];
 }

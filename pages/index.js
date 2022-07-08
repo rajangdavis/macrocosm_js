@@ -1,5 +1,6 @@
 import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
+import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 import useLocalStorage from "../hooks/use_local_storage";
 import PedalSelector from "../components/pedal_selector";
@@ -13,11 +14,12 @@ import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
 import { PageStateContext } from "../hooks/page_state";
 import ExpressionMacros from "../components/expression_macros";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, memo } from "react";
 
-export default function Index() {
+export default function Index(props) {
   const [midiObject, midiConfig, isConnected] = ManageMidi();
   const { pageState, setPageState } = useContext(PageStateContext);
+  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
   const [expressionVal, setExpressionVal] = useState(0);
   const [presetsOpen, setPresetsOpen] = useState(false);
   const isSupported = midiObject && midiObject.supported;
@@ -31,37 +33,25 @@ export default function Index() {
   const [macroToEdit, setMacroToEdit] = useState(null);
 
   // State for pedals
-  // Wrap in context provider
   const [sysexByte, setSysexByte] = useState(0);
-  const [selectedPedal, setSelectedPedal] = useLocalStorage(
-    "selected_pedal",
-    "enzo"
-  );
-  const midiData = {
-    channel: midiConfig[`${selectedPedal}Channel`],
-    output: midiConfig.output,
-    inputForExpression: midiConfig.inputForExpression,
-  };
   const [selectedPreset, setSelectedPreset] = useState({
     label: null,
     message: null,
   });
-  let [selectedPedalState, selectedPedalDispatch] = PedalInit(
+
+  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
     midiObject,
     expressionVal,
-    selectedPreset,
-    selectedPedal
+    selectedPreset
   );
 
   // State for both pages
   useEffect(() => {
-    console.log("DEFAULT EXPRESSION AND TEMPO");
     setExpressionVal(0);
     setMacroTempo(0);
-  }, [selectedPreset, selectedMacro, selectedPreset, pageState]);
+  }, [selectedPreset, selectedMacro, pageState]);
 
   useEffect(() => {
-    console.log("DEFAULT MACRO AND PRESET STATE");
     setSelectedMacro({});
     setSelectedPreset({
       label: null,

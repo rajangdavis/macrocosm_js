@@ -1,5 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { WebMidi } from "webmidi";
+import useEffectOnce from './use_effect_once'
 
 const defaultConfig = {
   outputs: [],
@@ -20,7 +21,7 @@ const WebMidiProvider = ({ children, initialConfig = defaultConfig }) => {
       });
   };
 
-  useEffect(updateWebMidi, []);
+  useEffectOnce(updateWebMidi, []);
 
   return (
     <WebMidiContext.Provider value={{ midiObject, updateWebMidi }}>

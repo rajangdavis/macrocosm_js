@@ -1,5 +1,7 @@
 // Stolen from https://usehooks.com/useLocalStorage/
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import useEffectOnce from './use_effect_once'
+
 export default function useLocalStorage(key, initialValue) {
   // console.log("key:", key);
   // console.log("initialValue:", initialValue);
@@ -20,7 +22,7 @@ export default function useLocalStorage(key, initialValue) {
     }
   });
 
-  useEffect(() => {
+  useEffectOnce(() => {
     setValue(storedValue);
   }, []);
 

@@ -1,4 +1,5 @@
 import { BigPadButton } from "./pad_button";
+import useEffectOnce from '../../hooks/use_effect_once'
 import { useState, useRef, useEffect } from "react";
 
 export default function TapButton(props) {
@@ -7,7 +8,7 @@ export default function TapButton(props) {
 
   useEffect(() => {
     prevCurrentTapTimeRef.current = currentTapTime;
-  });
+  },[currentTapTime]);
 
   const prevCurrentTapTime = prevCurrentTapTimeRef.current;
 
