@@ -5,8 +5,10 @@ export default function Bypass(props) {
     return props.bypass == value ? "selected" : "not-selected";
   };
 
+  const keyVal = props.keyVal ? props.keyVal : 14
+
   const setBypass = (value) => {
-    props.dispatch({ key: 14, value: value });
+    props.dispatch({ key: keyVal, value: value });
   };
   return (
     <div className="text-center bypass">

@@ -37,6 +37,7 @@ module.exports = {
 
 function Knob(props) {
   let maxValue = props.maxValue != undefined ? props.maxValue : 127;
+  let minValue = props.minValue != undefined ? props.minValue : 0;
   const { sliderState } = useContext(SliderStateContext);
 
   const updateVal = (event) => {

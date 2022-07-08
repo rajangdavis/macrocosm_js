@@ -8,6 +8,8 @@ const defaultConfig = {
   polymoonChannel: 3,
   mercury7Channel: 4,
   ottobitJrChannel: 5,
+  mobiusChannel: 6,
+  es8Channel: 7
 };
 
 const MidiConfigContext = createContext(defaultConfig);

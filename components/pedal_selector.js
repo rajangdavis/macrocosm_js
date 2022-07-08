@@ -62,39 +62,21 @@ export default function PedalSelector(props) {
       iconSource: ottobitJrImage,
       iconSourceSelected: ottobitJrImageSelected,
     },
+    {
+      key: "mobius",
+      label: "Ottobit Jr.",
+      sysexByte: 0,
+      order: 5,
+      iconSource: ottobitJrImage,
+      iconSourceSelected: ottobitJrImageSelected,
+    },
   ]);
-
-  const [dragId, setDragId] = useState();
-
-  const handleDrag = (ev) => {
-    setDragId(ev.currentTarget.id);
-  };
-  const handleDrop = (ev) => {
-    const dragBox = pedalSelectAndOrder.find((pedal) => pedal.key === dragId);
-    const dropBox = pedalSelectAndOrder.find(
-      (pedal) => pedal.key === ev.currentTarget.id
-    );
-
-    const dragBoxOrder = dragBox.order;
-    const dropBoxOrder = dropBox.order;
-
-    const newPedalOrder = pedalSelectAndOrder.map((pedal) => {
-      if (pedal.key === dragId) {
-        pedal.order = dropBoxOrder;
-      }
-      if (pedal.key === ev.currentTarget.id) {
-        pedal.order = dragBoxOrder;
-      }
-      return pedal;
-    });
-
-    setPedalSelectAndOrder(newPedalOrder);
-  };
 
   useEffect(() => {
     setExpressionVal(0);
     setSelectedPreset({ label: null, message: null });
   }, [pedalSelectAndOrder, selectedPedal, setExpressionVal, setSelectedPreset]);
+
   return (
     <>
       {pedalSelectAndOrder
@@ -118,9 +100,6 @@ export default function PedalSelector(props) {
               key={pedal.key}
               id={pedal.key}
               onDragOver={(ev) => ev.preventDefault()}
-              draggable="true"
-              onDragStart={handleDrag}
-              onDrop={handleDrop}
             >
               <a className={className} onClick={(e) => changePedal(e, pedal)}>
                 <Image

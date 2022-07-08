@@ -63,6 +63,20 @@ export default function NavMenu(props) {
               updateConfig={updateConfig}
             />
           </div>
+          <div className="channels-block">
+            <MidiChannelInput
+              label={"MOBIUS"}
+              midiConfig={midiConfig}
+              value={"mobiusChannel"}
+              updateConfig={updateConfig}
+            />
+            <MidiChannelInput
+              label={"ES8"}
+              midiConfig={midiConfig}
+              value={"es8Channel"}
+              updateConfig={updateConfig}
+            />
+          </div>
         </div>
       </div>
       <div className="options-block">

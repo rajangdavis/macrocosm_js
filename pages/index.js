@@ -145,7 +145,7 @@ export default function Index() {
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
-            tempo={selectedPedalState[15]}
+            selectedPedalState={selectedPedalState}
             dispatch={selectedPedalDispatch}
           />
         )}
@@ -183,10 +183,11 @@ export default function Index() {
         />
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
-        <MacrosModal setMacrosModalOpen={setMacrosModalOpen} />
+        <MacrosModal midiObject={midiObject} setMacrosModalOpen={setMacrosModalOpen} />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit
+          midiObject={midiObject}
           macroToEdit={macroToEdit}
           setMacroToEdit={setMacroToEdit}
           setMacrosModalOpen={setMacrosModalEditOpen}

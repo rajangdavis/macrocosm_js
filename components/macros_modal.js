@@ -8,9 +8,9 @@ export default function MacrosModal(props) {
   const { createMacro } = useContext(MacrosContext);
   const [name, setName] = useState("New Macro");
 
-  const { setMacrosModalOpen } = props;
+  const { setMacrosModalOpen, midiObject } = props;
 
-  let PEDALS = Object.keys(factoryPresets);
+  let PEDALS = Object.keys(factoryPresets).filter(x => x!= 'mobius');
 
   let PEDAL_OBJECTS = PEDALS.map((pedal) => {
     return {
@@ -58,6 +58,7 @@ export default function MacrosModal(props) {
       setName={setName}
       name={name}
       pedals={pedals}
+      midiObject={midiObject}
       setPedalState={setPedalState}
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}

@@ -24,6 +24,7 @@ export default function PedalInit(midiObject, expressionVal, selectedPreset) {
     polymoon: merisStateReducer(initialState["polymoon"]),
     mercury7: merisStateReducer(initialState["mercury7"]),
     ottobitJr: merisStateReducer(initialState["ottobitJr"]),
+    mobius: merisStateReducer(initialState["mobius"]),
   };
 
   const [selectedPedalState, selectedPedalDispatch] =

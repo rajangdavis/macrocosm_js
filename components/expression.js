@@ -4,20 +4,25 @@ export default function Expression(props) {
     expressionVal,
     selectedPedal,
     setExpressionVal,
-    tempo,
+    selectedPedalState,
     dispatch,
     invert,
     showExpression,
   } = props;
 
+
+  let tempoCcVal = selectedPedal == "mobius" ? 17 : 15;
+  let tempo = selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15];
+  let expressCcVal = selectedPedal == "mobius" ? 100 : 4;
+
   const express = (e) => {
     let parsedVal = parseInt(e.target.value);
-    dispatch({ key: 4, value: parsedVal });
+    dispatch({ key: expressCcVal, value: parsedVal });
     setExpressionVal(parsedVal);
   };
 
   const setTempo = (value) => {
-    dispatch({ key: 15, value: value });
+    dispatch({ key: tempoCcVal, value: value });
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
