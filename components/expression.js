@@ -4,8 +4,6 @@ export default function Expression(props) {
     expressionVal,
     selectedPedal,
     setExpressionVal,
-    midiObject,
-    midiData,
     tempo,
     dispatch,
     invert,
@@ -13,16 +11,9 @@ export default function Expression(props) {
   } = props;
 
   const express = (e) => {
-    if (midiObject && midiData.output && midiData.channel) {
-      let deviceOutput = midiObject.outputs.filter((x) => {
-        return x.name == midiData.output;
-      })[0];
-      let parsedVal = parseInt(e.target.value);
-      deviceOutput.sendControlChange(4, parsedVal, {
-        channels: parseInt(midiData.channel),
-      });
-      setExpressionVal(parsedVal);
-    }
+    let parsedVal = parseInt(e.target.value);
+    dispatch({ key: 4, value: parsedVal });
+    setExpressionVal(parsedVal);
   };
 
   const setTempo = (value) => {

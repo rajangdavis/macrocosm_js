@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import PedalLayouts from "./pedal_layouts";
 import pedalStates from "../data/pedal_states";
 import merisStateReducer from "../hooks/meris_state";
@@ -65,6 +66,7 @@ export default function PresetsBuilder(props) {
 
   let [computedPreset, setComputedPreset] = useState({
     label: presetName,
+    preset_id: uuidv4(),
     message: computeSysex(
       heelState,
       toeState,
