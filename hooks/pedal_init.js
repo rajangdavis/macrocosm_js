@@ -34,7 +34,6 @@ export default function PedalInit(
     pedalStateMap[selectedPedal];
 
   const dispatchFinal = (action)=>{
-    console.log(action);
     let ccValue = action.key;
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiData.output;
