@@ -7,7 +7,7 @@ export default function TapButton(props) {
 
   useEffect(() => {
     prevCurrentTapTimeRef.current = currentTapTime;
-  });
+  }, [currentTapTime]);
 
   const prevCurrentTapTime = prevCurrentTapTimeRef.current;
 

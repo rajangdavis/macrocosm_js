@@ -1,8 +1,8 @@
 import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
+import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
-import useLocalStorage from "../hooks/use_local_storage";
-import ManageMacroState from "../hooks/macro_state";
+
 import PedalSelector from "../components/pedal_selector";
 import PedalLayouts from "../components/pedal_layouts";
 import MacrosLayout from "../components/macros_layout";
@@ -12,12 +12,14 @@ import PresetsModalMacros from "../components/presets_modal_macros";
 import MacrosModal from "../components/macros_modal";
 import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
+import { PageStateContext } from "../hooks/page_state";
 import ExpressionMacros from "../components/expression_macros";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
 export default function Index() {
   const [midiObject, midiConfig, isConnected] = ManageMidi();
-  let [pageState, setPageState] = useLocalStorage("page_state", "pedals");
+  const { pageState, setPageState } = useContext(PageStateContext);
+  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
   const [expressionVal, setExpressionVal] = useState(0);
   const [presetsOpen, setPresetsOpen] = useState(false);
   const isSupported = midiObject && midiObject.supported;
@@ -29,39 +31,25 @@ export default function Index() {
   const [macrosModalEditOpen, setMacrosModalEditOpen] = useState(false);
   const [macroTempo, setMacroTempo] = useState(0);
   const [macroToEdit, setMacroToEdit] = useState(null);
-  let [initialMacrosState, setMacroState] = useLocalStorage("macro_state", []);
-  let [macros, macroDispatch] = ManageMacroState(initialMacrosState);
-  useEffect(() => {
-    setMacroState(macros);
-  });
 
   // State for pedals
   const [sysexByte, setSysexByte] = useState(0);
-  const [selectedPedal, setSelectedPedal] = useLocalStorage(
-    "selected_pedal",
-    "enzo"
-  );
-  const midiData = {
-    channel: midiConfig[`${selectedPedal}Channel`],
-    output: midiConfig.output,
-    inputForExpression: midiConfig.inputForExpression,
-  };
   const [selectedPreset, setSelectedPreset] = useState({
     label: null,
     message: null,
   });
-  let [selectedPedalState, selectedPedalDispatch] = PedalInit(
+
+  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
     midiObject,
     expressionVal,
-    selectedPreset,
-    selectedPedal
+    selectedPreset
   );
 
   // State for both pages
   useEffect(() => {
     setExpressionVal(0);
     setMacroTempo(0);
-  }, [selectedPreset, selectedMacro, selectedPreset, pageState]);
+  }, [selectedPreset, selectedMacro, pageState]);
 
   useEffect(() => {
     setSelectedMacro({});
@@ -145,8 +133,6 @@ export default function Index() {
             <MacrosLayout
               setSelectedMacro={setSelectedMacro}
               selectedMacro={selectedMacro}
-              macros={macros}
-              macroDispatch={macroDispatch}
               setMacroToEdit={setMacroToEdit}
               midiConfig={midiConfig}
               midiObject={midiObject}
@@ -159,8 +145,6 @@ export default function Index() {
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
-            midiData={midiData}
-            midiObject={midiObject}
             tempo={selectedPedalState[15]}
             dispatch={selectedPedalDispatch}
           />
@@ -199,14 +183,10 @@ export default function Index() {
         />
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
-        <MacrosModal
-          macroDispatch={macroDispatch}
-          setMacrosModalOpen={setMacrosModalOpen}
-        />
+        <MacrosModal setMacrosModalOpen={setMacrosModalOpen} />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit
-          macroDispatch={macroDispatch}
           macroToEdit={macroToEdit}
           setMacroToEdit={setMacroToEdit}
           setMacrosModalOpen={setMacrosModalEditOpen}

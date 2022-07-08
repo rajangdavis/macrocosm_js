@@ -64,6 +64,7 @@ export default function GlobalSettingsTable(props) {
             option2="Off"
           />
           <GlobalSettingsRow
+            midiObject={props.midiObject}
             sysexByte={props.sysexByte}
             title="GLOBAL TEMPO"
             state={globalTempo}
