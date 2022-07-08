@@ -7,8 +7,7 @@ import { useContext, useState } from "react";
 export default function MacrosModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
   const { updateMacro } = useContext(MacrosContext);
-  const { setMacrosModalOpen, setMacroToEdit, macroToEdit } =
-    props;
+  const { setMacrosModalOpen, setMacroToEdit, macroToEdit } = props;
 
   const copiedState = cloneDeep(macroToEdit);
   const [name, setName] = useState(copiedState.data.name);
@@ -38,7 +37,7 @@ export default function MacrosModal(props) {
       name: name,
       pedals: pedals,
     };
-    updateMacro(macroToEdit.macro_id, updatedData)
+    updateMacro(macroToEdit.macro_id, updatedData);
     setMacrosModalOpen();
     setMacroToEdit(null);
   };

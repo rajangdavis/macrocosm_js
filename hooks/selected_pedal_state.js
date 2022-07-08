@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import useLocalStorage from "./use_local_storage";
-const defaultConfig = 'enzo'
+const defaultConfig = "enzo";
 
 const SelectedPedalContext = createContext(defaultConfig);
 

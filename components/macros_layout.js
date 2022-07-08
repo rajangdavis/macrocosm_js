@@ -48,7 +48,7 @@ export default function MacrosLayout(props) {
               |
               <a
                 onClick={() => {
-                  cloneMacro(macro.macro_id)
+                  cloneMacro(macro.macro_id);
                 }}
               >
                 clone

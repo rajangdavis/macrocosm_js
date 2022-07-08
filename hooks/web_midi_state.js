@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { WebMidi } from "webmidi";
-import useEffectOnce from './use_effect_once'
+import useEffectOnce from "./use_effect_once";
 
 const defaultConfig = {
   outputs: [],

@@ -6,14 +6,10 @@ import { PedalStatesContext } from "./pedal_states";
 import { SelectedPedalContext } from "./selected_pedal_state";
 import useLocalStorage from "./use_local_storage";
 
-export default function PedalInit(
-  midiObject,
-  expressionVal,
-  selectedPreset
-) {
+export default function PedalInit(midiObject, expressionVal, selectedPreset) {
   const { midiConfig } = useContext(MidiConfigContext);
   const pedalStates = useContext(PedalStatesContext).pedalStates;
-  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext)
+  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
 
   const midiData = {
     channel: midiConfig[`${selectedPedal}Channel`],
@@ -33,7 +29,7 @@ export default function PedalInit(
   const [selectedPedalState, selectedPedalDispatch] =
     pedalStateMap[selectedPedal];
 
-  const dispatchFinal = (action)=>{
+  const dispatchFinal = (action) => {
     let ccValue = action.key;
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiData.output;
@@ -43,7 +39,7 @@ export default function PedalInit(
       channels: parseInt(midiData.channel),
     });
     return selectedPedalDispatch(action);
-  }
+  };
 
   useEffect(() => {
     let newPedalStates = { ...initialState };

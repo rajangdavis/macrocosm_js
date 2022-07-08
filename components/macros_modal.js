@@ -45,7 +45,7 @@ export default function MacrosModal(props) {
       name: name,
       pedals: pedals,
     };
-    createMacro(defaultHash)
+    createMacro(defaultHash);
     setMacrosModalOpen();
   };
 

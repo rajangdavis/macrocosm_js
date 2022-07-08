@@ -4,8 +4,6 @@ export default function Expression(props) {
     expressionVal,
     selectedPedal,
     setExpressionVal,
-    midiObject,
-    midiData,
     tempo,
     dispatch,
     invert,

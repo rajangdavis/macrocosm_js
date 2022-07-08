@@ -2,7 +2,7 @@ import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
 import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
-import useLocalStorage from "../hooks/use_local_storage";
+
 import PedalSelector from "../components/pedal_selector";
 import PedalLayouts from "../components/pedal_layouts";
 import MacrosLayout from "../components/macros_layout";
@@ -14,9 +14,9 @@ import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
 import { PageStateContext } from "../hooks/page_state";
 import ExpressionMacros from "../components/expression_macros";
-import { useState, useEffect, useContext, memo } from "react";
+import { useState, useEffect, useContext } from "react";
 
-export default function Index(props) {
+export default function Index() {
   const [midiObject, midiConfig, isConnected] = ManageMidi();
   const { pageState, setPageState } = useContext(PageStateContext);
   const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
@@ -145,8 +145,6 @@ export default function Index(props) {
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
-            midiData={midiData}
-            midiObject={midiObject}
             tempo={selectedPedalState[15]}
             dispatch={selectedPedalDispatch}
           />
@@ -185,9 +183,7 @@ export default function Index(props) {
         />
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
-        <MacrosModal
-          setMacrosModalOpen={setMacrosModalOpen}
-        />
+        <MacrosModal setMacrosModalOpen={setMacrosModalOpen} />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit
