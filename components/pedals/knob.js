@@ -58,7 +58,7 @@ function Knob(props) {
       </div>
       <input
         type="range"
-        min="0"
+        min={minValue}
         max={maxValue}
         value={props.val}
         style={style.inputRange(sliderState)}

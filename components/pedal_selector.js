@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Image from "next/image";
 import enzoImage from "../public/enzo_button.svg";
 import enzoImageSelected from "../public/enzo_button_selected.svg";
@@ -15,34 +15,30 @@ export default function PedalSelector(props) {
   let {
     midiConfig,
     selectedPedal,
-    setExpressionVal,
     setSelectedPreset,
     setSelectedPedal,
     setSysexByte,
   } = props;
 
-  const [pedalSelectAndOrder, setPedalSelectAndOrder] = useState([
-    {
-      key: "enzo",
-      label: "Enzo",
-      sysexByte: 3,
-      order: 1,
-      iconSource: enzoImage,
-      iconSourceSelected: enzoImageSelected,
-    },
+  const pedalSelectAndOrder = [
     {
       key: "hedra",
       label: "Hedra",
       sysexByte: 4,
-      order: 2,
       iconSource: hedraImage,
       iconSourceSelected: hedraImageSelected,
+    },
+    {
+      key: "enzo",
+      label: "Enzo",
+      sysexByte: 3,
+      iconSource: enzoImage,
+      iconSourceSelected: enzoImageSelected,
     },
     {
       key: "polymoon",
       label: "Polymoon",
       sysexByte: 2,
-      order: 3,
       iconSource: polymoonImage,
       iconSourceSelected: polymoonImageSelected,
     },
@@ -50,7 +46,6 @@ export default function PedalSelector(props) {
       key: "mercury7",
       label: "Mercury7",
       sysexByte: 1,
-      order: 4,
       iconSource: mercury7Image,
       iconSourceSelected: mercury7ImageSelected,
     },
@@ -58,7 +53,6 @@ export default function PedalSelector(props) {
       key: "ottobitJr",
       label: "Ottobit Jr.",
       sysexByte: 0,
-      order: 5,
       iconSource: ottobitJrImage,
       iconSourceSelected: ottobitJrImageSelected,
     },
@@ -66,21 +60,18 @@ export default function PedalSelector(props) {
       key: "mobius",
       label: "Ottobit Jr.",
       sysexByte: 0,
-      order: 5,
       iconSource: ottobitJrImage,
       iconSourceSelected: ottobitJrImageSelected,
     },
-  ]);
+  ];
 
   useEffect(() => {
-    setExpressionVal(0);
     setSelectedPreset({ label: null, message: null });
-  }, [pedalSelectAndOrder, selectedPedal, setExpressionVal, setSelectedPreset]);
+  }, [selectedPedal]);
 
   return (
     <>
       {pedalSelectAndOrder
-        .sort((a, b) => a.order - b.order)
         .filter((x) => parseInt(midiConfig[`${x["key"]}Channel`]) > 0)
         .map((pedal) => {
           let className =

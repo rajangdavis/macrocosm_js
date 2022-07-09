@@ -69,7 +69,6 @@ export default function Index() {
               setSysexByte={setSysexByte}
               selectedPedal={selectedPedal}
               setSelectedPedal={setSelectedPedal}
-              setExpressionVal={setExpressionVal}
               setSelectedPreset={setSelectedPreset}
             />
           )}

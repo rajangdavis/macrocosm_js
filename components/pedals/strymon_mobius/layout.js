@@ -1,6 +1,6 @@
 import Bypass from "../bypass";
-import { LittleKnob } from "../knob"
-import CustomSelect from "../../custom_select";
+// import { LittleKnob } from "../knob"
+// import CustomSelect from "../../custom_select";
 
 export default function StrymonMobiusLayout(props) {
   let { state, dispatch, midiObject, midiData } = props;
