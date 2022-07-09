@@ -10,7 +10,7 @@ export default function MacrosModal(props) {
 
   const { setMacrosModalOpen, midiObject } = props;
 
-  let PEDALS = Object.keys(factoryPresets).filter(x => x!= 'mobius');
+  let PEDALS = Object.keys(factoryPresets).filter((x) => x != "mobius");
 
   let PEDAL_OBJECTS = PEDALS.map((pedal) => {
     return {

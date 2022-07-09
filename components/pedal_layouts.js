@@ -11,7 +11,7 @@ const LAYOUT_MAP = {
   polymoon: MerisPolymoonLayout,
   mercury7: MerisMercury7Layout,
   ottobitJr: MerisOttobitJrLayout,
-  mobius: StrymonMobiusLayout
+  mobius: StrymonMobiusLayout,
 };
 
 export default function PedalLayouts(props) {

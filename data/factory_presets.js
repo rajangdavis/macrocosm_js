@@ -18,5 +18,5 @@ module.exports = {
   polymoon: MerisPolymoonPresets.map((x) => addUid(x)),
   mercury7: MerisMercury7Presets.map((x) => addUid(x)),
   ottobitJr: MerisOttobitJrPresets.map((x) => addUid(x)),
-  mobius: []
+  mobius: [],
 };

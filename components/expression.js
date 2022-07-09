@@ -10,9 +10,9 @@ export default function Expression(props) {
     showExpression,
   } = props;
 
-
   let tempoCcVal = selectedPedal == "mobius" ? 17 : 15;
-  let tempo = selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15];
+  let tempo =
+    selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15];
   let expressCcVal = selectedPedal == "mobius" ? 100 : 4;
 
   const express = (e) => {

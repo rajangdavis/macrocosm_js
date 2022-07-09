@@ -2,7 +2,7 @@ import CloseButton from "./close_button";
 import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
 import { MidiConfigContext } from "../hooks/midi_config";
-import { useContext } from 'react'
+import { useContext } from "react";
 
 export default function MacrosModalForm(props) {
   let {
@@ -20,11 +20,11 @@ export default function MacrosModalForm(props) {
 
   const { midiConfig } = useContext(MidiConfigContext);
   const midiData = {
-    channel: midiConfig['es8Channel'],
+    channel: midiConfig["es8Channel"],
     output: midiConfig.output,
   };
 
-  const sendChange = (e)=>{
+  const sendChange = (e) => {
     let pcNumber = parseInt(e.target.value);
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiData.output;
@@ -33,8 +33,7 @@ export default function MacrosModalForm(props) {
     deviceOutput.sendProgramChange(pcNumber, {
       channels: parseInt(midiData.channel),
     });
-  }
-
+  };
 
   return (
     <div className="presets-modal zoom-in">
@@ -85,7 +84,7 @@ export default function MacrosModalForm(props) {
                 }
               })}
               <div>
-                <input type="number" min="0" max="127" onChange={sendChange}/>
+                <input type="number" min="0" max="127" onChange={sendChange} />
               </div>
               <div>
                 <button className="save-button" onClick={saveMacro}>

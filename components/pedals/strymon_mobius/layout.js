@@ -1,15 +1,11 @@
 import Bypass from "../bypass";
 // import { LittleKnob } from "../knob"
-// import CustomSelect from "../../custom_select";
+import CustomSelect from "../../custom_select";
 
 export default function StrymonMobiusLayout(props) {
-  let { state, dispatch, midiObject, midiData } = props;
+  let { state, dispatch /* midiObject, midiData */ } = props;
 
-  let {
-    19: typeEncoder,
-    102: bypass
-  } = state
-
+  let { 102: bypass } = state;
 
   const options = [
     "Chorus",
@@ -23,13 +19,13 @@ export default function StrymonMobiusLayout(props) {
     "Pattern Trem",
     "AutoSwell",
     "Destroyer",
-    "Quadrature"
-  ]
-  
-  const setTypeEncoder = (value )=>{
-    let ccVal = options.findIndex((x)=> x == value)
+    "Quadrature",
+  ];
+
+  const setTypeEncoder = (value) => {
+    let ccVal = options.findIndex((x) => x == value);
     props.dispatch({ key: 19, value: ccVal });
-  }
+  };
 
   return (
     <>

@@ -182,7 +182,10 @@ export default function Index() {
         />
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
-        <MacrosModal midiObject={midiObject} setMacrosModalOpen={setMacrosModalOpen} />
+        <MacrosModal
+          midiObject={midiObject}
+          setMacrosModalOpen={setMacrosModalOpen}
+        />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit

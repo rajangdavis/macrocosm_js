@@ -11,5 +11,5 @@ module.exports = {
   polymoon: MerisPolymoonState,
   mercury7: MerisMercury7State,
   ottobitJr: MerisOttobitJrState,
-  mobius: StyrmonMobiusState
+  mobius: StyrmonMobiusState,
 };
