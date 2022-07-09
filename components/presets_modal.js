@@ -263,7 +263,7 @@ export default function PresetsModal(props) {
             setExpressionVal={setExpressionVal}
             midiData={midiData}
             midiObject={midiObject}
-            tempo={state[15]}
+            selectedPedalState={state}
             dispatch={dispatch}
             selectedPedal={selectedPedal}
             invert={true}

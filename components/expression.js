@@ -7,12 +7,17 @@ export default function Expression(props) {
     selectedPedalState,
     dispatch,
     invert,
+    tempo,
     showExpression,
   } = props;
 
   let tempoCcVal = selectedPedal == "mobius" ? 17 : 15;
-  let tempo =
-    selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15];
+
+  if(selectedPedalState){
+    var selectedPedalTempo = selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15]
+  }
+
+  let tempoComputed = tempo ? tempo : selectedPedalTempo;
   let expressCcVal = selectedPedal == "mobius" ? 100 : 4;
 
   const express = (e) => {
@@ -48,7 +53,7 @@ export default function Expression(props) {
           label="TEMPO"
           maxValue={120}
           setVal={setTempo}
-          val={tempo}
+          val={tempoComputed}
         />
       )}
       {invert != true && (
@@ -57,7 +62,7 @@ export default function Expression(props) {
           label="TEMPO"
           maxValue={120}
           setVal={setTempo}
-          val={tempo}
+          val={tempoComputed}
         />
       )}
     </div>
