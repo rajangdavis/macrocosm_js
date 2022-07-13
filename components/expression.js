@@ -13,8 +13,11 @@ export default function Expression(props) {
 
   let tempoCcVal = selectedPedal == "mobius" ? 17 : 15;
 
-  if(selectedPedalState){
-    var selectedPedalTempo = selectedPedal == "mobius" ? selectedPedalState[17] : selectedPedalState[15]
+  if (selectedPedalState) {
+    var selectedPedalTempo =
+      selectedPedal == "mobius"
+        ? selectedPedalState[17]
+        : selectedPedalState[15];
   }
 
   let tempoComputed = tempo ? tempo : selectedPedalTempo;

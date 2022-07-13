@@ -10,6 +10,8 @@ import mercury7Image from "../public/mercury7_button.svg";
 import mercury7ImageSelected from "../public/mercury7_button_selected.svg";
 import ottobitJrImage from "../public/ottobit_jr_button.svg";
 import ottobitJrImageSelected from "../public/ottobit_jr_button_selected.svg";
+import mobiusImage from "../public/mobius_button.svg";
+import mobiusImageSelected from "../public/mobius_button_selected.svg";
 
 export default function PedalSelector(props) {
   let {
@@ -36,6 +38,13 @@ export default function PedalSelector(props) {
       iconSourceSelected: enzoImageSelected,
     },
     {
+      key: "mobius",
+      label: "Mobius",
+      sysexByte: 0,
+      iconSource: mobiusImage,
+      iconSourceSelected: mobiusImageSelected,
+    },
+    {
       key: "polymoon",
       label: "Polymoon",
       sysexByte: 2,
@@ -51,13 +60,6 @@ export default function PedalSelector(props) {
     },
     {
       key: "ottobitJr",
-      label: "Ottobit Jr.",
-      sysexByte: 0,
-      iconSource: ottobitJrImage,
-      iconSourceSelected: ottobitJrImageSelected,
-    },
-    {
-      key: "mobius",
       label: "Ottobit Jr.",
       sysexByte: 0,
       iconSource: ottobitJrImage,

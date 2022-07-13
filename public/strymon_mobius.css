@@ -17,6 +17,13 @@
   left: calc(50% - (348px / 2));
 }
 
+.strymon-mobius-bigbox .knob > div:first-of-type {
+  border: 1px solid white;
+}
+.strymon-mobius-bigbox .knob span {
+  color: white;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
