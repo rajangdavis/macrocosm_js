@@ -8,6 +8,7 @@
   align-items: stretch;
   background: black;
   border: 3px solid;
+  color: white;
 }
 
 .strymon-mobius-bigbox:after {
@@ -18,10 +19,7 @@
 }
 
 .strymon-mobius-bigbox .knob > div:first-of-type {
-  border: 1px solid white;
-}
-.strymon-mobius-bigbox .knob span {
-  color: white;
+  border: 3px solid white;
 }
 
 .flex-row {
@@ -117,6 +115,7 @@
 
 .bypass {
   flex: 2;
+  color: black !important;
   margin-top: 30px;
 }
 
@@ -126,4 +125,8 @@
 
 .bypass > label {
   margin-right: 9px;
+}
+
+.not-selected {
+  color: black;
 }

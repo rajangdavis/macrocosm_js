@@ -1,9 +1,10 @@
 import Bypass from "../bypass";
 import { BigKnob } from "../knob";
+import DynamicBody from "./dynamic_body";
 import CustomSelect from "../../custom_select";
 
 export default function StrymonMobiusLayout(props) {
-  let { state, dispatch /* midiObject, midiData */ } = props;
+  let { state, dispatch } = props;
 
   let {
     102: bypass,
@@ -82,6 +83,8 @@ export default function StrymonMobiusLayout(props) {
               val={param2}
             />
           </div>
+          <br />
+          <DynamicBody encoderType={encoderType} {...props} />
           <Bypass keyVal={102} bypass={bypass} dispatch={dispatch} />
         </div>
       </div>
