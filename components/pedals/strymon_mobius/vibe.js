@@ -19,7 +19,7 @@ export default function Vibe(props) {
   let modeOptions = ["Vibrato", "Chorus"];
 
   return (
-    <div>
+    <>
       <div className="flex-row">
         <BigKnob
           label="Waveshape"
@@ -63,6 +63,6 @@ export default function Vibe(props) {
         <br />
         <div>Mode</div>
       </div>
-    </div>
+    </>
   );
 }

@@ -15,7 +15,7 @@ export default function Chorus(props) {
   let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "20px" }}>
         {modeOptions.map((option, index) => {
           return (
@@ -47,6 +47,6 @@ export default function Chorus(props) {
           val={tone}
         />
       </div>
-    </div>
+    </>
   );
 }

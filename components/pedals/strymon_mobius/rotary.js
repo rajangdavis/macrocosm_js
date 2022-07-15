@@ -21,7 +21,7 @@ export default function Rotary(props) {
   let tapSelectOptions = ["Off", "On"];
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "50px" }}>
         <BigKnob
           label="horn level"
@@ -73,6 +73,6 @@ export default function Rotary(props) {
         <br />
         <div>Tap Select</div>
       </div>
-    </div>
+    </>
   );
 }

@@ -48,7 +48,7 @@ export default function Filter(props) {
   const setSpreadOption = setOptionVal(spreadOptions, 69);
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "20px" }}>
         <CustomSelect
           inputLabel="mode"
@@ -96,6 +96,6 @@ export default function Filter(props) {
         />
       </div>
       <br />
-    </div>
+    </>
   );
 }

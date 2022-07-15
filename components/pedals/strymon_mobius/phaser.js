@@ -39,7 +39,7 @@ export default function Phaser(props) {
   const setSpreadOption = setOptionVal(spreadOptions, 47);
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "20px" }}>
         <CustomSelect
           inputLabel="mode"
@@ -79,6 +79,6 @@ export default function Phaser(props) {
         />
       </div>
       <br />
-    </div>
+    </>
   );
 }

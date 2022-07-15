@@ -49,7 +49,7 @@ export default function StrymonMobiusLayout(props) {
             defaultOption={options[encoderType]}
             onChange={setTypeEncoder}
           />
-          <div className="flex-row">
+          <div className="flex-row" style={{ zIndex: 2 }}>
             <BigKnob
               className="depth"
               label="Depth"
@@ -84,7 +84,9 @@ export default function StrymonMobiusLayout(props) {
             />
           </div>
           <br />
-          <DynamicBody encoderType={encoderType} {...props} />
+          <div style={{ zIndex: 2 }}>
+            <DynamicBody encoderType={encoderType} {...props} />
+          </div>
           <Bypass keyVal={102} bypass={bypass} dispatch={dispatch} />
         </div>
       </div>

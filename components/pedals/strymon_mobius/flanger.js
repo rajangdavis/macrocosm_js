@@ -22,7 +22,7 @@ export default function Flanger(props) {
   ];
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "20px" }}>
         {modeOptions
           .filter((_, index) => {
@@ -75,6 +75,6 @@ export default function Flanger(props) {
           val={manual}
         />
       </div>
-    </div>
+    </>
   );
 }
