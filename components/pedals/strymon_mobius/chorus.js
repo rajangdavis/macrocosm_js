@@ -1,14 +1,14 @@
 import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Chorus(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
   // CHORUS - Mode 28 0-4
   // CHORUS - Mix 29 0-17
   // CHORUS - Tone 30 0-20
   let { 28: mode, 29: mix, 30: tone } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const isSelected = (index) => {

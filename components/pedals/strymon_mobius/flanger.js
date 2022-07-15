@@ -1,14 +1,14 @@
 import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Flanger(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
   // FLANGER - Mode 24 0-5
   // FLANGER - Regen 25 0-17
   // FLANGER - Manual 26 0-17
   let { 24: mode, 25: regen, 26: manual } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const isSelected = (index) => {

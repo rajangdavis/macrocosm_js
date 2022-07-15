@@ -38,25 +38,25 @@ module.exports = {
   115: null,
   31: null,
   32: null,
-  113: null, // PATTERN TREM - Waveshape 113 0-6
-  105: 0, // PATTERN TREM - Beat 1 105 0-17
-  106: 0, // PATTERN TREM - Beat 2 106 0-18
-  107: 0, // PATTERN TREM - Beat 3 107 0-18
-  108: 0, // PATTERN TREM - Beat 4 108 0-18
-  109: 0, // PATTERN TREM - Beat 5 109 0-18
-  110: 0, // PATTERN TREM - Beat 6 110 0-18
-  111: 0, // PATTERN TREM - Beat 7 111 0-18
-  112: 0, // PATTERN TREM - Beat 8 112 0-18
-  114: null, // PATTERN TREM - Pan 114 0-1
+  113: null,
+  105: 0,
+  106: 0,
+  107: 0,
+  108: 0,
+  109: 0,
+  110: 0,
+  111: 0,
+  112: 0,
+  114: null,
   57: 0,
   58: null,
-  59: 0, // DESTROYER - Bit Depth 59 0-20
-  61: 0, // DESTROYER - Sample Rate 61 0-20
-  62: null, // DESTROYER - Filter 62 0-8
-  63: 0, // DESTROYER - Vinyl 63 0-18
-  64: 0, // DESTROYER - Mix 64 0-20
-  53: null, // QUADRATURE - Mode 53 0-3
-  54: 0, // QUADRATURE - Shift 1 54 0-17
-  56: null, // QUADRATURE - LFO 56 0-6
-  55: 0, // QUADRATURE - Mix 55 0-20
+  59: 0,
+  61: 0,
+  62: null,
+  63: 0,
+  64: 0,
+  53: null,
+  54: 0,
+  56: null,
+  55: 0,
 };

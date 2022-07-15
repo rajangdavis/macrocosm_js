@@ -1,50 +1,72 @@
-import { WidePadButton } from "../pad_button";
+import CustomSelect from "../../custom_select";
 import { BigKnob } from "../knob";
-export default function Chorus(props) {
-  let { state } = props;
-  let { 28: mode, 29: mix, 30: tone } = state;
+export default function Quadrature(props) {
+  let { state, dispatch } = props;
+  // QUADRATURE - Mode 53 0-3
+  // QUADRATURE - Shift 1 54 0-17
+  // QUADRATURE - LFO 56 0-6
+  // QUADRATURE - Mix 55 0-20
+  let { 53: mode, 54: shift, 56: waveShape, 55: mix } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
-  const isSelected = (index) => {
-    return mode == index ? "selected" : "not-selected";
+  let modeOptions = ["AM", "FM", "Frequency Shifter +", "Frequency Shifter -"];
+
+  let waveShapeOptions = [
+    "Sine",
+    "Triangle",
+    "Square",
+    "Ramp",
+    "Saw",
+    "Random",
+    "Envelope",
+  ];
+
+  const setOptionVal = (options, key) => {
+    return (value) => {
+      let ccVal = options.findIndex((x) => x == value);
+      dispatch({ key: key, value: ccVal });
+    };
   };
 
-  let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
+  const setModeOption = setOptionVal(modeOptions, 53);
+  const setWaveShapeOption = setOptionVal(waveShapeOptions, 56);
 
   return (
     <div>
       <div className="flex-row" style={{ gap: "20px" }}>
-        {modeOptions.map((option, index) => {
-          return (
-            <WidePadButton
-              key={index}
-              label={option}
-              className={isSelected(index)}
-              onClick={() => setVal(28, index)}
-            />
-          );
-        })}
+        <CustomSelect
+          inputLabel="mode"
+          options={modeOptions}
+          defaultOption={modeOptions[mode]}
+          onChange={setModeOption}
+        />
+        <CustomSelect
+          inputLabel="wave shape"
+          options={waveShapeOptions}
+          defaultOption={waveShapeOptions[waveShape]}
+          onChange={setWaveShapeOption}
+        />
       </div>
       <br />
       <div className="flex-row">
         <BigKnob
-          label="mix"
+          label="shift"
           maxValue={17}
           setVal={(value) => {
-            return setVal(29, value);
+            return setVal(54, value);
           }}
-          val={mix}
+          val={shift}
         />
         <BigKnob
-          label="tone"
+          label="mix"
           maxValue={20}
           setVal={(value) => {
-            return setVal(30, value);
+            return setVal(55, value);
           }}
-          val={tone}
+          val={mix}
         />
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Rotary(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
   // ROTARY - Horn Level 34 0-17
   // ROTARY - Preamp Drive 35 0-17
   // ROTARY - Slow Rotor Speed 36 0-17
@@ -16,7 +16,7 @@ export default function Rotary(props) {
   } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const isSelected = (index) => {

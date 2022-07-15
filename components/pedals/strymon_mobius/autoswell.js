@@ -2,13 +2,13 @@ import CustomSelect from "../../custom_select";
 import { BigKnob } from "../knob";
 
 export default function Autoswell(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
   // AUTOSWELL - Rise Time 57 0-22
   // AUTOSWELL - Shape 58 0-3
   let { 57: riseTime, 58: shape } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   let shapeOptions = ["Exponential", "Quadratic", "Ramp", "Logarithmic"];

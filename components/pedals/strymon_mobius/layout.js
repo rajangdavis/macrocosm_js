@@ -31,12 +31,12 @@ export default function StrymonMobiusLayout(props) {
   ];
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const setTypeEncoder = (value) => {
     let ccVal = options.findIndex((x) => x == value);
-    props.dispatch({ key: 19, value: ccVal });
+    dispatch({ key: 19, value: ccVal });
   };
 
   return (

@@ -8,6 +8,8 @@ import Formant from "./formant";
 import VintageTrem from "./vintage_trem";
 import PatternTrem from "./pattern_trem";
 import Autoswell from "./autoswell";
+import Destroyer from "./destroyer";
+import Quadrature from "./quadrature";
 
 export default function DynamicBody(props) {
   let { encoderType } = props;
@@ -22,6 +24,8 @@ export default function DynamicBody(props) {
     <VintageTrem key={"VintageTrem"} {...props} />,
     <PatternTrem key={"PatternTrem"} {...props} />,
     <Autoswell key={"Autoswell"} {...props} />,
+    <Destroyer key={"Destroyer"} {...props} />,
+    <Quadrature key={"Quadrature"} {...props} />,
   ];
   return <>{bodyOptions.filter((_, i) => encoderType == i).map((x) => x)}</>;
 }

@@ -1,11 +1,16 @@
 import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Chorus(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
+  // DESTROYER - Bit Depth 59 0-20
+  // DESTROYER - Sample Rate 61 0-20
+  // DESTROYER - Filter 62 0-8
+  // DESTROYER - Vinyl 63 0-18
+  // DESTROYER - Mix 64 0-20
   let { 28: mode, 29: mix, 30: tone } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const isSelected = (index) => {

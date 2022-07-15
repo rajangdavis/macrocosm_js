@@ -1,7 +1,7 @@
 import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Vibe(props) {
-  let { state } = props;
+  let { state, dispatch } = props;
   // VIBE - Waveshape 40 0-17
   // VIBE - Low End 41 0-20
   // VIBE - Headroom 42 0-17
@@ -9,7 +9,7 @@ export default function Vibe(props) {
   let { 40: waveshape, 41: low, 42: headroom, 43: mode } = state;
 
   const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+    dispatch({ key: key, value: value });
   };
 
   const isSelected = (index) => {
