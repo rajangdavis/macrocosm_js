@@ -1,52 +1,47 @@
-import { WidePadButton } from "../pad_button";
+import CustomSelect from "../../custom_select";
 import { BigKnob } from "../knob";
-export default function Chorus(props) {
+
+export default function Autoswell(props) {
   let { state } = props;
-  let { 28: mode, 29: mix, 30: tone } = state;
+  // AUTOSWELL - Rise Time 57 0-22
+  // AUTOSWELL - Shape 58 0-3
+  let { 57: riseTime, 58: shape } = state;
 
   const setVal = (key, value) => {
     props.dispatch({ key: key, value: value });
   };
 
-  const isSelected = (index) => {
-    return mode == index ? "selected" : "not-selected";
+  let shapeOptions = ["Exponential", "Quadratic", "Ramp", "Logarithmic"];
+  const setOptionVal = (options, key) => {
+    return (value) => {
+      let ccVal = options.findIndex((x) => x == value);
+      dispatch({ key: key, value: ccVal });
+    };
   };
 
-  let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
+  const setShapeOptions = setOptionVal(shapeOptions, 58);
 
   return (
-    <div>
-      <div className="flex-row" style={{ gap: "20px" }}>
-        {modeOptions.map((option, index) => {
-          return (
-            <WidePadButton
-              key={index}
-              label={option}
-              className={isSelected(index)}
-              onClick={() => setVal(28, index)}
-            />
-          );
-        })}
+    <>
+      <div className="flex-row">
+        <CustomSelect
+          inputLabel="shape"
+          options={shapeOptions}
+          defaultOption={shapeOptions[shape]}
+          onChange={setShapeOptions}
+        />
       </div>
       <br />
       <div className="flex-row">
         <BigKnob
-          label="mix"
-          maxValue={17}
+          label="rise time"
+          maxValue={22}
           setVal={(value) => {
-            return setVal(29, value);
+            return setVal(57, value);
           }}
-          val={mix}
-        />
-        <BigKnob
-          label="tone"
-          maxValue={20}
-          setVal={(value) => {
-            return setVal(30, value);
-          }}
-          val={tone}
+          val={riseTime}
         />
       </div>
-    </div>
+    </>
   );
 }

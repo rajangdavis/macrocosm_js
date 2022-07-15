@@ -1,52 +1,43 @@
-import { WidePadButton } from "../pad_button";
-import { BigKnob } from "../knob";
-export default function Chorus(props) {
-  let { state } = props;
-  let { 28: mode, 29: mix, 30: tone } = state;
+import CustomSelect from "../../custom_select";
+export default function VintageTrem(props) {
+  let { state, dispatch } = props;
+  // VINTAGE TREM - Mode 31 0-2
+  // VINTAGE TREM - Pan 32 0-1
+  let { 31: mode, 32: pan } = state;
 
-  const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+  let modeOptions = ["Tube", "Harmonic", "Photoresistor"];
+
+  let padOptions = ["Off", "Half", "Full"];
+
+  const setOptionVal = (options, key) => {
+    return (value) => {
+      let ccVal = options.findIndex((x) => x == value);
+      dispatch({ key: key, value: ccVal });
+    };
   };
 
-  const isSelected = (index) => {
-    return mode == index ? "selected" : "not-selected";
-  };
-
-  let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
+  const setModeOptions = setOptionVal(modeOptions, 31);
+  const setPadOptions = setOptionVal(padOptions, 32);
 
   return (
-    <div>
-      <div className="flex-row" style={{ gap: "20px" }}>
-        {modeOptions.map((option, index) => {
-          return (
-            <WidePadButton
-              key={index}
-              label={option}
-              className={isSelected(index)}
-              onClick={() => setVal(28, index)}
-            />
-          );
-        })}
+    <>
+      <div className="flex-row">
+        <CustomSelect
+          inputLabel="mode"
+          options={modeOptions}
+          defaultOption={modeOptions[mode]}
+          onChange={setModeOptions}
+        />
       </div>
       <br />
       <div className="flex-row">
-        <BigKnob
-          label="mix"
-          maxValue={17}
-          setVal={(value) => {
-            return setVal(29, value);
-          }}
-          val={mix}
-        />
-        <BigKnob
-          label="tone"
-          maxValue={20}
-          setVal={(value) => {
-            return setVal(30, value);
-          }}
-          val={tone}
+        <CustomSelect
+          inputLabel="pan"
+          options={padOptions}
+          defaultOption={padOptions[pan]}
+          onChange={setPadOptions}
         />
       </div>
-    </div>
+    </>
   );
 }

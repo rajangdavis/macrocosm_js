@@ -1,52 +1,70 @@
-import { WidePadButton } from "../pad_button";
-import { BigKnob } from "../knob";
-export default function Chorus(props) {
-  let { state } = props;
-  let { 28: mode, 29: mix, 30: tone } = state;
+import CustomSelect from "../../custom_select";
+export default function Formant(props) {
+  let { state, dispatch } = props;
+  // FORMANT - Vowel 1 65 0-5
+  // FORMANT - Vowel 2 66 0-5
+  // FORMANT - LFO 67 0-6
+  // FORMANT - Stereo Spread 115 0-4
+  let { 65: vowel1, 66: vowel2, 67: waveShape, 115: spread } = state;
 
-  const setVal = (key, value) => {
-    props.dispatch({ key: key, value: value });
+  let vowelOptions = ["AA", "EE", "EYE", "OH", "OOH", "Random"];
+
+  let waveShapeOptions = [
+    "Sine",
+    "Triangle",
+    "Square",
+    "Ramp",
+    "Saw",
+    "Random",
+    "Envelope +",
+    "Envelope -",
+  ];
+
+  let spreadOptions = ["Off", "1/4", "Half", "3/4", "Full"];
+
+  const setOptionVal = (options, key) => {
+    return (value) => {
+      let ccVal = options.findIndex((x) => x == value);
+      dispatch({ key: key, value: ccVal });
+    };
   };
 
-  const isSelected = (index) => {
-    return mode == index ? "selected" : "not-selected";
-  };
-
-  let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
+  const setVowel1Options = setOptionVal(vowelOptions, 65);
+  const setVowel2Options = setOptionVal(vowelOptions, 66);
+  const setWaveShapeOption = setOptionVal(waveShapeOptions, 67);
+  const setSpreadOption = setOptionVal(spreadOptions, 115);
 
   return (
-    <div>
+    <>
       <div className="flex-row" style={{ gap: "20px" }}>
-        {modeOptions.map((option, index) => {
-          return (
-            <WidePadButton
-              key={index}
-              label={option}
-              className={isSelected(index)}
-              onClick={() => setVal(28, index)}
-            />
-          );
-        })}
+        <CustomSelect
+          inputLabel="vowel 1"
+          options={vowelOptions}
+          defaultOption={vowelOptions[vowel1]}
+          onChange={setVowel1Options}
+        />
+        <CustomSelect
+          inputLabel="vowel2"
+          options={vowelOptions}
+          defaultOption={vowelOptions[vowel2]}
+          onChange={setVowel2Options}
+        />
       </div>
       <br />
-      <div className="flex-row">
-        <BigKnob
-          label="mix"
-          maxValue={17}
-          setVal={(value) => {
-            return setVal(29, value);
-          }}
-          val={mix}
+      <div className="flex-row" style={{ gap: "20px" }}>
+        <CustomSelect
+          inputLabel="spread"
+          options={spreadOptions}
+          defaultOption={spreadOptions[spread]}
+          onChange={setSpreadOption}
         />
-        <BigKnob
-          label="tone"
-          maxValue={20}
-          setVal={(value) => {
-            return setVal(30, value);
-          }}
-          val={tone}
+        <CustomSelect
+          inputLabel="wave shape"
+          options={waveShapeOptions}
+          defaultOption={waveShapeOptions[waveShape]}
+          onChange={setWaveShapeOption}
         />
       </div>
-    </div>
+    </>
   );
 }

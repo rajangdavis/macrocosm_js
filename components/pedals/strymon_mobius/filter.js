@@ -72,7 +72,7 @@ export default function Filter(props) {
         />
         <BigKnob
           label="Resonance"
-          maxValue={17}
+          maxValue={18}
           setVal={(value) => {
             return setVal(50, value);
           }}
@@ -80,7 +80,7 @@ export default function Filter(props) {
         />
         <BigKnob
           label="Dry Level"
-          maxValue={17}
+          maxValue={18}
           setVal={(value) => {
             return setVal(51, value);
           }}
@@ -88,7 +88,7 @@ export default function Filter(props) {
         />
         <BigKnob
           label="Frequency Middle"
-          maxValue={17}
+          maxValue={20}
           setVal={(value) => {
             return setVal(52, value);
           }}

@@ -2,6 +2,11 @@ import { WidePadButton } from "../pad_button";
 import { BigKnob } from "../knob";
 export default function Rotary(props) {
   let { state } = props;
+  // ROTARY - Horn Level 34 0-17
+  // ROTARY - Preamp Drive 35 0-17
+  // ROTARY - Slow Rotor Speed 36 0-17
+  // ROTARY - Acceleration 37 0-17
+  // ROTARY - Tap Select 39 0-1
   let {
     34: hornLevel,
     35: preampDrive,
