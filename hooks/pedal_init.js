@@ -35,10 +35,12 @@ export default function PedalInit(midiObject, expressionVal, selectedPreset) {
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiData.output;
     })[0];
-    console.log(ccValue, action.value, { channels: midiData.channel });
-    deviceOutput.sendControlChange(ccValue, action.value, {
-      channels: parseInt(midiData.channel),
-    });
+    if (action.skipMidi != true) {
+      console.log(ccValue, action.value, { channels: midiData.channel });
+      deviceOutput.sendControlChange(ccValue, action.value, {
+        channels: parseInt(midiData.channel),
+      });
+    }
     return selectedPedalDispatch(action);
   };
 

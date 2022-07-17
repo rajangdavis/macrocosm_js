@@ -20,8 +20,9 @@ export default function Expression(props) {
         : selectedPedalState[15];
   }
 
-  let tempoComputed = tempo ? tempo : selectedPedalTempo;
+  let tempoComputed = tempo != undefined ? tempo : selectedPedalTempo;
   let expressCcVal = selectedPedal == "mobius" ? 100 : 4;
+  let tempoMaxValue = selectedPedal == "mobius" ? 127 : 120;
 
   const express = (e) => {
     let parsedVal = parseInt(e.target.value);
@@ -54,7 +55,7 @@ export default function Expression(props) {
         <InvertedBigKnob
           className={merc7Selected}
           label="TEMPO"
-          maxValue={120}
+          maxValue={tempoMaxValue}
           setVal={setTempo}
           val={tempoComputed}
         />
@@ -63,7 +64,7 @@ export default function Expression(props) {
         <BigKnob
           className={merc7Selected}
           label="TEMPO"
-          maxValue={120}
+          maxValue={tempoMaxValue}
           setVal={setTempo}
           val={tempoComputed}
         />

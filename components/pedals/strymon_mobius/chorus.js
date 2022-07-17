@@ -15,7 +15,7 @@ export default function Chorus(props) {
     return mode == index ? "selected" : "not-selected";
   };
 
-  let modeOptions = ["dBucket", "Multi", "Vibratro", "Detune", "Digital"];
+  let modeOptions = ["dBucket", "Multi", "Vibrato", "Detune", "Digital"];
 
   return (
     <>

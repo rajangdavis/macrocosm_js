@@ -13,7 +13,8 @@ import parseSysexToBinary from "../utilities/parse_sysex";
 
 export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const { factoryPresets } = useContext(FactoryPresetsContext);
+  const { factoryPresets, deleteFactoryPreset, updateFactoryPresets } =
+    useContext(FactoryPresetsContext);
   const [presetExpressionVal, setPresetExpressionVal] = useState(0);
   const [presetTempo, setPresetTempoVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
@@ -63,10 +64,6 @@ export default function PresetsModal(props) {
     output: midiConfig.output,
     sysexByte: sysexByte,
   };
-
-  const { deleteFactoryPreset, updateFactoryPresets } = useContext(
-    FactoryPresetsContext
-  );
 
   const presetTempoDispatch = (dispatchOverride) => {
     setPresetTempoVal(dispatchOverride.value);
@@ -209,20 +206,21 @@ export default function PresetsModal(props) {
             </div>
           </div>
         )}
-        {menu == "new-preset" && (
-          <PresetsBuilder
-            toeSettingsConfirmed={toeSettingsConfirmed}
-            setToeSettingsConfirmed={setToeSettingsConfirmed}
-            heelSettingsConfirmed={heelSettingsConfirmed}
-            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
-            selectedPedal={selectedPedal}
-            midiObject={midiObject}
-            midiData={midiData}
-            setMenu={setMenu}
-            presetTempo={presetTempo}
-            expressionVal={presetExpressionVal}
-          />
-        )}
+        {menu == "new-preset" &&
+          selectedPedal != "mobius" /* Mobius is not ready */ && (
+            <PresetsBuilder
+              toeSettingsConfirmed={toeSettingsConfirmed}
+              setToeSettingsConfirmed={setToeSettingsConfirmed}
+              heelSettingsConfirmed={heelSettingsConfirmed}
+              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+              selectedPedal={selectedPedal}
+              midiObject={midiObject}
+              midiData={midiData}
+              setMenu={setMenu}
+              presetTempo={presetTempo}
+              expressionVal={presetExpressionVal}
+            />
+          )}
         {menu == "edit-preset" && (
           <PresetsEditor
             heelSettingsConfirmed={heelSettingsConfirmed}
