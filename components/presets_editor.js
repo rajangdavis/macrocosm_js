@@ -1,6 +1,6 @@
 import PedalLayouts from "./pedal_layouts";
 import merisStateReducer from "../hooks/meris_state";
-// import trackToggles from "../hooks/track_toggles";
+import trackToggles from "../hooks/track_toggles";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import computeSysex from "../utilities/compute_sysex";
 import decomposeSysex from "../utilities/decompose_sysex";
@@ -50,15 +50,12 @@ export default function PresetsEditor(props) {
     return;
   };
 
-  // Refactor to return new dispatches
-  // That modify state
-
-  // trackToggles({
-  //   heelState: heelState,
-  //   heelDispatch: heelDispatch,
-  //   toeState: toeState,
-  //   toeDispatch: toeDispatch,
-  // });
+  let [heelDispatchOverride, toeDispatchOverride] = trackToggles({
+    heelState: heelState,
+    heelDispatch: heelDispatch,
+    toeState: toeState,
+    toeDispatch: toeDispatch,
+  });
 
   let [computedPreset, setComputedPreset] = useState({
     label: presetName,
@@ -134,7 +131,7 @@ export default function PresetsEditor(props) {
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={heelState}
-              dispatch={heelDispatch}
+              dispatch={heelDispatchOverride}
               midiObject={midiObject}
               midiData={midiData}
             />
@@ -152,7 +149,7 @@ export default function PresetsEditor(props) {
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={toeState}
-              dispatch={toeDispatch}
+              dispatch={toeDispatchOverride}
               midiObject={midiObject}
               midiData={midiData}
             />
