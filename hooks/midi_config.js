@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import useLocalStorage from "./use_local_storage";
 const defaultConfig = {
   output: "",
-  inputForExpression: "",
+  input: "",
   enzoChannel: 1,
   hedraChannel: 2,
   polymoonChannel: 3,

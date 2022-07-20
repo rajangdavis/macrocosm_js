@@ -4,6 +4,7 @@ import useEffectOnce from "./use_effect_once";
 
 const defaultConfig = {
   outputs: [],
+  inputs: [],
 };
 
 const WebMidiContext = createContext(defaultConfig);

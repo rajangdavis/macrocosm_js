@@ -49,6 +49,7 @@ export default async function callMacro(props) {
           return x.message.data;
         })
         .map((x) => {
+          console.log(x);
           return deviceOutput.sendSysex(x.message.manufacturer, x.message.data);
         })
     );

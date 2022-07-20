@@ -13,10 +13,18 @@ export default function NavMenu(props) {
   const updateMidiOutput = (option) => {
     updateConfig("output", option);
   };
+  const updateMidiInput = (option) => {
+    updateConfig("input", option);
+  };
 
   const outputOptions =
     props.midiObject != undefined
       ? props.midiObject.outputs.map((x) => x.name)
+      : [];
+
+  const inputOptions =
+    props.midiObject != undefined
+      ? props.midiObject.inputs.map((x) => x.name)
       : [];
 
   return (
@@ -30,6 +38,13 @@ export default function NavMenu(props) {
             closeIf={props.headerOpen}
             inputLabel={"MIDI OUTPUT"}
             options={outputOptions}
+          />
+          <MidiOutputSelect
+            onChange={updateMidiInput}
+            defaultOption={midiConfig.input}
+            closeIf={props.headerOpen}
+            inputLabel={"MIDI INPUT"}
+            options={inputOptions}
           />
           <div className="channels-block">
             <MidiChannelInput
