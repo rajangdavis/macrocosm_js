@@ -24,7 +24,7 @@ export default function PedalInit(midiObject, expressionVal, selectedPreset) {
   if (deviceInput && !deviceInput.hasListener("midimessage")) {
     console.log("listening");
     deviceInput.on("midimessage", function (event) {
-      if (event.statusByte != 254) {
+      if (event.statusByte != 254 && event.statusByte != 248) {
         let sysexString = event.rawData
           .map((x) => x.toString(16))
           .map((x) => {
