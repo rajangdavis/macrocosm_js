@@ -48,6 +48,7 @@ export default function PresetsModal(props) {
 
   const {
     midiObject,
+    midiData,
     sysexByte,
     state,
     expressionVal,
@@ -58,12 +59,6 @@ export default function PresetsModal(props) {
     setSelectedPreset,
     setPresetsOpen,
   } = props;
-
-  const midiData = {
-    channel: midiConfig[`${selectedPedal}Channel`],
-    output: midiConfig.output,
-    sysexByte: sysexByte,
-  };
 
   const presetTempoDispatch = (dispatchOverride) => {
     setPresetTempoVal(dispatchOverride.value);
@@ -85,18 +80,18 @@ export default function PresetsModal(props) {
     }
   };
 
-  const setPresetPc = (preset, i) => {
-    if (midiObject && midiData.output && midiData.channel) {
-      let { manufacturer, data } = parseSysexToBinary(preset.message);
-      let deviceOutput = midiObject.outputs.filter((x) => {
-        return x.name == midiData.output;
-      })[0];
-      deviceOutput.sendProgramChange([i+1], {
-        channels: parseInt(midiData.channel),
-      });
-      setSelectedPreset(preset);
-    }
-  };
+  // const setPresetPc = (preset, i) => {
+  //   if (midiObject && midiData.output && midiData.channel) {
+  //     let { _, data } = parseSysexToBinary(preset.message);
+  //     // let deviceOutput = midiObject.outputs.filter((x) => {
+  //     //   return x.name == midiData.output;
+  //     // })[0];
+  //     // deviceOutput.sendProgramChange([i+1], {
+  //     //   channels: parseInt(midiData.channel),
+  //     // });
+  //     setSelectedPreset(preset);
+  //   }
+  // };
 
   const clonePreset = (preset) => {
     let presetClone = {
@@ -229,6 +224,7 @@ export default function PresetsModal(props) {
               heelSettingsConfirmed={heelSettingsConfirmed}
               setHeelSettingsConfirmed={setHeelSettingsConfirmed}
               selectedPedal={selectedPedal}
+              state={state}
               midiObject={midiObject}
               midiData={midiData}
               setMenu={setMenu}

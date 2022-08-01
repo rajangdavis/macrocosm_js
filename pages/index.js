@@ -163,6 +163,7 @@ export default function Index() {
       {presetsOpen && isSupported && pageState == "pedals" && (
         <PresetsModal
           selectedPedal={selectedPedal}
+          midiData={midiData}
           state={selectedPedalState}
           dispatch={selectedPedalDispatch}
           expressionVal={expressionVal}

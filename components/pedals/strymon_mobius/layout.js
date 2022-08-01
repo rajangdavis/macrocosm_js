@@ -2,7 +2,6 @@ import Bypass from "../bypass";
 import { BigKnob } from "../knob";
 import DynamicBody from "./dynamic_body";
 import CustomSelect from "../../custom_select";
-import parseSysexToBinary from "../../../utilities/parse_sysex";
 
 export default function StrymonMobiusLayout(props) {
   let { state, dispatch } = props;
@@ -42,50 +41,52 @@ export default function StrymonMobiusLayout(props) {
 
   /* PRESET CREATION FUNCTIONS START */
 
-  const hex_to_ascii = (hexCode) => {
-    var hex = hexCode.toString();
-    var str = "";
-    for (var n = 0; n < hex.length; n += 2) {
-      str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
-    }
-    return str;
-  };
+  // const hexToAscii = (hexCode) => {
+  //   var hex = hexCode.toString();
+  //   var str = "";
+  //   for (var n = 0; n < hex.length; n += 2) {
+  //     str += String.fromCharCode(parseInt(hex.substr(n, 2), 16));
+  //   }
+  //   return str;
+  // };
 
-  const hexToName = (hexVals) => {
-    let cleanHexVals = hexVals.replaceAll(" ", "");
-    let splitHexVals = cleanHexVals.split(/(?<=^(?:.{2})+)(?!$)/);
-    return splitHexVals
-      .map((x) => hex_to_ascii(x))
-      .join("")
-      .trim();
-  };
+  // const hexToName = (hexVals) => {
+  //   let cleanHexVals = hexVals.replaceAll(" ", "");
+  //   let splitHexVals = cleanHexVals.split(/(?<=^(?:.{2})+)(?!$)/);
+  //   return splitHexVals
+  //     .map((x) => hexToAscii(x))
+  //     .join("")
+  //     .trim();
+  // };
 
-  const nameToHex = (hexVals) => {
-    let splitVals = hexVals.split("").slice(0, 15);
-    while (splitVals.length < 16) {
-      splitVals.push(" ");
-    }
-    let parsedVals = splitVals.map((x) => x.toUpperCase().charCodeAt(0).toString(16));
-    return parsedVals.join(" ");
-  };
+  // const nameToHex = (hexVals) => {
+  //   let splitVals = hexVals.split("").slice(0, 15);
+  //   while (splitVals.length < 16) {
+  //     splitVals.push(" ");
+  //   }
+  //   let parsedVals = splitVals.map((x) => x.toUpperCase().charCodeAt(0).toString(16));
+  //   return parsedVals.join(" ");
+  // };
 
-  const checkSumCalc = (sysexString) => {
-    // grab the sysex string
-    // from index 9 and up
-    // get 639 chars
-    let vals = sysexString.replaceAll(" ", "").split(/(?<=^(?:.{2})+)(?!$)/);
-    let newVals = vals.map((x) => parseInt(x, 16));
-    var accum = 0;
-    for (var i = 0; i < newVals.length; i++) {
-      accum += newVals[i];
-      if (accum > 127) {
-        accum -= 128;
-      }
-    }
-    return accum.toString(16);
-  };
+  // const checkSumCalc = (sysexString) => {
+  //   // grab the sysex string
+  //   // from index 9 and up
+  //   // get 639 chars
+  //   let vals = sysexString.replaceAll(" ", "").split(/(?<=^(?:.{2})+)(?!$)/);
+  //   let newVals = vals.map((x) => parseInt(x, 16));
+  //   var accum = 0;
+  //   for (var i = 0; i < newVals.length; i++) {
+  //     accum += newVals[i];
+  //     if (accum > 127) {
+  //       accum -= 128;
+  //     }
+  //   }
+  //   return accum.toString(16);
+  // };
+
 
   /* PRESET CREATION FUNCTIONS END */
+
 
   return (
     <>
