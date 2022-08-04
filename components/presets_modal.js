@@ -195,8 +195,6 @@ export default function PresetsModal(props) {
                   <div key={i} className={selectedClassName(preset)}>
                     <a onClick={() => setPreset(preset)}>{preset.label}</a>
                     <span className="pull-right">
-                      <a onClick={() => setPresetPc(preset, i)}>Apply</a>
-                      <> | </>
                       {skipOgPresets(i) && (
                         <>
                           <a onClick={() => editPreset(preset, i)}>EDIT</a> |{" "}
@@ -227,6 +225,7 @@ export default function PresetsModal(props) {
               state={state}
               midiObject={midiObject}
               midiData={midiData}
+              sysexByte={sysexByte}
               setMenu={setMenu}
               presetTempo={presetTempo}
               expressionVal={presetExpressionVal}
@@ -241,6 +240,7 @@ export default function PresetsModal(props) {
             selectedPedal={selectedPedal}
             midiObject={midiObject}
             midiData={midiData}
+            sysexByte={sysexByte}
             setMenu={setMenu}
             presetTempo={presetTempo}
             setPresetTempoVal={setPresetTempoVal}

@@ -69,7 +69,7 @@ export default function PedalSelector(props) {
 
   useEffect(() => {
     setSelectedPreset({ label: null, message: null });
-  }, [selectedPedal]);
+  }, [selectedPedal, setSelectedPreset]);
 
   return (
     <>

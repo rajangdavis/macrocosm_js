@@ -15,6 +15,7 @@ export default function PresetsEditor(props) {
     selectedPedal,
     midiObject,
     midiData,
+    sysexByte,
     expressionVal,
     presetTempo,
     setPresetTempoVal,
@@ -59,23 +60,13 @@ export default function PresetsEditor(props) {
 
   let [computedPreset, setComputedPreset] = useState({
     label: presetName,
-    message: computeSysex(
-      heelState,
-      toeState,
-      midiData.sysexByte,
-      presetNumber
-    ),
+    message: computeSysex(heelState, toeState, sysexByte, presetNumber),
   });
 
   useEffect(() => {
     setComputedPreset({
       label: presetName,
-      message: computeSysex(
-        heelState,
-        toeState,
-        midiData.sysexByte,
-        presetNumber
-      ),
+      message: computeSysex(heelState, toeState, sysexByte, presetNumber),
     });
   }, [heelState, heelSettingsConfirmed, presetName, presetNumber, toeState]);
 

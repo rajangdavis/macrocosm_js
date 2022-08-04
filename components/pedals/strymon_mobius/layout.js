@@ -84,9 +84,7 @@ export default function StrymonMobiusLayout(props) {
   //   return accum.toString(16);
   // };
 
-
   /* PRESET CREATION FUNCTIONS END */
-
 
   return (
     <>
