@@ -114,8 +114,8 @@ export default function Index() {
 
           {!isSupported && (
             <div className="not-connected">
-              This browser is not supported; please try with Chrome on a
-              supported operating system.
+              This browser has not accepted permission to connect to the WebMIDI API.
+              Please provide permission to use this tool.
             </div>
           )}
           {pageState == "pedals" && canView && (

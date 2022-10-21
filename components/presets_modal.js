@@ -165,7 +165,7 @@ export default function PresetsModal(props) {
             PEDAL PRESETS AND SETTINGS
           </a>
         )}
-        {midiData.output && (
+        {midiData.output && selectedPedal != "mobius" && (
           <a
             className={selectedMenu("new-preset")}
             onClick={() => {
@@ -179,7 +179,7 @@ export default function PresetsModal(props) {
       <div className="presets-modal-background"></div>
       <div className="presets-modal-content" ref={modalTop}>
         {menu == "midi" && <NavMenu midiObject={midiObject} />}
-        {menu == "presets" && (
+        {menu == "presets" && selectedPedal != "mobius" && (
           <div className="sysex-menu fade-in">
             <div className="global-settings">
               <label>GLOBAL SETTINGS</label>
@@ -214,8 +214,15 @@ export default function PresetsModal(props) {
             </div>
           </div>
         )}
+        {menu == "presets" && selectedPedal == "mobius" && (
+          <div className="sysex-menu fade-in">
+            <div className="global-settings">
+              <label>PC Commands</label>
+            </div>
+          </div>
+        )}
         {menu == "new-preset" &&
-          selectedPedal != "mobius" /* Mobius is not ready */ && (
+          selectedPedal != "mobius" && (
             <PresetsBuilder
               toeSettingsConfirmed={toeSettingsConfirmed}
               setToeSettingsConfirmed={setToeSettingsConfirmed}
@@ -231,7 +238,8 @@ export default function PresetsModal(props) {
               expressionVal={presetExpressionVal}
             />
           )}
-        {menu == "edit-preset" && (
+        {menu == "edit-preset" &&
+          selectedPedal != "mobius" && (
           <PresetsEditor
             heelSettingsConfirmed={heelSettingsConfirmed}
             setHeelSettingsConfirmed={setHeelSettingsConfirmed}
