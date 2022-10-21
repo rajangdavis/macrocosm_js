@@ -221,25 +221,23 @@ export default function PresetsModal(props) {
             </div>
           </div>
         )}
-        {menu == "new-preset" &&
-          selectedPedal != "mobius" && (
-            <PresetsBuilder
-              toeSettingsConfirmed={toeSettingsConfirmed}
-              setToeSettingsConfirmed={setToeSettingsConfirmed}
-              heelSettingsConfirmed={heelSettingsConfirmed}
-              setHeelSettingsConfirmed={setHeelSettingsConfirmed}
-              selectedPedal={selectedPedal}
-              state={state}
-              midiObject={midiObject}
-              midiData={midiData}
-              sysexByte={sysexByte}
-              setMenu={setMenu}
-              presetTempo={presetTempo}
-              expressionVal={presetExpressionVal}
-            />
-          )}
-        {menu == "edit-preset" &&
-          selectedPedal != "mobius" && (
+        {menu == "new-preset" && selectedPedal != "mobius" && (
+          <PresetsBuilder
+            toeSettingsConfirmed={toeSettingsConfirmed}
+            setToeSettingsConfirmed={setToeSettingsConfirmed}
+            heelSettingsConfirmed={heelSettingsConfirmed}
+            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+            selectedPedal={selectedPedal}
+            state={state}
+            midiObject={midiObject}
+            midiData={midiData}
+            sysexByte={sysexByte}
+            setMenu={setMenu}
+            presetTempo={presetTempo}
+            expressionVal={presetExpressionVal}
+          />
+        )}
+        {menu == "edit-preset" && selectedPedal != "mobius" && (
           <PresetsEditor
             heelSettingsConfirmed={heelSettingsConfirmed}
             setHeelSettingsConfirmed={setHeelSettingsConfirmed}
