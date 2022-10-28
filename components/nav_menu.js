@@ -91,6 +91,12 @@ export default function NavMenu(props) {
               value={"es8Channel"}
               updateConfig={updateConfig}
             />
+            <MidiChannelInput
+              label={"Quad Cortex"}
+              midiConfig={midiConfig}
+              value={"quadCortexChannel"}
+              updateConfig={updateConfig}
+            />
           </div>
         </div>
       </div>
