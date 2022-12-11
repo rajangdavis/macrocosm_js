@@ -2,7 +2,36 @@ import CloseButton from "./close_button";
 import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
 import { MidiConfigContext } from "../hooks/midi_config";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+
+function PcMessageInput(props) {
+  const { midiConfig } = useContext(MidiConfigContext);
+  let { label, channel, midiObject } = props;
+  let [inputState, setInputState] = useState(0);
+
+  let update = function (val) {
+    let newVal = inputState + val;
+    let newState = newVal < 0 ? 0 : newVal > 127 ? 127 : newVal;
+    setInputState(newState);
+    let deviceOutput = midiObject.outputs.filter((x) => {
+      return x.name == midiConfig.output;
+    })[0];
+    console.log(newState, { channels: midiConfig[channel] });
+    deviceOutput.sendProgramChange(newState, {
+      channels: parseInt(midiConfig[channel]),
+    });
+  };
+
+  return (
+    <div className="flex-row">
+      <label onClick={() => update(-1)}>-</label>
+      <label>
+        {label}: {inputState}
+      </label>
+      <label onClick={() => update(1)}>+</label>
+    </div>
+  );
+}
 
 export default function MacrosModalForm(props) {
   let {
@@ -17,23 +46,6 @@ export default function MacrosModalForm(props) {
     showOrHidePedal,
     saveMacro,
   } = props;
-
-  const { midiConfig } = useContext(MidiConfigContext);
-  const midiData = {
-    channel: midiConfig["es8Channel"],
-    output: midiConfig.output,
-  };
-
-  const sendChange = (e) => {
-    let pcNumber = parseInt(e.target.value);
-    let deviceOutput = midiObject.outputs.filter((x) => {
-      return x.name == midiData.output;
-    })[0];
-    console.log(pcNumber, { channels: midiData.channel });
-    deviceOutput.sendProgramChange(pcNumber, {
-      channels: parseInt(midiData.channel),
-    });
-  };
 
   return (
     <div className="presets-modal zoom-in">
@@ -60,33 +72,49 @@ export default function MacrosModalForm(props) {
                 showOrHidePedal={showOrHidePedal}
                 pedals={pedals}
               />
-              {pedals.map((pedal, index) => {
-                if (pedal.showing) {
-                  let options = findPresets(pedal).map((x) => x.label);
-                  let setSelectedPreset = (option) => {
-                    let copiedPedalsConfig = [...pedals];
-                    let optionVals = findPresets(pedal).filter(
-                      (x) => x.label == option
-                    )[0];
-                    copiedPedalsConfig[index].selectedPreset = optionVals;
-                    setPedalState(copiedPedalsConfig);
-                  };
-                  return (
-                    <div key={index} className="options-block">
-                      <CustomSelect
-                        inputLabel={`${pedal.name} Preset`}
-                        options={options}
-                        defaultOption={pedal.selectedPreset.label}
-                        onChange={setSelectedPreset}
-                      />
-                    </div>
-                  );
-                }
-              })}
-              <div>
-                <input type="number" min="0" max="127" onChange={sendChange} />
-              </div>
-              <div>
+              {pedals
+                .filter((x) => x.name != "mobius")
+                .map((pedal, index) => {
+                  if (pedal.showing) {
+                    let options = findPresets(pedal).map((x) => x.label);
+                    let setSelectedPreset = (option) => {
+                      let copiedPedalsConfig = [...pedals];
+                      let optionVals = findPresets(pedal).filter(
+                        (x) => x.label == option
+                      )[0];
+                      copiedPedalsConfig[index].selectedPreset = optionVals;
+                      setPedalState(copiedPedalsConfig);
+                    };
+                    return (
+                      <div key={index} className="options-block">
+                        <CustomSelect
+                          inputLabel={`${pedal.name} Preset`}
+                          options={options}
+                          defaultOption={pedal.selectedPreset.label}
+                          onChange={setSelectedPreset}
+                        />
+                      </div>
+                    );
+                  }
+                })}
+
+              <PcMessageInput
+                midiObject={midiObject}
+                label={"ES8"}
+                channel={"es8Channel"}
+              />
+              <PcMessageInput
+                midiObject={midiObject}
+                label={"Quad Cortex"}
+                channel={"quadCortexChannel"}
+              />
+              <PcMessageInput
+                midiObject={midiObject}
+                label={"Mobius"}
+                channel={"mobiusChannel"}
+              />
+              <br />
+              <div className="flex-row">
                 <button className="save-button" onClick={saveMacro}>
                   Save
                 </button>

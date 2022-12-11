@@ -17,30 +17,30 @@ export default function PedalInit(midiObject, expressionVal, selectedPreset) {
     input: midiConfig.input,
   };
 
-  let deviceInput = midiObject.inputs.filter((x) => {
-    return x.name == midiData.input;
-  })[0];
+  // let deviceInput = midiObject.inputs.filter((x) => {
+  //   return x.name == midiData.input;
+  // })[0];
 
-  if (deviceInput && !deviceInput.hasListener("midimessage")) {
-    console.log("listening");
-    deviceInput.on("midimessage", function (event) {
-      if (event.statusByte != 254 && event.statusByte != 248) {
-        let sysexString = event.rawData
-          .map((x) => x.toString(16))
-          .map((x) => {
-            if (x.length == 2) {
-              return x.toUpperCase();
-            } else {
-              return `0${x.toUpperCase()}`;
-            }
-          })
-          .join("")
-          .split(/(?<=^(?:.{4})+)(?!$)/)
-          .join(" ");
-        console.log(sysexString);
-      }
-    });
-  }
+  // if (deviceInput && !deviceInput.hasListener("midimessage")) {
+  //   console.log("listening");
+  //   deviceInput.on("midimessage", function (event) {
+  //     if (event.statusByte != 254 && event.statusByte != 248) {
+  //       let sysexString = event.rawData
+  //         .map((x) => x.toString(16))
+  //         .map((x) => {
+  //           if (x.length == 2) {
+  //             return x.toUpperCase();
+  //           } else {
+  //             return `0${x.toUpperCase()}`;
+  //           }
+  //         })
+  //         .join("")
+  //         .split(/(?<=^(?:.{4})+)(?!$)/)
+  //         .join(" ");
+  //       console.log(sysexString);
+  //     }
+  //   });
+  // }
 
   const [initialState, setState] = useLocalStorage("pedal_states", pedalStates);
 

@@ -10,7 +10,7 @@ const defaultConfig = {
   ottobitJrChannel: 5,
   mobiusChannel: 6,
   es8Channel: 7,
-  quadCortexChannel: 8
+  quadCortexChannel: 8,
 };
 
 const MidiConfigContext = createContext(defaultConfig);

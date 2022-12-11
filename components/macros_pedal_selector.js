@@ -52,6 +52,7 @@ export default function MacrosPedalSelector(props) {
     <div className="macros pedal-selector">
       {selectedPedals
         .filter((x) => parseInt(midiConfig[`${x["name"]}Channel`]) > 0)
+        .filter((x) => x.name != "mobius")
         .map((pedal) => {
           let className =
             pedal.showing == true ? "selected pedal-option" : "pedal-option";

@@ -10,7 +10,7 @@ export default function MacrosModal(props) {
 
   const { setMacrosModalOpen, midiObject } = props;
 
-  let PEDALS = Object.keys(factoryPresets).filter((x) => x != "mobius");
+  let PEDALS = Object.keys(factoryPresets);
 
   let PEDAL_OBJECTS = PEDALS.map((pedal) => {
     return {
@@ -39,6 +39,34 @@ export default function MacrosModal(props) {
     });
     setPedalState(updatedState);
   };
+
+  // let DEVICES = ['strymon', 'es8', 'quadCortex']
+
+  // let DEVICE_OBJECTS = DEVICES.map((device) => {
+  //   return {
+  //     name: device,
+  //     showing: false,
+  //     selectedPreset: {},
+  //   };
+  // });
+
+  // const [devices, setDevicesState] = useState(deviceDefaultState);
+  // const findDeviceObject = (device) => devices.filter((x) => x.name == device)[0];
+  // const findDeviceObjectIndex = (device) =>
+  //   devices.indexOf(findDeviceObject(device));
+
+  // const showOrHideDevice = (device) => {
+  //   let deviceMatch = findDeviceObjectIndex(device.name);
+  //   let updatedState = devices.map((device, index) => {
+  //     if (index == deviceMatch) {
+  //       device.showing = !device.showing;
+  //     }
+  //     return device;
+  //   });
+  //   setDeviceState(updatedState);
+  // };
+
+  // console.log(devices)
 
   const saveMacro = () => {
     let defaultHash = {
