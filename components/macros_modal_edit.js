@@ -70,12 +70,12 @@ export default function MacrosModal(props) {
       setName={setName}
       name={name}
       pedals={pedals}
-      devices={devices}
+      // devices={devices}
       midiObject={midiObject}
       setPedalState={setPedalState}
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}
-      showOrHideDevice={showOrHideDevice}
+      // showOrHideDevice={showOrHideDevice}
       saveMacro={saveMacro}
     />
   );
