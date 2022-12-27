@@ -4,8 +4,7 @@ export default async function turnOffAllPedals(props) {
   let merisPedalChannels = Object.keys(midiConfig).filter(
     (x) =>
       x.indexOf("Channel") > -1 &&
-      x.indexOf("es8") == -1 &&
-      x.indexOf("mobius") == -1
+      !["es8Channel", "mobiusChannel", "quadCortexChannel"].includes(x)
   );
   let mobiusChannel = midiConfig["mobiusChannel"];
   let deviceOutput = midiObject.outputs.filter((x) => {

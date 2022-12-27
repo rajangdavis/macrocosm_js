@@ -60,7 +60,8 @@ a:hover {
 .pull-right {
   float: right;
 }
-.pedal-selector {
+.pedal-selector,
+.device-selector {
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -69,16 +70,24 @@ a:hover {
   width: 15%;
 }
 
-.pedal-selector.macros {
+.pedal-selector.macros,
+.device-selector.macros {
   flex-direction: row;
   width: 90%;
   margin: 50px auto;
 }
 
-.pedal-selector a {
+.img-placeholder {
+  height: 140px;
+  width: 140px;
+}
+
+.pedal-selector a,
+.device-selector a {
   margin: 10px;
 }
-.pedal-selector a:hover {
+.pedal-selector a:hover,
+.device-selector a:hover {
   cursor: pointer;
 }
 

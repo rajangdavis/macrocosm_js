@@ -40,38 +40,36 @@ export default function MacrosModal(props) {
     setPedalState(updatedState);
   };
 
-  // let DEVICES = ['strymon', 'es8', 'quadCortex']
+  let DEVICES = ["mobius", "es8", "quadCortex"];
 
-  // let DEVICE_OBJECTS = DEVICES.map((device) => {
-  //   return {
-  //     name: device,
-  //     showing: false,
-  //     selectedPreset: {},
-  //   };
-  // });
+  let DEVICE_OBJECTS = DEVICES.map((device) => {
+    return {
+      name: device,
+      showing: false,
+      selectedPreset: {},
+    };
+  });
 
-  // const [devices, setDevicesState] = useState(deviceDefaultState);
-  // const findDeviceObject = (device) => devices.filter((x) => x.name == device)[0];
-  // const findDeviceObjectIndex = (device) =>
-  //   devices.indexOf(findDeviceObject(device));
+  const [devices, setDevicesState] = useState(DEVICE_OBJECTS);
+  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
+  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
 
-  // const showOrHideDevice = (device) => {
-  //   let deviceMatch = findDeviceObjectIndex(device.name);
-  //   let updatedState = devices.map((device, index) => {
-  //     if (index == deviceMatch) {
-  //       device.showing = !device.showing;
-  //     }
-  //     return device;
-  //   });
-  //   setDeviceState(updatedState);
-  // };
-
-  // console.log(devices)
+  const showOrHideDevice = (device) => {
+    let deviceMatch = findDeviceIndex(device.name);
+    let updatedState = devices.map((device, index) => {
+      if (index == deviceMatch) {
+        device.showing = !device.showing;
+      }
+      return device;
+    });
+    setDevicesState(updatedState);
+  };
 
   const saveMacro = () => {
     let defaultHash = {
       name: name,
       pedals: pedals,
+      devices: devices,
     };
     createMacro(defaultHash);
     setMacrosModalOpen();
@@ -91,6 +89,11 @@ export default function MacrosModal(props) {
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}
       saveMacro={saveMacro}
+      devices={devices}
+      setDevicesState={setDevicesState}
+      findDevice={findDevice}
+      findDeviceIndex={findDeviceIndex}
+      showOrHideDevice={showOrHideDevice}
     />
   );
 }

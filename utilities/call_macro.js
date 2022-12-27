@@ -5,6 +5,7 @@ export default async function callMacro(props) {
 
   setSelectedMacro(macro);
   let macroData = macro.data;
+  // handle strymon
   let macroSelectedPedals = macroData.pedals.filter(
     (x) => x.showing == true && x.selectedPreset != {}
   );

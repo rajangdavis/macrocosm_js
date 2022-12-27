@@ -1,6 +1,7 @@
 import CloseButton from "./close_button";
 import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
+import MacrosDeviceSelector from "./macros_device_selector";
 import { MidiConfigContext } from "../hooks/midi_config";
 import { useContext, useState } from "react";
 
@@ -45,6 +46,11 @@ export default function MacrosModalForm(props) {
     midiObject,
     showOrHidePedal,
     saveMacro,
+    devices,
+    // setDevicesState,
+    // findDevice,
+    // findDeviceIndex,
+    showOrHideDevice,
   } = props;
 
   return (
@@ -72,6 +78,10 @@ export default function MacrosModalForm(props) {
                 showOrHidePedal={showOrHidePedal}
                 pedals={pedals}
               />
+              <MacrosDeviceSelector
+                showOrHidePedal={showOrHideDevice}
+                pedals={devices}
+              />
               {pedals
                 .filter((x) => x.name != "mobius")
                 .map((pedal, index) => {
@@ -97,22 +107,35 @@ export default function MacrosModalForm(props) {
                     );
                   }
                 })}
+              {devices.map((device, index) => {
+                if (device.showing) {
+                  // Set something up for the PC Message bounds
+                  // it might make sense to think about
+                  // what types of commands you need to send
+                  // for each device...
 
-              <PcMessageInput
-                midiObject={midiObject}
-                label={"ES8"}
-                channel={"es8Channel"}
-              />
-              <PcMessageInput
-                midiObject={midiObject}
-                label={"Quad Cortex"}
-                channel={"quadCortexChannel"}
-              />
-              <PcMessageInput
-                midiObject={midiObject}
-                label={"Mobius"}
-                channel={"mobiusChannel"}
-              />
+                  // Also, you may need to refactor things
+                  // But build it first
+                  // then build it right
+
+                  {
+                    /*let options = findPresets(pedal).map((x) => x.label);
+                  let setSelectedPreset = (option) => {
+                    let copiedPedalsConfig = [...devices];
+                    copiedPedalsConfig[index].selectedPreset = optionVals;
+                    setPedalState(copiedPedalsConfig);
+                  };*/
+                  }
+                  return (
+                    <PcMessageInput
+                      key={index}
+                      midiObject={midiObject}
+                      label={device.name}
+                      channel={`${device.name}Channel`}
+                    />
+                  );
+                }
+              })}
               <br />
               <div className="flex-row">
                 <button className="save-button" onClick={saveMacro}>
