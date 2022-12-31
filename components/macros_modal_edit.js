@@ -36,6 +36,8 @@ export default function MacrosModal(props) {
     copiedState.data.devices == undefined ? [] : copiedState.data.devices;
 
   const [devices, setDevicesState] = useState(deviceDefaultState);
+  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
+  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
 
   const showOrHideDevice = (device) => {
     let deviceMatch = findDeviceIndex(device.name);
