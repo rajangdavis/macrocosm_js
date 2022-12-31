@@ -80,19 +80,6 @@ export default function PresetsModal(props) {
     }
   };
 
-  // const setPresetPc = (preset, i) => {
-  //   if (midiObject && midiData.output && midiData.channel) {
-  //     let { _, data } = parseSysexToBinary(preset.message);
-  //     // let deviceOutput = midiObject.outputs.filter((x) => {
-  //     //   return x.name == midiData.output;
-  //     // })[0];
-  //     // deviceOutput.sendProgramChange([i+1], {
-  //     //   channels: parseInt(midiData.channel),
-  //     // });
-  //     setSelectedPreset(preset);
-  //   }
-  // };
-
   const clonePreset = (preset) => {
     let presetClone = {
       label: `Clone of ${preset.label}`,

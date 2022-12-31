@@ -313,6 +313,19 @@ input[type="number"] {
   overflow-x: hidden;
 }
 
+.flex-row.device-input-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-row.device-input-container > label:not(.device-input) {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+}
+
 /* MACROS PEDALS */
 .macro-display {
   display: flex;

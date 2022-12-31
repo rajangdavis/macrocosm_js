@@ -1,5 +1,6 @@
 .midi-channel-input,
-.preset-input {
+.preset-input,
+.device-input {
   font-size: 25px;
   display: flex;
   flex-direction: column;
@@ -7,7 +8,8 @@
 }
 
 .midi-channel-input > input,
-.preset-input > input[type="number"] {
+.preset-input > input[type="number"],
+.device-input > input[type="number"] {
   background: transparent;
   color: white;
   border: 3px solid white;

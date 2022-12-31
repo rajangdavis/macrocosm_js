@@ -2,34 +2,36 @@ import CloseButton from "./close_button";
 import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
 import MacrosDeviceSelector from "./macros_device_selector";
-import { MidiConfigContext } from "../hooks/midi_config";
-import { useContext, useState } from "react";
 
 function PcMessageInput(props) {
-  const { midiConfig } = useContext(MidiConfigContext);
-  let { label, channel, midiObject } = props;
-  let [inputState, setInputState] = useState(0);
+  let { device, setSelectedPreset, maxValue, minValue } = props;
 
   let update = function (val) {
-    let newVal = inputState + val;
-    let newState = newVal < 0 ? 0 : newVal > 127 ? 127 : newVal;
-    setInputState(newState);
-    let deviceOutput = midiObject.outputs.filter((x) => {
-      return x.name == midiConfig.output;
-    })[0];
-    console.log(newState, { channels: midiConfig[channel] });
-    deviceOutput.sendProgramChange(newState, {
-      channels: parseInt(midiConfig[channel]),
-    });
+    if (val.change) {
+      let defaultVal = device.selectedPreset ? device.selectedPreset : 0;
+      var newVal = defaultVal + val.by;
+    } else if (val.overwrite) {
+      var newVal = parseInt(val.overwrite);
+    }
+    var newState =
+      newVal < minValue ? minValue : newVal > maxValue ? maxValue : newVal;
+    setSelectedPreset(newState);
   };
 
   return (
-    <div className="flex-row">
-      <label onClick={() => update(-1)}>-</label>
-      <label>
-        {label}: {inputState}
+    <div className="flex-row device-input-container">
+      <label onClick={() => update({ change: true, by: -1 })}>-</label>
+      <label className={"device-input"}>
+        <span>{device.name}:</span>
+        <input
+          type="number"
+          value={device.selectedPreset}
+          onChange={(e) => {
+            update({ overwrite: e.target.value });
+          }}
+        />
       </label>
-      <label onClick={() => update(1)}>+</label>
+      <label onClick={() => update({ change: true, by: 1 })}>+</label>
     </div>
   );
 }
@@ -43,15 +45,24 @@ export default function MacrosModalForm(props) {
     pedals,
     setPedalState,
     findPresets,
-    midiObject,
     showOrHidePedal,
     saveMacro,
     devices,
-    // setDevicesState,
-    // findDevice,
-    // findDeviceIndex,
+    setDevicesState,
     showOrHideDevice,
   } = props;
+
+  let maxPcValue = {
+    mobius: 199,
+    es8: 127,
+    quadCortex: 127 * 2,
+  };
+
+  let minPcValue = {
+    mobius: 0,
+    es8: 0,
+    quadCortex: 0,
+  };
 
   return (
     <div className="presets-modal zoom-in">
@@ -109,29 +120,19 @@ export default function MacrosModalForm(props) {
                 })}
               {devices.map((device, index) => {
                 if (device.showing) {
-                  // Set something up for the PC Message bounds
-                  // it might make sense to think about
-                  // what types of commands you need to send
-                  // for each device...
+                  let setSelectedPreset = (value) => {
+                    let copiedDevicesConfig = [...devices];
+                    copiedDevicesConfig[index].selectedPreset = value;
+                    setDevicesState(copiedDevicesConfig);
+                  };
 
-                  // Also, you may need to refactor things
-                  // But build it first
-                  // then build it right
-
-                  {
-                    /*let options = findPresets(pedal).map((x) => x.label);
-                  let setSelectedPreset = (option) => {
-                    let copiedPedalsConfig = [...devices];
-                    copiedPedalsConfig[index].selectedPreset = optionVals;
-                    setPedalState(copiedPedalsConfig);
-                  };*/
-                  }
                   return (
                     <PcMessageInput
+                      device={device}
                       key={index}
-                      midiObject={midiObject}
-                      label={device.name}
-                      channel={`${device.name}Channel`}
+                      setSelectedPreset={setSelectedPreset}
+                      maxValue={maxPcValue[device.name]}
+                      minValue={minPcValue[device.name]}
                     />
                   );
                 }

@@ -43,16 +43,15 @@ export default function MacrosModal(props) {
   let DEVICES = ["mobius", "es8", "quadCortex"];
 
   let DEVICE_OBJECTS = DEVICES.map((device) => {
+    let defaultShowing = device != "mobius";
     return {
       name: device,
-      showing: false,
-      selectedPreset: {},
+      showing: defaultShowing,
+      selectedPreset: 0,
     };
   });
 
   const [devices, setDevicesState] = useState(DEVICE_OBJECTS);
-  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
-  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
 
   const showOrHideDevice = (device) => {
     let deviceMatch = findDeviceIndex(device.name);
@@ -91,8 +90,6 @@ export default function MacrosModal(props) {
       saveMacro={saveMacro}
       devices={devices}
       setDevicesState={setDevicesState}
-      findDevice={findDevice}
-      findDeviceIndex={findDeviceIndex}
       showOrHideDevice={showOrHideDevice}
     />
   );

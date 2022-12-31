@@ -7,7 +7,7 @@ import { useContext, useState } from "react";
 export default function MacrosModal(props) {
   const { factoryPresets } = useContext(FactoryPresetsContext);
   const { updateMacro } = useContext(MacrosContext);
-  const { setMacrosModalOpen, setMacroToEdit, macroToEdit, midiObject } = props;
+  const { setMacrosModalOpen, setMacroToEdit, macroToEdit } = props;
 
   const copiedState = cloneDeep(macroToEdit);
   const [name, setName] = useState(copiedState.data.name);
@@ -36,8 +36,6 @@ export default function MacrosModal(props) {
     copiedState.data.devices == undefined ? [] : copiedState.data.devices;
 
   const [devices, setDevicesState] = useState(deviceDefaultState);
-  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
-  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
 
   const showOrHideDevice = (device) => {
     let deviceMatch = findDeviceIndex(device.name);
@@ -70,15 +68,12 @@ export default function MacrosModal(props) {
       setName={setName}
       name={name}
       pedals={pedals}
-      midiObject={midiObject}
       setPedalState={setPedalState}
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}
       saveMacro={saveMacro}
       devices={devices}
       setDevicesState={setDevicesState}
-      findDevice={findDevice}
-      findDeviceIndex={findDeviceIndex}
       showOrHideDevice={showOrHideDevice}
     />
   );
