@@ -40,6 +40,10 @@ export default async function callMacro(props) {
     (x) => x.showing == true && x.selectedPreset > 0
   );
 
+  let deviceOutput = midiObject.outputs.filter((x) => {
+    return x.name == midiConfig.output;
+  })[0];
+
   let buildMobiusCommands = () => {
     let onOffState = mobiusOnOrOff == 0 ? "OFF" : "ON";
     console.log(`TURNING MOBIUS ${onOffState}`);
@@ -97,10 +101,6 @@ export default async function callMacro(props) {
       }),
     ];
   };
-
-  let deviceOutput = midiObject.outputs.filter((x) => {
-    return x.name == midiConfig.output;
-  })[0];
 
   let buildPromises = () => {
     let firstPass = [
