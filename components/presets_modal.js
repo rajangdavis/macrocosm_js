@@ -1,4 +1,5 @@
 import CloseButton from "./close_button";
+import { v4 as uuidv4 } from "uuid";
 import Expression from "./expression";
 import PresetsBuilder from "./presets_builder";
 import PresetsEditor from "./presets_editor";
@@ -90,6 +91,7 @@ export default function PresetsModal(props) {
   const clonePreset = (preset) => {
     let presetClone = {
       label: `Clone of ${preset.label}`,
+      preset_id: uuidv4(),
       message: preset.message,
     };
     updateFactoryPresets(selectedPedal, presetClone);
@@ -106,7 +108,9 @@ export default function PresetsModal(props) {
   };
 
   const selectedClassName = (preset) => {
-    if (preset.label == selectedPreset.label) {
+    let presetId = `${preset.label}+${preset.preset_id}`;
+    let selectedPresetId = `${selectedPreset.label}+${selectedPreset.preset_id}`;
+    if (presetId == selectedPresetId) {
       return "selected preset-row";
     } else {
       return "preset-row";

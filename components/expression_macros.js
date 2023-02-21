@@ -16,7 +16,6 @@ export default function ExpressionMacros(props) {
       let selectedPedals = selectedMacro.data.pedals
         .filter((x) => x.showing)
         .map((x) => x.name);
-      console.log(midiConfig);
       let deviceOutput = midiObject.outputs.filter((x) => {
         return x.name == midiConfig.output;
       })[0];
