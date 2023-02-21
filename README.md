@@ -31,6 +31,7 @@ The app is only supported by browsers that have support for the [Web MIDI API](h
 4. Possibly reverse engineer the Boss ES8 Sysex messages and generate Boss ES8 presets based on macro data
 
 ## TODO
-1. Basic instruction on what is needed to achieve connectivity via MIDI
-2. Add some technical instruction on how certain features work (macro calls, knobs, state)
-3. Possibly upgrade React, but not the hugest priority
+1. Add Screenshots of app
+2. Basic instruction on what is needed to achieve connectivity via MIDI
+3. Add some technical instruction on how certain features work (macro calls, knobs, state)
+4. Possibly upgrade React, but not the hugest priority
