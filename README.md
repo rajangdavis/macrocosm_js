@@ -4,8 +4,7 @@ A client-first app built with [React](https://reactjs.org/) and [Webmidi.js](htt
 
 ![My pedalboard](pedalboard.png)
 
-The app in only supported by browsers that have support for the [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API). 
-
+The app is only supported by browsers that have support for the [Web MIDI API](https://developer.mozilla.org/en-US/docs/Web/API/Web_MIDI_API)
 
 ## Supported features
 1. Contains a UI for controlling all of the knobs, expression, and tempo for the following pedals:
@@ -20,8 +19,9 @@ The app in only supported by browsers that have support for the [Web MIDI API](h
 
 ## Primary Motivation and inspiration
 1. I wanted to play with the Web MIDI API
-2. I wanted to have a modular pedalboard in that I can change the order of pedals, change the routing of devices, and have a flexible interface for doing so
-3. I wanted the app to be client-first meaning no server/database is needed to run the app
+2. I really liked the [editors](https://studiocode.dev/editors/) created by [François Georgy](https://francoisgeorgy.ch/) and wanted to create something similar
+3. I wanted to have a modular pedalboard in that I can change the order of pedals, change the routing of devices, and have a flexible interface for doing so
+4. I wanted the app to be client-first meaning no server/database is needed to run the app
 
 
 ## Future Goals
@@ -32,4 +32,5 @@ The app in only supported by browsers that have support for the [Web MIDI API](h
 
 ## TODO
 1. Basic instruction on what is needed to achieve connectivity via MIDI
-2. Possibly upgrade React, but not the hugest priority
+2. Add some technical instruction on how certain features work (macro calls, knobs, state)
+3. Possibly upgrade React, but not the hugest priority
