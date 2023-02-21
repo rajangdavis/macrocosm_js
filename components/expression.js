@@ -4,20 +4,34 @@ export default function Expression(props) {
     expressionVal,
     selectedPedal,
     setExpressionVal,
-    tempo,
+    selectedPedalState,
     dispatch,
     invert,
+    tempo,
     showExpression,
   } = props;
 
+  let tempoCcVal = selectedPedal == "mobius" ? 17 : 15;
+
+  if (selectedPedalState) {
+    var selectedPedalTempo =
+      selectedPedal == "mobius"
+        ? selectedPedalState[17]
+        : selectedPedalState[15];
+  }
+
+  let tempoComputed = tempo != undefined ? tempo : selectedPedalTempo;
+  let expressCcVal = selectedPedal == "mobius" ? 100 : 4;
+  let tempoMaxValue = selectedPedal == "mobius" ? 127 : 120;
+
   const express = (e) => {
     let parsedVal = parseInt(e.target.value);
-    dispatch({ key: 4, value: parsedVal });
+    dispatch({ key: expressCcVal, value: parsedVal });
     setExpressionVal(parsedVal);
   };
 
   const setTempo = (value) => {
-    dispatch({ key: 15, value: value });
+    dispatch({ key: tempoCcVal, value: value });
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";
@@ -41,18 +55,18 @@ export default function Expression(props) {
         <InvertedBigKnob
           className={merc7Selected}
           label="TEMPO"
-          maxValue={120}
+          maxValue={tempoMaxValue}
           setVal={setTempo}
-          val={tempo}
+          val={tempoComputed}
         />
       )}
       {invert != true && (
         <BigKnob
           className={merc7Selected}
           label="TEMPO"
-          maxValue={120}
+          maxValue={tempoMaxValue}
           setVal={setTempo}
-          val={tempo}
+          val={tempoComputed}
         />
       )}
     </div>

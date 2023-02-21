@@ -32,10 +32,29 @@ export default function MacrosModal(props) {
     setPedalState(updatedState);
   };
 
+  const deviceDefaultState =
+    copiedState.data.devices == undefined ? [] : copiedState.data.devices;
+
+  const [devices, setDevicesState] = useState(deviceDefaultState);
+  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
+  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
+
+  const showOrHideDevice = (device) => {
+    let deviceMatch = findDeviceIndex(device.name);
+    let updatedState = devices.map((device, index) => {
+      if (index == deviceMatch) {
+        device.showing = !device.showing;
+      }
+      return device;
+    });
+    setDevicesState(updatedState);
+  };
+
   const saveMacro = () => {
     let updatedData = {
       name: name,
       pedals: pedals,
+      devices: devices,
     };
     updateMacro(macroToEdit.macro_id, updatedData);
     setMacrosModalOpen();
@@ -55,6 +74,9 @@ export default function MacrosModal(props) {
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}
       saveMacro={saveMacro}
+      devices={devices}
+      setDevicesState={setDevicesState}
+      showOrHideDevice={showOrHideDevice}
     />
   );
 }

@@ -1,15 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export default function trackToggles(props) {
-  let { heelState, heelDispatch, toeState, toeDispatch } = props;
-  let previousHeelState = useRef();
-  let previousToeState = useRef();
-
-  // useEffect(()=>{
-  //  	previousHeelState = heelState;
-  //  	previousToeState = toeState;
-  //  }, [previousHeelState,heelState, previousToeState, toeState])
-
+  let { heelDispatch, toeDispatch } = props;
   // Insert code to keep track of
 
   // CC14 -> On Off => always on
@@ -17,27 +9,29 @@ export default function trackToggles(props) {
   // CC29 -> Toggle
   // CC30 -> Toggle
   // CC15 -> Tempo
-  const channelstoWatch = [9, 29, 30, 15];
+  const channelstoWatch = [9, 29, 30, 15, 14];
 
-  useEffect(() => {
-    if (heelState) {
-      for (var i = channelstoWatch.length - 1; i >= 0; i--) {
-        let value = heelState[channelstoWatch[i]];
-        toeDispatch({ key: channelstoWatch[i], value: value, skipMidi: true });
+  function heelDispatchOverride(action) {
+    if (channelstoWatch.includes(action.key)) {
+      if (action.key == 14) {
+        toeDispatch({ ...action, value: 127 });
+      } else {
+        toeDispatch(action);
       }
-      toeDispatch({ key: 14, value: 127, skipMidi: true });
-      heelDispatch({ key: 14, value: 127, skipMidi: true });
     }
-  }, [heelState]);
+    return heelDispatch(action);
+  }
 
-  useEffect(() => {
-    if (toeState) {
-      for (var i = channelstoWatch.length - 1; i >= 0; i--) {
-        let value = toeState[channelstoWatch[i]];
-        heelDispatch({ key: channelstoWatch[i], value: value, skipMidi: true });
+  function toeDispatchOverride(action) {
+    if (channelstoWatch.includes(action.key)) {
+      if (action.key == 14) {
+        heelDispatch({ ...action, value: 127 });
+      } else {
+        heelDispatch(action);
       }
-      toeDispatch({ key: 14, value: 127, skipMidi: true });
-      heelDispatch({ key: 14, value: 127, skipMidi: true });
     }
-  }, [toeState]);
+    return toeDispatch(action);
+  }
+
+  return [heelDispatchOverride, toeDispatchOverride];
 }

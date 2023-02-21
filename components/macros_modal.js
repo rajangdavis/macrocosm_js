@@ -8,7 +8,7 @@ export default function MacrosModal(props) {
   const { createMacro } = useContext(MacrosContext);
   const [name, setName] = useState("New Macro");
 
-  const { setMacrosModalOpen } = props;
+  const { setMacrosModalOpen, midiObject } = props;
 
   let PEDALS = Object.keys(factoryPresets);
 
@@ -40,10 +40,37 @@ export default function MacrosModal(props) {
     setPedalState(updatedState);
   };
 
+  let DEVICES = ["mobius", "es8", "quadCortex"];
+
+  let DEVICE_OBJECTS = DEVICES.map((device) => {
+    let defaultShowing = device != "mobius";
+    return {
+      name: device,
+      showing: defaultShowing,
+      selectedPreset: 0,
+    };
+  });
+
+  const [devices, setDevicesState] = useState(DEVICE_OBJECTS);
+  const findDevice = (device) => devices.filter((x) => x.name == device)[0];
+  const findDeviceIndex = (device) => devices.indexOf(findDevice(device));
+
+  const showOrHideDevice = (device) => {
+    let deviceMatch = findDeviceIndex(device.name);
+    let updatedState = devices.map((device, index) => {
+      if (index == deviceMatch) {
+        device.showing = !device.showing;
+      }
+      return device;
+    });
+    setDevicesState(updatedState);
+  };
+
   const saveMacro = () => {
     let defaultHash = {
       name: name,
       pedals: pedals,
+      devices: devices,
     };
     createMacro(defaultHash);
     setMacrosModalOpen();
@@ -58,10 +85,14 @@ export default function MacrosModal(props) {
       setName={setName}
       name={name}
       pedals={pedals}
+      midiObject={midiObject}
       setPedalState={setPedalState}
       findPresets={findPresets}
       showOrHidePedal={showOrHidePedal}
       saveMacro={saveMacro}
+      devices={devices}
+      setDevicesState={setDevicesState}
+      showOrHideDevice={showOrHideDevice}
     />
   );
 }

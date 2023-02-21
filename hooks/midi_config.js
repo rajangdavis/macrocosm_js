@@ -2,12 +2,15 @@ import { createContext, useState } from "react";
 import useLocalStorage from "./use_local_storage";
 const defaultConfig = {
   output: "",
-  inputForExpression: "",
+  input: "",
   enzoChannel: 1,
   hedraChannel: 2,
   polymoonChannel: 3,
   mercury7Channel: 4,
   ottobitJrChannel: 5,
+  mobiusChannel: 6,
+  es8Channel: 7,
+  quadCortexChannel: 8,
 };
 
 const MidiConfigContext = createContext(defaultConfig);

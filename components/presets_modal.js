@@ -13,7 +13,8 @@ import parseSysexToBinary from "../utilities/parse_sysex";
 
 export default function PresetsModal(props) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const { factoryPresets } = useContext(FactoryPresetsContext);
+  const { factoryPresets, deleteFactoryPreset, updateFactoryPresets } =
+    useContext(FactoryPresetsContext);
   const [presetExpressionVal, setPresetExpressionVal] = useState(0);
   const [presetTempo, setPresetTempoVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
@@ -47,6 +48,7 @@ export default function PresetsModal(props) {
 
   const {
     midiObject,
+    midiData,
     sysexByte,
     state,
     expressionVal,
@@ -57,16 +59,6 @@ export default function PresetsModal(props) {
     setSelectedPreset,
     setPresetsOpen,
   } = props;
-
-  const midiData = {
-    channel: midiConfig[`${selectedPedal}Channel`],
-    output: midiConfig.output,
-    sysexByte: sysexByte,
-  };
-
-  const { deleteFactoryPreset, updateFactoryPresets } = useContext(
-    FactoryPresetsContext
-  );
 
   const presetTempoDispatch = (dispatchOverride) => {
     setPresetTempoVal(dispatchOverride.value);
@@ -160,7 +152,7 @@ export default function PresetsModal(props) {
             PEDAL PRESETS AND SETTINGS
           </a>
         )}
-        {midiData.output && (
+        {midiData.output && selectedPedal != "mobius" && (
           <a
             className={selectedMenu("new-preset")}
             onClick={() => {
@@ -174,7 +166,7 @@ export default function PresetsModal(props) {
       <div className="presets-modal-background"></div>
       <div className="presets-modal-content" ref={modalTop}>
         {menu == "midi" && <NavMenu midiObject={midiObject} />}
-        {menu == "presets" && (
+        {menu == "presets" && selectedPedal != "mobius" && (
           <div className="sysex-menu fade-in">
             <div className="global-settings">
               <label>GLOBAL SETTINGS</label>
@@ -209,21 +201,30 @@ export default function PresetsModal(props) {
             </div>
           </div>
         )}
-        {menu == "new-preset" && (
+        {menu == "presets" && selectedPedal == "mobius" && (
+          <div className="sysex-menu fade-in">
+            <div className="global-settings">
+              <label>PC Commands</label>
+            </div>
+          </div>
+        )}
+        {menu == "new-preset" && selectedPedal != "mobius" && (
           <PresetsBuilder
             toeSettingsConfirmed={toeSettingsConfirmed}
             setToeSettingsConfirmed={setToeSettingsConfirmed}
             heelSettingsConfirmed={heelSettingsConfirmed}
             setHeelSettingsConfirmed={setHeelSettingsConfirmed}
             selectedPedal={selectedPedal}
+            state={state}
             midiObject={midiObject}
             midiData={midiData}
+            sysexByte={sysexByte}
             setMenu={setMenu}
             presetTempo={presetTempo}
             expressionVal={presetExpressionVal}
           />
         )}
-        {menu == "edit-preset" && (
+        {menu == "edit-preset" && selectedPedal != "mobius" && (
           <PresetsEditor
             heelSettingsConfirmed={heelSettingsConfirmed}
             setHeelSettingsConfirmed={setHeelSettingsConfirmed}
@@ -232,6 +233,7 @@ export default function PresetsModal(props) {
             selectedPedal={selectedPedal}
             midiObject={midiObject}
             midiData={midiData}
+            sysexByte={sysexByte}
             setMenu={setMenu}
             presetTempo={presetTempo}
             setPresetTempoVal={setPresetTempoVal}
@@ -263,7 +265,7 @@ export default function PresetsModal(props) {
             setExpressionVal={setExpressionVal}
             midiData={midiData}
             midiObject={midiObject}
-            tempo={state[15]}
+            selectedPedalState={state}
             dispatch={dispatch}
             selectedPedal={selectedPedal}
             invert={true}

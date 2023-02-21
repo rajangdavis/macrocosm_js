@@ -11,6 +11,7 @@
 @import url("meris_polymoon.css");
 @import url("meris_mercury7.css");
 @import url("meris_ottobit_jr.css");
+@import url("strymon_mobius.css");
 @import url("presets_builder_and_editor.css");
 
 html,
@@ -59,7 +60,8 @@ a:hover {
 .pull-right {
   float: right;
 }
-.pedal-selector {
+.pedal-selector,
+.device-selector {
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -68,16 +70,24 @@ a:hover {
   width: 15%;
 }
 
-.pedal-selector.macros {
+.pedal-selector.macros,
+.device-selector.macros {
   flex-direction: row;
   width: 90%;
   margin: 50px auto;
 }
 
-.pedal-selector a {
+.img-placeholder {
+  height: 140px;
+  width: 140px;
+}
+
+.pedal-selector a,
+.device-selector a {
   margin: 10px;
 }
-.pedal-selector a:hover {
+.pedal-selector a:hover,
+.device-selector a:hover {
   cursor: pointer;
 }
 
@@ -301,6 +311,19 @@ input[type="number"] {
   margin: 30px;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.flex-row.device-input-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.flex-row.device-input-container > label:not(.device-input) {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
 }
 
 /* MACROS PEDALS */

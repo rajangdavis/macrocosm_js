@@ -1,9 +1,11 @@
-import { useImmerReducer } from "use-immer";
+import { useReducer } from "react";
 
 export default function MerisState(initialState) {
   let reducer = (state, action) => {
-    state[action.key] = action.value;
-    return state;
+    return {
+      ...state,
+      [action.key]: action.value,
+    };
   };
-  return useImmerReducer(reducer, initialState);
+  return useReducer(reducer, initialState);
 }

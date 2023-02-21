@@ -69,7 +69,6 @@ export default function Index() {
               setSysexByte={setSysexByte}
               selectedPedal={selectedPedal}
               setSelectedPedal={setSelectedPedal}
-              setExpressionVal={setExpressionVal}
               setSelectedPreset={setSelectedPreset}
             />
           )}
@@ -115,8 +114,8 @@ export default function Index() {
 
           {!isSupported && (
             <div className="not-connected">
-              This browser is not supported; please try with Chrome on a
-              supported operating system.
+              This browser has not accepted permission to connect to the WebMIDI
+              API. Please provide permission to use this tool.
             </div>
           )}
           {pageState == "pedals" && canView && (
@@ -145,7 +144,7 @@ export default function Index() {
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
-            tempo={selectedPedalState[15]}
+            selectedPedalState={selectedPedalState}
             dispatch={selectedPedalDispatch}
           />
         )}
@@ -164,6 +163,7 @@ export default function Index() {
       {presetsOpen && isSupported && pageState == "pedals" && (
         <PresetsModal
           selectedPedal={selectedPedal}
+          midiData={midiData}
           state={selectedPedalState}
           dispatch={selectedPedalDispatch}
           expressionVal={expressionVal}
@@ -183,10 +183,14 @@ export default function Index() {
         />
       )}
       {macrosModalOpen && isSupported && pageState == "macros" && (
-        <MacrosModal setMacrosModalOpen={setMacrosModalOpen} />
+        <MacrosModal
+          midiObject={midiObject}
+          setMacrosModalOpen={setMacrosModalOpen}
+        />
       )}
       {macrosModalEditOpen && isSupported && pageState == "macros" && (
         <MacrosModalEdit
+          midiObject={midiObject}
           macroToEdit={macroToEdit}
           setMacroToEdit={setMacroToEdit}
           setMacrosModalOpen={setMacrosModalEditOpen}

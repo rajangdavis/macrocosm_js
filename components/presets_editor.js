@@ -15,6 +15,7 @@ export default function PresetsEditor(props) {
     selectedPedal,
     midiObject,
     midiData,
+    sysexByte,
     expressionVal,
     presetTempo,
     setPresetTempoVal,
@@ -50,7 +51,7 @@ export default function PresetsEditor(props) {
     return;
   };
 
-  trackToggles({
+  let [heelDispatchOverride, toeDispatchOverride] = trackToggles({
     heelState: heelState,
     heelDispatch: heelDispatch,
     toeState: toeState,
@@ -59,23 +60,13 @@ export default function PresetsEditor(props) {
 
   let [computedPreset, setComputedPreset] = useState({
     label: presetName,
-    message: computeSysex(
-      heelState,
-      toeState,
-      midiData.sysexByte,
-      presetNumber
-    ),
+    message: computeSysex(heelState, toeState, sysexByte, presetNumber),
   });
 
   useEffect(() => {
     setComputedPreset({
       label: presetName,
-      message: computeSysex(
-        heelState,
-        toeState,
-        midiData.sysexByte,
-        presetNumber
-      ),
+      message: computeSysex(heelState, toeState, sysexByte, presetNumber),
     });
   }, [heelState, heelSettingsConfirmed, presetName, presetNumber, toeState]);
 
@@ -131,7 +122,7 @@ export default function PresetsEditor(props) {
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={heelState}
-              dispatch={heelDispatch}
+              dispatch={heelDispatchOverride}
               midiObject={midiObject}
               midiData={midiData}
             />
@@ -149,7 +140,7 @@ export default function PresetsEditor(props) {
             <PedalLayouts
               selectedPedal={selectedPedal}
               state={toeState}
-              dispatch={toeDispatch}
+              dispatch={toeDispatchOverride}
               midiObject={midiObject}
               midiData={midiData}
             />
