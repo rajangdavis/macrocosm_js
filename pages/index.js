@@ -42,7 +42,8 @@ export default function Index() {
   let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
     midiObject,
     expressionVal,
-    selectedPreset
+    selectedPreset,
+    setSelectedMacro
   );
 
   // State for both pages

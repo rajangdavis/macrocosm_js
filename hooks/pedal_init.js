@@ -3,12 +3,20 @@ import merisStateReducer from "./meris_state";
 import applyExpression from "./apply_expression";
 import { MidiConfigContext } from "./midi_config";
 import { PedalStatesContext } from "./pedal_states";
+import { MacrosContext } from "./macro_state";
 import { SelectedPedalContext } from "./selected_pedal_state";
 import useLocalStorage from "./use_local_storage";
+import callMacro from "../utilities/call_macro";
 
-export default function PedalInit(midiObject, expressionVal, selectedPreset) {
+export default function PedalInit(
+  midiObject,
+  expressionVal,
+  selectedPreset,
+  setSelectedMacro
+) {
   const { midiConfig } = useContext(MidiConfigContext);
   const pedalStates = useContext(PedalStatesContext).pedalStates;
+  const macroStates = useContext(MacrosContext);
   const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
 
   const midiData = {
@@ -17,30 +25,26 @@ export default function PedalInit(midiObject, expressionVal, selectedPreset) {
     input: midiConfig.input,
   };
 
-  // let deviceInput = midiObject.inputs.filter((x) => {
-  //   return x.name == midiData.input;
-  // })[0];
+  let deviceInput = midiObject.inputs.filter((x) => {
+    return x.name == midiData.input;
+  })[0];
 
-  // if (deviceInput && !deviceInput.hasListener("midimessage")) {
-  //   console.log("listening");
-  //   deviceInput.on("midimessage", function (event) {
-  //     if (event.statusByte != 254 && event.statusByte != 248) {
-  //       let sysexString = event.rawData
-  //         .map((x) => x.toString(16))
-  //         .map((x) => {
-  //           if (x.length == 2) {
-  //             return x.toUpperCase();
-  //           } else {
-  //             return `0${x.toUpperCase()}`;
-  //           }
-  //         })
-  //         .join("")
-  //         .split(/(?<=^(?:.{4})+)(?!$)/)
-  //         .join(" ");
-  //       console.log(sysexString);
-  //     }
-  //   });
-  // }
+  if (deviceInput && !deviceInput.hasListener("midimessage")) {
+    console.log("listening");
+    deviceInput.on("midimessage", function (event) {
+      if (event.statusByte == 192) {
+        let macroToCall = macroStates.macros[event.dataBytes[0]];
+        if (macroToCall) {
+          callMacro({
+            macro: macroToCall,
+            setSelectedMacro: setSelectedMacro,
+            midiConfig: midiConfig,
+            midiObject: midiObject,
+          });
+        }
+      }
+    });
+  }
 
   const [initialState, setState] = useLocalStorage("pedal_states", pedalStates);
 
