@@ -93,9 +93,9 @@ export default async function callMacro(props) {
       `SENDING QUAD CORTEX PRESET: ${quadCortexConfig.selectedPreset}`
     );
     return [
-      deviceOutput.sendControlChange(0, commandVal, {
-        channels: parseInt(midiConfig["quadCortexChannel"]),
-      }),
+      // deviceOutput.sendControlChange(0, commandVal, {
+      //   channels: parseInt(midiConfig["quadCortexChannel"]),
+      // }),
       deviceOutput.sendProgramChange(quadCortexConfig.selectedPreset, {
         channels: parseInt(midiConfig["quadCortexChannel"]),
       }),

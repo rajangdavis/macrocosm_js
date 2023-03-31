@@ -17,13 +17,12 @@ import ExpressionMacros from "../components/expression_macros";
 import { useState, useEffect, useContext } from "react";
 
 export default function Index() {
-  const [midiObject, midiConfig, isConnected] = ManageMidi();
+  const [midiObject, midiConfig, isConnected, isSupported, canView] =
+    ManageMidi();
   const { pageState, setPageState } = useContext(PageStateContext);
   const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
   const [expressionVal, setExpressionVal] = useState(0);
   const [presetsOpen, setPresetsOpen] = useState(false);
-  const isSupported = midiObject && midiObject.supported;
-  const canView = isConnected && isSupported;
 
   // State for macros
   const [selectedMacro, setSelectedMacro] = useState({});

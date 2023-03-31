@@ -72,6 +72,7 @@ export default function PresetsBuilder(props) {
   useEffect(() => {
     setComputedPreset({
       label: presetName,
+      preset_id: uuidv4(),
       message: computeSysex(heelState, toeState, sysexByte, presetNumber),
     });
   }, [heelState, heelSettingsConfirmed, presetName, presetNumber, toeState]);

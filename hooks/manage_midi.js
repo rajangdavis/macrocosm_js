@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MidiConfigContext } from "./midi_config";
 import { WebMidiContext } from "./web_midi_state";
 
@@ -21,12 +21,15 @@ export default function ManageMidi() {
   let { midiObject } = useContext(WebMidiContext);
   let { midiConfig, updateConfig } = useContext(MidiConfigContext);
 
-  useMemo(() => {
+  useEffect(() => {
     if (midiObject && midiObject.getOutputByName && midiConfig.output != "") {
       let savedOutput = midiObject.getOutputByName(midiConfig.output);
       checkForDisconnect(savedOutput, updateConfig, setIsConnected);
     }
   }, [midiObject, midiConfig]);
 
-  return [midiObject, midiConfig, isConnected];
+  let isSupported = midiObject && midiObject.supported;
+  let canView = isConnected && isSupported;
+
+  return [midiObject, midiConfig, isConnected, isSupported, canView];
 }
