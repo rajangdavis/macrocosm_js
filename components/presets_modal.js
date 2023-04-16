@@ -34,6 +34,50 @@ export default function PresetsModal(props) {
     }
   };
 
+  function PcMessageInput() {
+    let maxValue = 199;
+    let minValue = 0;
+    let channel = "mobiusChannel";
+    let [presetVal, setPresetVal] = useState(minValue);
+    let deviceOutput = midiObject.outputs.filter((x) => {
+      return x.name == midiConfig.output;
+    })[0];
+
+    let update = function (val) {
+      if (val.change) {
+        let defaultVal = presetVal ? presetVal : 0;
+        var newVal = defaultVal + val.by;
+      } else if (val.overwrite) {
+        var newVal = parseInt(val.overwrite);
+      }
+      var newState =
+        newVal < minValue ? minValue : newVal > maxValue ? maxValue : newVal;
+      console.log(newState, { channels: midiConfig[channel] });
+      deviceOutput.sendProgramChange(newState, {
+        channels: parseInt(midiConfig[channel]),
+      });
+      console.log(midiConfig);
+      setPresetVal(newState);
+    };
+
+    return (
+      <div className="flex-row device-input-container">
+        <label onClick={() => update({ change: true, by: -1 })}>-</label>
+        <label className={"device-input"}>
+          <span>Mobius Commands:</span>
+          <input
+            type="number"
+            value={presetVal}
+            onChange={(e) => {
+              update({ overwrite: e.target.value });
+            }}
+          />
+        </label>
+        <label onClick={() => update({ change: true, by: 1 })}>+</label>
+      </div>
+    );
+  }
+
   useEffect(() => {
     if (menu != "edit-preset") {
       setToeSettingsConfirmed(false);
@@ -203,8 +247,10 @@ export default function PresetsModal(props) {
         )}
         {menu == "presets" && selectedPedal == "mobius" && (
           <div className="sysex-menu fade-in">
-            <div className="global-settings">
-              <label>PC Commands</label>
+            <div>
+              <div className="presets-container">
+                <PcMessageInput />
+              </div>
             </div>
           </div>
         )}
