@@ -494,7 +494,9 @@ input[type="number"] {
   .expression-container {
     height: 100vh;
   }
-  .pedal-selector:not(.macros),
+  .pedal-selector:not(.macros) {
+    transform: scale(0.7);
+  }
   .expression-container {
     transform: scale(0.8);
   }

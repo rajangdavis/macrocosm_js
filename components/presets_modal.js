@@ -52,11 +52,9 @@ export default function PresetsModal(props) {
       }
       var newState =
         newVal < minValue ? minValue : newVal > maxValue ? maxValue : newVal;
-      console.log(newState, { channels: midiConfig[channel] });
       deviceOutput.sendProgramChange(newState, {
         channels: parseInt(midiConfig[channel]),
       });
-      console.log(midiConfig);
       setPresetVal(newState);
     };
 
