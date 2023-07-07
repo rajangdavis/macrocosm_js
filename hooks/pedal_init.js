@@ -1,21 +1,27 @@
 import { useState, useEffect, useContext } from "react";
-import merisStateReducer from "./meris_state";
 import applyExpression from "./apply_expression";
+import computeSysex from "../utilities/compute_sysex";
 import { MidiConfigContext } from "./midi_config";
-import { PedalStatesContext } from "./pedal_states";
+
 import { MacrosContext } from "./macro_state";
 import { SelectedPedalContext } from "./selected_pedal_state";
 import useLocalStorage from "./use_local_storage";
 import callMacro from "../utilities/call_macro";
 
 export default function PedalInit(
+  initialState,
+  setState,
+  selectedPedalState,
+  selectedPedalDispatch,
   midiObject,
   expressionVal,
   selectedPreset,
-  setSelectedMacro
+  setSelectedMacro,
+  sysexByte,
+  changeTlr,
+  changeBlr
 ) {
   const { midiConfig } = useContext(MidiConfigContext);
-  const pedalStates = useContext(PedalStatesContext).pedalStates;
   const macroStates = useContext(MacrosContext);
   const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
 
@@ -46,19 +52,19 @@ export default function PedalInit(
     });
   }
 
-  const [initialState, setState] = useLocalStorage("pedal_states", pedalStates);
-
-  const pedalStateMap = {
-    enzo: merisStateReducer(initialState["enzo"]),
-    hedra: merisStateReducer(initialState["hedra"]),
-    polymoon: merisStateReducer(initialState["polymoon"]),
-    mercury7: merisStateReducer(initialState["mercury7"]),
-    ottobitJr: merisStateReducer(initialState["ottobitJr"]),
-    mobius: merisStateReducer(initialState["mobius"]),
+  let detectExpressionLowAndHigh = (parsedVal) => {
+    console.log("selectedPedalState", selectedPedalState);
+    if (parsedVal === 0) {
+      changeBlr(true);
+      console.log("at the bottom");
+    } else if (parsedVal === 127) {
+      changeTlr(true);
+      console.log("at the top");
+    } else {
+      changeTlr(false);
+      changeBlr(false);
+    }
   };
-
-  const [selectedPedalState, selectedPedalDispatch] =
-    pedalStateMap[selectedPedal];
 
   const dispatchFinal = (action) => {
     let ccValue = action.key;
@@ -91,16 +97,15 @@ export default function PedalInit(
   }, [selectedPedalState, selectedPedal]);
 
   useEffect(() => {
-    if (selectedPreset.label != null) {
-      applyExpression(
-        midiObject,
-        midiData,
-        expressionVal,
-        selectedPreset,
-        dispatchFinal
-      );
-    }
-  }, [expressionVal, selectedPreset]);
+    applyExpression(
+      midiObject,
+      midiData,
+      expressionVal,
+      selectedPreset,
+      dispatchFinal,
+      detectExpressionLowAndHigh
+    );
+  }, [expressionVal]);
 
-  return [selectedPedalState, dispatchFinal, midiData];
+  return [dispatchFinal, midiData];
 }

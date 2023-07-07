@@ -3,6 +3,7 @@ export default function Expression(props) {
   const {
     expressionVal,
     selectedPedal,
+    detectExpressionLowAndHigh,
     setExpressionVal,
     selectedPedalState,
     dispatch,
@@ -28,6 +29,7 @@ export default function Expression(props) {
     let parsedVal = parseInt(e.target.value);
     dispatch({ key: expressCcVal, value: parsedVal });
     setExpressionVal(parsedVal);
+    detectExpressionLowAndHigh(parsedVal);
   };
 
   const setTempo = (value) => {

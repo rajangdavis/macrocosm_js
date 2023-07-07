@@ -1,7 +1,9 @@
 import ManageMidi from "../hooks/manage_midi";
 import PedalInit from "../hooks/pedal_init";
+import useLocalStorage from "../hooks/use_local_storage";
 import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
+import computeSysex from "../utilities/compute_sysex";
 
 import PedalSelector from "../components/pedal_selector";
 import PedalLayouts from "../components/pedal_layouts";
@@ -13,12 +15,15 @@ import MacrosModal from "../components/macros_modal";
 import MacrosModalEdit from "../components/macros_modal_edit";
 import Expression from "../components/expression";
 import { PageStateContext } from "../hooks/page_state";
+import merisStateReducer from "../hooks/meris_state";
+import { PedalStatesContext } from "../hooks/pedal_states";
 import ExpressionMacros from "../components/expression_macros";
 import { useState, useEffect, useContext } from "react";
 
 export default function Index() {
   const [midiObject, midiConfig, isConnected, isSupported, canView] =
     ManageMidi();
+  const pedalStates = useContext(PedalStatesContext).pedalStates;
   const { pageState, setPageState } = useContext(PageStateContext);
   const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
   const [expressionVal, setExpressionVal] = useState(0);
@@ -33,17 +38,57 @@ export default function Index() {
 
   // State for pedals
   const [sysexByte, setSysexByte] = useState(0);
+  let [topLevelReached, changeTlr] = useState(false);
+  let [bottomLevelReached, changeBlr] = useState(false);
+  const [initialState, setState] = useLocalStorage("pedal_states", pedalStates);
+
+  const pedalStateMap = {
+    enzo: merisStateReducer(initialState["enzo"]),
+    hedra: merisStateReducer(initialState["hedra"]),
+    polymoon: merisStateReducer(initialState["polymoon"]),
+    mercury7: merisStateReducer(initialState["mercury7"]),
+    ottobitJr: merisStateReducer(initialState["ottobitJr"]),
+    mobius: merisStateReducer(initialState["mobius"]),
+  };
+
+  const [selectedPedalState, selectedPedalDispatchInitial] =
+    pedalStateMap[selectedPedal];
+
   const [selectedPreset, setSelectedPreset] = useState({
     label: null,
-    message: null,
+    message: computeSysex(
+      selectedPedalState,
+      selectedPedalState,
+      sysexByte,
+      "01"
+    ),
   });
 
-  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
+  let [selectedPedalDispatch, midiData] = PedalInit(
+    initialState,
+    setState,
+    selectedPedalState,
+    selectedPedalDispatchInitial,
     midiObject,
     expressionVal,
     selectedPreset,
-    setSelectedMacro
+    setSelectedMacro,
+    sysexByte,
+    changeTlr,
+    changeBlr
   );
+
+  let [background, changeBackground] = useState("honeydew");
+
+  let detectExpressionLowAndHigh = (parsedVal) => {
+    if (parsedVal === 0) {
+      changeBackground("red");
+    } else if (parsedVal === 127) {
+      changeBackground("blue");
+    } else {
+      changeBackground("honeydew");
+    }
+  };
 
   // State for both pages
   useEffect(() => {
@@ -52,20 +97,24 @@ export default function Index() {
   }, [selectedPreset, selectedMacro, pageState]);
 
   useEffect(() => {
-    setSelectedMacro({});
-    setSelectedPreset({
-      label: null,
-      message: null,
-    });
-  }, [pageState]);
+    setExpressionVal(0);
+    setMacroTempo(0);
+  }, [selectedPreset, selectedMacro, pageState]);
+
+  useEffect(() => {
+    console.log("bottomLevelReached:", bottomLevelReached);
+    console.log("topLevelReached:", topLevelReached);
+  }, [topLevelReached, bottomLevelReached]);
 
   return (
-    <div className="container fade-in">
+    <div className="container fade-in" style={{ background: background }}>
       <div className="view-port">
         <div className="pedal-selector">
           {pageState == "pedals" && canView && (
             <PedalSelector
+              selectedPedalState={selectedPedalState}
               midiConfig={midiConfig}
+              sysexByte={sysexByte}
               setSysexByte={setSysexByte}
               selectedPedal={selectedPedal}
               setSelectedPedal={setSelectedPedal}
@@ -144,6 +193,7 @@ export default function Index() {
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
+            detectExpressionLowAndHigh={detectExpressionLowAndHigh}
             selectedPedalState={selectedPedalState}
             dispatch={selectedPedalDispatch}
           />

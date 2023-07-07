@@ -7,11 +7,13 @@ export default function applyExpression(
   midiData,
   expressionVal,
   preset,
-  selectedPedalDispatch
+  selectedPedalDispatch,
+  detectExpressionLowAndHigh
 ) {
   if (midiObject && midiData.output && midiData.channel) {
     let { manufacturer, data } = parseSysexToBinary(preset.message);
     let presetValWithExpression = expressionSysex(data, expressionVal);
+    detectExpressionLowAndHigh(expressionVal);
     sysexKnobsUpdate({
       data: presetValWithExpression.slice(5, 22),
       dispatch: selectedPedalDispatch,

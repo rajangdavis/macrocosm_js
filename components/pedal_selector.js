@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import computeSysex from "../utilities/compute_sysex";
 import Image from "next/image";
 import enzoImage from "../public/enzo_button.svg";
 import enzoImageSelected from "../public/enzo_button_selected.svg";
@@ -17,9 +18,11 @@ export default function PedalSelector(props) {
   let {
     midiConfig,
     selectedPedal,
+    selectedPedalState,
     setSelectedPreset,
     setSelectedPedal,
     setSysexByte,
+    sysexByte,
   } = props;
 
   const pedalSelectAndOrder = [
@@ -68,8 +71,16 @@ export default function PedalSelector(props) {
   ];
 
   useEffect(() => {
-    setSelectedPreset({ label: null, message: null });
-  }, [selectedPedal, setSelectedPreset]);
+    setSelectedPreset({
+      label: null,
+      message: computeSysex(
+        selectedPedalState,
+        selectedPedalState,
+        sysexByte,
+        "01"
+      ),
+    });
+  }, [selectedPedal, setSelectedPreset, sysexByte]);
 
   return (
     <>
