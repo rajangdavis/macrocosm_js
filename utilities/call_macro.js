@@ -92,14 +92,28 @@ export default async function callMacro(props) {
     console.log(
       `SENDING QUAD CORTEX PRESET: ${quadCortexConfig.selectedPreset}`
     );
-    return [
-      // deviceOutput.sendControlChange(0, commandVal, {
-      //   channels: parseInt(midiConfig["quadCortexChannel"]),
-      // }),
+
+    let commands = [
+      deviceOutput.sendControlChange(0, commandVal, {
+        channels: parseInt(midiConfig["quadCortexChannel"]),
+      }),
       deviceOutput.sendProgramChange(quadCortexConfig.selectedPreset, {
         channels: parseInt(midiConfig["quadCortexChannel"]),
       }),
     ];
+
+    if (quadCortexConfig.selectedCcVal) {
+      console.log(
+        `SENDING QUAD CORTEX CC VAL: ${quadCortexConfig.selectedCcVal}`
+      );
+      commands.push(
+        deviceOutput.sendControlChange(quadCortexConfig.selectedCcVal, 127, {
+          channels: parseInt(midiConfig["quadCortexChannel"]),
+        })
+      );
+    }
+
+    return commands;
   };
 
   let buildPromises = () => {
@@ -126,14 +140,14 @@ export default async function callMacro(props) {
         })
     );
 
+    if (parseInt(midiConfig["quadCortexChannel"]) > 0) {
+      firstPass.concat(buildQuadCortexCommands());
+    }
     if (parseInt(midiConfig["mobiusChannel"]) > 0) {
       firstPass.concat(buildMobiusCommands());
     }
     if (parseInt(midiConfig["es8Channel"]) > 0) {
       firstPass.concat(buildEs8Commands());
-    }
-    if (parseInt(midiConfig["quadCortexChannel"]) > 0) {
-      firstPass.concat(buildQuadCortexCommands());
     }
     return firstPass;
   };

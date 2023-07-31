@@ -2,39 +2,7 @@ import CloseButton from "./close_button";
 import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
 import MacrosDeviceSelector from "./macros_device_selector";
-
-function PcMessageInput(props) {
-  let { device, setSelectedPreset, maxValue, minValue } = props;
-
-  let update = function (val) {
-    if (val.change) {
-      let defaultVal = device.selectedPreset ? device.selectedPreset : 0;
-      var newVal = defaultVal + val.by;
-    } else if (val.overwrite) {
-      var newVal = parseInt(val.overwrite);
-    }
-    var newState =
-      newVal < minValue ? minValue : newVal > maxValue ? maxValue : newVal;
-    setSelectedPreset(newState);
-  };
-
-  return (
-    <div className="flex-row device-input-container">
-      <label onClick={() => update({ change: true, by: -1 })}>-</label>
-      <label className={"device-input"}>
-        <span>{device.name}:</span>
-        <input
-          type="number"
-          value={device.selectedPreset}
-          onChange={(e) => {
-            update({ overwrite: e.target.value });
-          }}
-        />
-      </label>
-      <label onClick={() => update({ change: true, by: 1 })}>+</label>
-    </div>
-  );
-}
+import { PcMessageInput, PcMessageInputWithCc } from "./pc_message_input";
 
 export default function MacrosModalForm(props) {
   let {
@@ -125,16 +93,33 @@ export default function MacrosModalForm(props) {
                     copiedDevicesConfig[index].selectedPreset = value;
                     setDevicesState(copiedDevicesConfig);
                   };
-
-                  return (
-                    <PcMessageInput
-                      device={device}
-                      key={index}
-                      setSelectedPreset={setSelectedPreset}
-                      maxValue={maxPcValue[device.name]}
-                      minValue={minPcValue[device.name]}
-                    />
-                  );
+                  let setSelectedCcVal = (value) => {
+                    let copiedDevicesConfig = [...devices];
+                    copiedDevicesConfig[index].selectedCcVal = value;
+                    setDevicesState(copiedDevicesConfig);
+                  };
+                  if (device.name == "quadCortex") {
+                    return (
+                      <PcMessageInputWithCc
+                        device={device}
+                        key={index}
+                        setSelectedCcVal={setSelectedCcVal}
+                        setSelectedPreset={setSelectedPreset}
+                        maxValue={maxPcValue[device.name]}
+                        minValue={minPcValue[device.name]}
+                      />
+                    );
+                  } else {
+                    return (
+                      <PcMessageInput
+                        device={device}
+                        key={index}
+                        setSelectedPreset={setSelectedPreset}
+                        maxValue={maxPcValue[device.name]}
+                        minValue={minPcValue[device.name]}
+                      />
+                    );
+                  }
                 }
               })}
               <br />

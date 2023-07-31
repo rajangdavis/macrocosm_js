@@ -10,6 +10,18 @@ export default async function turnOffAllPedals(props) {
   let deviceOutput = midiObject.outputs.filter((x) => {
     return x.name == midiConfig.output;
   })[0];
+  let quadCortexChannel = midiConfig["quadCortexChannel"];
+  const quadCortexReset = () => {
+    console.log("Resetting Quad Cortext on channels:", quadCortexChannel);
+    return [
+      deviceOutput.sendControlChange(35, 127, {
+        channels: quadCortexChannel,
+      }),
+      deviceOutput.sendProgramChange(0, {
+        channels: quadCortexChannel,
+      }),
+    ];
+  };
 
   const merisOff = () => {
     let merisChannels = merisPedalChannels.map((x) => midiConfig[x]);
@@ -26,7 +38,11 @@ export default async function turnOffAllPedals(props) {
   };
 
   if (deviceOutput) {
-    const results = await Promise.all([merisOff(), strymonOff()]);
+    const results = await Promise.all([
+      quadCortexReset(),
+      merisOff(),
+      strymonOff(),
+    ]);
     console.log(results);
   }
 }
