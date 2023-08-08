@@ -33,12 +33,21 @@ function PcMessageInput(props) {
 
   let updateSelectedCcVal = function (val) {
     if (val.change) {
-      let defaultVal = device.selectedCcVal ? device.selectedCcVal : 35;
+      let defaultVal = device.selectedCcVal ? device.selectedCcVal : -1;
       var newVal = defaultVal + val.by;
     } else if (val.overwrite) {
       var newVal = parseInt(val.overwrite);
     }
-    var newState = newVal < 35 ? 35 : newVal > 42 ? 42 : newVal;
+    var newState;
+    if (newVal < -1 || newVal == 34) {
+      newState = -1;
+    } else if (newVal > -1 && newVal < 35) {
+      newState = 35;
+    } else if (newVal > 42) {
+      newState = 42;
+    } else {
+      newState = newVal;
+    }
     setSelectedCcVal(newState);
   };
 

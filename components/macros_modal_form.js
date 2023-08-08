@@ -29,7 +29,7 @@ export default function MacrosModalForm(props) {
   let minPcValue = {
     mobius: 0,
     es8: 0,
-    quadCortex: 0,
+    quadCortex: -1,
   };
 
   return (

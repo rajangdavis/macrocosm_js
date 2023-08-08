@@ -84,25 +84,28 @@ export default async function callMacro(props) {
   };
 
   let buildQuadCortexCommands = () => {
-    let commandVal = quadCortexConfig.selectedPreset > 127 ? 1 : 0;
-    let normalizedVal =
-      quadCortexConfig.selectedPreset > 127
-        ? quadCortexConfig.selectedPreset - 127
-        : quadCortexConfig.selectedPreset;
-    console.log(
-      `SENDING QUAD CORTEX PRESET: ${quadCortexConfig.selectedPreset}`
-    );
+    var commands = [];
+    if (quadCortexConfig.selectedPreset > -1) {
+      let commandVal = quadCortexConfig.selectedPreset > 127 ? 1 : 0;
+      let normalizedVal =
+        quadCortexConfig.selectedPreset > 127
+          ? quadCortexConfig.selectedPreset - 127
+          : quadCortexConfig.selectedPreset;
+      console.log(
+        `SENDING QUAD CORTEX PRESET: ${quadCortexConfig.selectedPreset}`
+      );
 
-    let commands = [
-      deviceOutput.sendControlChange(0, commandVal, {
-        channels: parseInt(midiConfig["quadCortexChannel"]),
-      }),
-      deviceOutput.sendProgramChange(quadCortexConfig.selectedPreset, {
-        channels: parseInt(midiConfig["quadCortexChannel"]),
-      }),
-    ];
+      commands = [
+        deviceOutput.sendControlChange(0, commandVal, {
+          channels: parseInt(midiConfig["quadCortexChannel"]),
+        }),
+        deviceOutput.sendProgramChange(quadCortexConfig.selectedPreset, {
+          channels: parseInt(midiConfig["quadCortexChannel"]),
+        }),
+      ];
+    }
 
-    if (quadCortexConfig.selectedCcVal) {
+    if (quadCortexConfig.selectedCcVal > -1) {
       console.log(
         `SENDING QUAD CORTEX CC VAL: ${quadCortexConfig.selectedCcVal}`
       );

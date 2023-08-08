@@ -34,6 +34,7 @@ export default function MacrosModal(props) {
     let updatedState = pedals.map((pedal, index) => {
       if (index == pedalMatch) {
         pedal.showing = !pedal.showing;
+        pedal.selectedPreset = {};
       }
       return pedal;
     });

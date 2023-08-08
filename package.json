@@ -7,7 +7,8 @@
     "build": "next build && next export",
     "start": "next start",
     "lint": "next lint",
-    "clean": "npx prettier --write ./components/ ./data/ ./hooks/ ./pages/ ./public/ ./utilities/"
+    "clean": "npx prettier --write ./components/ ./data/ ./hooks/ ./pages/ ./public/ ./utilities/",
+    "lift" : "npm run clean && npm run lint"
   },
   "dependencies": {
     "lodash": "^4.17.21",
