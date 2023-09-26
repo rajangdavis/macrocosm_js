@@ -39,14 +39,14 @@ function PcMessageInput(props) {
       var newVal = parseInt(val.overwrite);
     }
     var newState;
-    if (newVal < -1 || newVal == 34) {
+    if(newVal < -1 || newVal == 34){
       newState = -1;
-    } else if (newVal > -1 && newVal < 35) {
+    }else if(newVal > -1 && newVal < 35){
       newState = 35;
-    } else if (newVal > 42) {
+    }else if(newVal > 42){
       newState = 42;
-    } else {
-      newState = newVal;
+    }else{
+      newState = newVal
     }
     setSelectedCcVal(newState);
   };
