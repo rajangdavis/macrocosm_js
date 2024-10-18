@@ -1,8 +1,8 @@
 import CloseButton from "./close_button";
 import { v4 as uuidv4 } from "uuid";
 import Expression from "./expression";
-import PresetsBuilder from "./presets_builder";
-import PresetsEditor from "./presets_editor";
+import PresetsBuilderSimple from "./presets_builder_simple";
+import PresetsEditorSimple from "./presets_editor_simple";
 import NavMenu from "./nav_menu";
 import GlobalSettingsTable from "./global_settings_table";
 import { useContext, useState, useEffect, useRef } from "react";
@@ -19,8 +19,6 @@ export default function PresetsModal(props) {
   const [presetTempo, setPresetTempoVal] = useState(0);
   const [presetToEdit, setPresetToEdit] = useState(null);
   const [presetToEditIndex, setPresetToEditIndex] = useState(null);
-  const [heelSettingsConfirmed, setHeelSettingsConfirmed] = useState(false);
-  const [toeSettingsConfirmed, setToeSettingsConfirmed] = useState(false);
   const defaultMenu = midiConfig.output ? "presets" : "midi";
   const [menu, setMenu] = useState(defaultMenu);
   const modalTop = useRef();
@@ -34,10 +32,13 @@ export default function PresetsModal(props) {
     }
   };
 
-  function PcMessageInput() {
+  function PcMessageInput(props) {
     let maxValue = 199;
     let minValue = 0;
-    let channel = "mobiusChannel";
+    let channel = props.selectedPedal
+      ? `${props.selectedPedal}Channel`
+      : "mobiusChannel";
+    let title = props.selectedPedal ? `${props.selectedPedal}` : "mobius";
     let [presetVal, setPresetVal] = useState(minValue);
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiConfig.output;
@@ -62,7 +63,7 @@ export default function PresetsModal(props) {
       <div className="flex-row device-input-container">
         <label onClick={() => update({ change: true, by: -1 })}>-</label>
         <label className={"device-input"}>
-          <span>Mobius Commands:</span>
+          <span>{title} Commands:</span>
           <input
             type="number"
             value={presetVal}
@@ -77,13 +78,6 @@ export default function PresetsModal(props) {
   }
 
   useEffect(() => {
-    if (menu != "edit-preset") {
-      setToeSettingsConfirmed(false);
-      setHeelSettingsConfirmed(false);
-    } else {
-      setToeSettingsConfirmed(true);
-      setHeelSettingsConfirmed(true);
-    }
     scrollToTop();
     setPresetExpressionVal(0);
   }, [menu]);
@@ -101,11 +95,6 @@ export default function PresetsModal(props) {
     setSelectedPreset,
     setPresetsOpen,
   } = props;
-
-  const presetTempoDispatch = (dispatchOverride) => {
-    setPresetTempoVal(dispatchOverride.value);
-    return dispatch;
-  };
 
   const setPreset = (preset) => {
     if (midiObject && midiData.output && midiData.channel) {
@@ -137,7 +126,7 @@ export default function PresetsModal(props) {
     setMenu("edit-preset");
   };
 
-  const deletePreset = (i) => {
+  const deletePreset = (preset, i) => {
     deleteFactoryPreset(selectedPedal, i);
   };
 
@@ -210,6 +199,15 @@ export default function PresetsModal(props) {
         {menu == "midi" && <NavMenu midiObject={midiObject} />}
         {menu == "presets" && selectedPedal != "mobius" && (
           <div className="sysex-menu fade-in">
+            <div>
+              <div className="presets-container">
+                <PcMessageInput selectedPedal={selectedPedal} />
+              </div>
+            </div>
+          </div>
+        )}
+        {menu == "presets" && selectedPedal != "mobius" && (
+          <div className="sysex-menu fade-in">
             <div className="global-settings">
               <label>GLOBAL SETTINGS</label>
               <GlobalSettingsTable
@@ -233,7 +231,7 @@ export default function PresetsModal(props) {
                       {skipOgPresets(i) && <> | </>}
                       {skipOgPresets(i) && (
                         <>
-                          <a onClick={() => deletePreset(preset)}>DELETE</a>
+                          <a onClick={() => deletePreset(preset, i)}>DELETE</a>
                         </>
                       )}
                     </span>
@@ -253,27 +251,20 @@ export default function PresetsModal(props) {
           </div>
         )}
         {menu == "new-preset" && selectedPedal != "mobius" && (
-          <PresetsBuilder
-            toeSettingsConfirmed={toeSettingsConfirmed}
-            setToeSettingsConfirmed={setToeSettingsConfirmed}
-            heelSettingsConfirmed={heelSettingsConfirmed}
-            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
+          <PresetsBuilderSimple
             selectedPedal={selectedPedal}
-            state={state}
             midiObject={midiObject}
             midiData={midiData}
             sysexByte={sysexByte}
             setMenu={setMenu}
+            state={state}
+            dispatch={dispatch}
             presetTempo={presetTempo}
             expressionVal={presetExpressionVal}
           />
         )}
         {menu == "edit-preset" && selectedPedal != "mobius" && (
-          <PresetsEditor
-            heelSettingsConfirmed={heelSettingsConfirmed}
-            setHeelSettingsConfirmed={setHeelSettingsConfirmed}
-            toeSettingsConfirmed={toeSettingsConfirmed}
-            setToeSettingsConfirmed={setToeSettingsConfirmed}
+          <PresetsEditorSimple
             selectedPedal={selectedPedal}
             midiObject={midiObject}
             midiData={midiData}
@@ -285,19 +276,21 @@ export default function PresetsModal(props) {
             presetToEditIndex={presetToEditIndex}
             expressionVal={presetExpressionVal}
             setExpressionVal={setPresetExpressionVal}
+            state={state}
+            dispatch={dispatch}
           />
         )}
       </div>
       <div className="menu-select right pedals">
         {(menu == "new-preset" || menu == "edit-preset") && (
           <Expression
-            showExpression={heelSettingsConfirmed && toeSettingsConfirmed}
+            showExpression={true}
             expressionVal={presetExpressionVal}
             setExpressionVal={setPresetExpressionVal}
             midiData={midiData}
             midiObject={midiObject}
             tempo={presetTempo}
-            dispatch={presetTempoDispatch}
+            dispatch={dispatch}
             selectedPedal={selectedPedal}
             invert={true}
           />
