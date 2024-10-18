@@ -32,10 +32,13 @@ export default function PresetsModal(props) {
     }
   };
 
-  function PcMessageInput() {
+  function PcMessageInput(props) {
     let maxValue = 199;
     let minValue = 0;
-    let channel = "mobiusChannel";
+    let channel = props.selectedPedal
+      ? `${props.selectedPedal}Channel`
+      : "mobiusChannel";
+    let title = props.selectedPedal ? `${props.selectedPedal}` : "mobius";
     let [presetVal, setPresetVal] = useState(minValue);
     let deviceOutput = midiObject.outputs.filter((x) => {
       return x.name == midiConfig.output;
@@ -60,7 +63,7 @@ export default function PresetsModal(props) {
       <div className="flex-row device-input-container">
         <label onClick={() => update({ change: true, by: -1 })}>-</label>
         <label className={"device-input"}>
-          <span>Mobius Commands:</span>
+          <span>{title} Commands:</span>
           <input
             type="number"
             value={presetVal}
@@ -123,7 +126,7 @@ export default function PresetsModal(props) {
     setMenu("edit-preset");
   };
 
-  const deletePreset = (i) => {
+  const deletePreset = (preset, i) => {
     deleteFactoryPreset(selectedPedal, i);
   };
 
@@ -196,6 +199,15 @@ export default function PresetsModal(props) {
         {menu == "midi" && <NavMenu midiObject={midiObject} />}
         {menu == "presets" && selectedPedal != "mobius" && (
           <div className="sysex-menu fade-in">
+            <div>
+              <div className="presets-container">
+                <PcMessageInput selectedPedal={selectedPedal} />
+              </div>
+            </div>
+          </div>
+        )}
+        {menu == "presets" && selectedPedal != "mobius" && (
+          <div className="sysex-menu fade-in">
             <div className="global-settings">
               <label>GLOBAL SETTINGS</label>
               <GlobalSettingsTable
@@ -219,7 +231,7 @@ export default function PresetsModal(props) {
                       {skipOgPresets(i) && <> | </>}
                       {skipOgPresets(i) && (
                         <>
-                          <a onClick={() => deletePreset(preset)}>DELETE</a>
+                          <a onClick={() => deletePreset(preset, i)}>DELETE</a>
                         </>
                       )}
                     </span>

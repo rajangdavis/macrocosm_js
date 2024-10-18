@@ -46,37 +46,40 @@ export default function NavMenu(props) {
             inputLabel={"MIDI INPUT"}
             options={inputOptions}
           />
-          <div className="channels-block">
-            <MidiChannelInput
-              label={"ENZO"}
-              midiConfig={midiConfig}
-              value={"enzoChannel"}
-              updateConfig={updateConfig}
-            />
-            <MidiChannelInput
-              label={"HEDRA"}
-              midiConfig={midiConfig}
-              value={"hedraChannel"}
-              updateConfig={updateConfig}
-            />
-            <MidiChannelInput
-              label={"POLYMOON"}
-              midiConfig={midiConfig}
-              value={"polymoonChannel"}
-              updateConfig={updateConfig}
-            />
-            <MidiChannelInput
-              label={"MERCURY7"}
-              midiConfig={midiConfig}
-              value={"mercury7Channel"}
-              updateConfig={updateConfig}
-            />
-            <MidiChannelInput
-              label={"OTTOBIT JR"}
-              midiConfig={midiConfig}
-              value={"ottobitJrChannel"}
-              updateConfig={updateConfig}
-            />
+          <label>MIDI CHANNELS</label>
+          <div className="channels-container">
+            <div className="channels-block">
+              <MidiChannelInput
+                label={"ENZO"}
+                midiConfig={midiConfig}
+                value={"enzoChannel"}
+                updateConfig={updateConfig}
+              />
+              <MidiChannelInput
+                label={"HEDRA"}
+                midiConfig={midiConfig}
+                value={"hedraChannel"}
+                updateConfig={updateConfig}
+              />
+              <MidiChannelInput
+                label={"POLYMOON"}
+                midiConfig={midiConfig}
+                value={"polymoonChannel"}
+                updateConfig={updateConfig}
+              />
+              <MidiChannelInput
+                label={"MERCURY7"}
+                midiConfig={midiConfig}
+                value={"mercury7Channel"}
+                updateConfig={updateConfig}
+              />
+              <MidiChannelInput
+                label={"OTTOBIT JR"}
+                midiConfig={midiConfig}
+                value={"ottobitJrChannel"}
+                updateConfig={updateConfig}
+              />
+            </div>
           </div>
           <div className="channels-block">
             <MidiChannelInput

@@ -41,7 +41,8 @@
   margin: 50px 0;
 }
 
-.nav-menu > .options-block > label {
+.nav-menu > .options-block > label,
+.midi-options > label {
   font-size: 25px;
   border-top: 1px solid white;
   border-bottom: 1px solid white;

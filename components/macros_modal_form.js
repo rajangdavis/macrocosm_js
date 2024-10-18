@@ -3,6 +3,8 @@ import CustomSelect from "./custom_select";
 import MacrosPedalSelector from "./macros_pedal_selector";
 import MacrosDeviceSelector from "./macros_device_selector";
 import { PcMessageInput, PcMessageInputWithCc } from "./pc_message_input";
+import { MidiConfigContext } from "../hooks/midi_config";
+import { useContext } from "react";
 
 export default function MacrosModalForm(props) {
   let {
@@ -19,6 +21,11 @@ export default function MacrosModalForm(props) {
     setDevicesState,
     showOrHideDevice,
   } = props;
+
+  let { midiConfig } = useContext(MidiConfigContext);
+  let canView = (device) => {
+    return parseInt(midiConfig[`${device}Channel`]) > 0;
+  };
 
   let maxPcValue = {
     mobius: 199,
@@ -98,7 +105,7 @@ export default function MacrosModalForm(props) {
                     copiedDevicesConfig[index].selectedCcVal = value;
                     setDevicesState(copiedDevicesConfig);
                   };
-                  if (device.name == "quadCortex") {
+                  if (device.name == "quadCortex" && canView(device.name)) {
                     return (
                       <PcMessageInputWithCc
                         device={device}
@@ -111,13 +118,15 @@ export default function MacrosModalForm(props) {
                     );
                   } else {
                     return (
-                      <PcMessageInput
-                        device={device}
-                        key={index}
-                        setSelectedPreset={setSelectedPreset}
-                        maxValue={maxPcValue[device.name]}
-                        minValue={minPcValue[device.name]}
-                      />
+                      canView(device.name) && (
+                        <PcMessageInput
+                          device={device}
+                          key={index}
+                          setSelectedPreset={setSelectedPreset}
+                          maxValue={maxPcValue[device.name]}
+                          minValue={minPcValue[device.name]}
+                        />
+                      )
                     );
                   }
                 }

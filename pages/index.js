@@ -1,5 +1,5 @@
 import ManageMidi from "../hooks/manage_midi";
-import PedalInit from "../hooks/pedal_init";
+import PedalInitTrackToggles from "../hooks/pedal_init_track_toggles";
 import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 
@@ -38,12 +38,13 @@ export default function Index() {
     message: null,
   });
 
-  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
-    midiObject,
-    expressionVal,
-    selectedPreset,
-    setSelectedMacro
-  );
+  let [selectedPedalState, selectedPedalDispatch, midiData] =
+    PedalInitTrackToggles(
+      midiObject,
+      expressionVal,
+      selectedPreset,
+      setSelectedMacro
+    );
 
   // State for both pages
   useEffect(() => {

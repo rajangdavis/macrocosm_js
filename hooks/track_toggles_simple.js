@@ -16,9 +16,9 @@ export default function trackToggles(props) {
     if (channelstoWatch.includes(action.key)) {
       if (action.key == 14) {
         toeDispatch({ ...action, value: 127 });
-      }else if(action.key == 31){
+      } else if (action.key == 31) {
         toeDispatch({ ...action, value: 0 });
-      }else {
+      } else {
         toeDispatch(action);
       }
     }
@@ -29,9 +29,9 @@ export default function trackToggles(props) {
     if (channelstoWatch.includes(action.key)) {
       if (action.key == 14) {
         heelDispatch({ ...action, value: 127 });
-      }else if(action.key == 31){
+      } else if (action.key == 31) {
         toeDispatch({ ...action, value: 0 });
-      }else {
+      } else {
         heelDispatch(action);
       }
     }
@@ -42,12 +42,11 @@ export default function trackToggles(props) {
     return;
   };
 
-  if(expressionVal == 0){
+  if (expressionVal == 0) {
     return heelDispatchOverride;
-  }else if(expressionVal == 127){
+  } else if (expressionVal == 127) {
     return toeDispatchOverride;
-  }else{
+  } else {
     return noOpDispatch;
   }
-
 }

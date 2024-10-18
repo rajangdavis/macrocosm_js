@@ -22,7 +22,7 @@ export default function PresetsBuilderSimple(props) {
     expressionVal,
     presetTempo,
     dispatch,
-    state
+    state,
   } = props;
 
   let initialState = { ...pedalStates[selectedPedal] };
@@ -67,16 +67,6 @@ export default function PresetsBuilderSimple(props) {
     });
   }, [heelState, presetName, presetNumber, toeState]);
 
-  let copyHeelSettings = (heelState, dispatch) => {
-    let keys = Object.keys(heelState);
-    for (var i = keys.length - 1; i >= 0; i--) {
-      let key = keys[i];
-      let value = heelState[keys[i]];
-      dispatch({ skipMidi: true, key: key, value: value });
-    }
-    return null;
-  };
-
   let createPreset = () => {
     updateFactoryPresets(selectedPedal, computedPreset);
     setMenu("presets");
@@ -100,46 +90,46 @@ export default function PresetsBuilderSimple(props) {
     <div className="fade-in presets-pedal-layout final">
       <div className="preset-create-container">
         <label>Create a preset</label>
-          <div className="fade-in pedal-layouts">
-            <PedalLayouts
-              selectedPedal={selectedPedal}
-              state={state}
-              dispatch={finalDispatch}
-              midiObject={midiObject}
-              midiData={midiData}
-            />
-            <div className="text-input">
-              <span>Preset Name</span>
-              <input
-                type="text"
-                value={presetName}
-                onChange={(e) => {
-                  setPresetName(e.target.value);
-                }}
-              />
-            </div>
-            <br />
-            <div className="preset-input">
-              <label>Preset Number</label>
-              <input
-                type="number"
-                min="1"
-                max="16"
-                value={parseInt(presetNumber)}
-                onChange={(e) => {
-                  setPresetNumber(e.target.value);
-                }}
-              />
-            </div>
-            <br />
-            <a
-              onClick={() => {
-                return createPreset();
+        <div className="fade-in pedal-layouts">
+          <PedalLayouts
+            selectedPedal={selectedPedal}
+            state={state}
+            dispatch={finalDispatch}
+            midiObject={midiObject}
+            midiData={midiData}
+          />
+          <div className="text-input">
+            <span>Preset Name</span>
+            <input
+              type="text"
+              value={presetName}
+              onChange={(e) => {
+                setPresetName(e.target.value);
               }}
-            >
-              Save Preset
-            </a>
+            />
           </div>
+          <br />
+          <div className="preset-input">
+            <label>Preset Number</label>
+            <input
+              type="number"
+              min="1"
+              max="16"
+              value={parseInt(presetNumber)}
+              onChange={(e) => {
+                setPresetNumber(e.target.value);
+              }}
+            />
+          </div>
+          <br />
+          <a
+            onClick={() => {
+              return createPreset();
+            }}
+          >
+            Save Preset
+          </a>
+        </div>
       </div>
     </div>
   );
