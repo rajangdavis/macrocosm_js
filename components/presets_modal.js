@@ -102,6 +102,8 @@ export default function PresetsModal(props) {
       let deviceOutput = midiObject.outputs.filter((x) => {
         return x.name == midiData.output;
       })[0];
+      console.log(preset.message);
+      console.log(data);
       deviceOutput.sendSysex(manufacturer, data);
       sysexKnobsUpdate({
         data: data.slice(5, 22),
