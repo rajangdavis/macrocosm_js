@@ -141,14 +141,14 @@ export default async function callMacro(props) {
         channels: macroMessageData.map((x) => parseInt(x.channel)),
       }),
     ].concat(
-      pcMessageData.map((x) => {
-        console.log(
-          `SENDING PC COMMANDS: PC - ${x.programChange} to Channel ${x.channel}`
-        );
-        return deviceOutput.sendProgramChange(x.programChange, {
-          channels: parseInt(x.channel),
-        });
-      }),
+      // pcMessageData.map((x) => {
+      //   console.log(
+      //     `SENDING PC COMMANDS: PC - ${x.programChange} to Channel ${x.channel}`
+      //   );
+      //   return deviceOutput.sendProgramChange(x.programChange, {
+      //     channels: parseInt(x.channel),
+      //   });
+      // }),
       macroMessageData
         .filter((x) => {
           console.log("TURNING ON PRESET, RESETTING EXPRESSION: " + x.name);
