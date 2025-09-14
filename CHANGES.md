@@ -43,4 +43,4 @@ components/presets_editor.js
 components/presets_editor_simple.js
 ```
 
-I want to remap the knobs to update the pedal state represented as a sysex byte string depending on where the expression is set except for the Strymon pedals.
+I want to remap the knobs to update the pedal state represented as a sysex byte string depending on where the expression is set except for the Strymon pedals. It will still need to send CC commands for a given channel.
