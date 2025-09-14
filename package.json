@@ -4,15 +4,15 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "clean": "npx prettier --write ./components/ ./data/ ./hooks/ ./pages/ ./public/ ./utilities/",
-    "lift" : "npm run clean && npm run lint"
+    "lift": "npm run clean && npm run lint"
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "next": "^12.2.2",
+    "next": "^15.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^8.3.2",

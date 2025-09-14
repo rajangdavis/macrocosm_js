@@ -31,6 +31,16 @@ export default async function callMacro(props) {
     };
   });
 
+  let pcMessageData = macroSelectedPedals.map((x) => {
+    let message = x.selectedPreset.message
+      ? parseSysexToBinary(x.selectedPreset.message)
+      : false;
+    return {
+      programChange: message.data[4],
+      channel: midiConfig[`${x.name}Channel`],
+    };
+  });
+
   let turnOffThesePedals = notSelectedPedals.map((x) => {
     console.log("TURNING OFF: " + x.name);
     return parseInt(midiConfig[`${x.name}Channel`]);
@@ -131,6 +141,14 @@ export default async function callMacro(props) {
         channels: macroMessageData.map((x) => parseInt(x.channel)),
       }),
     ].concat(
+      // pcMessageData.map((x) => {
+      //   console.log(
+      //     `SENDING PC COMMANDS: PC - ${x.programChange} to Channel ${x.channel}`
+      //   );
+      //   return deviceOutput.sendProgramChange(x.programChange, {
+      //     channels: parseInt(x.channel),
+      //   });
+      // }),
       macroMessageData
         .filter((x) => {
           console.log("TURNING ON PRESET, RESETTING EXPRESSION: " + x.name);
@@ -149,7 +167,7 @@ export default async function callMacro(props) {
     if (parseInt(midiConfig["mobiusChannel"]) > 0) {
       firstPass.concat(buildMobiusCommands());
     }
-    if (parseInt(midiConfig["es8Channel"]) > 0) {
+    if (parseInt(midiConfig["es8Channel"]) > 0 && es8Config.showing == true) {
       firstPass.concat(buildEs8Commands());
     }
     return firstPass;

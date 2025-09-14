@@ -231,7 +231,7 @@ how to remove the virtical space around the range input in IE*/
   position: relative;
   flex-direction: row;
   justify-content: space-between;
-  width: 916px;
+  width: 51rem;
   margin: 5px;
 }
 

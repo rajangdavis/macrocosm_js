@@ -2,7 +2,7 @@ import { WebMidiContext } from "../hooks/web_midi_state";
 import { useContext, useEffect, useState } from "react";
 
 export default function MidiOutputSelect(props) {
-  let { updateWebMidi } = useContext(WebMidiContext);
+  let { midiObject, updateWebMidi } = useContext(WebMidiContext);
   const [selectOpen, setSelectOpen] = useState(false);
   let closeIf = props.closeIf == undefined ? true : props.closeIf;
   const [selectedOption, setSelectedOption] = useState(props.defaultOption);
@@ -20,13 +20,21 @@ export default function MidiOutputSelect(props) {
     }
   };
 
+  const [options, setOptions] = useState([]);
+
+  useEffect(() => {
+    if (midiObject != undefined) {
+      setOptions(midiObject[props.option].map((x) => x.name));
+    }
+  }, [midiObject]);
+
   useEffect(() => {
     if (closeIf == false) {
       setSelectOpen(false);
     }
   }, [closeIf]);
 
-  let remainingOptions = props.options.filter((x) => x != selectedOption);
+  let remainingOptions = options.filter((x) => x != selectedOption);
 
   return (
     <div className={containerClass} onClick={openOrCloseSelect}>
@@ -47,12 +55,12 @@ export default function MidiOutputSelect(props) {
               );
             }
           })}
-          {props.options.length == 0 && (
+          {options.length == 0 && (
             <div className="custom-select-option" onClick={updateWebMidi}>
               No options available
             </div>
           )}
-          {props.options.length > 0 && remainingOptions.length == 0 && (
+          {options.length > 0 && remainingOptions.length == 0 && (
             <div className="custom-select-option" onClick={updateWebMidi}>
               No other options available
             </div>

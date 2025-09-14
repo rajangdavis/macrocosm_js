@@ -24,14 +24,7 @@ The app is only supported by browsers that have support for the [Web MIDI API](h
 4. I wanted the app to be client-first meaning no server/database is needed to run the app
 
 
-## Future Goals
-1. Create a way to change the presets via PC commands for the Strymon Mobius, Boss ES8, and Neural DSP Quad Cortex devices
-2. Create a better design for mobile use; currently works well with a Samsung tablet and Macbook Pro
-3. Create a way to share presets between apps, it might be possible via a custom sysex messaging API
-4. Possibly reverse engineer the Boss ES8 Sysex messages and generate Boss ES8 presets based on macro data
-
 ## TODO
 1. Add Screenshots of app
 2. Basic instruction on what is needed to achieve connectivity via MIDI
 3. Add some technical instruction on how certain features work (macro calls, knobs, state)
-4. Possibly upgrade React, but not the hugest priority
