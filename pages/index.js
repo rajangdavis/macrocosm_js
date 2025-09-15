@@ -146,6 +146,7 @@ export default function Index() {
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
             selectedPedalState={selectedPedalState}
+            setPresetTempoVal={() => {}}
             dispatch={selectedPedalDispatch}
           />
         )}
