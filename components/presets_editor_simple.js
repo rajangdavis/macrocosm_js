@@ -17,8 +17,6 @@ export default function PresetsEditor(props) {
     midiData,
     sysexByte,
     expressionVal,
-    presetTempo,
-    setPresetTempoVal,
     presetToEdit,
     presetToEditIndex,
     state,
@@ -59,18 +57,10 @@ export default function PresetsEditor(props) {
     });
   }, [heelState, presetName, presetNumber, toeState]);
 
-  useEffect(() => {
-    setPresetTempoVal(state[15]);
-  }, []);
-
   let updatePreset = () => {
     replaceFactoryPresets(selectedPedal, presetToEditIndex, computedPreset);
     setMenu("presets");
   };
-
-  useEffect(() => {
-    finalDispatch({ skipMidi: true, key: 15, value: presetTempo });
-  }, [presetTempo]);
 
   useEffect(() => {
     applyExpression(

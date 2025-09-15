@@ -73,10 +73,6 @@ export default function PresetsBuilderSimple(props) {
   };
 
   useEffect(() => {
-    finalDispatch({ skipMidi: true, key: 15, value: presetTempo });
-  }, [presetTempo]);
-
-  useEffect(() => {
     applyExpression(
       midiObject,
       midiData,
