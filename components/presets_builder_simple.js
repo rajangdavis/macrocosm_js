@@ -5,7 +5,7 @@ import merisStateReducer from "../hooks/meris_state";
 import trackTogglesSimple from "../hooks/track_toggles_simple";
 import { FactoryPresetsContext } from "../hooks/presets_state";
 import computeSysex from "../utilities/compute_sysex";
-import applyExpression from "../hooks/apply_expression";
+import applyExpression from "../hooks/apply_expression_old";
 import { useContext, useState, useEffect } from "react";
 
 export default function PresetsBuilderSimple(props) {
@@ -69,7 +69,9 @@ export default function PresetsBuilderSimple(props) {
 
   let createPreset = () => {
     updateFactoryPresets(selectedPedal, computedPreset);
-    setMenu("presets");
+    if (setMenu != null) {
+      setMenu("presets");
+    }
   };
 
   useEffect(() => {

@@ -7,11 +7,14 @@ export default function applyExpression(
   midiData,
   expressionVal,
   preset,
-  selectedPedalDispatch
+  selectedPedalDispatch,
+  state
 ) {
   if (midiObject && midiData.output && midiData.channel) {
     let { manufacturer, data } = parseSysexToBinary(preset.message);
     let presetValWithExpression = expressionSysex(data, expressionVal);
+    // don't change bypass in this universe
+    presetValWithExpression[17] = state[14];
     sysexKnobsUpdate({
       data: presetValWithExpression.slice(5, 22),
       dispatch: selectedPedalDispatch,

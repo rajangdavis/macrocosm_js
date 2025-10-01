@@ -1,10 +1,11 @@
 import ManageMidi from "../hooks/manage_midi";
-import PedalInitTrackToggles from "../hooks/pedal_init_track_toggles";
+import PedalInit from "../hooks/pedal_init";
 import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 
 import PedalSelector from "../components/pedal_selector";
 import PedalLayouts from "../components/pedal_layouts";
+import PresetsBuilder from "../components/presets_builder";
 import MacrosLayout from "../components/macros_layout";
 import ModalOpenButton from "../components/modal_open_button";
 import PresetsModal from "../components/presets_modal";
@@ -38,13 +39,12 @@ export default function Index() {
     message: null,
   });
 
-  let [selectedPedalState, selectedPedalDispatch, midiData] =
-    PedalInitTrackToggles(
-      midiObject,
-      expressionVal,
-      selectedPreset,
-      setSelectedMacro
-    );
+  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
+    midiObject,
+    expressionVal,
+    selectedPreset,
+    setSelectedMacro
+  );
 
   // State for both pages
   useEffect(() => {
@@ -127,6 +127,18 @@ export default function Index() {
               midiObject={midiObject}
               midiData={midiData}
               setMacrosModalOpen={setMacrosModalOpen}
+            />
+          )}
+          {pageState == "test" && canView && (
+            <PresetsBuilder
+              selectedPedal={selectedPedal}
+              midiObject={midiObject}
+              midiData={midiData}
+              sysexByte={sysexByte}
+              // setMenu={setMenu}
+              state={selectedPedalState}
+              dispatch={selectedPedalDispatch}
+              expressionVal={expressionVal}
             />
           )}
           {pageState == "macros" && canView && (
