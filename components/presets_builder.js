@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import PedalLayouts from "./pedal_layouts";
+import PresetSave from "./preset_save";
 import merisStateReducer from "../hooks/meris_state";
 import trackToggles from "../hooks/track_toggles";
 import { FactoryPresetsContext } from "../hooks/presets_state";
@@ -19,6 +20,8 @@ export default function PresetsBuilder(props) {
     sysexByte,
     expressionVal,
     dispatch,
+    showPresetSave,
+    setShowPresetSave,
     state,
   } = props;
 
@@ -57,7 +60,17 @@ export default function PresetsBuilder(props) {
 
   let createPreset = () => {
     updateFactoryPresets(selectedPedal, computedPreset);
+    resetPresetFields();
   };
+
+  let resetPresetFields = () => {
+    setPresetName("New Preset");
+    setPresetNumber(1);
+  };
+
+  useEffect(() => {
+    resetPresetFields();
+  }, [selectedPedal]);
 
   useEffect(() => {
     applyExpression(
@@ -71,10 +84,9 @@ export default function PresetsBuilder(props) {
   }, [expressionVal, computedPreset]);
 
   return (
-    <div className="fade-in presets-pedal-layout final">
+    <div className="presets-pedal-layout final">
       <div className="preset-create-container">
-        <label>Create a preset</label>
-        <div className="fade-in pedal-layouts">
+        <div className="pedal-layouts">
           <PedalLayouts
             selectedPedal={selectedPedal}
             state={state}
@@ -82,37 +94,16 @@ export default function PresetsBuilder(props) {
             midiObject={midiObject}
             midiData={midiData}
           />
-          <div className="text-input">
-            <span>Preset Name</span>
-            <input
-              type="text"
-              value={presetName}
-              onChange={(e) => {
-                setPresetName(e.target.value);
-              }}
-            />
-          </div>
-          <br />
-          <div className="preset-input">
-            <label>Preset Number</label>
-            <input
-              type="number"
-              min="1"
-              max="16"
-              value={parseInt(presetNumber)}
-              onChange={(e) => {
-                setPresetNumber(e.target.value);
-              }}
-            />
-          </div>
-          <br />
-          <a
-            onClick={() => {
-              return createPreset();
-            }}
-          >
-            Save Preset
-          </a>
+          <PresetSave
+            showPresetSave={showPresetSave}
+            setShowPresetSave={setShowPresetSave}
+            selectedPedal={selectedPedal}
+            setPresetName={setPresetName}
+            presetName={presetName}
+            setPresetNumber={setPresetNumber}
+            presetNumber={presetNumber}
+            createPreset={createPreset}
+          />
         </div>
       </div>
     </div>

@@ -9,13 +9,13 @@
 }
 
 @media (max-width: 1340px) and (orientation: landscape) {
-  .preset-create-container,
+  /* .preset-create-container,
   .preset-edit-container {
     min-height: 110vh;
-  }
-  .presets-pedal-layout.final {
+  } */
+  /* .presets-pedal-layout.final {
     min-height: 120vh;
-  }
+  } */
 }
 
 .preset-create-container > label,
@@ -26,7 +26,9 @@
 .preset-create-container > .pedal-layouts > a,
 .preset-create-container > .pedal-layouts > span,
 .preset-edit-container > .pedal-layouts > a,
-.preset-edit-container > .pedal-layouts > span {
+.preset-edit-container > .pedal-layouts > span,
+.preset-save > a,
+.preset-save > span {
   color: white;
   font-size: 25px;
 }
@@ -36,10 +38,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 775px;
+  padding-top: 40px;
 }
 
 .pedal-layouts {
+  margin: 30px;
   position: relative;
 }
 
@@ -49,4 +53,20 @@
   flex-direction: column;
   align-items: center;
   color: white;
+}
+
+.preset-save {
+  color: white;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+.preset-save a {
+  margin: 0 auto;
+}
+
+.preset-save.button {
+  text-align: center;
+  font-size: 25px;
 }

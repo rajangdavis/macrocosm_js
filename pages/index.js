@@ -4,7 +4,6 @@ import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 
 import PedalSelector from "../components/pedal_selector";
-import PedalLayouts from "../components/pedal_layouts";
 import PresetsBuilder from "../components/presets_builder";
 import MacrosLayout from "../components/macros_layout";
 import ModalOpenButton from "../components/modal_open_button";
@@ -38,6 +37,8 @@ export default function Index() {
     label: null,
     message: null,
   });
+
+  let [showPresetSave, setShowPresetSave] = useState(false);
 
   let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
     midiObject,
@@ -98,7 +99,13 @@ export default function Index() {
             </>
           )}
         </div>
-        <div className="main-display">
+        <div
+          className={
+            showPresetSave && selectedPedal != "mobius" && pageState == "pedals"
+              ? "main-display preset-save-showing"
+              : "main-display"
+          }
+        >
           <ModalOpenButton
             pageState={pageState}
             setPageState={setPageState}
@@ -120,25 +127,16 @@ export default function Index() {
             </div>
           )}
           {pageState == "pedals" && canView && (
-            <PedalLayouts
-              selectedPedal={selectedPedal}
-              state={selectedPedalState}
-              dispatch={selectedPedalDispatch}
-              midiObject={midiObject}
-              midiData={midiData}
-              setMacrosModalOpen={setMacrosModalOpen}
-            />
-          )}
-          {pageState == "test" && canView && (
             <PresetsBuilder
               selectedPedal={selectedPedal}
               midiObject={midiObject}
               midiData={midiData}
               sysexByte={sysexByte}
-              // setMenu={setMenu}
               state={selectedPedalState}
               dispatch={selectedPedalDispatch}
               expressionVal={expressionVal}
+              showPresetSave={showPresetSave}
+              setShowPresetSave={setShowPresetSave}
             />
           )}
           {pageState == "macros" && canView && (

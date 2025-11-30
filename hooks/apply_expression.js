@@ -11,7 +11,7 @@ export default function applyExpression(
   state
 ) {
   if (midiObject && midiData.output && midiData.channel) {
-    let { manufacturer, data } = parseSysexToBinary(preset.message);
+    let { _, data } = parseSysexToBinary(preset.message);
     let presetValWithExpression = expressionSysex(data, expressionVal);
     // don't change bypass in this universe
     presetValWithExpression[17] = state[14];
