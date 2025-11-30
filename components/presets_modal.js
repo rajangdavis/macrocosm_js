@@ -63,7 +63,7 @@ export default function PresetsModal(props) {
       <div className="flex-row device-input-container">
         <label onClick={() => update({ change: true, by: -1 })}>-</label>
         <label className={"device-input"}>
-          <span>{title} Commands:</span>
+          <span>{title} PC Commands:</span>
           <input
             type="number"
             value={presetVal}
@@ -201,15 +201,6 @@ export default function PresetsModal(props) {
         {menu == "midi" && <NavMenu midiObject={midiObject} />}
         {menu == "presets" && selectedPedal != "mobius" && (
           <div className="sysex-menu fade-in">
-            <div>
-              <div className="presets-container">
-                <PcMessageInput selectedPedal={selectedPedal} />
-              </div>
-            </div>
-          </div>
-        )}
-        {menu == "presets" && selectedPedal != "mobius" && (
-          <div className="sysex-menu fade-in">
             <div className="global-settings">
               <label>GLOBAL SETTINGS</label>
               <GlobalSettingsTable
@@ -243,12 +234,10 @@ export default function PresetsModal(props) {
             </div>
           </div>
         )}
-        {menu == "presets" && selectedPedal == "mobius" && (
+        {menu == "presets" && (
           <div className="sysex-menu fade-in">
-            <div>
-              <div className="presets-container">
-                <PcMessageInput />
-              </div>
+            <div className="pc-message-container">
+              <PcMessageInput selectedPedal={selectedPedal} />
             </div>
           </div>
         )}
@@ -262,6 +251,7 @@ export default function PresetsModal(props) {
             state={state}
             dispatch={dispatch}
             presetTempo={presetTempo}
+            setPresetTempoVal={setPresetTempoVal}
             expressionVal={presetExpressionVal}
           />
         )}
@@ -289,6 +279,7 @@ export default function PresetsModal(props) {
             showExpression={true}
             expressionVal={presetExpressionVal}
             setExpressionVal={setPresetExpressionVal}
+            setPresetTempoVal={setPresetTempoVal}
             midiData={midiData}
             midiObject={midiObject}
             tempo={presetTempo}
@@ -302,6 +293,7 @@ export default function PresetsModal(props) {
             showExpression={true}
             expressionVal={expressionVal}
             setExpressionVal={setExpressionVal}
+            setPresetTempoVal={setPresetTempoVal}
             midiData={midiData}
             midiObject={midiObject}
             selectedPedalState={state}

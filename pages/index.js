@@ -1,10 +1,10 @@
 import ManageMidi from "../hooks/manage_midi";
-import PedalInitTrackToggles from "../hooks/pedal_init_track_toggles";
+import PedalInit from "../hooks/pedal_init";
 import { SelectedPedalContext } from "../hooks/selected_pedal_state";
 import turnOffAllPedals from "../utilities/turn_off_all_pedals";
 
 import PedalSelector from "../components/pedal_selector";
-import PedalLayouts from "../components/pedal_layouts";
+import PresetsBuilder from "../components/presets_builder";
 import MacrosLayout from "../components/macros_layout";
 import ModalOpenButton from "../components/modal_open_button";
 import PresetsModal from "../components/presets_modal";
@@ -38,13 +38,14 @@ export default function Index() {
     message: null,
   });
 
-  let [selectedPedalState, selectedPedalDispatch, midiData] =
-    PedalInitTrackToggles(
-      midiObject,
-      expressionVal,
-      selectedPreset,
-      setSelectedMacro
-    );
+  let [showPresetSave, setShowPresetSave] = useState(false);
+
+  let [selectedPedalState, selectedPedalDispatch, midiData] = PedalInit(
+    midiObject,
+    expressionVal,
+    selectedPreset,
+    setSelectedMacro
+  );
 
   // State for both pages
   useEffect(() => {
@@ -98,7 +99,13 @@ export default function Index() {
             </>
           )}
         </div>
-        <div className="main-display">
+        <div
+          className={
+            showPresetSave && selectedPedal != "mobius" && pageState == "pedals"
+              ? "main-display preset-save-showing"
+              : "main-display"
+          }
+        >
           <ModalOpenButton
             pageState={pageState}
             setPageState={setPageState}
@@ -120,13 +127,16 @@ export default function Index() {
             </div>
           )}
           {pageState == "pedals" && canView && (
-            <PedalLayouts
+            <PresetsBuilder
               selectedPedal={selectedPedal}
-              state={selectedPedalState}
-              dispatch={selectedPedalDispatch}
               midiObject={midiObject}
               midiData={midiData}
-              setMacrosModalOpen={setMacrosModalOpen}
+              sysexByte={sysexByte}
+              state={selectedPedalState}
+              dispatch={selectedPedalDispatch}
+              expressionVal={expressionVal}
+              showPresetSave={showPresetSave}
+              setShowPresetSave={setShowPresetSave}
             />
           )}
           {pageState == "macros" && canView && (
@@ -146,6 +156,7 @@ export default function Index() {
             setExpressionVal={setExpressionVal}
             selectedPedal={selectedPedal}
             selectedPedalState={selectedPedalState}
+            setPresetTempoVal={() => {}}
             dispatch={selectedPedalDispatch}
           />
         )}

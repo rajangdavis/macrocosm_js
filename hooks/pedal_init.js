@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import merisStateReducer from "./meris_state";
 import applyExpression from "./apply_expression";
 import { MidiConfigContext } from "./midi_config";
@@ -17,7 +17,7 @@ export default function PedalInit(
   const { midiConfig } = useContext(MidiConfigContext);
   const pedalStates = useContext(PedalStatesContext).pedalStates;
   const macroStates = useContext(MacrosContext);
-  const { selectedPedal, setSelectedPedal } = useContext(SelectedPedalContext);
+  const { selectedPedal } = useContext(SelectedPedalContext);
 
   const midiData = {
     channel: midiConfig[`${selectedPedal}Channel`],
@@ -97,7 +97,8 @@ export default function PedalInit(
         midiData,
         expressionVal,
         selectedPreset,
-        dispatchFinal
+        dispatchFinal,
+        selectedPedalState
       );
     }
   }, [expressionVal, selectedPreset]);

@@ -5,6 +5,7 @@ export default function Expression(props) {
     selectedPedal,
     setExpressionVal,
     selectedPedalState,
+    setPresetTempoVal,
     dispatch,
     invert,
     tempo,
@@ -32,6 +33,7 @@ export default function Expression(props) {
 
   const setTempo = (value) => {
     dispatch({ key: tempoCcVal, value: value });
+    setPresetTempoVal(value);
   };
 
   const merc7Selected = selectedPedal == "mercury7" ? "hidden" : "tempo";

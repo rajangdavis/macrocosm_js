@@ -12,6 +12,12 @@ export default function trackToggles(props) {
   // CC15 -> Tempo
   const channelstoWatch = [9, 29, 30, 15, 14, 31];
 
+  function captureDispatch(action) {
+    console.log(`action: `, action);
+    dispatch(action);
+    return;
+  }
+
   function heelDispatchOverride(action) {
     if (channelstoWatch.includes(action.key)) {
       if (action.key == 14) {
@@ -22,6 +28,7 @@ export default function trackToggles(props) {
         toeDispatch(action);
       }
     }
+    captureDispatch(action);
     return heelDispatch(action);
   }
 
@@ -35,6 +42,7 @@ export default function trackToggles(props) {
         heelDispatch(action);
       }
     }
+    captureDispatch(action);
     return toeDispatch(action);
   }
 
